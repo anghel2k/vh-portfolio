@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const ACCESS_COOKIE = "vellumhaus_access";
 const UNLOCK_PATH = "/__vellumhaus_unlock";
+const INVITE_PREFIX = "/invite/";
 const COOKIE_LIFETIME = 60 * 60 * 12;
 
 function page(error = false) {
@@ -154,24 +155,41 @@ function comingSoon(error = false) {
   });
 }
 
+function grantAccess(request: NextRequest, token: string) {
+  const response = NextResponse.redirect(new URL("/", request.url), 303);
+  response.cookies.set(ACCESS_COOKIE, token, {
+    httpOnly: true,
+    maxAge: COOKIE_LIFETIME,
+    path: "/",
+    sameSite: "lax",
+    secure: request.nextUrl.protocol === "https:",
+  });
+  response.headers.set("Cache-Control", "no-store, max-age=0");
+  response.headers.set("Referrer-Policy", "no-referrer");
+  return response;
+}
+
 export async function proxy(request: NextRequest) {
   const password = process.env.SITE_PASSWORD;
+  const inviteToken = process.env.ACCESS_LINK_TOKEN;
   const expectedToken = password ? await accessToken(password) : "";
+
+  if (request.method === "GET" && request.nextUrl.pathname.startsWith(INVITE_PREFIX)) {
+    const submittedToken = request.nextUrl.pathname.slice(INVITE_PREFIX.length);
+
+    if (inviteToken && submittedToken === inviteToken && expectedToken) {
+      return grantAccess(request, expectedToken);
+    }
+
+    return comingSoon();
+  }
 
   if (request.nextUrl.pathname === UNLOCK_PATH && request.method === "POST") {
     const form = await request.formData();
     const submittedPassword = form.get("password");
 
     if (password && submittedPassword === password) {
-      const response = NextResponse.redirect(new URL("/", request.url), 303);
-      response.cookies.set(ACCESS_COOKIE, expectedToken, {
-        httpOnly: true,
-        maxAge: COOKIE_LIFETIME,
-        path: "/",
-        sameSite: "lax",
-        secure: request.nextUrl.protocol === "https:",
-      });
-      return response;
+      return grantAccess(request, expectedToken);
     }
 
     return NextResponse.redirect(new URL("/?error=1", request.url), 303);
