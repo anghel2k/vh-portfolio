@@ -5,22 +5,22 @@ import "@fontsource/space-mono/700.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vellumhaus.studio"),
-  title: "vellumhaus",
-  description: "AI-hybrid post-production by Anghel Robert. Keyframes, retouch, compositing and final film.",
+  metadataBase: new URL("https://portfolio.vellumhaus.studio"),
+  title: "Robert Anghel — Creative Work",
+  description: "Portfolio of Robert Anghel — creative work across 3D, VFX and post-production.",
   icons: { icon: "/brand/vh_favicon.svg", shortcut: "/brand/vh_favicon.svg" },
   openGraph: {
-    title: "vellumhaus",
-    description: "AI-hybrid post-production by Anghel Robert. Keyframes, retouch, compositing and final film.",
-    url: "https://vellumhaus.studio",
-    siteName: "vellumhaus",
+    title: "Robert Anghel — Creative Work",
+    description: "Portfolio and selected creative work across 3D, VFX and post-production.",
+    url: "https://portfolio.vellumhaus.studio",
+    siteName: "Robert Anghel / Vellumhaus",
     type: "website",
-    images: [{ url: "/og.png", width: 1730, height: 909, alt: "vellumhaus — AI-hybrid post-production" }],
+    images: [{ url: "/og.png", width: 1730, height: 909, alt: "Robert Anghel — portfolio" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "vellumhaus",
-    description: "AI-hybrid post-production by Anghel Robert.",
+    title: "Robert Anghel — Creative Work",
+    description: "Portfolio and selected creative work across 3D, VFX and post-production.",
     images: ["/og.png"],
   },
 };

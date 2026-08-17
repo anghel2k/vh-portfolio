@@ -1,307 +1,1260 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import BouncingMark from "./BouncingMark";
-import { ProjectLogoRail, WorkIndex } from "./ProjectNavigation";
 
-const motionFilms = [
-  { id: "01", title: "L'Opéra", file: "opera.mp4", poster: "opera-poster.jpg" },
-  { id: "02", title: "Le Jardin", file: "jardin.mp4", poster: "jardin-poster.jpg" },
-  { id: "03", title: "Arc de Triomphe", file: "arc-de-triomphe.mp4", poster: "arc-de-triomphe-poster.jpg" },
+type Language = "en" | "ro";
+
+const framebreedProjects = [
+  {
+    id: "san-pellegrino",
+    title: "San Pellegrino — Ciao! Paris",
+    image: "/projects/san-pellegrino/pool-still.jpg",
+    logo: "/projects/san-pellegrino/san-pellegrino-logo.png",
+    media: [
+      { type: "video", src: "/projects/san-pellegrino/arc-de-triomphe.mp4", poster: "/projects/san-pellegrino/arc-de-triomphe-poster.jpg" },
+      { type: "video", src: "/projects/san-pellegrino/jardin.mp4", poster: "/projects/san-pellegrino/jardin-poster.jpg" },
+      { type: "video", src: "/projects/san-pellegrino/opera.mp4", poster: "/projects/san-pellegrino/opera-poster.jpg" },
+      { type: "image", src: "/projects/san-pellegrino/cherry-still.jpg" },
+      { type: "image", src: "/projects/san-pellegrino/lemon-still.jpg" },
+    ],
+    en: {
+      note: "Campaign support through Frame23 Studio and Everything is Computer.",
+      role: "Client and agency communication, keyframe creation, Photoshop retouching and AI video generation, working closely with Serj Zarnescu and Andrei Brovcenco.",
+      discipline: "Keyframes / Retouch / Video generation",
+      work: ["Team, client and agency communication", "Keyframe creation", "Photoshop retouching", "AI-assisted video generation"],
+      credits: [
+        ["Frame23 / FrameBreed Studio", "VFX and production"],
+        ["Everything is Computer", "Agency"],
+        ["John Nakamura Whitehouse", "Creative Director / Producer"],
+        ["Erfan Saadati", "Executive Producer"],
+        ["Andrei Brovcenco", "FrameBreed Founder / Producer / Creative support"],
+        ["Serj Zarnescu", "Main graphics / Keyframe collaboration"],
+        ["Robert Anghel", "Communication / Keyframes / Retouching / AI video generation"],
+      ],
+    },
+    ro: {
+      note: "Suport de campanie prin Frame23 Studio și Everything is Computer.",
+      role: "Comunicare cu clientul și agenția, creare de keyframe-uri, retuș în Photoshop și generare video cu AI, lucrând îndeaproape cu Serj Zarnescu și Andrei Brovcenco.",
+      discipline: "Keyframes / Retuș / Generare video",
+      work: ["Comunicare între echipă, client și agenție", "Creare de keyframe-uri", "Retuș în Photoshop", "Generare video asistată de AI"],
+      credits: [
+        ["Frame23 / FrameBreed Studio", "VFX și producție"],
+        ["Everything is Computer", "Agenție"],
+        ["John Nakamura Whitehouse", "Director de creație / Producător"],
+        ["Erfan Saadati", "Producător executiv"],
+        ["Andrei Brovcenco", "Fondator FrameBreed / Producător / Suport creativ"],
+        ["Serj Zarnescu", "Grafică principală / Colaborare la keyframe-uri"],
+        ["Robert Anghel", "Comunicare / Keyframe-uri / Retuș / Generare video AI"],
+      ],
+    },
+  },
+  {
+    id: "heineken",
+    title: "Heineken — Fans Have More Friends",
+    image: "/projects/heineken/heineken-blue.jpg",
+    logo: "/projects/heineken/heineken-logo.png",
+    media: [
+      { type: "image", src: "/projects/heineken/heineken-blue.jpg" },
+      { type: "image", src: "/projects/heineken/heineken-day.jpg" },
+    ],
+    en: {
+      note: "On-set and technical production support through FrameBreed Studio.",
+      role: "VFX supervision with Andrei Brovcenco, technical previs setups, AI tests and live Photoshop retouching for client and agency presentations on set.",
+      discipline: "VFX supervision / Previs / On-set retouch",
+      work: ["On-set VFX supervision with Andrei Brovcenco", "Technical previsualization setups", "AI workflow tests", "Live Photoshop retouching for client and agency presentations"],
+      credits: [
+        ["Client", [
+          { name: "Heineken", handle: "@heineken", href: "https://www.instagram.com/heineken/" },
+        ]],
+        ["Agency", [
+          { name: "LePub Worldwide", handle: "@lepub_worldwide", href: "https://www.instagram.com/lepub_worldwide/" },
+        ]],
+        ["Photographer", [
+          { name: "Justin Bettman", handle: "@justinbettman", href: "https://www.instagram.com/justinbettman/" },
+        ]],
+        ["Production", [
+          { name: "Bread.TheMakery", handle: "@bread.themakery", href: "https://www.instagram.com/bread.themakery/" },
+          { name: "Bread.Service", handle: "@bread.service", href: "https://www.instagram.com/bread.service/" },
+        ]],
+        ["FrameBreed Studio", "VFX / Technical production"],
+        ["Andrei Brovcenco", "VFX supervision / Technical collaboration"],
+        ["Robert Anghel", "VFX supervision / Technical previs / AI tests / Live on-set Photoshop"],
+      ],
+    },
+    ro: {
+      note: "Suport pe platou și producție tehnică prin FrameBreed Studio.",
+      role: "Supervizare VFX alături de Andrei Brovcenco, setup-uri tehnice de previz, teste AI și retuș live în Photoshop pentru prezentările către client și agenție pe platou.",
+      discipline: "Supervizare VFX / Previz / Retuș pe platou",
+      work: ["Supervizare VFX pe platou alături de Andrei Brovcenco", "Setup-uri tehnice de pre-vizualizare", "Teste de fluxuri AI", "Retuș live în Photoshop pentru prezentările către client și agenție"],
+      credits: [
+        ["Client", [
+          { name: "Heineken", handle: "@heineken", href: "https://www.instagram.com/heineken/" },
+        ]],
+        ["Agenție", [
+          { name: "LePub Worldwide", handle: "@lepub_worldwide", href: "https://www.instagram.com/lepub_worldwide/" },
+        ]],
+        ["Fotograf", [
+          { name: "Justin Bettman", handle: "@justinbettman", href: "https://www.instagram.com/justinbettman/" },
+        ]],
+        ["Producție", [
+          { name: "Bread.TheMakery", handle: "@bread.themakery", href: "https://www.instagram.com/bread.themakery/" },
+          { name: "Bread.Service", handle: "@bread.service", href: "https://www.instagram.com/bread.service/" },
+        ]],
+        ["FrameBreed Studio", "VFX / Producție tehnică"],
+        ["Andrei Brovcenco", "Supervizare VFX / Colaborare tehnică"],
+        ["Robert Anghel", "Supervizare VFX / Previz tehnic / Teste AI / Photoshop live pe platou"],
+      ],
+    },
+  },
+  {
+    id: "house-of-errors",
+    title: "House of Errors — Selected Campaigns",
+    image: "/projects/house-of-errors/ss25-02.jpg",
+    logo: "/projects/house-of-errors/logo.svg",
+    media: [
+      { type: "video", src: "/projects/house-of-errors/moss.mp4", poster: "/projects/house-of-errors/moss-poster.jpg" },
+      { type: "video", src: "/projects/house-of-errors/ss25.mp4", poster: "/projects/house-of-errors/ss25-poster.jpg" },
+      { type: "image", src: "/projects/house-of-errors/ss25-01.jpg" },
+      { type: "image", src: "/projects/house-of-errors/ss25-03.jpg" },
+      { type: "image", src: "/projects/house-of-errors/ss25-04.jpg" },
+    ],
+    en: {
+      note: "Two separate contributions, both produced through the Frame23 / FrameBreed team.",
+      role: "For Embroidered Moss Denim: keyframe creation and video generation for the transition. For SS25: technical render setup, lighting and final bucket renders.",
+      discipline: "Keyframes / Generation / Lighting / Render",
+      work: ["Keyframe creation for the Embroidered Moss Denim transition", "AI-assisted video generation for the transition", "Technical render setup for the SS25 bucket assets", "Lighting and final bucket renders"],
+      creditScope: "Credits are grouped by production. Robert's exact contribution to each film is recorded above.",
+      credits: [
+        ["Project — House of Errors SS25", [
+          { name: "House of Errors", handle: "@houseoferrors", href: "https://www.instagram.com/houseoferrors/" },
+          { name: "fullyfullyfully", handle: "@fullyfullyfully", href: "https://www.instagram.com/fullyfullyfully/" },
+        ]],
+        ["Creative Director & Director", [
+          { name: "Tom Emmerson", handle: "@tom.emmerson", href: "https://www.instagram.com/tom.emmerson/" },
+        ]],
+        ["Agency", [
+          { name: "Red Buoy", handle: "@redbuoy.studio", href: "https://www.instagram.com/redbuoy.studio/" },
+        ]],
+        ["Producer", [
+          { name: "Maggie Curwin", handle: "@maggiecurwin", href: "https://www.instagram.com/maggiecurwin/" },
+        ]],
+        ["Production Manager", [
+          { name: "Peggy DiGioia Davies", handle: "@pdigioia_", href: "https://www.instagram.com/pdigioia_/" },
+        ]],
+        ["Light", [
+          { name: "Jjay Johnson", handle: "@jjay_johnson_", href: "https://www.instagram.com/jjay_johnson_/" },
+        ]],
+        ["Digi Op", [
+          { name: "Giorgio Lattanzi", handle: "@george_giorgio", href: "https://www.instagram.com/george_giorgio/" },
+        ]],
+        ["DOP", [
+          { name: "Sam Kinsella", handle: "@kinsellas", href: "https://www.instagram.com/kinsellas/" },
+        ]],
+        ["Production Designer", [
+          { name: "Naomi Feld", handle: "@naomifeldstudio", href: "https://www.instagram.com/naomifeldstudio/" },
+        ]],
+        ["Art Assistant", [{ name: "Eli Parkinson" }]],
+        ["Model", [
+          { name: "Randy", handle: "@raaandy.zip", href: "https://www.instagram.com/raaandy.zip/" },
+        ]],
+        ["VFX Supervisor", [{ name: "Lewis Ball" }]],
+        ["Post", [
+          { name: "Frame 23", handle: "@frame23.studio", href: "https://www.instagram.com/frame23.studio/" },
+        ]],
+        ["Frame 23 Executive Producers", [
+          { name: "Andrei Brovcenco", handle: "@tractoraptor", href: "https://www.instagram.com/tractoraptor/" },
+          { name: "Erfan Saadati", handle: "@erfanzugram", href: "https://www.instagram.com/erfanzugram/" },
+        ]],
+        ["3D Modelling", [
+          { name: "Mădălin Teletin", handle: "@teletinmadalin", href: "https://www.instagram.com/teletinmadalin/" },
+        ]],
+        ["Lighting & Render", [
+          { name: "Robert Anghel", handle: "@anghel.w", href: "https://www.instagram.com/anghel.w/" },
+        ]],
+        ["Compositing & Retouch", [
+          { name: "Marius Iftimie" },
+          { name: "Cosmin Moldovan", handle: "@cosm_o_gram", href: "https://www.instagram.com/cosm_o_gram/" },
+        ]],
+        ["Sound Designer", [
+          { name: "I Need Sound", handle: "@ineedsound.co", href: "https://www.instagram.com/ineedsound.co/" },
+        ]],
+        ["Colour", [
+          { name: "Mara Ciorba", handle: "@maraciorba", href: "https://www.instagram.com/maraciorba/" },
+          { name: "Harbor Picture Company", handle: "@harborpictureco", href: "https://www.instagram.com/harborpictureco/" },
+        ]],
+        ["Special Thanks", [
+          { name: "London Film Studios", handle: "@londonfilmstudios", href: "https://www.instagram.com/londonfilmstudios/" },
+          { name: "SHL London", handle: "@shl.london", href: "https://www.instagram.com/shl.london/" },
+          { name: "Luluz Catering", handle: "@luluzcatering", href: "https://www.instagram.com/luluzcatering/" },
+          { name: "The Unit Bag", handle: "@theunitbag", href: "https://www.instagram.com/theunitbag/" },
+        ]],
+        ["Project — Embroidered Moss Denim", [
+          { name: "House of Errors", handle: "@houseoferrors", href: "https://www.instagram.com/houseoferrors/" },
+        ]],
+        ["Creative Studio", [
+          { name: "Red Buoy", handle: "@redbuoy.studio", href: "https://www.instagram.com/redbuoy.studio/" },
+        ]],
+        ["Creative Director, Director & Photographer", [
+          { name: "Tom Emmerson", handle: "@tom.emmerson", href: "https://www.instagram.com/tom.emmerson/" },
+        ]],
+        ["Production", [
+          { name: "Business Club", handle: "@businessclub.tv", href: "https://www.instagram.com/businessclub.tv/" },
+        ]],
+        ["Executive Producer", [{ name: "Jason Lovelock" }]],
+        ["Producer", [
+          { name: "Brooklyn Adebowale", handle: "@Brooklynade", href: "https://www.instagram.com/Brooklynade/" },
+        ]],
+        ["DOP", [
+          { name: "Jack Maddison", handle: "@jackmaddisondop", href: "https://www.instagram.com/jackmaddisondop/" },
+        ]],
+        ["Model", [
+          { name: "Cheikh Diaw", handle: "@cheikh.ad", href: "https://www.instagram.com/cheikh.ad/" },
+        ]],
+        ["VFX", [
+          { name: "Frame 23", handle: "@frame23.studio", href: "https://www.instagram.com/frame23.studio/" },
+        ]],
+        ["Grade", [
+          { name: "Rascal Post", handle: "@RASCALSTUDIO_", href: "https://www.instagram.com/RASCALSTUDIO_/" },
+        ]],
+        ["Colourist", [
+          { name: "Dan Levy", handle: "@danmaxlevy", href: "https://www.instagram.com/danmaxlevy/" },
+        ]],
+        ["Sound", [
+          { name: "Cameron Byrom", handle: "@cbav_productions", href: "https://www.instagram.com/cbav_productions/" },
+        ]],
+        ["Local Crew — Production", [
+          { name: "Hawai", handle: "@hawaifilms", href: "https://www.instagram.com/hawaifilms/" },
+        ]],
+        ["Local Executive Producer", [{ name: "Ana Gil" }]],
+        ["Production Coordinator Madrid", [{ name: "Marta Gómez" }]],
+        ["Locations", [
+          { name: "Two Sisters", handle: "@twosisterslocations", href: "https://www.instagram.com/twosisterslocations/" },
+        ]],
+        ["Fixer", [{ name: "Rosa Cosmelli" }]],
+        ["Production Assistants", [
+          { name: "Laura Abadia" },
+          { name: "Giacomo Neri" },
+          { name: "Jeremy Blackwood", handle: "@jerryjblackwood", href: "https://www.instagram.com/jerryjblackwood/" },
+        ]],
+        ["Assistant Camera", [
+          { name: "Gabi Simo", handle: "@gabisimoig", href: "https://www.instagram.com/gabisimoig/" },
+        ]],
+        ["Prop Stylist", [{ name: "Laura Ques" }]],
+        ["Atrezzo", [{ name: "Killian Irz" }]],
+        ["Hair & Make-up Artist", [
+          { name: "Isabel Esteban", handle: "@isabelestebanmakeup", href: "https://www.instagram.com/isabelestebanmakeup/" },
+        ]],
+        ["Casting Director", [{ name: "Mar Clar" }]],
+        ["Cast", [
+          { name: "Begoña Paredes Gonzalez" },
+          { name: "Jose Ma Susacasa" },
+        ]],
+        ["Stunt", [{ name: "Marc Trilla" }]],
+        ["Hero Boat", [{ name: "Alcatraz" }]],
+        ["Boat Captain", [{ name: "Miguel" }]],
+        ["Safety Deckhand", [{ name: "Nerea" }]],
+        ["Marine Crew Coordination", [{ name: "Marine Tramuntana Diving and Film Services" }]],
+        ["Safety Boat", [{ name: "Smile II" }]],
+        ["Safety Boat Deckhand", [{ name: "Joad Sanchez" }]],
+        ["Office Coordination", [{ name: "Cata Vives" }]],
+      ],
+    },
+    ro: {
+      note: "Două contribuții separate, ambele produse prin echipa Frame23 / FrameBreed.",
+      role: "Pentru Embroidered Moss Denim: creare de keyframe-uri și generare video pentru tranziție. Pentru SS25: setup tehnic de render, lighting și randările finale ale găleților.",
+      discipline: "Keyframes / Generare / Lighting / Render",
+      work: ["Creare de keyframe-uri pentru tranziția Embroidered Moss Denim", "Generare video asistată de AI pentru tranziție", "Setup tehnic de render pentru asset-urile SS25", "Lighting și randările finale ale găleților"],
+      creditScope: "Creditele sunt grupate pe producții. Contribuția exactă a lui Robert pentru fiecare film este prezentată mai sus.",
+      credits: [
+        ["Proiect — House of Errors SS25", [
+          { name: "House of Errors", handle: "@houseoferrors", href: "https://www.instagram.com/houseoferrors/" },
+          { name: "fullyfullyfully", handle: "@fullyfullyfully", href: "https://www.instagram.com/fullyfullyfully/" },
+        ]],
+        ["Director de creație & Regizor", [
+          { name: "Tom Emmerson", handle: "@tom.emmerson", href: "https://www.instagram.com/tom.emmerson/" },
+        ]],
+        ["Agenție", [
+          { name: "Red Buoy", handle: "@redbuoy.studio", href: "https://www.instagram.com/redbuoy.studio/" },
+        ]],
+        ["Producător", [
+          { name: "Maggie Curwin", handle: "@maggiecurwin", href: "https://www.instagram.com/maggiecurwin/" },
+        ]],
+        ["Manager de producție", [
+          { name: "Peggy DiGioia Davies", handle: "@pdigioia_", href: "https://www.instagram.com/pdigioia_/" },
+        ]],
+        ["Light", [
+          { name: "Jjay Johnson", handle: "@jjay_johnson_", href: "https://www.instagram.com/jjay_johnson_/" },
+        ]],
+        ["Digi Op", [
+          { name: "Giorgio Lattanzi", handle: "@george_giorgio", href: "https://www.instagram.com/george_giorgio/" },
+        ]],
+        ["DOP", [
+          { name: "Sam Kinsella", handle: "@kinsellas", href: "https://www.instagram.com/kinsellas/" },
+        ]],
+        ["Production Designer", [
+          { name: "Naomi Feld", handle: "@naomifeldstudio", href: "https://www.instagram.com/naomifeldstudio/" },
+        ]],
+        ["Asistent artă", [{ name: "Eli Parkinson" }]],
+        ["Model", [
+          { name: "Randy", handle: "@raaandy.zip", href: "https://www.instagram.com/raaandy.zip/" },
+        ]],
+        ["Supervizor VFX", [{ name: "Lewis Ball" }]],
+        ["Post-producție", [
+          { name: "Frame 23", handle: "@frame23.studio", href: "https://www.instagram.com/frame23.studio/" },
+        ]],
+        ["Producători executivi Frame 23", [
+          { name: "Andrei Brovcenco", handle: "@tractoraptor", href: "https://www.instagram.com/tractoraptor/" },
+          { name: "Erfan Saadati", handle: "@erfanzugram", href: "https://www.instagram.com/erfanzugram/" },
+        ]],
+        ["Modelare 3D", [
+          { name: "Mădălin Teletin", handle: "@teletinmadalin", href: "https://www.instagram.com/teletinmadalin/" },
+        ]],
+        ["Lighting & Render", [
+          { name: "Robert Anghel", handle: "@anghel.w", href: "https://www.instagram.com/anghel.w/" },
+        ]],
+        ["Compositing & Retuș", [
+          { name: "Marius Iftimie" },
+          { name: "Cosmin Moldovan", handle: "@cosm_o_gram", href: "https://www.instagram.com/cosm_o_gram/" },
+        ]],
+        ["Sound Designer", [
+          { name: "I Need Sound", handle: "@ineedsound.co", href: "https://www.instagram.com/ineedsound.co/" },
+        ]],
+        ["Culoare", [
+          { name: "Mara Ciorba", handle: "@maraciorba", href: "https://www.instagram.com/maraciorba/" },
+          { name: "Harbor Picture Company", handle: "@harborpictureco", href: "https://www.instagram.com/harborpictureco/" },
+        ]],
+        ["Mulțumiri speciale", [
+          { name: "London Film Studios", handle: "@londonfilmstudios", href: "https://www.instagram.com/londonfilmstudios/" },
+          { name: "SHL London", handle: "@shl.london", href: "https://www.instagram.com/shl.london/" },
+          { name: "Luluz Catering", handle: "@luluzcatering", href: "https://www.instagram.com/luluzcatering/" },
+          { name: "The Unit Bag", handle: "@theunitbag", href: "https://www.instagram.com/theunitbag/" },
+        ]],
+        ["Proiect — Embroidered Moss Denim", [
+          { name: "House of Errors", handle: "@houseoferrors", href: "https://www.instagram.com/houseoferrors/" },
+        ]],
+        ["Studio de creație", [
+          { name: "Red Buoy", handle: "@redbuoy.studio", href: "https://www.instagram.com/redbuoy.studio/" },
+        ]],
+        ["Director de creație, Regizor & Fotograf", [
+          { name: "Tom Emmerson", handle: "@tom.emmerson", href: "https://www.instagram.com/tom.emmerson/" },
+        ]],
+        ["Producție", [
+          { name: "Business Club", handle: "@businessclub.tv", href: "https://www.instagram.com/businessclub.tv/" },
+        ]],
+        ["Producător executiv", [{ name: "Jason Lovelock" }]],
+        ["Producător", [
+          { name: "Brooklyn Adebowale", handle: "@Brooklynade", href: "https://www.instagram.com/Brooklynade/" },
+        ]],
+        ["DOP", [
+          { name: "Jack Maddison", handle: "@jackmaddisondop", href: "https://www.instagram.com/jackmaddisondop/" },
+        ]],
+        ["Model", [
+          { name: "Cheikh Diaw", handle: "@cheikh.ad", href: "https://www.instagram.com/cheikh.ad/" },
+        ]],
+        ["VFX", [
+          { name: "Frame 23", handle: "@frame23.studio", href: "https://www.instagram.com/frame23.studio/" },
+        ]],
+        ["Grade", [
+          { name: "Rascal Post", handle: "@RASCALSTUDIO_", href: "https://www.instagram.com/RASCALSTUDIO_/" },
+        ]],
+        ["Colorist", [
+          { name: "Dan Levy", handle: "@danmaxlevy", href: "https://www.instagram.com/danmaxlevy/" },
+        ]],
+        ["Sunet", [
+          { name: "Cameron Byrom", handle: "@cbav_productions", href: "https://www.instagram.com/cbav_productions/" },
+        ]],
+        ["Echipă locală — Producție", [
+          { name: "Hawai", handle: "@hawaifilms", href: "https://www.instagram.com/hawaifilms/" },
+        ]],
+        ["Producător executiv local", [{ name: "Ana Gil" }]],
+        ["Coordonator producție Madrid", [{ name: "Marta Gómez" }]],
+        ["Locații", [
+          { name: "Two Sisters", handle: "@twosisterslocations", href: "https://www.instagram.com/twosisterslocations/" },
+        ]],
+        ["Fixer", [{ name: "Rosa Cosmelli" }]],
+        ["Asistenți producție", [
+          { name: "Laura Abadia" },
+          { name: "Giacomo Neri" },
+          { name: "Jeremy Blackwood", handle: "@jerryjblackwood", href: "https://www.instagram.com/jerryjblackwood/" },
+        ]],
+        ["Asistent cameră", [
+          { name: "Gabi Simo", handle: "@gabisimoig", href: "https://www.instagram.com/gabisimoig/" },
+        ]],
+        ["Prop Stylist", [{ name: "Laura Ques" }]],
+        ["Atrezzo", [{ name: "Killian Irz" }]],
+        ["Hair & Make-up Artist", [
+          { name: "Isabel Esteban", handle: "@isabelestebanmakeup", href: "https://www.instagram.com/isabelestebanmakeup/" },
+        ]],
+        ["Director casting", [{ name: "Mar Clar" }]],
+        ["Distribuție", [
+          { name: "Begoña Paredes Gonzalez" },
+          { name: "Jose Ma Susacasa" },
+        ]],
+        ["Cascador", [{ name: "Marc Trilla" }]],
+        ["Ambarcațiune principală", [{ name: "Alcatraz" }]],
+        ["Căpitan ambarcațiune", [{ name: "Miguel" }]],
+        ["Marinar de siguranță", [{ name: "Nerea" }]],
+        ["Coordonare echipă marină", [{ name: "Marine Tramuntana Diving and Film Services" }]],
+        ["Ambarcațiune de siguranță", [{ name: "Smile II" }]],
+        ["Marinar ambarcațiune de siguranță", [{ name: "Joad Sanchez" }]],
+        ["Coordonare office", [{ name: "Cata Vives" }]],
+      ],
+    },
+  },
+  {
+    id: "new-balance",
+    title: "New Balance — Gator Run",
+    image: "/projects/new-balance/egg-hatch.jpg",
+    logo: "/projects/new-balance/new-balance-logo.png",
+    media: [
+      { type: "video", src: "/projects/new-balance/egg-hatch.mp4", poster: "/projects/new-balance/egg-hatch.jpg" },
+      { type: "video", src: "/projects/new-balance/croc-insert.mp4", poster: "/projects/new-balance/croc-insert.jpg" },
+      { type: "video", src: "/projects/new-balance/follow-leader.mp4", poster: "/projects/new-balance/follow-leader.jpg" },
+      { type: "video", src: "/projects/new-balance/mama-croc.mp4", poster: "/projects/new-balance/mama-croc.jpg" },
+    ],
+    en: {
+      note: "Full CGI campaign produced through Frame23 Studio.",
+      role: "Previsualization with Andrei Brovcenco, team communication, agency delivery preparation and selected retouching support.",
+      discipline: "Previs / Coordination / Delivery / Retouch",
+      work: ["Previsualization with Andrei Brovcenco", "Production team communication", "Preparing versions and deliverables for the agency", "Selected Photoshop retouching"],
+      credits: [
+        ["Client", [{ name: "New Balance" }]],
+        ["Creative Agency", [{ name: "Red Buoy" }]],
+        ["Production Company", [{ name: "Business Club" }]],
+        ["VFX / Full CGI", [{ name: "Frame23 Studio" }]],
+        ["3D Modelling & Texturing", [
+          { name: "Anastasia Bîdiliță", handle: "@anastasia.bidilita", href: "https://www.instagram.com/anastasia.bidilita/" },
+          { name: "Mădălin Teletin", handle: "@teletinmadalin", href: "https://www.instagram.com/teletinmadalin/" },
+          { name: "Salo Bohuslav" },
+        ]],
+        ["3D Animation", [
+          { name: "Călin Ivașcu" },
+          { name: "Filip Rădulescu", handle: "@filipu", href: "https://www.instagram.com/filipu/" },
+          { name: "Ramzan Mulani" },
+        ]],
+        ["Technical Direction", [
+          { name: "Cristian Afteni", handle: "@cristi_rdi", href: "https://www.instagram.com/cristi_rdi/" },
+          { name: "Ciprian Dumitru", handle: "@cipry16", href: "https://www.instagram.com/cipry16/" },
+          { name: "Robert Anghel", handle: "@anghel.w", href: "https://www.instagram.com/anghel.w/" },
+        ]],
+        ["Character Rigging", [
+          { name: "Alexandru Gonța", handle: "@aiex_gz", href: "https://www.instagram.com/aiex_gz/" },
+        ]],
+        ["Compositing", [
+          { name: "Laura Maria Mihăilă", handle: "@l.a.u.r.a.m.m", href: "https://www.instagram.com/l.a.u.r.a.m.m/" },
+          { name: "Marius Iftimie" },
+          { name: "Cosmin Moldovan", handle: "@cosm_o_gram", href: "https://www.instagram.com/cosm_o_gram/" },
+        ]],
+        ["VFX & 3D Animation Supervision", [
+          { name: "Andrei Brovcenco", handle: "@tractoraptor", href: "https://www.instagram.com/tractoraptor/" },
+        ]],
+        ["VFX Producers", [
+          { name: "Andrei Brovcenco", handle: "@tractoraptor", href: "https://www.instagram.com/tractoraptor/" },
+          { name: "Raluca Platon", handle: "@ralucaaaaip", href: "https://www.instagram.com/ralucaaaaip/" },
+          { name: "Cosmin Moldovan", handle: "@cosm_o_gram", href: "https://www.instagram.com/cosm_o_gram/" },
+        ]],
+        ["Executive Producer", [
+          { name: "Erfan Saadati" },
+        ]],
+      ],
+    },
+    ro: {
+      note: "Campanie full CGI produsă prin Frame23 Studio.",
+      role: "Pre-vizualizare alături de Andrei Brovcenco, comunicarea cu echipa, pregătirea livrabilelor pentru agenție și suport punctual de retuș.",
+      discipline: "Previz / Coordonare / Livrare / Retuș",
+      work: ["Pre-vizualizare alături de Andrei Brovcenco", "Comunicare cu echipa de producție", "Pregătirea versiunilor și livrabilelor pentru agenție", "Retuș punctual în Photoshop"],
+      credits: [
+        ["Client", [{ name: "New Balance" }]],
+        ["Agenție de creație", [{ name: "Red Buoy" }]],
+        ["Companie de producție", [{ name: "Business Club" }]],
+        ["VFX / Full CGI", [{ name: "Frame23 Studio" }]],
+        ["Modelare 3D & texturare", [
+          { name: "Anastasia Bîdiliță", handle: "@anastasia.bidilita", href: "https://www.instagram.com/anastasia.bidilita/" },
+          { name: "Mădălin Teletin", handle: "@teletinmadalin", href: "https://www.instagram.com/teletinmadalin/" },
+          { name: "Salo Bohuslav" },
+        ]],
+        ["Animație 3D", [
+          { name: "Călin Ivașcu" },
+          { name: "Filip Rădulescu", handle: "@filipu", href: "https://www.instagram.com/filipu/" },
+          { name: "Ramzan Mulani" },
+        ]],
+        ["Direcție tehnică", [
+          { name: "Cristian Afteni", handle: "@cristi_rdi", href: "https://www.instagram.com/cristi_rdi/" },
+          { name: "Ciprian Dumitru", handle: "@cipry16", href: "https://www.instagram.com/cipry16/" },
+          { name: "Robert Anghel", handle: "@anghel.w", href: "https://www.instagram.com/anghel.w/" },
+        ]],
+        ["Rigging personaje", [
+          { name: "Alexandru Gonța", handle: "@aiex_gz", href: "https://www.instagram.com/aiex_gz/" },
+        ]],
+        ["Compositing", [
+          { name: "Laura Maria Mihăilă", handle: "@l.a.u.r.a.m.m", href: "https://www.instagram.com/l.a.u.r.a.m.m/" },
+          { name: "Marius Iftimie" },
+          { name: "Cosmin Moldovan", handle: "@cosm_o_gram", href: "https://www.instagram.com/cosm_o_gram/" },
+        ]],
+        ["Supervizare VFX & animație 3D", [
+          { name: "Andrei Brovcenco", handle: "@tractoraptor", href: "https://www.instagram.com/tractoraptor/" },
+        ]],
+        ["Producători VFX", [
+          { name: "Andrei Brovcenco", handle: "@tractoraptor", href: "https://www.instagram.com/tractoraptor/" },
+          { name: "Raluca Platon", handle: "@ralucaaaaip", href: "https://www.instagram.com/ralucaaaaip/" },
+          { name: "Cosmin Moldovan", handle: "@cosm_o_gram", href: "https://www.instagram.com/cosm_o_gram/" },
+        ]],
+        ["Producător executiv", [
+          { name: "Erfan Saadati" },
+        ]],
+      ],
+    },
+  },
+  {
+    id: "kaufland",
+    title: "Kaufland — AI Film",
+    image: "/projects/kaufland/kaufland-poster.jpg",
+    logo: "/projects/kaufland/kaufland-logo.png",
+    tileLogo: "/projects/kaufland/kaufland-logo-white.png",
+    media: [
+      { type: "video", src: "/projects/kaufland/kaufland-film.mp4", poster: "/projects/kaufland/kaufland-poster.jpg" },
+    ],
+    en: {
+      note: "AI film production completed through FrameBreed Studio.",
+      role: "Keyframe creation and video generation together with Andrei Brovcenco, who developed the story, script and creative direction.",
+      discipline: "Keyframes / AI video generation",
+      work: ["Keyframe creation together with Andrei Brovcenco", "AI-assisted video generation", "Visual development support based on the approved story and script"],
+      credits: [
+        ["Client", [{ name: "Kaufland Romania" }]],
+        ["Agency", [{ name: "Saga Film" }]],
+        ["FrameBreed Studio", "VFX / AI production"],
+        ["Andrei Brovcenco", "Story / Script / Creative Direction / Keyframe and generation collaboration"],
+        ["Robert Anghel", "Keyframes / AI video generation"],
+      ],
+    },
+    ro: {
+      note: "Producție de film AI realizată prin FrameBreed Studio.",
+      role: "Creare de keyframe-uri și generare video împreună cu Andrei Brovcenco, care a dezvoltat povestea, scenariul și direcția creativă.",
+      discipline: "Keyframes / Generare video AI",
+      work: ["Creare de keyframe-uri împreună cu Andrei Brovcenco", "Generare video asistată de AI", "Suport de dezvoltare vizuală pe baza poveștii și scenariului aprobate"],
+      credits: [
+        ["Client", [{ name: "Kaufland Romania" }]],
+        ["Agenție", [{ name: "Saga Film" }]],
+        ["FrameBreed Studio", "VFX / Producție AI"],
+        ["Andrei Brovcenco", "Poveste / Scenariu / Direcție creativă / Colaborare la keyframe-uri și generare"],
+        ["Robert Anghel", "Keyframe-uri / Generare video AI"],
+      ],
+    },
+  },
 ];
 
-const stills = [
-  { title: "Ciao! Pool", file: "pool-still.jpg" },
-  { title: "Ciao! Cherry", file: "cherry-still.jpg" },
-  { title: "Ciao! Lemon", file: "lemon-still.jpg" },
-];
+const trandingProjects = [
+  {
+    id: "product-visualization-01",
+    image: "/tranding/product-01.jpg",
+    href: "https://www.instagram.com/p/C--pfpgtcxQ/?img_index=1",
+    format: "square",
+    title: { en: "Product visualization", ro: "Vizualizare de produs" },
+    scope: { en: "3D / Product", ro: "3D / Produs" },
+  },
+  {
+    id: "product-visualization-02",
+    image: "/tranding/product-02.jpg",
+    href: "https://www.instagram.com/p/C-8ZhmBqgJW/?img_index=3",
+    format: "square",
+    title: { en: "Product visualization", ro: "Vizualizare de produs" },
+    scope: { en: "3D / Product", ro: "3D / Produs" },
+  },
+  {
+    id: "product-visualization-03",
+    image: "/tranding/product-03.jpg",
+    href: "https://www.instagram.com/p/DBYeSrhqyaf/?img_index=1",
+    format: "square",
+    title: { en: "Product visualization", ro: "Vizualizare de produs" },
+    scope: { en: "3D / Product", ro: "3D / Produs" },
+  },
+  {
+    id: "cgi-reel-01",
+    image: "/tranding/reel-01.jpg",
+    href: "https://www.instagram.com/p/DB9IAJliQy4/",
+    format: "reel",
+    title: { en: "CGI reel ad", ro: "Reclamă CGI pentru reel" },
+    scope: { en: "CGI / Social", ro: "CGI / Social" },
+  },
+  {
+    id: "cgi-reel-02",
+    image: "/tranding/reel-02.jpg",
+    href: "https://www.instagram.com/p/DCW-QVdq63L/",
+    format: "reel",
+    title: { en: "CGI reel ad", ro: "Reclamă CGI pentru reel" },
+    scope: { en: "CGI / Social", ro: "CGI / Social" },
+  },
+] as const;
 
-const houseOfErrorsStills = [
-  { id: "01", file: "ss25-01.jpg" },
-  { id: "02", file: "ss25-02.jpg" },
-  { id: "03", file: "ss25-03.jpg" },
-  { id: "04", file: "ss25-04.jpg" },
-];
+const spetaImages = [
+  "/side-projects/speta-home.png",
+  "/side-projects/speta-ask-legal.png",
+  "/side-projects/speta-answer.png",
+  "/side-projects/speta-monitor.png",
+] as const;
 
-const gatorRunFilms = [
-  { id: "01", title: "Egg Hatch", file: "egg-hatch.mp4", poster: "egg-hatch.jpg" },
-  { id: "02", title: "Follow Leader", file: "follow-leader.mp4", poster: "follow-leader.jpg" },
-  { id: "03", title: "Croc Insert", file: "croc-insert.mp4", poster: "croc-insert.jpg" },
-  { id: "04", title: "Mama Croc", file: "mama-croc.mp4", poster: "mama-croc.jpg" },
-];
+const veliuminArchive = [
+  { id: "website-home", image: "/veliumin/website-home.jpg", format: "wide", title: { en: "E-commerce homepage", ro: "Homepage e-commerce" }, scope: { en: "Shopify / Custom theme", ro: "Shopify / Temă custom" } },
+  { id: "website-products", image: "/veliumin/website-products.jpg", format: "wide", title: { en: "Product catalogue", ro: "Catalog de produse" }, scope: { en: "Commerce / Product system", ro: "Comerț / Sistem de produse" } },
+  { id: "website-product-page", image: "/veliumin/website-product-page.jpg", format: "wide", title: { en: "Product page", ro: "Pagină de produs" }, scope: { en: "E-commerce / Product imagery", ro: "E-commerce / Imagine de produs" } },
+  { id: "early-campaign", image: "/veliumin/IMG_9272.jpg", format: "portrait", title: { en: "Early campaign", ro: "Campanie timpurie" }, scope: { en: "Campaign / Collection", ro: "Campanie / Colecție" } },
+  { id: "product-range-2023", image: "/veliumin/IMG_9270.jpg", format: "portrait", title: { en: "Product range", ro: "Gamă de produse" }, scope: { en: "Drop / Product development", ro: "Drop / Dezvoltare de produs" } },
+  { id: "size-labels", image: "/veliumin/IMG_9269.jpg", format: "portrait", title: { en: "Garment label system", ro: "Sistem de etichete" }, scope: { en: "Brand system / Production", ro: "Sistem de brand / Producție" } },
+  { id: "running-shorts", image: "/veliumin/IMG_9268.jpg", format: "portrait", title: { en: "Running shorts", ro: "Pantaloni scurți running" }, scope: { en: "Product / Art direction", ro: "Produs / Art direction" } },
+  { id: "product-graphics", image: "/veliumin/IMG_9267.jpg", format: "portrait", title: { en: "Product graphics", ro: "Grafică de produs" }, scope: { en: "Graphic design / Product", ro: "Design grafic / Produs" } },
+  { id: "custom-labels", image: "/veliumin/IMG_9266.jpg", format: "portrait", title: { en: "Custom labels & graphics", ro: "Etichete & grafică custom" }, scope: { en: "Product development", ro: "Dezvoltare de produs" } },
+  { id: "collection-lineup", image: "/veliumin/IMG_9264.jpg", format: "portrait", title: { en: "Collection line-up", ro: "Line-up de colecție" }, scope: { en: "Drop / Art direction", ro: "Drop / Art direction" } },
+  { id: "sand-stars", image: "/veliumin/IMG_9263.jpg", format: "portrait", title: { en: "Sand Stars / SS25", ro: "Sand Stars / SS25" }, scope: { en: "Collection / Product", ro: "Colecție / Produs" } },
+  { id: "popup-poster", image: "/veliumin/IMG_9261.jpg", format: "portrait", title: { en: "VELIUMIN pop-up", ro: "Pop-up VELIUMIN" }, scope: { en: "Physical activation", ro: "Activare fizică" } },
+  { id: "ss25-products", image: "/veliumin/IMG_9259.jpg", format: "portrait", title: { en: "SS25 product selection", ro: "Selecție de produse SS25" }, scope: { en: "Product / Photography", ro: "Produs / Fotografie" } },
+  { id: "popup-voucher", image: "/veliumin/IMG_9258.jpg", format: "portrait", title: { en: "Pop-up voucher", ro: "Voucher de pop-up" }, scope: { en: "Customer experience", ro: "Experiență de client" } },
+  { id: "popup-rack", image: "/veliumin/IMG_9257.jpg", format: "portrait", title: { en: "Retail set-up", ro: "Setup de retail" }, scope: { en: "Pop-up / Physical retail", ro: "Pop-up / Retail fizic" } },
+  { id: "popup-menu", image: "/veliumin/IMG_9256.jpg", format: "portrait", title: { en: "Pop-up menu", ro: "Meniu de pop-up" }, scope: { en: "Retail design / Print", ro: "Design de retail / Print" } },
+  { id: "campaign-cast", image: "/veliumin/IMG_9255.jpg", format: "portrait", title: { en: "SS25 campaign cast", ro: "Cast campanie SS25" }, scope: { en: "Campaign / Production", ro: "Campanie / Producție" } },
+  { id: "studio-campaign", image: "/veliumin/IMG_9254.jpg", format: "portrait", title: { en: "Studio campaign", ro: "Campanie de studio" }, scope: { en: "Creative direction / Shoot", ro: "Direcție creativă / Shooting" } },
+  { id: "telephone-product", image: "/veliumin/IMG_9253.jpg", format: "portrait", title: { en: "Telephone T-shirt", ro: "Tricou Telephone" }, scope: { en: "Product photography", ro: "Fotografie de produs" } },
+  { id: "couch-campaign", image: "/veliumin/IMG_9252.jpg", format: "portrait", title: { en: "Campaign still", ro: "Cadru de campanie" }, scope: { en: "Campaign / Production", ro: "Campanie / Producție" } },
+  { id: "cherry-campaign", image: "/veliumin/IMG_9251.jpg", format: "portrait", title: { en: "Cherry campaign", ro: "Campanie Cherry" }, scope: { en: "Campaign / Product", ro: "Campanie / Produs" } },
+  { id: "dj-campaign", image: "/veliumin/IMG_9250.jpg", format: "portrait", title: { en: "DJ campaign", ro: "Campanie DJ" }, scope: { en: "Campaign / Art direction", ro: "Campanie / Art direction" } },
+  { id: "flower-products", image: "/veliumin/IMG_9249.jpg", format: "portrait", title: { en: "Flower T-shirts", ro: "Tricouri Flowers" }, scope: { en: "SS25 / Product", ro: "SS25 / Produs" } },
+  { id: "campaign-bts", image: "/veliumin/IMG_9248.jpg", format: "portrait", title: { en: "Campaign / Behind the scenes", ro: "Campanie / Behind the scenes" }, scope: { en: "Shoot / Production", ro: "Shooting / Producție" } },
+] as const;
+
+const chapters = [
+  { company: { en: "FrameBreed Studio", ro: "FrameBreed Studio" }, years: { en: "Nov 2025 — Present", ro: "nov. 2025 — Prezent" }, role: { en: "Technical Manager", ro: "Technical Manager" }, engagement: { en: "B2B contract", ro: "Contract B2B" }, href: "#framebreed-studio", logo: "/identity/framebreed-logo-timeline.png" },
+  { company: { en: "VELIUMIN", ro: "VELIUMIN" }, years: { en: "Mar 2023 — Present", ro: "mart. 2023 — Prezent" }, role: { en: "Founder / Creative Director", ro: "Fondator / Director de creație" }, engagement: { en: "Founder-led venture", ro: "Proiect propriu / Fondator" }, href: "#veliumin", logo: "/identity/veliumin-logo-blue.svg" },
+  { company: { en: "Tranding Social Media", ro: "Tranding Social Media" }, years: { en: "Sep 2023 — Aug 2025", ro: "sept. 2023 — aug. 2025" }, role: { en: "Visual Effects Artist", ro: "Artist efecte vizuale" }, engagement: { en: "B2B contract / paid per project", ro: "Contract B2B / plată per proiect" }, href: "#tranding-social-media", logo: "/identity/tranding-logo-timeline.png" },
+] as const;
+
+const copy = {
+  en: {
+    skip: "Skip to content",
+    homeLabel: "Robert Anghel home",
+    navLabel: "Primary navigation",
+    nav: ["Work", "Contact"],
+    menuOpen: "Open menu",
+    menuClose: "Close menu",
+    languageLabel: "Choose website language",
+    languageNames: { en: "English", ro: "Romanian" },
+    heroWork: "Creative Work",
+    scrollPrompt: "Scroll to explore",
+    heroBriefLabel: "3D / VFX / Post-production",
+    heroBrief: "Hands-on visual work across 3D, VFX, editing, graphics, retouching and AI-assisted production, backed by technical production experience and direct coordination between teams, clients and agencies.",
+    experienceEyebrow: "Experience",
+    experienceTitle: <>Work<br />timeline.</>,
+    roadmapLabel: "Career roadmap / Latest first",
+    roadmapHint: "Select a role to open the full section",
+    framebreedEyebrow: "Mar 2024 — Present",
+    framebreedSummary: [
+      "B2B Technical Manager with a background in technical 3D work, coordinating teams, clients and agencies while supporting estimates, deliverables, editing, graphics, AI workflows, 3D and on-set VFX supervision.",
+    ],
+    present: "Present",
+    currentPosition: "Current position",
+    framebreedContract: "B2B contract",
+    roleProgressionLabel: "FrameBreed role progression",
+    contribution: "My contribution",
+    projectContext: "Project context",
+    responsibilityRecord: "What I worked on",
+    creditRecord: "Team & production credits",
+    creditNote: "Only people, companies and roles confirmed from the available project information are listed.",
+    projectStill: "project still",
+    selectedProjects: "Selected FrameBreed projects",
+    seeProject: "See project",
+    seeAllProjects: "See all projects",
+    hideAllProjects: "Hide all projects",
+    allProjectsTitle: "All FrameBreed projects",
+    closeProject: "Close project",
+    projectMedia: "Project media",
+    openMedia: "Open full media",
+    closeMedia: "Close media",
+    motionPreview: "Motion preview",
+    imagePreview: "Image preview",
+    creditsLabel: "Project credits",
+    veliuminEyebrow: "Mar 2023 — Present",
+    veliuminSummary: [
+      "Fashion and creative project built from zero, from the first identity and product drops through campaigns, online commerce and a physical pop-up.",
+      "My work covered brand systems and graphic direction, end-to-end product development and tech packs, Shopify and custom themes, campaign production and physical retail.",
+    ],
+    role: "Role",
+    scope: "Scope",
+    veliuminRole: "Founder / Creative Director",
+    veliuminShowcaseLabel: "Selected VELIUMIN archive",
+    veliuminShowcaseTitle: "Website / Drops / Campaigns / Pop-up",
+    trandingEyebrow: "Sep 2023 — Aug 2025",
+    trandingSummary: "B2B visual work delivered per project through Tranding: product visualization, CGI reels, editing and 3D/VFX integrations.",
+    trandingRole: "Visual Effects Artist",
+    contract: "Contract",
+    trandingContract: "B2B / Paid per project",
+    formats: "Scope",
+    trandingMediaLabel: "Selected Tranding project previews",
+    sourceProject: "Open source",
+    sideEyebrow: "Independent work",
+    sideTitle: "SIDE PROJECTS & EXPERIMENTS",
+    sideIntro: "Independent products and focused experiments outside my main timeline.",
+    spetaAlt: "SPETA legal workspace homepage",
+    spetaCaption: ["Live beta / 2026", "Independent product development"],
+    spetaTitle: "A Romanian legal workspace built around verifiable sources.",
+    spetaBody: "Independent legal-tech product in active beta, using indexed Romanian legislation to answer questions with exact article and source citations.",
+    spetaDetails: [["Status", "Beta / active testing"], ["My role", "Independent product development"]],
+    spetaGallery: ["Ask Legal / Workspace", "Verified answer / Cited sources", "Legislative Monitor / Indexed corpus"],
+    spetaWalkthrough: "Product walkthrough",
+    openImage: "Open image",
+    closeImage: "Close image",
+    previousImage: "Previous image",
+    nextImage: "Next image",
+    visitSpeta: "Visit speta.io",
+    skillsEyebrow: "Tools / Software / Capabilities",
+    skillsTitle: "Skills & software",
+    skillGroups: [
+      ["Video & post", ["Premiere Pro", "After Effects", "DaVinci Resolve", "Video editing", "Compositing"]],
+      ["Design & image", ["Photoshop", "Illustrator", "InDesign", "Retouching / keyframes", "Visual identity"]],
+      ["3D & VFX", ["3ds Max", "Maya", "Blender", "Rigging / morphs", "Lighting / render setup", "Previsualization"]],
+      ["Technical production", ["VFX supervision", "Client / agency communication", "Estimates / deliverables", "Media conform / versioning", "Export / delivery QA"]],
+      ["AI & systems", ["Kling / Higgsfield", "GPT Image", "Veo / Flow", "Seedance / Seedream", "AI upscale / retouch", "Linux / servers", "Shopify development"]],
+    ],
+    cvEyebrow: "Resume / PDF",
+    cvTitle: "Resume",
+    cvLead: "A concise one-page overview of my experience, tools and technical production background.",
+    cvPreview: "Preview Robert Anghel resume",
+    cvOpen: "Open PDF",
+    cvDownload: "Download PDF",
+    cvFileName: "Robert_Anghel_Resume.pdf",
+    contactEyebrow: "Contact",
+    contactTitle: <>Let&apos;s<br />connect.</>,
+    contactLead: "For project enquiries and creative collaborations, get in touch directly.",
+    contactLabels: ["Name", "Based", "Phone", "Languages", "LinkedIn"],
+    based: "Bucharest, Romania",
+    languages: "Romanian / English",
+    backTop: "Back to top ↑",
+  },
+  ro: {
+    skip: "Sari la conținut",
+    homeLabel: "Pagina principală Robert Anghel",
+    navLabel: "Navigare principală",
+    nav: ["Work", "Contact"],
+    menuOpen: "Deschide meniul",
+    menuClose: "Închide meniul",
+    languageLabel: "Alege limba website-ului",
+    languageNames: { en: "Engleză", ro: "Română" },
+    heroWork: "Creative Work",
+    scrollPrompt: "Derulează pentru a explora",
+    heroBriefLabel: "3D / VFX / Post-producție",
+    heroBrief: "Lucru vizual hands-on în 3D, VFX, editare, grafică, retuș și producție asistată de AI, susținut de experiență în producție tehnică și coordonare directă între echipe, clienți și agenții.",
+    experienceEyebrow: "Experiență",
+    experienceTitle: <>Cronologie<br />profesională.</>,
+    roadmapLabel: "Parcurs profesional / Cel mai recent primul",
+    roadmapHint: "Selectează un rol pentru secțiunea completă",
+    framebreedEyebrow: "mart. 2024 — Prezent",
+    framebreedSummary: [
+      "Technical Manager B2B cu experiență în 3D tehnic, coordonând echipe, clienți și agenții și contribuind la estimări, livrabile, editare, grafică, fluxuri AI, 3D și supervizare VFX pe platou.",
+    ],
+    present: "Prezent",
+    currentPosition: "Poziție actuală",
+    framebreedContract: "Contract B2B",
+    roleProgressionLabel: "Evoluția rolurilor la FrameBreed",
+    contribution: "Contribuția mea",
+    projectContext: "Contextul proiectului",
+    responsibilityRecord: "Ce am realizat",
+    creditRecord: "Echipă & credite de producție",
+    creditNote: "Sunt afișate doar persoanele, companiile și rolurile confirmate din informațiile disponibile despre proiect.",
+    projectStill: "cadru din proiect",
+    selectedProjects: "Proiecte FrameBreed selectate",
+    seeProject: "Vezi proiectul",
+    seeAllProjects: "Vezi toate proiectele",
+    hideAllProjects: "Ascunde toate proiectele",
+    allProjectsTitle: "Toate proiectele FrameBreed",
+    closeProject: "Închide proiectul",
+    projectMedia: "Materiale din proiect",
+    openMedia: "Deschide materialul complet",
+    closeMedia: "Închide materialul",
+    motionPreview: "Preview video",
+    imagePreview: "Preview imagine",
+    creditsLabel: "Creditele proiectului",
+    veliuminEyebrow: "mart. 2023 — Prezent",
+    veliuminSummary: [
+      "Proiect de fashion și creație construit de la zero, de la prima identitate și primele drop-uri până la campanii, comerț online și un pop-up fizic.",
+      "Munca mea a acoperit sisteme de brand și direcție grafică, dezvoltare de produs end-to-end și tech pack-uri, Shopify și teme custom, producție de campanie și retail fizic.",
+    ],
+    role: "Rol",
+    scope: "Arii",
+    veliuminRole: "Fondator / Director de creație",
+    veliuminShowcaseLabel: "Arhivă VELIUMIN selectată",
+    veliuminShowcaseTitle: "Website / Drop-uri / Campanii / Pop-up",
+    trandingEyebrow: "sept. 2023 — aug. 2025",
+    trandingSummary: "Lucrări vizuale B2B livrate per proiect prin Tranding: vizualizare de produs, reels CGI, editare și integrări 3D/VFX.",
+    trandingRole: "Artist efecte vizuale",
+    contract: "Contract",
+    trandingContract: "B2B / Plată per proiect",
+    formats: "Arii",
+    trandingMediaLabel: "Preview-uri din proiectele Tranding selectate",
+    sourceProject: "Deschide sursa",
+    sideEyebrow: "Proiecte independente",
+    sideTitle: "PROIECTE SECUNDARE & EXPERIMENTE",
+    sideIntro: "Produse independente și experimente punctuale din afara parcursului principal.",
+    spetaAlt: "Pagina principală a workspace-ului juridic SPETA",
+    spetaCaption: ["Beta live / 2026", "Dezvoltare independentă de produs"],
+    spetaTitle: "Un workspace juridic românesc construit în jurul surselor verificabile.",
+    spetaBody: "Produs legal-tech independent aflat în beta, care folosește legislația românească indexată pentru răspunsuri cu articole și surse citate exact.",
+    spetaDetails: [["Status", "Beta / testare activă"], ["Rolul meu", "Dezvoltare independentă de produs"]],
+    spetaGallery: ["Ask Legal / Workspace", "Răspuns verificabil / Surse citate", "Legislative Monitor / Corpus indexat"],
+    spetaWalkthrough: "Parcursul produsului",
+    openImage: "Deschide imaginea",
+    closeImage: "Închide imaginea",
+    previousImage: "Imaginea anterioară",
+    nextImage: "Imaginea următoare",
+    visitSpeta: "Vizitează speta.io",
+    skillsEyebrow: "Instrumente / Software / Competențe",
+    skillsTitle: "Skill-uri & software",
+    skillGroups: [
+      ["Video & post-producție", ["Premiere Pro", "After Effects", "DaVinci Resolve", "Editare video", "Compositing"]],
+      ["Design & imagine", ["Photoshop", "Illustrator", "InDesign", "Retuș / keyframe-uri", "Identitate vizuală"]],
+      ["3D & VFX", ["3ds Max", "Maya", "Blender", "Rigging / morphs", "Lighting / setup de render", "Pre-vizualizare"]],
+      ["Producție tehnică", ["Supervizare VFX", "Comunicare client / agenție", "Estimări / livrabile", "Conformare / versionare", "Export / controlul livrării"]],
+      ["AI & sisteme", ["Kling / Higgsfield", "GPT Image", "Veo / Flow", "Seedance / Seedream", "Upscale / retuș AI", "Linux / servere", "Dezvoltare Shopify"]],
+    ],
+    cvEyebrow: "CV / PDF",
+    cvTitle: "CV",
+    cvLead: "O prezentare concisă, de o pagină, a experienței, instrumentelor și pregătirii mele tehnice.",
+    cvPreview: "Previzualizare CV Robert Anghel",
+    cvOpen: "Deschide PDF",
+    cvDownload: "Descarcă PDF",
+    cvFileName: "Robert_Anghel_CV.pdf",
+    contactEyebrow: "Contact",
+    contactTitle: <>Hai să<br />discutăm.</>,
+    contactLead: "Pentru proiecte și colaborări creative, contactează-mă direct.",
+    contactLabels: ["Nume", "Locație", "Telefon", "Limbi", "LinkedIn"],
+    based: "București, România",
+    languages: "Română / Engleză",
+    backTop: "Înapoi sus ↑",
+  },
+} as const;
 
 export default function Home() {
+  const [language, setLanguage] = useState<Language>("en");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
+  const [activeProjectMediaIndex, setActiveProjectMediaIndex] = useState<number | null>(null);
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [activeSpetaImage, setActiveSpetaImage] = useState<number | null>(null);
+  const [selectedSpetaPreview, setSelectedSpetaPreview] = useState(0);
+  const t = copy[language];
+  const activeProject = framebreedProjects.find((project) => project.id === activeProjectId) ?? null;
+  const spetaLabels = [t.spetaAlt, ...t.spetaGallery];
+
+  useEffect(() => {
+    const savedLanguage = window.localStorage.getItem("robert-portfolio-language");
+    if (savedLanguage === "ro") setLanguage("ro");
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const desktopQuery = window.matchMedia("(min-width: 701px)");
+    const closeMenu = () => setMobileMenuOpen(false);
+    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") closeMenu(); };
+    const closeOnOutsideClick = (event: PointerEvent) => {
+      const target = event.target;
+      if (target instanceof Element && !target.closest(".mobileMenu,.mobileMenuToggle")) closeMenu();
+    };
+    const closeOnDesktop = (event: MediaQueryListEvent) => { if (event.matches) closeMenu(); };
+    document.addEventListener("keydown", closeOnEscape);
+    document.addEventListener("pointerdown", closeOnOutsideClick);
+    desktopQuery.addEventListener("change", closeOnDesktop);
+    return () => {
+      document.removeEventListener("keydown", closeOnEscape);
+      document.removeEventListener("pointerdown", closeOnOutsideClick);
+      desktopQuery.removeEventListener("change", closeOnDesktop);
+    };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (!activeProject && activeSpetaImage === null) return;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        if (activeProjectMediaIndex !== null) setActiveProjectMediaIndex(null);
+        else {
+          setActiveProjectId(null);
+          setActiveSpetaImage(null);
+        }
+      }
+    };
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [activeProject, activeProjectMediaIndex, activeSpetaImage]);
+
+  const changeLanguage = (nextLanguage: Language) => {
+    setLanguage(nextLanguage);
+    window.localStorage.setItem("robert-portfolio-language", nextLanguage);
+  };
+
   return (
     <>
-      <a className="skipLink" href="#main">Skip to content</a>
+      <a className="skipLink" href="#main">{t.skip}</a>
 
       <header className="siteHeader">
-        <a className="brandLink" href="#top" aria-label="Vellumhaus home">
+        <a className="brandLink" href="#top" aria-label={t.homeLabel} onClick={() => setMobileMenuOpen(false)}>
           <img src="/brand/vh_mark_ink.svg" alt="" width={36} height={36} />
-          <strong>vellumhaus©</strong>
         </a>
-        <nav aria-label="Primary navigation">
-          <WorkIndex />
-          <a className="contactNav" href="#contact">Contact</a>
-        </nav>
+        <div className="headerActions">
+          <nav aria-label={t.navLabel}>
+            <a className="workNav" href="#experience">{t.nav[0]}</a>
+            <a className="contactNav" href="#contact">{t.nav[1]}</a>
+          </nav>
+          <div className="languageSwitch" role="group" aria-label={t.languageLabel}>
+            <button type="button" className={language === "en" ? "active" : ""} aria-pressed={language === "en"} aria-label={t.languageNames.en} title={t.languageNames.en} onClick={() => changeLanguage("en")}><span aria-hidden="true">🇬🇧</span><small>EN</small></button>
+            <button type="button" className={language === "ro" ? "active" : ""} aria-pressed={language === "ro"} aria-label={t.languageNames.ro} title={t.languageNames.ro} onClick={() => changeLanguage("ro")}><span aria-hidden="true">🇷🇴</span><small>RO</small></button>
+          </div>
+        </div>
+        <button className={`mobileMenuToggle${mobileMenuOpen ? " isOpen" : ""}`} type="button" aria-expanded={mobileMenuOpen} aria-controls="mobile-menu" aria-label={mobileMenuOpen ? t.menuClose : t.menuOpen} onClick={() => setMobileMenuOpen((isOpen) => !isOpen)}>
+          <span aria-hidden="true" /><span aria-hidden="true" />
+        </button>
+        {mobileMenuOpen && (
+          <div className="mobileMenu" id="mobile-menu">
+            <nav aria-label={t.navLabel}>
+              <a className="workNav" href="#experience" onClick={() => setMobileMenuOpen(false)}>{t.nav[0]}</a>
+              <a className="contactNav" href="#contact" onClick={() => setMobileMenuOpen(false)}>{t.nav[1]}</a>
+            </nav>
+            <div className="languageSwitch" role="group" aria-label={t.languageLabel}>
+              <button type="button" className={language === "en" ? "active" : ""} aria-pressed={language === "en"} aria-label={t.languageNames.en} onClick={() => { changeLanguage("en"); setMobileMenuOpen(false); }}><span aria-hidden="true">🇬🇧</span><small>EN</small></button>
+              <button type="button" className={language === "ro" ? "active" : ""} aria-pressed={language === "ro"} aria-label={t.languageNames.ro} onClick={() => { changeLanguage("ro"); setMobileMenuOpen(false); }}><span aria-hidden="true">🇷🇴</span><small>RO</small></button>
+            </div>
+          </div>
+        )}
       </header>
 
       <main id="main" tabIndex={-1}>
         <section className="hero" id="top">
           <BouncingMark />
-          <h1>
-            <span>Human eye.</span>
-            <span className="heroIndent">Machine nerve.</span>
-            <span>Final image.</span>
-          </h1>
-          <div className="heroFooter">
-            <ProjectLogoRail />
-            <p className="heroPositioning">
-              <strong>Post-Production House</strong>
-              <span>Focused on AI-driven pipelines and hybrid workflows.</span>
-            </p>
-            <a className="heroWorkLink" href="#work">View selected work <span aria-hidden="true">↓</span></a>
+          <h1 className="heroHeadline"><span className="heroName">Robert Anghel</span><span className="heroWork">{t.heroWork}</span></h1>
+          <a className="heroScrollLink" href="#intro"><span>{t.scrollPrompt}</span><i aria-hidden="true" /></a>
+        </section>
+
+        <section className="heroBrief" id="intro" aria-label={t.heroBriefLabel}>
+          <p className="eyebrow">{t.heroBriefLabel}</p><p>{t.heroBrief}</p>
+        </section>
+
+        <section className="experienceIndex" id="experience" aria-labelledby="experience-title">
+          <header className="experienceHeader">
+            <div className="experienceHeading"><p className="eyebrow">{t.experienceEyebrow}</p><h2 id="experience-title">{t.experienceTitle}</h2></div>
+            <div className="experienceGuide"><span>{t.roadmapLabel}</span><p>{t.roadmapHint}</p></div>
+          </header>
+          <div className="chapterList">
+            {chapters.map((chapter) => (
+              <a href={chapter.href} className="chapterRow" key={chapter.href} aria-label={`${chapter.company[language]} — ${chapter.role[language]}`}>
+                <span className="roadmapNode" aria-hidden="true" />
+                <span className="chapterIdentity"><span className="chapterLogo"><img src={chapter.logo} alt={chapter.company[language]} /></span></span>
+                <span className="chapterWork"><strong>{chapter.role[language]}</strong><small>{chapter.engagement[language]}</small></span>
+                <span className="chapterYears">{chapter.years[language]}</span><span className="chapterArrow" aria-hidden="true">↘</span>
+              </a>
+            ))}
           </div>
         </section>
 
-        <div className="ticker" aria-hidden="true" />
-
-        <section className="workSection" id="work" aria-labelledby="work-title">
-          <article className="featuredProject" id="san-pellegrino">
-            <header className="featureHeader">
-              <div className="projectIdentity">
-                <p className="eyebrow">Featured project / 2026</p>
-                <img className="projectLogo" src="/projects/san-pellegrino/san-pellegrino-logo.png" alt="San Pellegrino" />
-                <h2 className="srOnly" id="work-title">San Pellegrino</h2>
-              </div>
-              <div className="featureSummary">
-                <p>Three six-second social films turning Paris landmarks into oversized Italian gifts. The workflow combined AI image-making with deliberate keyframing, retouch, compositing and final-film craft.</p>
-                <dl className="creditGrid">
-                  <div><dt>Client</dt><dd>San Pellegrino</dd></div>
-                  <div><dt>Agency</dt><dd>Everything is Computer</dd></div>
-                  <div><dt>Role</dt><dd>AI Hybrid Post-Production</dd></div>
-                  <div><dt>Workflow</dt><dd>Keyframes / Retouch / Final Film</dd></div>
-                </dl>
-              </div>
-            </header>
-
-            <div className="motionDeck" aria-label="San Pellegrino motion films">
-              {motionFilms.map((film) => (
-                <figure className="cassette" key={film.id}>
-                  <div className="cassetteTop"><span>Motion / {film.id}</span><span>06 SEC</span></div>
-                  <video autoPlay loop muted playsInline preload="metadata" poster={`/projects/san-pellegrino/${film.poster}`} aria-label={`${film.title}, San Pellegrino social film`}>
-                    <source src={`/projects/san-pellegrino/${film.file}`} type="video/mp4" />
-                  </video>
-                  <figcaption><strong>{film.title}</strong><span>AI Hybrid Film</span></figcaption>
-                </figure>
+        <section className="careerChapter framebreedChapter" id="framebreed-studio" aria-label="FrameBreed Studio">
+          <header className="careerHeader">
+            <div><span className="careerLogo brandLogoHero"><img src="/identity/framebreed-logo.png" alt="FrameBreed Studio" /></span><p className="eyebrow">{t.framebreedEyebrow}</p></div>
+            <div className="careerSummary">
+              {t.framebreedSummary.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              <ol className="framebreedRoleRoadmap" aria-label={t.roleProgressionLabel}>
+                <li><span className="roleRoadmapNode" aria-hidden="true" /><time>Mar 2024 — Nov 2025</time><strong>3D Generalist</strong><small>{t.framebreedContract}</small></li>
+                <li className="isCurrent"><span className="roleRoadmapNode" aria-hidden="true" /><time>Nov 2025 — {t.present}</time><strong>Technical Manager</strong><small>{t.currentPosition} / {t.framebreedContract}</small></li>
+              </ol>
+            </div>
+          </header>
+          <div className="projectLoop" id="selected-work" aria-label={t.selectedProjects}>
+            <div className="projectLoopTrack">
+              {[0, 1].map((copyIndex) => (
+                <div className="projectLoopGroup" aria-hidden={copyIndex === 1} key={copyIndex}>
+                  {framebreedProjects.map((project) => {
+                    const projectCopy = project[language];
+                    const tileLogo = "tileLogo" in project ? project.tileLogo : project.logo;
+                    return (
+                      <button
+                        className="projectLoopCard"
+                        data-project={project.id}
+                        id={copyIndex === 0 ? project.id : undefined}
+                        type="button"
+                        tabIndex={copyIndex === 1 ? -1 : undefined}
+                        onClick={() => setActiveProjectId(project.id)}
+                        key={`${copyIndex}-${project.id}`}
+                        aria-label={`${t.seeProject}: ${project.title}`}
+                      >
+                        <img className="projectLoopPreview" src={project.image} alt="" />
+                        <span className="projectLoopTint" aria-hidden="true" />
+                        <span className="projectLoopLogo"><img src={tileLogo} alt={copyIndex === 0 ? project.title : ""} /></span>
+                        <span className="projectLoopMeta">
+                          <small>{projectCopy.discipline}</small>
+                          <strong>{t.seeProject}<span aria-hidden="true">↗</span></strong>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
               ))}
             </div>
-
-            <div className="stillSection">
-              <div className="stillHeading"><span>Campaign stills</span><span>Social / Print</span></div>
-              <div className="stillGrid">
-                {stills.map((still) => (
-                  <figure key={still.file}>
-                    <img src={`/projects/san-pellegrino/${still.file}`} alt={`${still.title} campaign still for San Pellegrino`} />
-                    <figcaption>{still.title}</figcaption>
-                  </figure>
-                ))}
-              </div>
-            </div>
-          </article>
-
-          <article className="featuredProject hoeProject" id="house-of-errors" aria-labelledby="house-of-errors-title">
-            <header className="hoeBrandHeader">
-              <p className="eyebrow">House of Errors / Two campaigns</p>
-              <img src="/projects/house-of-errors/logo.svg" alt="House of Errors" />
-              <h2 className="srOnly" id="house-of-errors-title">House of Errors — selected work</h2>
-            </header>
-
-            <section className="hoeCampaign mossCampaign" aria-labelledby="moss-title">
-              <figure className="campaignFilm mossFilm">
-                <div className="assetBar"><span>Campaign 01 / Film</span><span>00:24 / Loop</span></div>
-                <video autoPlay loop muted playsInline preload="metadata" poster="/projects/house-of-errors/moss-poster.jpg" aria-label="House of Errors Embroidered Moss Denim film">
-                  <source src="/projects/house-of-errors/moss.mp4" type="video/mp4" />
-                </video>
-                <figcaption><strong>Embroidered Moss Denim</strong><span>Post-Production</span></figcaption>
-              </figure>
-
-              <div className="campaignDetails">
-                <p className="campaignIndex">01 / Post-Production</p>
-                <h3 id="moss-title">Embroidered<br />Moss Denim</h3>
-                <p className="campaignDescription">Shot and directed by Tom Emmerson, the live-action material was shaped through compositing, grading and editorial into a tactile film where embroidered moss grows through the denim.</p>
-                <dl className="campaignCredits">
-                  <div><dt>Client</dt><dd>House of Errors</dd></div>
-                  <div><dt>Agency</dt><dd>Red Buoy</dd></div>
-                  <div><dt>Director / Photographer</dt><dd>Tom Emmerson</dd></div>
-                  <div><dt>Workflow</dt><dd>Compositing / Grade / Edit</dd></div>
-                </dl>
+          </div>
+          <div className="projectDirectoryToggleRow">
+            <span>{framebreedProjects.length.toString().padStart(2, "0")} / {t.selectedProjects}</span>
+            <button type="button" aria-expanded={showAllProjects} aria-controls="framebreed-project-directory" onClick={() => setShowAllProjects((isOpen) => !isOpen)}>
+              {showAllProjects ? t.hideAllProjects : t.seeAllProjects}<span aria-hidden="true">{showAllProjects ? "−" : "+"}</span>
+            </button>
+          </div>
+          {showAllProjects && (
+            <section className="projectDirectory" id="framebreed-project-directory" aria-labelledby="project-directory-title">
+              <header><p className="eyebrow">{t.selectedProjects}</p><h3 id="project-directory-title">{t.allProjectsTitle}</h3></header>
+              <div className="projectDirectoryGrid">
+                {framebreedProjects.map((project) => {
+                  const projectCopy = project[language];
+                  const tileLogo = "tileLogo" in project ? project.tileLogo : project.logo;
+                  return (
+                    <button className="projectLoopCard projectGridCard" data-project={project.id} type="button" onClick={() => setActiveProjectId(project.id)} key={`grid-${project.id}`} aria-label={`${t.seeProject}: ${project.title}`}>
+                      <img className="projectLoopPreview" src={project.image} alt="" />
+                      <span className="projectLoopTint" aria-hidden="true" />
+                      <span className="projectLoopLogo"><img src={tileLogo} alt={project.title} /></span>
+                      <span className="projectLoopMeta"><small>{projectCopy.discipline}</small><strong>{project.title}<span aria-hidden="true">↗</span></strong></span>
+                    </button>
+                  );
+                })}
               </div>
             </section>
+          )}
+        </section>
 
-            <section className="hoeCampaign ss25Campaign" aria-labelledby="ss25-title">
-              <div className="ss25Intro">
-                <div>
-                  <p className="campaignIndex">02 / 3D + VFX</p>
-                  <h3 id="ss25-title">SS25</h3>
+        {activeProject && (() => {
+          const projectCopy = activeProject[language];
+          return (
+            <div className="projectDetailLayer" onMouseDown={() => { setActiveProjectMediaIndex(null); setActiveProjectId(null); }}>
+              <article className="projectDetail" data-project={activeProject.id} role="dialog" aria-modal="true" aria-labelledby="project-detail-title" onMouseDown={(event) => event.stopPropagation()}>
+                <header className="projectDetailHeader">
+                  <span>{t.selectedProjects} / {activeProject.title}</span>
+                  <button type="button" autoFocus onClick={() => { setActiveProjectMediaIndex(null); setActiveProjectId(null); }} aria-label={t.closeProject}>{t.closeProject} <span aria-hidden="true">×</span></button>
+                </header>
+                <div className="projectDetailIntro">
+                  <div className="projectDetailIdentity">
+                    <span className="projectDetailLogo"><img src={activeProject.logo} alt={`${activeProject.title} logo`} /></span>
+                    <p className="eyebrow">{projectCopy.discipline}</p>
+                    <h2 id="project-detail-title">{activeProject.title}</h2>
+                  </div>
+                  <div className="projectDetailContext">
+                    <span>{t.projectContext}</span>
+                    <p>{projectCopy.note}</p>
+                  </div>
                 </div>
+                <section className="projectWorkRecord" aria-labelledby="project-work-title">
+                  <header><p className="eyebrow">{t.contribution}</p><h3 id="project-work-title">{t.responsibilityRecord}</h3></header>
+                  <div className="projectWorkDetails">
+                    <p>{projectCopy.role}</p>
+                    <ul>{projectCopy.work.map((item) => <li key={item}>{item}</li>)}</ul>
+                  </div>
+                </section>
+                <section className="projectMedia" aria-label={t.projectMedia}>
+                  {activeProject.media.map((item, index) => (
+                    <figure key={`${item.src}-${index}`}>
+                      <button className="projectMediaPreview" type="button" onClick={() => setActiveProjectMediaIndex(index)} aria-label={`${t.openMedia}: ${activeProject.title} ${index + 1}`}>
+                        {item.type === "video" ? (
+                          <video autoPlay loop muted playsInline preload="metadata" poster={"poster" in item ? item.poster : undefined}>
+                            <source src={item.src} type="video/mp4" />
+                          </video>
+                        ) : <img src={item.src} alt={`${activeProject.title} ${t.projectStill} ${index + 1}`} />}
+                        <span className="projectMediaHint" aria-hidden="true">{t.openMedia} ↗</span>
+                      </button>
+                      <figcaption><span>{item.type === "video" ? t.motionPreview : t.imagePreview}</span><span>0{index + 1}</span></figcaption>
+                    </figure>
+                  ))}
+                </section>
+                <section className="projectCredits" aria-label={t.creditsLabel}>
+                  <header className="projectCreditsHeading"><p className="eyebrow">{t.creditRecord}</p><h3>{t.creditsLabel}</h3><p>{"creditScope" in projectCopy ? projectCopy.creditScope : t.creditNote}</p></header>
+                  <dl>{projectCopy.credits.map((credit, creditIndex) => {
+                    const label = credit[0] as string;
+                    const value = credit[1];
+                    const isCreditSection = label.startsWith("Project —") || label.startsWith("Proiect —") || label.startsWith("Local Crew —") || label.startsWith("Echipă locală —");
+                    return (
+                      <div className={[label === "Robert Anghel" ? "isSelf" : "", isCreditSection ? "isCreditSection" : ""].filter(Boolean).join(" ") || undefined} key={`${label}-${creditIndex}`}>
+                        <dt>{label}</dt>
+                        <dd>{typeof value === "string" ? value : (
+                          <ul className="projectCreditNames">
+                            {value.map((person) => (
+                              <li className={person.name === "Robert Anghel" ? "isSelfCredit" : undefined} key={`${label}-${person.name}`}>
+                                {"href" in person ? (
+                                  <a href={person.href} target="_blank" rel="noreferrer"><span>{person.name}</span>{"handle" in person && <small>{person.handle} ↗</small>}</a>
+                                ) : <span>{person.name}</span>}
+                              </li>
+                            ))}
+                          </ul>
+                        )}</dd>
+                      </div>
+                    );
+                  })}</dl>
+                </section>
+              </article>
+            </div>
+          );
+        })()}
+
+        {activeProject && activeProjectMediaIndex !== null && (() => {
+          const media = activeProject.media[activeProjectMediaIndex];
+          return (
+            <div className="projectMediaLightboxLayer" onMouseDown={() => setActiveProjectMediaIndex(null)}>
+              <article className="projectMediaLightbox" role="dialog" aria-modal="true" aria-labelledby="project-media-lightbox-title" onMouseDown={(event) => event.stopPropagation()}>
+                <header><span id="project-media-lightbox-title">{activeProject.title} / 0{activeProjectMediaIndex + 1}</span><button type="button" autoFocus onClick={() => setActiveProjectMediaIndex(null)} aria-label={t.closeMedia}>{t.closeMedia} <span aria-hidden="true">×</span></button></header>
                 <div>
-                  <p className="campaignDescription">The stacked paint cans beneath the talent were built and rendered in 3D, replaced into the photographed plates and given subtle animation. The result keeps the surreal intervention grounded in the original light, scale and shadows.</p>
-                  <dl className="campaignCredits">
-                    <div><dt>Client</dt><dd>House of Errors</dd></div>
-                    <div><dt>Agency</dt><dd>Red Buoy</dd></div>
-                    <div><dt>Director</dt><dd>Tom Emmerson</dd></div>
-                    <div><dt>Workflow</dt><dd>3D / Render / Comp Replacement / Animation</dd></div>
-                  </dl>
+                  {media.type === "video" ? (
+                    <video key={media.src} controls autoPlay muted playsInline poster={"poster" in media ? media.poster : undefined}>
+                      <source src={media.src} type="video/mp4" />
+                    </video>
+                  ) : <img src={media.src} alt={`${activeProject.title} ${t.projectStill} ${activeProjectMediaIndex + 1}`} />}
                 </div>
-              </div>
+              </article>
+            </div>
+          );
+        })()}
 
-              <div className="ss25Showcase">
-                <figure className="campaignFilm ss25Film">
-                  <div className="assetBar"><span>Campaign 02 / Film</span><span>00:52 / Sound on</span></div>
-                  <video controls playsInline preload="metadata" poster="/projects/house-of-errors/ss25-poster.jpg" aria-label="House of Errors SS25 film">
-                    <source src="/projects/house-of-errors/ss25.mp4" type="video/mp4" />
-                  </video>
-                  <figcaption><strong>House of Errors SS25</strong><span>3D + VFX</span></figcaption>
-                </figure>
+        {activeSpetaImage !== null && (() => {
+          const imageLabel = activeSpetaImage === 0 ? t.spetaAlt : t.spetaGallery[activeSpetaImage - 1];
+          return (
+            <div className="spetaLightboxLayer" onMouseDown={() => setActiveSpetaImage(null)}>
+              <article className="spetaLightbox" role="dialog" aria-modal="true" aria-labelledby="speta-lightbox-title" onMouseDown={(event) => event.stopPropagation()}>
+                <header className="spetaLightboxHeader">
+                  <span>SPETA / 0{activeSpetaImage + 1} — 0{spetaImages.length}</span>
+                  <button type="button" autoFocus onClick={() => setActiveSpetaImage(null)} aria-label={t.closeImage}>{t.closeImage} <span aria-hidden="true">×</span></button>
+                </header>
+                <div className="spetaLightboxMedia"><img src={spetaImages[activeSpetaImage]} alt={imageLabel} /></div>
+                <div className="spetaLightboxControls">
+                  <button type="button" onClick={() => setActiveSpetaImage((activeSpetaImage - 1 + spetaImages.length) % spetaImages.length)} aria-label={t.previousImage}><span aria-hidden="true">←</span> {t.previousImage}</button>
+                  <strong id="speta-lightbox-title">{imageLabel}</strong>
+                  <button type="button" onClick={() => setActiveSpetaImage((activeSpetaImage + 1) % spetaImages.length)} aria-label={t.nextImage}>{t.nextImage} <span aria-hidden="true">→</span></button>
+                </div>
+              </article>
+            </div>
+          );
+        })()}
 
-                <div className="ss25StillGrid" aria-label="House of Errors SS25 campaign stills">
-                  {houseOfErrorsStills.map((still) => (
-                    <figure key={still.file}>
-                      <img src={`/projects/house-of-errors/${still.file}`} alt={`House of Errors SS25 campaign still ${still.id}`} />
-                      <figcaption>SS25 / {still.id}</figcaption>
+        <section className="careerChapter veliuminChapter" id="veliumin" aria-label="VELIUMIN">
+          <header className="careerHeader inverse">
+            <div><span className="careerLogo careerLogoWide veliuminLogoHero"><img src="/identity/veliumin-logo.svg" alt="VELIUMIN" /></span><p className="eyebrow">{t.veliuminEyebrow}</p></div>
+            <div className="careerSummary">
+              {t.veliuminSummary.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              <dl className="roleProgression light"><div><dt>{t.role}</dt><dd>{t.veliuminRole}</dd></div></dl>
+            </div>
+          </header>
+          <div className="veliuminShowcase" aria-label={t.veliuminShowcaseLabel}>
+            <header className="veliuminShowcaseHeader"><span>{t.veliuminShowcaseTitle}</span><span>2023 — 2025</span></header>
+            <div className="veliuminArchiveTrack">
+              {[0, 1].map((groupIndex) => (
+                <div className="veliuminArchiveGroup" aria-hidden={groupIndex === 1} key={groupIndex}>
+                  {veliuminArchive.map((item) => (
+                    <figure className="veliuminArchiveCard" data-format={item.format} key={`${groupIndex}-${item.id}`}>
+                      <img src={item.image} alt={groupIndex === 0 ? `${item.title[language]} — ${item.scope[language]}` : ""} loading={groupIndex === 0 ? "eager" : "lazy"} decoding="async" />
                     </figure>
                   ))}
                 </div>
-              </div>
-            </section>
-          </article>
-
-          <article className="featuredProject heinekenProject" id="heineken" aria-labelledby="heineken-title">
-            <header className="featureHeader heinekenHeader">
-              <div className="projectIdentity">
-                <p className="eyebrow">Fans Have More Friends / Hybrid Production</p>
-                <img className="projectLogo heinekenLogo" src="/projects/heineken/heineken-logo.png" alt="Heineken" />
-                <h2 className="srOnly" id="heineken-title">Heineken — Fans Have More Friends</h2>
-              </div>
-              <div className="featureSummary">
-                <p>For “Fans Have More Friends”, we built the campaign environments before the shoot—combining AI, 3D and VFX into LED-ready backgrounds matched to the talent, lighting and photographic setup. Technical 3D planning mapped every bottle position so the individual bottles resolve into one larger bottle at the centre of the image.</p>
-                <dl className="creditGrid">
-                  <div><dt>Client</dt><dd>Heineken</dd></div>
-                  <div><dt>Agency</dt><dd>LePub</dd></div>
-                  <div><dt>Photographer</dt><dd>Justin Bettman</dd></div>
-                  <div><dt>Production</dt><dd>Breadthemakery</dd></div>
-                  <div><dt>Role</dt><dd>Technical Image Production</dd></div>
-                  <div><dt>Pipeline</dt><dd>AI / 3D / VFX / LED</dd></div>
-                </dl>
-              </div>
-            </header>
-
-            <div className="heinekenGallery" aria-label="Heineken Fans Have More Friends campaign images">
-              <figure className="heinekenFrame">
-                <img src="/projects/heineken/heineken-day.jpg" alt="Heineken Fans Have More Friends campaign image in a daylight bar environment" />
-                <figcaption><strong>Daylight environment</strong><span>LED background / Final image</span></figcaption>
-              </figure>
-              <figure className="heinekenFrame">
-                <img src="/projects/heineken/heineken-blue.jpg" alt="Heineken Fans Have More Friends campaign image in a blue-hour bar environment" />
-                <figcaption><strong>Blue-hour environment</strong><span>LED background / Final image</span></figcaption>
-              </figure>
-            </div>
-          </article>
-
-          <article className="featuredProject newBalanceProject" id="new-balance" aria-labelledby="new-balance-title">
-            <header className="featureHeader newBalanceHeader">
-              <div className="projectIdentity">
-                <p className="eyebrow">Gator Run / Full CGI Campaign</p>
-                <img className="projectLogo newBalanceLogo" src="/projects/new-balance/new-balance-logo.png" alt="New Balance" />
-                <h2 className="srOnly" id="new-balance-title">New Balance — Gator Run</h2>
-              </div>
-              <div className="featureSummary">
-                <p>“Gator Run” introduces a baby gator through four fully CG campaign films and a suite of stills. Frame23 Studio built the project entirely in 3D; Vellumhaus handled previsualization, editorial, conform and the final stills package.</p>
-                <dl className="creditGrid">
-                  <div><dt>Client</dt><dd>New Balance</dd></div>
-                  <div><dt>Creative Agency</dt><dd>Red Buoy</dd></div>
-                  <div><dt>Director / Photographer</dt><dd>Tom Emmerson</dd></div>
-                  <div><dt>Production Company</dt><dd>Business Club</dd></div>
-                  <div><dt>VFX / Full CGI</dt><dd>Frame23 Studio</dd></div>
-                  <div><dt>Vellumhaus</dt><dd>Previs / Edit / Conform / Stills</dd></div>
-                </dl>
-              </div>
-            </header>
-
-            <div className="gatorFilmGrid" aria-label="New Balance Gator Run campaign films">
-              {gatorRunFilms.map((film) => (
-                <figure className="gatorFilm" key={film.id}>
-                  <div className="assetBar"><span>Gator Run / {film.id}</span><span>Full CGI</span></div>
-                  <video autoPlay loop muted playsInline preload="metadata" poster={`/projects/new-balance/${film.poster}`} aria-label={`${film.title}, New Balance Gator Run campaign film`}>
-                    <source src={`/projects/new-balance/${film.file}`} type="video/mp4" />
-                  </video>
-                  <figcaption><strong>{film.title}</strong><span>New Balance / Gator Run</span></figcaption>
-                </figure>
               ))}
             </div>
+          </div>
+        </section>
 
-            <section className="gatorStills" aria-labelledby="gator-stills-title">
-              <div className="gatorStillsHeading">
-                <h3 id="gator-stills-title">Campaign stills.</h3>
-                <span>Full CGI / Frame23 Studio</span>
-              </div>
-              <div className="gatorStillGrid">
-                {gatorRunFilms.map((still) => (
-                  <figure key={still.poster}>
-                    <img src={`/projects/new-balance/${still.poster}`} alt={`${still.title}, New Balance Gator Run campaign still`} />
-                    <figcaption>{still.id} / {still.title}</figcaption>
-                  </figure>
-                ))}
-              </div>
-            </section>
-          </article>
+        <section className="careerChapter trandingChapter" id="tranding-social-media" aria-label="Tranding Social Media">
+          <header className="careerHeader compact">
+            <div><span className="careerLogo brandLogoHero"><img src="/identity/tranding-logo.png" alt="Tranding Social Media" /></span><p className="eyebrow">{t.trandingEyebrow}</p></div>
+            <div className="careerSummary"><p>{t.trandingSummary}</p><dl className="roleProgression"><div><dt>{t.role}</dt><dd>{t.trandingRole}</dd></div><div><dt>{t.contract}</dt><dd>{t.trandingContract}</dd></div><div><dt>{t.formats}</dt><dd>Product vis / CGI reels / 3D / VFX</dd></div></dl></div>
+          </header>
+          <div className="trandingShowcase" aria-label={t.trandingMediaLabel}>
+            <div className="trandingProjectTrack">
+              {[0, 1].map((groupIndex) => (
+                <div className="trandingProjectGroup" aria-hidden={groupIndex === 1} key={groupIndex}>
+                  {trandingProjects.map((project) => (
+                    <a className="trandingProjectCard" data-format={project.format} href={project.href} target="_blank" rel="noreferrer" key={`${groupIndex}-${project.id}`} tabIndex={groupIndex === 1 ? -1 : undefined}>
+                      <img src={project.image} alt={groupIndex === 0 ? `${project.title[language]} — ${project.scope[language]}` : ""} />
+                      <span className="trandingProjectMeta"><small>{project.scope[language]}</small><strong>{project.title[language]}</strong><em>{t.sourceProject} ↗</em></span>
+                    </a>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-          <article className="featuredProject kauflandProject" id="kaufland" aria-labelledby="kaufland-title">
-            <header className="featureHeader">
-              <div className="projectIdentity">
-                <p className="eyebrow">Full AI Film / 2026</p>
-                <img className="projectLogo kauflandLogo" src="/projects/kaufland/kaufland-logo.png" alt="Kaufland" />
-                <h2 className="srOnly" id="kaufland-title">Kaufland Romania</h2>
-              </div>
-              <div className="featureSummary">
-                <p>A 90-second film made entirely with AI, built scene by scene from designed keyframes. Every shot was video-generated, composited and synchronised into a continuous edit, then colour-graded for one cohesive final look.</p>
-                <dl className="creditGrid">
-                  <div><dt>Client</dt><dd>Kaufland Romania</dd></div>
-                  <div><dt>Agency</dt><dd>Saga Film</dd></div>
-                  <div><dt>Role</dt><dd>Full AI Film Production</dd></div>
-                  <div><dt>Workflow</dt><dd>Keyframes / Generation / Composite / Grade</dd></div>
-                </dl>
-              </div>
-            </header>
-
-            <div className="kauflandFilm">
-              <figure className="featureReel">
-                <div className="reelTop"><span>Master Film / 01</span><span>01:30 / Sound on</span></div>
-                <video controls playsInline preload="metadata" poster="/projects/kaufland/kaufland-poster.jpg" aria-label="Kaufland Romania full AI film">
-                  <source src="/projects/kaufland/kaufland-film.mp4" type="video/mp4" />
-                </video>
-                <figcaption><strong>Generated shot by shot.</strong><span>Kaufland Romania / 2026</span></figcaption>
-              </figure>
+        <section className="sideProjectsSection" id="side-projects" aria-labelledby="side-projects-title">
+          <header className="sideProjectsHeader"><p className="eyebrow">{t.sideEyebrow}</p><h2 id="side-projects-title">{t.sideTitle}</h2><p>{t.sideIntro}</p></header>
+          <article className="spetaFeature">
+            <div className="spetaIdentity">
+              <div className="spetaWordmark"><span>S</span><strong>SPETA</strong></div>
+              <p className="eyebrow">Software pentru Evidență, Tehnologie și Analiză Juridică</p>
+              <div className="spetaStatus"><span>{t.spetaCaption[0]}</span><span>{t.spetaCaption[1]}</span></div>
+            </div>
+            <div className="spetaCopy">
+              <h3>{t.spetaTitle}</h3><p>{t.spetaBody}</p>
+              <dl>{t.spetaDetails.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+              <a className="externalProjectLink" href="https://www.speta.io/" target="_blank" rel="noreferrer">{t.visitSpeta} <span aria-hidden="true">↗</span></a>
             </div>
           </article>
+          <section className="spetaShowcase" aria-label={t.spetaWalkthrough}>
+            <header className="spetaShowcaseHeader"><p className="eyebrow">{t.spetaWalkthrough}</p><span>0{selectedSpetaPreview + 1} / 0{spetaImages.length}</span></header>
+            <figure className="spetaShowcaseStage">
+              <div className="spetaWindowBar" aria-hidden="true"><span><i></i><i></i><i></i></span><strong>speta.io</strong><small>PRODUCT / BETA</small></div>
+              <button className="spetaImageButton" type="button" onClick={() => setActiveSpetaImage(selectedSpetaPreview)} aria-label={`${t.openImage}: ${spetaLabels[selectedSpetaPreview]}`}>
+                <img src={spetaImages[selectedSpetaPreview]} alt={spetaLabels[selectedSpetaPreview]} />
+                <span className="spetaExpandHint" aria-hidden="true">{t.openImage} ↗</span>
+              </button>
+              <figcaption><strong>{spetaLabels[selectedSpetaPreview]}</strong><span>SPETA / 0{selectedSpetaPreview + 1}</span></figcaption>
+            </figure>
+            <div className="spetaThumbnailRail" aria-label={t.spetaWalkthrough}>
+              {spetaImages.map((image, index) => (
+                <button className={selectedSpetaPreview === index ? "isActive" : undefined} type="button" aria-pressed={selectedSpetaPreview === index} onClick={() => setSelectedSpetaPreview(index)} key={image}>
+                  <span>0{index + 1}</span><img src={image} alt="" /><strong>{spetaLabels[index]}</strong>
+                </button>
+              ))}
+            </div>
+          </section>
+          <section className="sideSkillsBlock" aria-labelledby="side-skills-title">
+            <header><p className="eyebrow">{t.skillsEyebrow}</p><h3 id="side-skills-title">{t.skillsTitle}</h3></header>
+            <div className="skillGroups">
+              {t.skillGroups.map(([group, skills]) => (
+                <article className="skillGroup" key={group}>
+                  <header><h4>{group}</h4></header>
+                  <ul>{skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
+                </article>
+              ))}
+            </div>
+          </section>
+        </section>
 
-
+        <section className="cvSection" id="cv" aria-labelledby="cv-title">
+          <header className="cvHeader">
+            <div><p className="eyebrow">{t.cvEyebrow}</p><h2 id="cv-title">{t.cvTitle}</h2></div>
+            <div className="cvIntro">
+              <p>{t.cvLead}</p>
+              <div className="cvActions">
+                <a href="/cv/robert-anghel-cv.pdf" target="_blank" rel="noreferrer">{t.cvOpen} <span aria-hidden="true">↗</span></a>
+                <a href="/cv/robert-anghel-cv.pdf" download={t.cvFileName}>{t.cvDownload} <span aria-hidden="true">↓</span></a>
+              </div>
+            </div>
+          </header>
+          <div className="cvPreview">
+            <object data="/cv/robert-anghel-cv.pdf#view=FitH&toolbar=0" type="application/pdf" aria-label={t.cvPreview}>
+              <p><a href="/cv/robert-anghel-cv.pdf" target="_blank" rel="noreferrer">{t.cvOpen}</a></p>
+            </object>
+          </div>
         </section>
 
         <section className="contactSection" id="contact" aria-labelledby="contact-title">
-          <p className="eyebrow">02 / Contact</p>
-          <h2 id="contact-title">Bring the<br />next frame.</h2>
-          <p className="contactLead">For films, campaigns and image systems that need craft at machine speed.</p>
-          <a className="contactEmail" href="mailto:contact@vellumhaus.studio"><span>contact@vellumhaus.studio</span><span aria-hidden="true">↗</span></a>
-          <div className="contactGrid">
-            <div className="contactPerson"><span>Name / Role</span><strong>Anghel Robert</strong><small>Producer / Founder</small></div>
-            <div><span>Based</span><strong>Bucharest, Romania</strong></div>
-            <div><span>Phone</span><a href="tel:+40722905095">+40 722 905 095</a></div>
-            <div><span>Availability</span><strong>Projects / Collaborations</strong></div>
-          </div>
+          <p className="eyebrow">{t.contactEyebrow}</p><h2 id="contact-title">{t.contactTitle}</h2><p className="contactLead">{t.contactLead}</p>
+          <a className="contactEmail" href="mailto:anghelrobert18@gmail.com"><span>anghelrobert18@gmail.com</span><span aria-hidden="true">↗</span></a>
+          <div className="contactGrid"><div><span>{t.contactLabels[0]}</span><strong>Robert Anghel</strong></div><div><span>{t.contactLabels[1]}</span><strong>{t.based}</strong></div><div><span>{t.contactLabels[2]}</span><a href="tel:+40722905095">+40 722 905 095</a></div><div><span>{t.contactLabels[3]}</span><strong>{t.languages}</strong></div><div><span>{t.contactLabels[4]}</span><a href="https://www.linkedin.com/in/robert-anghel18/" target="_blank" rel="noreferrer">linkedin.com/in/robert-anghel18 ↗</a></div></div>
           <div className="contactMark" aria-hidden="true"><img src="/brand/vh_mark_paper.svg" alt="" /></div>
         </section>
       </main>
 
-      <footer><span>Vellumhaus© 2026</span><a href="#top">Back to top ↑</a></footer>
+      <footer><span>Robert Anghel / Vellumhaus© 2026</span><a href="#top">{t.backTop}</a></footer>
     </>
   );
 }

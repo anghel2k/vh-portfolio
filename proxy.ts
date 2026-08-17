@@ -170,6 +170,10 @@ function grantAccess(request: NextRequest, token: string) {
 }
 
 export async function proxy(request: NextRequest) {
+  if (process.env.NODE_ENV === "development") {
+    return NextResponse.next();
+  }
+
   const password = process.env.SITE_PASSWORD;
   const inviteToken = process.env.ACCESS_LINK_TOKEN;
   const expectedToken = password ? await accessToken(password) : "";
