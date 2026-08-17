@@ -171,6 +171,8 @@ main:focus { outline:none; }
 .projectDetailHeader>span::before { content:""; width:9px; height:9px; flex:none; background:var(--projectAccent); border-radius:50%; }
 .projectDetailHeader button { min-height:40px; padding:0 14px; display:flex; align-items:center; gap:12px; color:white; background:var(--ink); border:1.5px solid var(--ink); border-radius:999px; font-size:8px; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; }
 .projectDetailHeader button span { font-size:18px; line-height:1; }
+.projectDetailHeader .projectCloseButton { min-width:118px; min-height:44px; justify-content:space-between; border-width:2px; box-shadow:0 0 0 2px rgba(241,239,232,.92),0 0 0 3.5px var(--ink); font-weight:780; }
+.projectDetailHeader .projectCloseButton span { width:25px; height:25px; display:grid; place-items:center; color:var(--ink); background:white; border-radius:50%; font-size:21px; font-weight:500; }
 .projectDetailIntro { padding:44px 24px 52px; display:grid; grid-template-columns:minmax(420px,1.08fr) minmax(380px,.92fr); gap:clamp(54px,9vw,150px); align-items:end; }
 .projectDetailIdentity { min-width:0; }
 .projectDetailLogo { width:min(62%,300px); height:92px; margin-bottom:30px; display:flex; align-items:center; justify-content:flex-start; }
@@ -239,6 +241,7 @@ main:focus { outline:none; }
 .veliuminShowcase { padding:0 0 14px; overflow:hidden; color:var(--ink); background:var(--paper); border-top:1.5px solid var(--paper); }
 .veliuminShowcase:hover .veliuminArchiveTrack,.veliuminShowcase:focus-within .veliuminArchiveTrack { animation-play-state:paused; }
 .veliuminShowcaseHeader { min-height:58px; padding:0 24px; display:flex; align-items:center; justify-content:space-between; gap:24px; color:var(--ink); border-bottom:1.5px solid var(--ink); font-size:8px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+.veliuminArchiveViewport { overflow:hidden; }
 .veliuminArchiveTrack { width:max-content; padding-top:14px; display:flex; animation:veliuminArchiveLoop 138s linear infinite; will-change:transform; }
 .veliuminArchiveGroup { padding-right:14px; display:flex; gap:14px; }
 .veliuminArchiveCard { width:clamp(280px,31vw,440px); height:clamp(410px,49vw,680px); flex:none; display:block; overflow:hidden; color:var(--ink); background:white; border:1.5px solid var(--ink); }
@@ -472,6 +475,8 @@ footer a { text-decoration:none; }
   .projectDetailHeader { min-height:58px; padding:8px 10px; gap:10px; }
   .projectDetailHeader>span { max-width:calc(100% - 52px); }
   .projectDetailHeader button,.projectMediaLightbox>header button,.spetaLightboxHeader button { width:40px; min-width:40px; padding:0; justify-content:center; font-size:0; }
+  .projectDetailHeader .projectCloseButton { width:48px; min-width:48px; min-height:48px; flex:none; box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--ink); }
+  .projectDetailHeader .projectCloseButton span { width:29px; height:29px; font-size:25px; }
   .projectDetailIntro { padding:32px 14px 38px; gap:40px; }
   .projectDetailLogo { width:min(68%,240px); height:72px; margin-bottom:24px; }
   .projectDetailIdentity h2 { font-size:clamp(42px,13vw,66px); }
@@ -502,6 +507,10 @@ footer a { text-decoration:none; }
   .trandingProjectGroup { padding-right:10px; gap:10px; }
   .trandingProjectCard { width:min(82vw,340px); }
   .trandingProjectMeta { inset:auto 12px 12px; }
+  .projectLoop,.trandingShowcase,.veliuminArchiveViewport { overflow-x:auto; overflow-y:hidden; overscroll-behavior-inline:contain; scrollbar-width:none; touch-action:pan-x pan-y; -webkit-overflow-scrolling:touch; }
+  .projectLoop::-webkit-scrollbar,.trandingShowcase::-webkit-scrollbar,.veliuminArchiveViewport::-webkit-scrollbar { display:none; }
+  .projectLoop:hover .projectLoopTrack,.projectLoop:focus-within .projectLoopTrack,.trandingShowcase:hover .trandingProjectTrack,.trandingShowcase:focus-within .trandingProjectTrack,.veliuminShowcase:hover .veliuminArchiveTrack,.veliuminShowcase:focus-within .veliuminArchiveTrack { animation-play-state:running; }
+  .projectLoop:active .projectLoopTrack,.projectLoop.isInteracting .projectLoopTrack,.trandingShowcase:active .trandingProjectTrack,.trandingShowcase.isInteracting .trandingProjectTrack,.veliuminArchiveViewport:active .veliuminArchiveTrack,.veliuminArchiveViewport.isInteracting .veliuminArchiveTrack { animation-play-state:paused; }
   .sideProjectsHeader { padding:54px 15px 44px; gap:40px; }
   .sideProjectsHeader h2 { font-size:clamp(36px,11.5vw,58px); }
   .spetaFeature { padding:42px 15px 48px; gap:44px; }

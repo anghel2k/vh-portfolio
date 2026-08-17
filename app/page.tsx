@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import BouncingMark from "./BouncingMark";
 
 type Language = "en" | "ro";
@@ -19,7 +19,7 @@ const framebreedProjects = [
       { type: "image", src: "/projects/san-pellegrino/lemon-still.jpg" },
     ],
     en: {
-      note: "Campaign support through Frame23 Studio and Everything is Computer.",
+      note: "Three six-second social films turning Paris landmarks into oversized Italian gifts, produced through Frame23 Studio and Everything is Computer.",
       role: "Client and agency communication, keyframe creation, Photoshop retouching and AI video generation, working closely with Serj Zarnescu and Andrei Brovcenco.",
       discipline: "Keyframes / Retouch / Video generation",
       work: ["Team, client and agency communication", "Keyframe creation", "Photoshop retouching", "AI-assisted video generation"],
@@ -34,7 +34,7 @@ const framebreedProjects = [
       ],
     },
     ro: {
-      note: "Suport de campanie prin Frame23 Studio și Everything is Computer.",
+      note: "Trei filme sociale de câte șase secunde, în care repere pariziene devin cadouri italiene supradimensionate, produse prin Frame23 Studio și Everything is Computer.",
       role: "Comunicare cu clientul și agenția, creare de keyframe-uri, retuș în Photoshop și generare video cu AI, lucrând îndeaproape cu Serj Zarnescu și Andrei Brovcenco.",
       discipline: "Keyframes / Retuș / Generare video",
       work: ["Comunicare între echipă, client și agenție", "Creare de keyframe-uri", "Retuș în Photoshop", "Generare video asistată de AI"],
@@ -59,7 +59,7 @@ const framebreedProjects = [
       { type: "image", src: "/projects/heineken/heineken-day.jpg" },
     ],
     en: {
-      note: "On-set and technical production support through FrameBreed Studio.",
+      note: "For “Fans Have More Friends”, AI, 3D and VFX were combined into LED-ready campaign environments matched to the talent, lighting and photographic setup.",
       role: "VFX supervision with Andrei Brovcenco, technical previs setups, AI tests and live Photoshop retouching for client and agency presentations on set.",
       discipline: "VFX supervision / Previs / On-set retouch",
       work: ["On-set VFX supervision with Andrei Brovcenco", "Technical previsualization setups", "AI workflow tests", "Live Photoshop retouching for client and agency presentations"],
@@ -83,7 +83,7 @@ const framebreedProjects = [
       ],
     },
     ro: {
-      note: "Suport pe platou și producție tehnică prin FrameBreed Studio.",
+      note: "Pentru „Fans Have More Friends”, AI, 3D și VFX au fost combinate în medii de campanie pregătite pentru LED, adaptate talentului, luminii și setup-ului fotografic.",
       role: "Supervizare VFX alături de Andrei Brovcenco, setup-uri tehnice de previz, teste AI și retuș live în Photoshop pentru prezentările către client și agenție pe platou.",
       discipline: "Supervizare VFX / Previz / Retuș pe platou",
       work: ["Supervizare VFX pe platou alături de Andrei Brovcenco", "Setup-uri tehnice de pre-vizualizare", "Teste de fluxuri AI", "Retuș live în Photoshop pentru prezentările către client și agenție"],
@@ -120,7 +120,7 @@ const framebreedProjects = [
       { type: "image", src: "/projects/house-of-errors/ss25-04.jpg" },
     ],
     en: {
-      note: "Two separate contributions, both produced through the Frame23 / FrameBreed team.",
+      note: "Two House of Errors campaigns produced through Frame23 / FrameBreed: the Embroidered Moss Denim transition and the surreal SS25 paint-bucket assets.",
       role: "For Embroidered Moss Denim: keyframe creation and video generation for the transition. For SS25: technical render setup, lighting and final bucket renders.",
       discipline: "Keyframes / Generation / Lighting / Render",
       work: ["Keyframe creation for the Embroidered Moss Denim transition", "AI-assisted video generation for the transition", "Technical render setup for the SS25 bucket assets", "Lighting and final bucket renders"],
@@ -261,7 +261,7 @@ const framebreedProjects = [
       ],
     },
     ro: {
-      note: "Două contribuții separate, ambele produse prin echipa Frame23 / FrameBreed.",
+      note: "Două campanii House of Errors produse prin Frame23 / FrameBreed: tranziția Embroidered Moss Denim și elementele suprarealiste cu găleți de vopsea pentru SS25.",
       role: "Pentru Embroidered Moss Denim: creare de keyframe-uri și generare video pentru tranziție. Pentru SS25: setup tehnic de render, lighting și randările finale ale găleților.",
       discipline: "Keyframes / Generare / Lighting / Render",
       work: ["Creare de keyframe-uri pentru tranziția Embroidered Moss Denim", "Generare video asistată de AI pentru tranziție", "Setup tehnic de render pentru asset-urile SS25", "Lighting și randările finale ale găleților"],
@@ -414,13 +414,14 @@ const framebreedProjects = [
       { type: "video", src: "/projects/new-balance/mama-croc.mp4", poster: "/projects/new-balance/mama-croc.jpg" },
     ],
     en: {
-      note: "Full CGI campaign produced through Frame23 Studio.",
+      note: "“Gator Run” introduces a baby gator through four full-CGI campaign films and a suite of stills, produced through Frame23 Studio.",
       role: "Previsualization with Andrei Brovcenco, team communication, agency delivery preparation and selected retouching support.",
       discipline: "Previs / Coordination / Delivery / Retouch",
       work: ["Previsualization with Andrei Brovcenco", "Production team communication", "Preparing versions and deliverables for the agency", "Selected Photoshop retouching"],
       credits: [
         ["Client", [{ name: "New Balance" }]],
         ["Creative Agency", [{ name: "Red Buoy" }]],
+        ["Director / Photographer", [{ name: "Tom Emmerson" }]],
         ["Production Company", [{ name: "Business Club" }]],
         ["VFX / Full CGI", [{ name: "Frame23 Studio" }]],
         ["3D Modelling & Texturing", [
@@ -460,13 +461,14 @@ const framebreedProjects = [
       ],
     },
     ro: {
-      note: "Campanie full CGI produsă prin Frame23 Studio.",
+      note: "„Gator Run” prezintă un pui de aligator prin patru filme de campanie full-CGI și o serie de still-uri, produse prin Frame23 Studio.",
       role: "Pre-vizualizare alături de Andrei Brovcenco, comunicarea cu echipa, pregătirea livrabilelor pentru agenție și suport punctual de retuș.",
       discipline: "Previz / Coordonare / Livrare / Retuș",
       work: ["Pre-vizualizare alături de Andrei Brovcenco", "Comunicare cu echipa de producție", "Pregătirea versiunilor și livrabilelor pentru agenție", "Retuș punctual în Photoshop"],
       credits: [
         ["Client", [{ name: "New Balance" }]],
         ["Agenție de creație", [{ name: "Red Buoy" }]],
+        ["Regizor / Fotograf", [{ name: "Tom Emmerson" }]],
         ["Companie de producție", [{ name: "Business Club" }]],
         ["VFX / Full CGI", [{ name: "Frame23 Studio" }]],
         ["Modelare 3D & texturare", [
@@ -516,7 +518,7 @@ const framebreedProjects = [
       { type: "video", src: "/projects/kaufland/kaufland-film.mp4", poster: "/projects/kaufland/kaufland-poster.jpg" },
     ],
     en: {
-      note: "AI film production completed through FrameBreed Studio.",
+      note: "A 90-second AI film built scene by scene from designed keyframes, then generated, composited and graded into one continuous edit through FrameBreed Studio.",
       role: "Keyframe creation and video generation together with Andrei Brovcenco, who developed the story, script and creative direction.",
       discipline: "Keyframes / AI video generation",
       work: ["Keyframe creation together with Andrei Brovcenco", "AI-assisted video generation", "Visual development support based on the approved story and script"],
@@ -529,7 +531,7 @@ const framebreedProjects = [
       ],
     },
     ro: {
-      note: "Producție de film AI realizată prin FrameBreed Studio.",
+      note: "Un film AI de 90 de secunde construit scenă cu scenă din keyframe-uri, apoi generat, compozitat și gradat într-un montaj continuu prin FrameBreed Studio.",
       role: "Creare de keyframe-uri și generare video împreună cu Andrei Brovcenco, care a dezvoltat povestea, scenariul și direcția creativă.",
       discipline: "Keyframes / Generare video AI",
       work: ["Creare de keyframe-uri împreună cu Andrei Brovcenco", "Generare video asistată de AI", "Suport de dezvoltare vizuală pe baza poveștii și scenariului aprobate"],
@@ -838,6 +840,7 @@ export default function Home() {
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [activeSpetaImage, setActiveSpetaImage] = useState<number | null>(null);
   const [selectedSpetaPreview, setSelectedSpetaPreview] = useState(0);
+  const carouselResumeTimers = useRef(new Map<HTMLElement, number>());
   const t = copy[language];
   const activeProject = framebreedProjects.find((project) => project.id === activeProjectId) ?? null;
   const spetaLabels = [t.spetaAlt, ...t.spetaGallery];
@@ -850,6 +853,11 @@ export default function Home() {
   useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);
+
+  useEffect(() => () => {
+    carouselResumeTimers.current.forEach((timer) => window.clearTimeout(timer));
+    carouselResumeTimers.current.clear();
+  }, []);
 
   useEffect(() => {
     if (!mobileMenuOpen) return;
@@ -894,6 +902,25 @@ export default function Home() {
   const changeLanguage = (nextLanguage: Language) => {
     setLanguage(nextLanguage);
     window.localStorage.setItem("robert-portfolio-language", nextLanguage);
+  };
+
+  const pauseCarousel = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const carousel = event.currentTarget;
+    const pendingResume = carouselResumeTimers.current.get(carousel);
+    if (pendingResume) window.clearTimeout(pendingResume);
+    carouselResumeTimers.current.delete(carousel);
+    carousel.classList.add("isInteracting");
+  };
+
+  const resumeCarousel = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const carousel = event.currentTarget;
+    const pendingResume = carouselResumeTimers.current.get(carousel);
+    if (pendingResume) window.clearTimeout(pendingResume);
+    const timer = window.setTimeout(() => {
+      carousel.classList.remove("isInteracting");
+      carouselResumeTimers.current.delete(carousel);
+    }, 2400);
+    carouselResumeTimers.current.set(carousel, timer);
   };
 
   return (
@@ -970,7 +997,7 @@ export default function Home() {
               </ol>
             </div>
           </header>
-          <div className="projectLoop" id="selected-work" aria-label={t.selectedProjects}>
+          <div className="projectLoop" id="selected-work" aria-label={t.selectedProjects} onPointerDown={pauseCarousel} onPointerUp={resumeCarousel} onPointerCancel={resumeCarousel} onPointerLeave={resumeCarousel}>
             <div className="projectLoopTrack">
               {[0, 1].map((copyIndex) => (
                 <div className="projectLoopGroup" aria-hidden={copyIndex === 1} key={copyIndex}>
@@ -1036,7 +1063,7 @@ export default function Home() {
               <article className="projectDetail" data-project={activeProject.id} role="dialog" aria-modal="true" aria-labelledby="project-detail-title" onMouseDown={(event) => event.stopPropagation()}>
                 <header className="projectDetailHeader">
                   <span>{t.selectedProjects} / {activeProject.title}</span>
-                  <button type="button" autoFocus onClick={() => { setActiveProjectMediaIndex(null); setActiveProjectId(null); }} aria-label={t.closeProject}>{t.closeProject} <span aria-hidden="true">×</span></button>
+                  <button className="projectCloseButton" type="button" autoFocus onClick={() => { setActiveProjectMediaIndex(null); setActiveProjectId(null); }} aria-label={t.closeProject}>{t.closeProject} <span aria-hidden="true">×</span></button>
                 </header>
                 <div className="projectDetailIntro">
                   <div className="projectDetailIdentity">
@@ -1148,16 +1175,18 @@ export default function Home() {
           </header>
           <div className="veliuminShowcase" aria-label={t.veliuminShowcaseLabel}>
             <header className="veliuminShowcaseHeader"><span>{t.veliuminShowcaseTitle}</span><span>2023 — 2025</span></header>
-            <div className="veliuminArchiveTrack">
-              {[0, 1].map((groupIndex) => (
-                <div className="veliuminArchiveGroup" aria-hidden={groupIndex === 1} key={groupIndex}>
-                  {veliuminArchive.map((item) => (
-                    <figure className="veliuminArchiveCard" data-format={item.format} key={`${groupIndex}-${item.id}`}>
-                      <img src={item.image} alt={groupIndex === 0 ? `${item.title[language]} — ${item.scope[language]}` : ""} loading={groupIndex === 0 ? "eager" : "lazy"} decoding="async" />
-                    </figure>
-                  ))}
-                </div>
-              ))}
+            <div className="veliuminArchiveViewport" onPointerDown={pauseCarousel} onPointerUp={resumeCarousel} onPointerCancel={resumeCarousel} onPointerLeave={resumeCarousel}>
+              <div className="veliuminArchiveTrack">
+                {[0, 1].map((groupIndex) => (
+                  <div className="veliuminArchiveGroup" aria-hidden={groupIndex === 1} key={groupIndex}>
+                    {veliuminArchive.map((item) => (
+                      <figure className="veliuminArchiveCard" data-format={item.format} key={`${groupIndex}-${item.id}`}>
+                        <img src={item.image} alt={groupIndex === 0 ? `${item.title[language]} — ${item.scope[language]}` : ""} loading={groupIndex === 0 ? "eager" : "lazy"} decoding="async" />
+                      </figure>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -1167,7 +1196,7 @@ export default function Home() {
             <div><span className="careerLogo brandLogoHero"><img src="/identity/tranding-logo.png" alt="Tranding Social Media" /></span><p className="eyebrow">{t.trandingEyebrow}</p></div>
             <div className="careerSummary"><p>{t.trandingSummary}</p><dl className="roleProgression"><div><dt>{t.role}</dt><dd>{t.trandingRole}</dd></div><div><dt>{t.contract}</dt><dd>{t.trandingContract}</dd></div><div><dt>{t.formats}</dt><dd>Product vis / CGI reels / 3D / VFX</dd></div></dl></div>
           </header>
-          <div className="trandingShowcase" aria-label={t.trandingMediaLabel}>
+          <div className="trandingShowcase" aria-label={t.trandingMediaLabel} onPointerDown={pauseCarousel} onPointerUp={resumeCarousel} onPointerCancel={resumeCarousel} onPointerLeave={resumeCarousel}>
             <div className="trandingProjectTrack">
               {[0, 1].map((groupIndex) => (
                 <div className="trandingProjectGroup" aria-hidden={groupIndex === 1} key={groupIndex}>
