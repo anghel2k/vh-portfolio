@@ -1,4 +1,13 @@
 node_modules/
 .next/
 .DS_Store
-
+tmp/
+pnpm-lock.yaml
+pnpm-workspace.yaml
+public/cv/Robert_Anghel_Resume_Template.docx
+public/cv/robert-anghel-cv.pdf
+public/identity/robert-anghel.jpg
+public/tranding/*.png
+public/tranding/anevi.jpg
+public/tranding/riverside.jpg
+public/veliumin/website-*.jpg
