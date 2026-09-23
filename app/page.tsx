@@ -5,6 +5,11 @@ import BouncingMark from "./BouncingMark";
 
 type Language = "en" | "ro";
 
+const cvVersions = [
+  { language: "ro", pdf: "/cv/Robert_Anghel_CV_RO.pdf", preview: "/cv/Robert_Anghel_CV_RO-preview.png", fileName: "Robert_Anghel_CV_RO.pdf" },
+  { language: "en", pdf: "/cv/Robert_Anghel_CV_EN.pdf", preview: "/cv/Robert_Anghel_CV_EN-preview.png", fileName: "Robert_Anghel_CV_EN.pdf" },
+] as const;
+
 const framebreedProjects = [
   {
     id: "san-pellegrino",
@@ -754,16 +759,17 @@ const copy = {
     skillsTools: "Tools / Platforms / Workflows",
     cvEyebrow: "Resume / PDF",
     cvTitle: "Resume",
-    cvLead: "A concise one-page overview of my experience, tools and technical production background.",
+    cvLead: "A concise one-page overview of my experience, available in Romanian and English.",
     cvPreview: "Preview Robert Anghel resume",
     cvOpen: "Open PDF",
     cvDownload: "Download PDF",
-    cvFileName: "Robert_Anghel_Resume_2026.pdf",
+    cvLanguageLabels: { ro: "Romanian", en: "English" },
     contactEyebrow: "Contact",
     contactTitle: <>Let&apos;s<br />connect.</>,
     contactLead: "Available for selected long-term remote collaborations.",
     availabilityMeta: "Contract · Retainer · Remote",
     contactLabels: ["Name", "Based", "Phone", "Languages", "LinkedIn"],
+    personalEmailLabel: "Personal email",
     based: "Bucharest, Romania",
     languages: "Romanian / English",
     backTop: "Back to top ↑",
@@ -864,16 +870,17 @@ const copy = {
     skillsTools: "Instrumente / Platforme / Workflow-uri",
     cvEyebrow: "CV / PDF",
     cvTitle: "CV",
-    cvLead: "O prezentare concisă, de o pagină, a experienței, instrumentelor și pregătirii mele tehnice.",
+    cvLead: "O prezentare concisă, de o pagină, a experienței mele, disponibilă în română și engleză.",
     cvPreview: "Previzualizare CV Robert Anghel",
     cvOpen: "Deschide PDF",
     cvDownload: "Descarcă PDF",
-    cvFileName: "Robert_Anghel_Resume_2026.pdf",
+    cvLanguageLabels: { ro: "Română", en: "Engleză" },
     contactEyebrow: "Contact",
     contactTitle: <>Hai să<br />discutăm.</>,
     contactLead: "Disponibil pentru colaborări remote selectate, pe termen lung.",
     availabilityMeta: "Contract · Retainer · Remote",
     contactLabels: ["Nume", "Locație", "Telefon", "Limbi", "LinkedIn"],
+    personalEmailLabel: "Email personal",
     based: "București, România",
     languages: "Română / Engleză",
     backTop: "Înapoi sus ↑",
@@ -1371,15 +1378,25 @@ export default function Home() {
             <div className="cvIntro">
               <p>{t.cvLead}</p>
               <div className="cvActions">
-                <a href="/cv/Robert_Anghel_Resume_2026.pdf" target="_blank" rel="noreferrer">{t.cvOpen} <span aria-hidden="true">↗</span></a>
-                <a href="/cv/Robert_Anghel_Resume_2026.pdf" download={t.cvFileName}>{t.cvDownload} <span aria-hidden="true">↓</span></a>
+                {cvVersions.map((version) => (
+                  <div className="cvVersion" key={version.language}>
+                    <strong>{t.cvLanguageLabels[version.language]}</strong>
+                    <div className="cvVersionLinks">
+                      <a href={version.pdf} target="_blank" rel="noreferrer">{t.cvOpen} <span aria-hidden="true">↗</span></a>
+                      <a href={version.pdf} download={version.fileName}>{t.cvDownload} <span aria-hidden="true">↓</span></a>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </header>
-          <div className="cvPreview">
-            <a className="cvPreviewLink" href="/cv/Robert_Anghel_Resume_2026.pdf" target="_blank" rel="noreferrer" aria-label={t.cvPreview}>
-              <img src="/cv/Robert_Anghel_Resume_2026-preview.png" alt={t.cvPreview} loading="lazy" decoding="async" />
-            </a>
+          <div className="cvPreviews">
+            {cvVersions.map((version) => (
+              <a className="cvPreviewLink" href={version.pdf} target="_blank" rel="noreferrer" aria-label={`${t.cvPreview} — ${t.cvLanguageLabels[version.language]}`} key={version.language}>
+                <img src={version.preview} alt="" loading="lazy" decoding="async" />
+                <span>{t.cvLanguageLabels[version.language]} <span aria-hidden="true">↗</span></span>
+              </a>
+            ))}
           </div>
         </section>
 
@@ -1387,6 +1404,7 @@ export default function Home() {
           <p className="eyebrow">{t.contactEyebrow}</p><h2 id="contact-title">{t.contactTitle}</h2>
           <div className="contactAvailability"><p className="contactLead">{t.contactLead}</p><span>{t.availabilityMeta}</span></div>
           <a className="contactEmail" href="mailto:anghel@vellumhaus.studio"><span>anghel@vellumhaus.studio</span><span aria-hidden="true">↗</span></a>
+          <a className="contactPersonalEmail" href="mailto:anghelrobert18@gmail.com"><span>{t.personalEmailLabel}</span><strong>anghelrobert18@gmail.com</strong><span aria-hidden="true">↗</span></a>
           <div className="contactGrid"><div><span>{t.contactLabels[0]}</span><strong>Robert Anghel</strong></div><div><span>{t.contactLabels[1]}</span><strong>{t.based}</strong></div><div><span>{t.contactLabels[2]}</span><a href="tel:+40722905095">+40 722 905 095</a></div><div><span>{t.contactLabels[3]}</span><strong>{t.languages}</strong></div><div><span>{t.contactLabels[4]}</span><a href="https://www.linkedin.com/in/robert-anghel18/" target="_blank" rel="noreferrer">LinkedIn ↗</a></div></div>
           <div className="contactMark" aria-hidden="true"><img src="/brand/vh_mark_paper.svg" alt="" /></div>
         </section>

@@ -373,11 +373,16 @@ main:focus { outline:none; }
 .cvIntro { display:grid; gap:30px; }
 .cvIntro>p { max-width:700px; font-family:var(--display); font-size:clamp(19px,2vw,28px); font-weight:620; line-height:1.14; letter-spacing:-.025em; }
 .cvActions { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.cvVersion { padding:14px; display:grid; align-content:start; gap:12px; border:1.5px solid var(--ink); background:var(--paper-dark); }
+.cvVersion>strong { font-size:10px; letter-spacing:.14em; text-transform:uppercase; }
+.cvVersionLinks { display:grid; gap:8px; }
 .cvActions a { min-height:54px; padding:0 15px; display:flex; align-items:center; justify-content:space-between; color:var(--ink); background:var(--paper); border:1.5px solid var(--ink); font-size:9px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; text-decoration:none; transition:color .15s,background .15s; }
 .cvActions a:hover,.cvActions a:focus-visible { color:var(--paper); background:var(--ink); }
-.cvPreview { padding:14px; background:var(--ink); }
-.cvPreviewLink { width:100%; display:block; background:white; color:inherit; overflow:hidden; }
+.cvPreviews { padding:14px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; background:var(--ink); }
+.cvPreviewLink { min-width:0; display:block; background:white; color:var(--ink); overflow:hidden; text-decoration:none; }
 .cvPreviewLink img { width:100%; height:auto; display:block; }
+.cvPreviewLink>span { padding:13px 16px; display:flex; justify-content:space-between; border-top:1px solid var(--ink); font-size:9px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+.cvPreviewLink:hover>span,.cvPreviewLink:focus-visible>span { color:var(--ultra); }
 
 .contactSection { position:relative; min-height:780px; padding:72px 24px 30px; overflow:hidden; color:var(--paper); background:var(--ink); }
 .contactSection .eyebrow { color:rgba(241,239,232,.62); }
@@ -388,7 +393,12 @@ main:focus { outline:none; }
 .contactEmail { position:relative; z-index:2; width:100%; margin-top:70px; padding:22px 0 28px; display:flex; justify-content:space-between; align-items:center; gap:30px; border-top:1.5px solid var(--paper); border-bottom:1.5px solid var(--paper); font-family:var(--display); font-size:clamp(30px,5.7vw,86px); font-weight:900; line-height:.9; letter-spacing:-.055em; text-decoration:none; overflow-wrap:anywhere; transition:color .15s,padding .15s; }
 .contactEmail span:last-child { font-family:var(--mono); font-size:clamp(24px,3vw,48px); font-weight:400; }
 .contactEmail:hover { color:#8fb0ff; padding-left:14px; padding-right:14px; }
-.contactGrid { position:relative; z-index:2; margin-top:70px; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); border-top:1px solid rgba(241,239,232,.55); }
+.contactPersonalEmail { position:relative; z-index:2; padding:18px 0 20px; display:grid; grid-template-columns:180px minmax(0,1fr) auto; align-items:center; gap:16px; border-bottom:1px solid rgba(241,239,232,.55); text-decoration:none; transition:color .15s,padding .15s; }
+.contactPersonalEmail>span:first-child { color:rgba(241,239,232,.7); font-size:9px; letter-spacing:.14em; text-transform:uppercase; }
+.contactPersonalEmail strong { font-family:var(--display); font-size:clamp(17px,2.2vw,30px); font-weight:700; overflow-wrap:anywhere; }
+.contactPersonalEmail>span:last-child { font-family:var(--mono); font-size:24px; }
+.contactPersonalEmail:hover { color:#8fb0ff; padding-left:14px; padding-right:14px; }
+.contactGrid { position:relative; z-index:2; margin-top:54px; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); border-top:1px solid rgba(241,239,232,.55); }
 .contactGrid div { padding:17px 20px 0 0; }
 .contactGrid span { display:block; margin-bottom:7px; color:rgba(241,239,232,.7); font-size:8px; letter-spacing:.14em; text-transform:uppercase; }
 .contactGrid strong,.contactGrid a { font-family:var(--display); font-size:16px; font-weight:600; text-decoration:none; }
@@ -595,12 +605,15 @@ footer a { text-decoration:none; }
   .cvIntro { gap:24px; }
   .cvActions { grid-template-columns:1fr; }
   .cvActions a { min-height:50px; }
-  .cvPreview { padding:7px; }
+  .cvPreviews { padding:7px; gap:7px; }
+  .cvPreviewLink>span { padding:10px; font-size:8px; }
   .contactSection { min-height:720px; padding:58px 15px 24px; }
   .contactAvailability { align-items:start; flex-direction:column; gap:14px; }
   .contactAvailability>span { padding-bottom:0; }
   .contactEmail { gap:clamp(12px,4vw,30px); font-size:clamp(17px,5.8vw,27px); letter-spacing:-.045em; }
   .contactEmail span:first-child { white-space:nowrap; }
+  .contactPersonalEmail { grid-template-columns:minmax(0,1fr) auto; gap:8px; }
+  .contactPersonalEmail>span:first-child { grid-column:1/-1; }
   .contactGrid { grid-template-columns:1fr 1fr; gap:25px; }
   .contactGrid a,footer a { min-height:44px; display:inline-flex; align-items:center; }
   footer { padding:0 15px; font-size:7px; }
