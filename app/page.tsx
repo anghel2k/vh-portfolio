@@ -8,8 +8,8 @@ import { framebreedProjects } from "./framebreedProjects";
 type Language = "en" | "ro";
 
 const cvVersions = [
-  { language: "ro", pdf: "/cv/Robert_Anghel_CV_RO.pdf", preview: "/cv/Robert_Anghel_CV_RO-preview.png", fileName: "Robert_Anghel_CV_RO.pdf" },
-  { language: "en", pdf: "/cv/Robert_Anghel_CV_EN.pdf", preview: "/cv/Robert_Anghel_CV_EN-preview.png", fileName: "Robert_Anghel_CV_EN.pdf" },
+  { language: "ro", pdf: "/cv/Robert_Anghel_CV_RO.pdf?v=84251e4d1443", preview: "/cv/Robert_Anghel_CV_RO-preview.png?v=84251e4d1443", fileName: "Robert_Anghel_CV_RO.pdf" },
+  { language: "en", pdf: "/cv/Robert_Anghel_CV_EN.pdf?v=c3aaba5056ea", preview: "/cv/Robert_Anghel_CV_EN-preview.png?v=c3aaba5056ea", fileName: "Robert_Anghel_CV_EN.pdf" },
 ] as const;
 
 const trandingProjects = [
