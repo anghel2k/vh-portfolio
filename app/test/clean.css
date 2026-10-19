@@ -685,11 +685,107 @@ body:has(.cleanPreview) { background:#f2f2f2; }
 
 .cleanPreview .clientLogo[data-brand="salt-bank"] img { height:32px; }
 .cleanPreview .clientLogo[data-brand="mentos-mammoth"] { width:124px; }
-.cleanPreview .careerRoleDetails { margin-top:0; color:var(--grey); }
-.cleanPreview .careerRoleDetails summary { display:flex; align-items:center; gap:12px; width:max-content; max-width:100%; min-height:44px; list-style:none; font-size:14px; font-weight:600; cursor:pointer; }
-.cleanPreview .careerRoleDetails summary::-webkit-details-marker { display:none; }
-.cleanPreview .careerRoleDetails summary:hover { color:var(--ink); }
-.cleanPreview .careerRoleDetails summary:focus-visible,.cleanPreview .clientLogoViewport:focus-visible { outline:2px solid var(--ultra); outline-offset:4px; }
-.cleanPreview .careerRoleDetails summary svg { width:16px; height:16px; flex:none; transition:transform .2s; }
-.cleanPreview .careerRoleDetails[open] summary svg { transform:rotate(45deg); }
-.cleanPreview .careerRoleDetails>p { max-width:620px; padding-top:12px; font-size:16px; line-height:1.5; }
+.cleanPreview .clientLogoViewport:focus-visible { outline:2px solid var(--ultra); outline-offset:4px; }
+
+/* Company chapters: one calm surface, a real role journey and a separate workflow. */
+.cleanPreview .companyPanel { padding:36px; margin-bottom:30px; border-radius:28px; background:radial-gradient(ellipse at 100% 0,var(--section-wash),transparent 62%),#fff; }
+.cleanPreview .companyPanelTop { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:34px; }
+.cleanPreview .companyPanelLogo { width:110px; height:64px; object-fit:contain; object-position:left center; }
+.cleanPreview .companyPanel[data-company="digitalstage"] .companyPanelLogo { width:162px; }
+.cleanPreview .companyPanel[data-company="veliumin"] .companyPanelLogo { width:190px; }
+.cleanPreview .companyPanel[data-company="tranding"] .companyPanelLogo { width:106px; }
+.cleanPreview .companyPeriod { padding:10px 15px; border-radius:999px; font-size:12px; line-height:1.4; color:var(--grey); background:rgba(255,255,255,.8); white-space:nowrap; }
+.cleanPreview .companyPanelBody { display:grid; grid-template-columns:1fr 1.15fr; gap:clamp(32px,6vw,90px); }
+.cleanPreview .companyIntroduction h3 { max-width:400px; font-size:clamp(28px,2.7vw,40px); line-height:1.06; }
+.cleanPreview .companyIntroduction>p { max-width:400px; margin-top:18px; font-size:17px; line-height:1.5; color:var(--grey); }
+.cleanPreview .companyMore { margin-top:12px; }
+.cleanPreview .companyMore summary { width:max-content; max-width:100%; min-height:44px; display:flex; gap:14px; align-items:center; list-style:none; font-size:13px; font-weight:600; cursor:pointer; }
+.cleanPreview .companyMore summary::-webkit-details-marker { display:none; }
+.cleanPreview .companyMore summary:hover { color:var(--section-accent); }
+.cleanPreview .companyMore summary svg { width:16px; height:16px; flex:none; transition:transform .2s; }
+.cleanPreview .companyMore[open] summary svg { transform:rotate(45deg); }
+.cleanPreview .companyMore>div { max-width:420px; color:var(--grey); font-size:15px; line-height:1.55; }
+.cleanPreview .companyMore p+p { margin-top:12px; }
+.cleanPreview .companyMore summary:focus-visible { outline:2px solid var(--ultra); outline-offset:4px; }
+.cleanPreview .companyJourney { min-width:0; padding-top:3px; }
+.cleanPreview .companyJourneyLabel { margin-bottom:20px; font-size:12px; font-weight:600; color:var(--grey); }
+.cleanPreview .companyMilestones { position:relative; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; list-style:none; padding:0; margin:0; }
+.cleanPreview .companyMilestones::before { content:""; position:absolute; left:8px; right:calc(50% - 8px); top:8px; height:2px; background:var(--section-accent); opacity:.22; transform-origin:left center; }
+.cleanPreview .companyMilestones.singleStage { grid-template-columns:1fr; }
+.cleanPreview .companyMilestones.singleStage::before { right:0; background:linear-gradient(90deg,var(--section-accent),transparent); }
+.cleanPreview .companyMilestones li { min-width:0; }
+.cleanPreview .companyMilestones :is(button,.journeyStage) { min-width:0; width:100%; padding:0; display:flex; flex-direction:column; align-items:start; background:transparent; color:var(--ink); text-align:left; font:inherit; }
+.cleanPreview .companyMilestones button { cursor:pointer; }
+.cleanPreview .journeyPoint { position:relative; width:18px; height:18px; margin-bottom:18px; border-radius:50%; background:#fff; color:var(--section-accent); box-shadow:inset 0 0 0 2px currentColor!important; transition:transform .2s; }
+.cleanPreview .journeyPoint::after { content:""; position:absolute; inset:5px; background:currentColor; border-radius:50%; opacity:.35; }
+.cleanPreview .isSelected .journeyPoint { box-shadow:inset 0 0 0 2px currentColor,0 0 0 6px var(--section-wash)!important; }
+.cleanPreview .isSelected .journeyPoint::after { opacity:1; }
+.cleanPreview .companyMilestones button:hover .journeyPoint { transform:scale(1.12); }
+.cleanPreview .companyMilestones time { font-size:12px; color:var(--grey); line-height:1.5; }
+.cleanPreview .companyMilestones strong { margin-top:6px; font-size:20px; font-weight:700; line-height:1.15; letter-spacing:-.03em; }
+.cleanPreview .companyMilestones small { margin-top:8px; font-size:11px; line-height:1.4; color:var(--grey); }
+.cleanPreview .companyMilestones .isCurrent.isSelected small { color:var(--section-accent); font-weight:600; }
+.cleanPreview .companyScope { max-width:490px; min-height:66px; margin-top:24px; font-size:14px; line-height:1.55; color:var(--grey); }
+.cleanPreview .companyScope>span { display:block; animation:practiceContentIn .25s ease-out; }
+.cleanPreview .companyWorkflow { display:flex; align-items:center; gap:24px; padding-top:28px; margin-top:26px; }
+.cleanPreview .companyWorkflowLabel { flex:none; font-size:12px; color:var(--grey); }
+.cleanPreview .companyWorkflow ol { display:flex; align-items:center; list-style:none; padding:0; margin:0; gap:20px; }
+.cleanPreview .companyWorkflow li { display:flex; align-items:center; gap:9px; min-width:0; font-size:13px; font-weight:600; }
+.cleanPreview .companyWorkflow button>svg:first-child { width:16px; height:16px; flex:none; color:var(--section-accent); }
+.cleanPreview .companyWorkflow .workflowArrow { width:14px; height:14px; flex:none; margin-left:12px; color:#8b8b8b; }
+.cleanPreview .companyPanel.isRevealed .companyMilestones::before { animation:journeyLineIn .75s cubic-bezier(.2,.7,.25,1); }
+.cleanPreview .companyPanel.isRevealed .companyMilestones li { animation:practiceContentIn .5s ease-out; }
+.cleanPreview .companyPanel.isRevealed .companyMilestones li:nth-child(2) { animation-delay:.12s; }
+@keyframes journeyLineIn { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+/* Timeline overview cards echo the lighter chapter panels. */
+.cleanPreview .chapterRow[href="#framebreed-studio"] { --card-wash:#f3eaf3; }
+.cleanPreview .chapterRow[href="#digitalstage"] { --card-wash:#f9eee8; }
+.cleanPreview .chapterRow[href="#veliumin"] { --card-wash:#e9effb; }
+.cleanPreview .chapterRow[href="#tranding-social-media"] { --card-wash:#edf2e6; }
+.cleanPreview .chapterRow[href] { border-radius:24px; background:radial-gradient(ellipse at 100% 0,var(--card-wash),transparent 75%),#fff; gap:20px; }
+.cleanPreview .chapterRow[href]:hover { background:radial-gradient(ellipse at 100% 0,var(--card-wash),transparent 75%),#fff; filter:none; }
+.cleanPreview .chapterRow .chapterArrow { display:grid; place-items:center; width:44px; height:44px; justify-self:end; border-radius:50%; background:rgba(255,255,255,.8); }
+.cleanPreview .chapterRow .chapterYears { width:max-content; max-width:100%; padding:7px 12px; border-radius:999px; background:rgba(242,242,242,.75); font-size:12px!important; }
+@media (max-width:1000px) {
+  .cleanPreview .companyPanelBody { grid-template-columns:1fr 1.1fr; gap:30px; }
+  .cleanPreview .companyPanel { padding:28px; }
+}
+@media (max-width:700px) {
+  .cleanPreview .companyPanel { padding:24px; border-radius:24px; margin-bottom:24px; }
+  .cleanPreview .companyPanelTop { align-items:start; gap:18px; flex-wrap:wrap; margin-bottom:28px; }
+  .cleanPreview .companyPanelLogo { height:54px; width:92px; }
+  .cleanPreview .companyPeriod { padding:8px 11px; font-size:11px; }
+  .cleanPreview .companyPanelBody { grid-template-columns:1fr; gap:28px; }
+  .cleanPreview .companyIntroduction h3 { font-size:30px; }
+  .cleanPreview .companyIntroduction>p { font-size:16px; }
+  .cleanPreview .companyJourneyLabel { margin-bottom:18px; }
+  .cleanPreview .companyMilestones { gap:14px; }
+  .cleanPreview .companyMilestones strong { font-size:18px; }
+  .cleanPreview .companyMilestones time { font-size:11px; }
+  .cleanPreview .companyScope { margin-top:22px; min-height:0; }
+  .cleanPreview .companyWorkflow { display:block; padding-top:22px; margin-top:20px; }
+  .cleanPreview .companyWorkflowLabel { display:block; margin-bottom:16px; }
+  .cleanPreview .companyWorkflow ol { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+  .cleanPreview .companyWorkflow li { position:relative; flex-direction:column; align-items:start; gap:10px; font-size:11px; }
+  .cleanPreview .companyWorkflow button>svg:first-child { width:14px; height:14px; }
+  .cleanPreview .companyWorkflow .workflowArrow { position:absolute; right:0; top:1px; margin-left:0; width:11px; }
+  .cleanPreview .chapterRow { padding:24px; }
+}
+@media (max-width:380px) {
+  .cleanPreview .companyPanel { padding:20px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .cleanPreview .companyPanel.isRevealed .companyMilestones::before,.cleanPreview .companyPanel.isRevealed .companyMilestones li,.cleanPreview .companyScope>span { animation:none; }
+  .cleanPreview .companyMilestones button:hover .journeyPoint { transform:none; }
+}
+
+.cleanPreview .companyWorkflow button { min-height:44px; padding:8px 10px; display:inline-flex; align-items:center; gap:9px; background:transparent; color:var(--ink); border-radius:14px; font:inherit; text-align:left; cursor:pointer; transition:background-color .2s,color .2s; }
+.cleanPreview .companyWorkflow button:hover,.cleanPreview .companyWorkflow button.isActive { background:var(--section-wash); color:var(--section-accent); }
+.cleanPreview .companyWorkflowDetail { max-width:700px; margin-top:16px; color:var(--grey); font-size:14px; line-height:1.5; }
+.cleanPreview .companyWorkflowDetail:empty { display:none; }
+.cleanPreview .companyWorkflowDetail>span { display:block; animation:practiceContentIn .25s ease-out; }
+@media (max-width:700px) {
+  .cleanPreview .companyWorkflow button { width:100%; min-height:58px; padding:6px 8px; flex-direction:column; align-items:start; gap:10px; }
+  .cleanPreview .companyWorkflow .workflowArrow { top:9px; right:-2px; }
+}
+@media (prefers-reduced-motion:reduce) { .cleanPreview .companyWorkflowDetail>span { animation:none; } }

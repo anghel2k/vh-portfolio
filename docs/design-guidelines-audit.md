@@ -98,3 +98,10 @@ Validated 30 responsive tab states across EN/RO and 320/390/768/1024/1440px: no 
 - app/ClientLogoRail.tsx - Pointer-distance effect uses refs and a requestAnimationFrame loop, batched slot reads and image transform/opacity writes. Cleanup resets the images on leave, visibility changes, reduced motion and unmount. No continuous pointer values in React state.
 - app/test/clean.css - Removed hover pause; the track continues beneath the pointer. Added image-only scale/lift/opacity transitions and vertical headroom, preserving fixed slot widths and the seamless loop.
 - Validation: hover track remains running and changes position; closest logo reaches 1.64× with neighbour magnification and no clipping; leave resets transforms; explicit pause works. Narrow-page scale 1.36× without overflow. Touch and reduced motion behave correctly. Build, TypeScript, accessibility and runtime checks pass.
+
+## Company roadmap revision
+
+- app/CompanyJourney.tsx - Shared preview-only company panels separate career history from production workflow. Real roles/dates retained. Selectable FrameBreed stages use native buttons with pressed state and a persistent polite scope region. Workflow toggles expose controlled descriptions; full original copy remains in native details elements.
+- app/usePreviewMotion.ts - Company panels participate in one-time entry feedback. Reduced motion skips the observer enhancement; connectors and copy remain visible without it.
+- app/test/clean.css - Replaced nested role boxes with open timelines, purposeful brand-colored connectors and light identity surfaces. Mobile workflow uses three stable columns. Focus outlines remain visible; reduced-motion rules cover connectors, stage entry and changing scope text.
+- Validation: forty EN/RO responsive panel states pass at 320/390/768/1024/1440px. No accessibility violations in four desktop/mobile states or the expanded state. Keyboard role selection, twelve workflow toggles, four disclosures, all eight logo references, project viewer and homepage regression pass. Real stage counts and periods confirmed; no runtime errors. Production build and TypeScript pass.

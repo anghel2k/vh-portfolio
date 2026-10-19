@@ -10,12 +10,13 @@ export function usePreviewMotion(enabled: boolean) {
     if (!enabled || reduced) return;
     const root = document.querySelector<HTMLElement>(".cleanPreview");
     if (!root) return;
-    const nodes = [...root.querySelectorAll<HTMLElement>(".careerHeader,.sideProjectsHeader,.cvHeader,.contactSection>h2")];
+    const nodes = [...root.querySelectorAll<HTMLElement>(".careerHeader,.companyPanel,.sideProjectsHeader,.cvHeader,.contactSection>h2")];
     const animations = new Set<Animation>();
     const observer = new IntersectionObserver(entries => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
         observer.unobserve(entry.target);
+        entry.target.classList.add("isRevealed");
         const animation = entry.target.animate([
           { opacity: .65, transform: "translateY(12px)" },
           { opacity: 1, transform: "translateY(0)" },

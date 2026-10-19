@@ -6,11 +6,12 @@ import ProjectSlider from "./ProjectSlider";
 import HeroProjectBubbles from "./HeroProjectBubbles";
 import ClientLogoRail from "./ClientLogoRail";
 import PracticeOverview from "./PracticeOverview";
+import CompanyJourney from "./CompanyJourney";
 import { usePreviewMotion } from "./usePreviewMotion";
 import { imageDimensions } from "./imageDimensions";
 import { useModalFocus } from "./useModalFocus";
 import { useReducedMotion } from "./useReducedMotion";
-import { ArrowTopRightIcon, ArrowBottomRightIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, DownloadIcon, GridIcon, EnvelopeClosedIcon, PersonIcon, FileTextIcon, MagicWandIcon, CubeIcon, VideoIcon, ImageIcon, PlusIcon } from "@radix-ui/react-icons";
+import { ArrowTopRightIcon, ArrowBottomRightIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, DownloadIcon, GridIcon, EnvelopeClosedIcon, PersonIcon, FileTextIcon, MagicWandIcon, CubeIcon, VideoIcon, ImageIcon } from "@radix-ui/react-icons";
 import { digitalstageProjects } from "./digitalstageProjects";
 import { framebreedProjects } from "./framebreedProjects";
 
@@ -560,6 +561,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
 
         <section className="careerChapter framebreedChapter" id="framebreed-studio" aria-label="FrameBreed Studio">
           <h2 className="srOnly" translate="no">FrameBreed Studio</h2>
+          {cleanPreview ? <CompanyJourney company="framebreed" language={language} details={t.framebreedSummary} /> : (
           <header className="careerHeader">
             <div><span className="careerLogo brandLogoHero"><img {...imageDimensions("/identity/framebreed-logo.png")} src="/identity/framebreed-logo.png" alt="FrameBreed Studio" loading="lazy" decoding="async" /></span><p className="eyebrow">{t.framebreedEyebrow}</p></div>
             <div className="careerSummary">
@@ -570,6 +572,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
               </ol>
             </div>
           </header>
+          )}
           <ProjectSlider active={cleanPreview} previousLabel={t.previousProject} nextLabel={t.nextProject} label={t.selectedProjects}>
           <div className="projectLoop" id="selected-work" aria-label={t.selectedProjects} onPointerDown={pauseCarousel} onPointerUp={resumeCarousel} onPointerCancel={resumeCarousel} onPointerLeave={resumeCarousel}>
             <div className="projectLoopTrack">
@@ -633,6 +636,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
 
         <section className="careerChapter digitalstageChapter" id="digitalstage" aria-label="Digital Stage">
           <h2 className="srOnly" translate="no">Digital Stage</h2>
+          {cleanPreview ? <CompanyJourney company="digitalstage" language={language} details={[language === "en" ? "Producer at Digital Stage, creating AI commercials and hybrid VFX productions with a team working across retouching, video and visual effects." : "Producer la Digital Stage, unde producem reclame AI și producții VFX hibride cu o echipă de retuș, video și efecte vizuale."]} /> : (
           <header className="careerHeader">
             <div>
               <a className="careerLogo brandLogoHero" href="https://digitalstage.ro" target="_blank" rel="noreferrer" aria-label="Digital Stage website"><img {...imageDimensions("/identity/digitalstage-logo.svg")} src="/identity/digitalstage-logo.svg" alt="Digital Stage" loading="lazy" decoding="async" /></a>
@@ -645,6 +649,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
               </ol>
             </div>
           </header>
+          )}
           <ProjectSlider active={cleanPreview} previousLabel={t.previousProject} nextLabel={t.nextProject} label={language === "en" ? "Selected Digital Stage projects" : "Proiecte Digital Stage selectate"}>
           <div className="projectLoop" id="digitalstage-work" aria-label={language === "en" ? "Selected Digital Stage projects" : "Proiecte Digital Stage selectate"} onPointerDown={pauseCarousel} onPointerUp={resumeCarousel} onPointerCancel={resumeCarousel} onPointerLeave={resumeCarousel}>
             <div className="projectLoopTrack">
@@ -828,19 +833,15 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
 
         <section className="careerChapter veliuminChapter" id="veliumin" aria-label="VELIUMIN">
           <h2 className="srOnly" translate="no">VELIUMIN</h2>
+          {cleanPreview ? <CompanyJourney company="veliumin" language={language} details={t.veliuminSummary} /> : (
           <header className="careerHeader inverse">
             <div><span className="careerLogo careerLogoWide veliuminLogoHero"><img {...imageDimensions("/identity/veliumin-logo.svg")} src="/identity/veliumin-logo.svg" alt="VELIUMIN" loading="lazy" decoding="async" /></span><p className="eyebrow">{t.veliuminEyebrow}</p></div>
             <div className="careerSummary">
-              {cleanPreview ? <>
-                <p>{t.veliuminSummary[0]}</p>
-                <details className="careerRoleDetails">
-                  <summary>{language === "en" ? "More about my role" : "Mai multe despre rol"}<PlusIcon aria-hidden="true" /></summary>
-                  {t.veliuminSummary.slice(1).map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-                </details>
-              </> : t.veliuminSummary.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+              {t.veliuminSummary.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
               <dl className="roleProgression light"><div><dt>{t.role}</dt><dd>{t.veliuminRole}</dd></div></dl>
             </div>
           </header>
+          )}
           <ProjectSlider active={cleanPreview} label={t.veliuminShowcaseTitle} previousLabel={t.previousImage} nextLabel={t.nextImage} cardSelector=".veliuminArchiveCard">
           <div className="veliuminShowcase" aria-label={t.veliuminShowcaseLabel}>
             <header className="veliuminShowcaseHeader"><span>{t.veliuminShowcaseTitle}</span><span>2023 — 2025</span></header>
@@ -863,10 +864,12 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
 
         <section className="careerChapter trandingChapter" id="tranding-social-media" aria-label="Tranding Social Media">
           <h2 className="srOnly" translate="no">Tranding Social Media</h2>
+          {cleanPreview ? <CompanyJourney company="tranding" language={language} details={[t.trandingSummary]} /> : (
           <header className="careerHeader compact">
             <div><span className="careerLogo brandLogoHero"><img {...imageDimensions("/identity/tranding-logo.png")} src="/identity/tranding-logo.png" alt="Tranding Social Media" loading="lazy" decoding="async" /></span><p className="eyebrow">{t.trandingEyebrow}</p></div>
             <div className="careerSummary"><p>{t.trandingSummary}</p><dl className="roleProgression"><div><dt>{t.role}</dt><dd>{t.trandingRole}</dd></div><div><dt>{t.contract}</dt><dd>{t.trandingContract}</dd></div><div><dt>{t.formats}</dt><dd>Product vis / CGI reels / 3D / VFX</dd></div></dl></div>
           </header>
+          )}
           <ProjectSlider active={cleanPreview} label={t.trandingMediaLabel} previousLabel={t.previousProject} nextLabel={t.nextProject} cardSelector=".trandingProjectCard">
           <div className="trandingShowcase" aria-label={t.trandingMediaLabel} onPointerDown={pauseCarousel} onPointerUp={resumeCarousel} onPointerCancel={resumeCarousel} onPointerLeave={resumeCarousel}>
             <div className="trandingProjectTrack">
