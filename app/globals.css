@@ -644,10 +644,12 @@ footer a { text-decoration:none; }
 .projectBrandName { max-width:100%; font-family:var(--display); font-size:clamp(28px,3.8vw,54px); font-weight:850; line-height:.95; letter-spacing:-.055em; text-align:center; white-space:nowrap; }
 @media(max-width:700px) { .projectGridCard .projectBrandName { font-size:clamp(18px,5.8vw,24px); } }
 
-/* Official brand assets retain their native colours and balanced optical sizing. */
-.projectLoopCard:is([data-project="mentos-mammoth"],[data-project="croco"],[data-project="ig-fat-cats"],[data-project="macushield"]) .projectLoopLogo img { filter:none; }
+/* Monochrome treatment keeps internal detail legible on marks with embedded fills. */
+.projectLoopCard:is([data-project="mentos-mammoth"],[data-project="croco"],[data-project="ig-fat-cats"],[data-project="macushield"]) .projectLoopLogo img { filter:grayscale(1) contrast(1.15) brightness(1.2); }
 .projectLoopCard[data-project="mentos-mammoth"] .projectLoopLogo img { width:68%; }
 .projectLoopCard[data-project="croco"] .projectLoopLogo img { width:57%; }
 .projectLoopCard[data-project="ig-fat-cats"] .projectLoopLogo img { width:34%; }
 .projectLoopCard[data-project="macushield"] .projectLoopLogo img { width:73%; }
 .projectLoopCard[data-project="salt-bank"] .projectLoopLogo img { width:48%; }
+
+.projectDetail:is([data-project="mentos-mammoth"],[data-project="croco"],[data-project="ig-fat-cats"],[data-project="macushield"]) .projectDetailLogo img { filter:grayscale(1); }
