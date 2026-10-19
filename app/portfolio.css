@@ -1,4 +1,4 @@
-/* Scoped design study. The existing homepage keeps its own visual system. */
+/* Approved portfolio design, shared by the homepage and the noindex preview route. */
 .cleanPreview {
   --ink:#161616; --paper:#f2f2f2; --paper-dark:#e9e9e9; --grey:#626262;
   --ultra:#205af9; --display:"Helvetica Neue",Helvetica,Arial,sans-serif;

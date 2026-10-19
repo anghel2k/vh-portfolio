@@ -33,3 +33,7 @@ Once the repository is connected, every commit to the production branch creates 
 ## Content
 
 All brand marks and San Pellegrino project media are included under `public/`. No external asset host or environment variables are required.
+
+## Current published design
+
+The approved design is the homepage at `/`. Its shared client component is `app/Portfolio.tsx` and its styles are `app/portfolio.css`. The `/test` route uses the same component and remains excluded from indexing. Production canonical, indexing and viewport settings are exported from `app/page.tsx`.

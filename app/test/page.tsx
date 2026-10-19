@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import Portfolio from "../page";
-import "./clean.css";
+import Portfolio from "../Portfolio";
+import "../portfolio.css";
 
 export const metadata: Metadata = {
   title: "Robert Anghel | Clean design study",
