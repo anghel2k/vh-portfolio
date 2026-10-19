@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 import { useEffect, useRef, useState, type ReactNode, type PointerEvent } from "react";
 
 type Position = { first: number; last: number; total: number; previous: boolean; next: boolean };
@@ -53,8 +54,8 @@ export default function ProjectSlider({ active, label, previousLabel, nextLabel,
         <span>{label}</span>
         <div className="cleanSliderControls">
           <span className="cleanSliderCount" aria-live="polite">{String(position.first).padStart(2, "0")}–{String(position.last).padStart(2, "0")} / {String(position.total).padStart(2, "0")}</span>
-          <button type="button" aria-label={`${previousLabel} / ${label}`} disabled={!position.previous} onClick={() => move(-1)}>←</button>
-          <button type="button" aria-label={`${nextLabel} / ${label}`} disabled={!position.next} onClick={() => move(1)}>→</button>
+          <button type="button" aria-label={`${previousLabel} / ${label}`} disabled={!position.previous} onClick={() => move(-1)}><ArrowLeftIcon className="uiArrow" aria-hidden="true" /></button>
+          <button type="button" aria-label={`${nextLabel} / ${label}`} disabled={!position.next} onClick={() => move(1)}><ArrowRightIcon className="uiArrow" aria-hidden="true" /></button>
         </div>
       </div>
       <div className="cleanSliderViewport" ref={viewport}

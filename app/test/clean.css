@@ -25,21 +25,21 @@
 .cleanPreview .languageSwitch button span { display:none; }
 .cleanPreview .languageSwitch button small { font-size:13px; font-weight:500; letter-spacing:0; }
 .cleanPreview .languageSwitch button:hover:not(.active) { color:var(--ultra); background:none; }
-.cleanPreview .cleanHero { position:relative; min-height:min(810px,calc(100svh - 80px)); display:grid; place-items:center; padding:140px var(--gutter) 170px; isolation:isolate; overflow:hidden; }
+.cleanPreview .cleanHero { position:relative; min-height:min(740px,calc(100svh - 80px)); display:grid; place-items:center; padding:120px var(--gutter) 140px; isolation:isolate; overflow:hidden; }
 .cleanPreview .cleanHeroCopy { z-index:2; position:relative; text-align:center; }
-.cleanPreview .cleanHeroCopy>p:first-child { margin-bottom:30px; color:var(--grey); font-size:16px; }
-.cleanPreview .cleanHero h1 { font-size:clamp(40px,5.2vw,76px); font-weight:700; line-height:1.02; letter-spacing:-.055em; }
-.cleanPreview .cleanHeroCopy>p:nth-last-child(2) { margin-top:24px; color:var(--grey); font-size:15px; }
-.cleanPreview .cleanHeroCopy>a { min-height:44px; margin-top:28px; display:inline-flex; align-items:center; gap:28px; font-size:15px; text-decoration:none; }
+.cleanPreview .cleanHeroCopy>p:first-child { margin-bottom:18px; color:var(--grey); font-size:16px; }
+.cleanPreview .cleanHero h1 { font-size:clamp(40px,5.2vw,76px); font-weight:700; line-height:.94; letter-spacing:-.055em; }
+.cleanPreview .cleanHeroCopy>p:nth-last-child(2) { margin-top:16px; color:var(--grey); font-size:15px; }
+.cleanPreview .cleanHeroCopy>a { min-height:44px; margin-top:14px; display:inline-flex; align-items:center; gap:28px; font-size:15px; text-decoration:none; }
 .cleanPreview .cleanHeroCopy>a:hover { color:var(--ultra); }
 .cleanPreview .cleanHeroImage { position:absolute; z-index:-1; border-radius:12px; width:clamp(170px,21vw,300px); aspect-ratio:1.65; }
 .cleanPreview .cleanHeroImage img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
-.cleanPreview .cleanHeroBlur { z-index:-1; filter:blur(28px) saturate(1.15); opacity:.38; transform:scale(1.18); pointer-events:none; }
+.cleanPreview .cleanHeroImage .cleanHeroBlur { z-index:-1; border-radius:50%; filter:blur(20px) saturate(1.15); opacity:.4; transform:scale(1.6,1.9); mask-image:radial-gradient(ellipse closest-side,#000 8%,rgba(0,0,0,.7) 38%,transparent 100%); -webkit-mask-image:radial-gradient(ellipse closest-side,#000 8%,rgba(0,0,0,.7) 38%,transparent 100%); pointer-events:none; }
 .cleanPreview .cleanHeroPicture { z-index:0; }
 .cleanPreview .cleanHeroImageOne { left:var(--gutter); top:12%; }
-.cleanPreview .cleanHeroImageTwo { right:var(--gutter); top:6%; width:clamp(150px,18vw,260px); }
-.cleanPreview .cleanHeroImageThree { left:22%; bottom:6%; width:clamp(120px,14vw,200px); }
-.cleanPreview .cleanHeroImageFour { right:10%; bottom:2%; }
+.cleanPreview .cleanHeroImageTwo { right:var(--gutter); top:12%; width:clamp(150px,18vw,260px); }
+.cleanPreview .cleanHeroImageThree { left:22%; bottom:10%; width:clamp(120px,14vw,200px); }
+.cleanPreview .cleanHeroImageFour { right:10%; bottom:12%; }
 .cleanPreview .heroBrief { min-height:0; padding:var(--section) var(--gutter); display:grid; grid-template-columns:1fr 2.1fr; gap:10%; background:var(--paper); }
 .cleanPreview .heroBrief .eyebrow { padding-top:8px; color:var(--grey); font-weight:500; }
 .cleanPreview .heroBrief>p:last-child { max-width:950px; font-size:clamp(28px,3.4vw,50px); font-weight:500; line-height:1.15; letter-spacing:-.035em; }
@@ -320,16 +320,16 @@
   .cleanPreview .mobileMenu { top:70px; padding:20px; background:var(--paper); }
   .cleanPreview .mobileMenu nav a { min-height:50px; justify-content:start; }
   .cleanPreview .mobileMenu .languageSwitch { width:max-content; margin-top:15px; }
-  .cleanPreview .cleanHero { min-height:700px; padding:160px 20px 190px; }
-  .cleanPreview .cleanHero h1 { font-size:clamp(33px,8.8vw,58px); line-height:1.06; letter-spacing:-.05em; }
-  .cleanPreview .cleanHeroCopy>p:first-child { margin-bottom:22px; font-size:14px; }
-  .cleanPreview .cleanHeroCopy>p:nth-last-child(2) { max-width:250px; margin:20px auto 0; font-size:14px; line-height:1.5; }
-  .cleanPreview .cleanHeroCopy>a { margin-top:18px; font-size:14px; }
+  .cleanPreview .cleanHero { min-height:620px; padding:140px 20px 150px; }
+  .cleanPreview .cleanHero h1 { font-size:clamp(33px,8.8vw,58px); line-height:.96; letter-spacing:-.05em; }
+  .cleanPreview .cleanHeroCopy>p:first-child { margin-bottom:16px; font-size:14px; }
+  .cleanPreview .cleanHeroCopy>p:nth-last-child(2) { max-width:250px; margin:14px auto 0; font-size:14px; line-height:1.5; }
+  .cleanPreview .cleanHeroCopy>a { margin-top:10px; font-size:14px; }
   .cleanPreview .cleanHeroImage { width:34vw; border-radius:6px; }
-  .cleanPreview .cleanHeroImageOne { top:4%; left:20px; }
+  .cleanPreview .cleanHeroImageOne { top:8%; left:20px; }
   .cleanPreview .cleanHeroImageTwo { top:11%; right:20px; width:28vw; }
   .cleanPreview .cleanHeroImageThree { left:11%; bottom:8%; width:27vw; }
-  .cleanPreview .cleanHeroImageFour { right:20px; bottom:3%; width:40vw; }
+  .cleanPreview .cleanHeroImageFour { right:20px; bottom:10%; width:40vw; }
   .cleanPreview .heroBrief { padding:55px 20px 80px; display:block; }
   .cleanPreview .heroBrief .eyebrow { margin-bottom:24px; }
   .cleanPreview .heroBrief>p:last-child { font-size:29px; line-height:1.2; }
@@ -430,3 +430,10 @@
 @media (prefers-reduced-motion:reduce) {
   .cleanPreview *, .cleanPreview *::before, .cleanPreview *::after { animation:none!important; transition:none!important; }
 }
+
+/* Vector arrows are independent of platform emoji fonts. */
+.cleanPreview .uiArrow { display:inline-block; width:1em; height:1em; flex:none; vertical-align:-.12em; }
+.cleanPreview .cleanSliderControls button { display:grid; place-items:center; }
+.cleanPreview .cleanSliderControls .uiArrow { width:20px; height:20px; }
+.cleanPreview .chapterArrow .uiArrow { width:22px; height:22px; }
+.cleanPreview .cleanHeroCopy>a .uiArrow { width:18px; height:18px; }

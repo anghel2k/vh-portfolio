@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import BouncingMark from "./BouncingMark";
 import ProjectSlider from "./ProjectSlider";
+import { ArrowTopRightIcon, ArrowBottomRightIcon, ArrowLeftIcon, ArrowRightIcon, DownloadIcon } from "@radix-ui/react-icons";
 import { digitalstageProjects } from "./digitalstageProjects";
 import { framebreedProjects } from "./framebreedProjects";
 
@@ -493,7 +494,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
               <p>Robert Anghel</p>
               <h1 id="clean-hero-title">{language === "en" ? <>Technical direction.<br />Creative production.</> : <>Direcție tehnică.<br />Producție creativă.</>}</h1>
               <p>{t.heroCapabilities}</p>
-              <a href="#experience">{language === "en" ? "Explore my work" : "Descoperă proiectele"} <span aria-hidden="true">↗</span></a>
+              <a href="#experience">{language === "en" ? "Explore my work" : "Descoperă proiectele"} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></a>
             </div>
           </section>
         ) : (
@@ -524,7 +525,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                 <span className="roadmapNode" aria-hidden="true" />
                 <span className="chapterIdentity"><span className="chapterLogo"><img src={chapter.logo} alt={cleanPreview ? "" : chapter.company[language]} /></span>{cleanPreview && <span className="cleanCompany">{chapter.company[language]}</span>}</span>
                 <span className="chapterWork"><strong>{chapter.role[language]}</strong><small>{chapter.engagement[language]}</small></span>
-                <span className="chapterYears">{chapter.years[language]}</span><span className="chapterArrow" aria-hidden="true">↘</span>
+                <span className="chapterYears">{chapter.years[language]}</span><span className="chapterArrow" aria-hidden="true">{cleanPreview ? <ArrowBottomRightIcon className="uiArrow" /> : "↘"}</span>
               </a>
             ))}
           </div>
@@ -565,7 +566,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                         <span className="projectLoopLogo">{tileLogo ? <img src={tileLogo} alt={copyIndex === 0 ? project.title : ""} /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
                         <span className="projectLoopMeta">
                           <small>{project.classification} · {projectCopy.discipline}</small>
-                          <strong>{cleanPreview ? project.title : t.seeProject}<span aria-hidden="true">↗</span></strong>
+                          <strong>{cleanPreview ? project.title : t.seeProject}<span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></strong>
                         </span>
                       </button>
                     );
@@ -593,7 +594,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                       <img className="projectLoopPreview" src={project.image} alt="" />
                       <span className="projectLoopTint" aria-hidden="true" />
                       <span className="projectLoopLogo">{tileLogo ? <img src={tileLogo} alt={project.title} /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
-                      <span className="projectLoopMeta"><small>{project.classification} · {projectCopy.discipline}</small><strong>{project.title}<span aria-hidden="true">↗</span></strong></span>
+                      <span className="projectLoopMeta"><small>{project.classification} · {projectCopy.discipline}</small><strong>{project.title}<span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></strong></span>
                     </button>
                   );
                 })}
@@ -639,7 +640,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                         <span className="projectLoopLogo">{tileLogo ? <img src={tileLogo} alt={copyIndex === 0 ? project.title : ""} /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
                         <span className="projectLoopMeta">
                           <small>{project.classification} · {projectCopy.discipline}</small>
-                          <strong>{cleanPreview ? project.title : t.seeProject}<span aria-hidden="true">↗</span></strong>
+                          <strong>{cleanPreview ? project.title : t.seeProject}<span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></strong>
                         </span>
                       </button>
                     );
@@ -667,7 +668,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                       <img className="projectLoopPreview" src={project.image} alt="" loading="lazy" decoding="async" />
                       <span className="projectLoopTint" aria-hidden="true" />
                       <span className="projectLoopLogo">{tileLogo ? <img src={tileLogo} alt={project.title} /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
-                      <span className="projectLoopMeta"><small>{project.classification} · {projectCopy.discipline}</small><strong>{project.title}<span aria-hidden="true">↗</span></strong></span>
+                      <span className="projectLoopMeta"><small>{project.classification} · {projectCopy.discipline}</small><strong>{project.title}<span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></strong></span>
                     </button>
                   );
                 })}
@@ -719,7 +720,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                         {item.type === "video" ? (
                           <ProjectPreviewVideo src={item.src} poster={"poster" in item ? item.poster : undefined} label={`${activeProject.title} ${t.motionPreview} ${index + 1}`} />
                         ) : <img src={item.src} alt={`${activeProject.title} ${t.projectStill} ${index + 1}`} loading="lazy" decoding="async" />}
-                        <span className="projectMediaHint" aria-hidden="true">{t.openMedia} ↗</span>
+                        <span className="projectMediaHint" aria-hidden="true">{t.openMedia} {cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span>
                       </button>
                       <figcaption><span>{"label" in item ? item.label : item.type === "video" ? t.motionPreview : t.imagePreview}</span><span>0{index + 1}</span></figcaption>
                     </figure>
@@ -739,7 +740,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                             {value.map((person) => (
                               <li className={person.name === "Robert Anghel" ? "isSelfCredit" : undefined} key={`${label}-${person.name}`}>
                                 {"href" in person ? (
-                                  <a href={person.href} target="_blank" rel="noreferrer"><span>{person.name}</span>{"handle" in person && <small>{person.handle} ↗</small>}</a>
+                                  <a href={person.href} target="_blank" rel="noreferrer"><span>{person.name}</span>{"handle" in person && <small>{person.handle} {cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</small>}</a>
                                 ) : <span>{person.name}</span>}
                               </li>
                             ))}
@@ -750,8 +751,8 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                   })}</dl>
                 </section>
                 <nav className="projectCaseNavigation" aria-label={`${t.previousProject} / ${t.nextProject}`}>
-                  <button type="button" onClick={() => { setActiveProjectMediaIndex(null); setActiveProjectId(previousProject.id); }}><span>← {t.previousProject}</span><strong>{previousProject.title}</strong></button>
-                  <button type="button" onClick={() => { setActiveProjectMediaIndex(null); setActiveProjectId(nextProject.id); }}><span>{t.nextProject} →</span><strong>{nextProject.title}</strong></button>
+                  <button type="button" onClick={() => { setActiveProjectMediaIndex(null); setActiveProjectId(previousProject.id); }}><span>{cleanPreview ? <ArrowLeftIcon className="uiArrow" /> : "←"} {t.previousProject}</span><strong>{previousProject.title}</strong></button>
+                  <button type="button" onClick={() => { setActiveProjectMediaIndex(null); setActiveProjectId(nextProject.id); }}><span>{t.nextProject} {cleanPreview ? <ArrowRightIcon className="uiArrow" /> : "→"}</span><strong>{nextProject.title}</strong></button>
                 </nav>
               </article>
             </div>
@@ -787,9 +788,9 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                 </header>
                 <div className="spetaLightboxMedia"><img src={spetaImages[activeSpetaImage]} alt={imageLabel} /></div>
                 <div className="spetaLightboxControls">
-                  <button type="button" onClick={() => setActiveSpetaImage((activeSpetaImage - 1 + spetaImages.length) % spetaImages.length)} aria-label={t.previousImage}><span aria-hidden="true">←</span> {t.previousImage}</button>
+                  <button type="button" onClick={() => setActiveSpetaImage((activeSpetaImage - 1 + spetaImages.length) % spetaImages.length)} aria-label={t.previousImage}><span aria-hidden="true">{cleanPreview ? <ArrowLeftIcon className="uiArrow" /> : "←"}</span> {t.previousImage}</button>
                   <strong id="speta-lightbox-title">{imageLabel}</strong>
-                  <button type="button" onClick={() => setActiveSpetaImage((activeSpetaImage + 1) % spetaImages.length)} aria-label={t.nextImage}>{t.nextImage} <span aria-hidden="true">→</span></button>
+                  <button type="button" onClick={() => setActiveSpetaImage((activeSpetaImage + 1) % spetaImages.length)} aria-label={t.nextImage}>{t.nextImage} <span aria-hidden="true">{cleanPreview ? <ArrowRightIcon className="uiArrow" /> : "→"}</span></button>
                 </div>
               </article>
             </div>
@@ -834,7 +835,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                   {trandingProjects.map((project) => (
                     <a className="trandingProjectCard" data-format={project.format} href={project.href} target="_blank" rel="noreferrer" key={`${groupIndex}-${project.id}`} tabIndex={groupIndex === 1 ? -1 : undefined}>
                       <img src={project.image} alt={groupIndex === 0 ? `${project.title[language]} — ${project.scope[language]}` : ""} />
-                      <span className="trandingProjectMeta"><small>{project.scope[language]}</small><strong>{project.title[language]}</strong><em>{t.sourceProject} ↗</em></span>
+                      <span className="trandingProjectMeta"><small>{project.scope[language]}</small><strong>{project.title[language]}</strong><em>{t.sourceProject} {cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</em></span>
                     </a>
                   ))}
                 </div>
@@ -855,7 +856,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
             <div className="spetaCopy">
               <h3>{t.spetaTitle}</h3><p>{t.spetaBody}</p>
               <dl>{t.spetaDetails.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-              <a className="externalProjectLink" href="https://www.speta.io/" target="_blank" rel="noreferrer">{t.visitSpeta} <span aria-hidden="true">↗</span></a>
+              <a className="externalProjectLink" href="https://www.speta.io/" target="_blank" rel="noreferrer">{t.visitSpeta} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></a>
             </div>
           </article>
           <section className="spetaShowcase" aria-label={t.spetaWalkthrough}>
@@ -864,7 +865,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
               <div className="spetaWindowBar" aria-hidden="true"><span><i></i><i></i><i></i></span><strong>speta.io</strong><small>PRODUCT / BETA</small></div>
               <button className="spetaImageButton" type="button" onClick={() => setActiveSpetaImage(selectedSpetaPreview)} aria-label={`${t.openImage}: ${spetaLabels[selectedSpetaPreview]}`}>
                 <img src={spetaImages[selectedSpetaPreview]} alt={spetaLabels[selectedSpetaPreview]} />
-                <span className="spetaExpandHint" aria-hidden="true">{t.openImage} ↗</span>
+                <span className="spetaExpandHint" aria-hidden="true">{t.openImage} {cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span>
               </button>
               <figcaption><strong>{spetaLabels[selectedSpetaPreview]}</strong><span>SPETA / 0{selectedSpetaPreview + 1}</span></figcaption>
             </figure>
@@ -903,8 +904,8 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                   <div className="cvVersion" key={version.language}>
                     <strong>{t.cvLanguageLabels[version.language]}</strong>
                     <div className="cvVersionLinks">
-                      <a href={version.pdf} target="_blank" rel="noreferrer">{t.cvOpen} <span aria-hidden="true">↗</span></a>
-                      <a href={version.pdf} download={version.fileName}>{t.cvDownload} <span aria-hidden="true">↓</span></a>
+                      <a href={version.pdf} target="_blank" rel="noreferrer">{t.cvOpen} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></a>
+                      <a href={version.pdf} download={version.fileName}>{t.cvDownload} <span aria-hidden="true">{cleanPreview ? <DownloadIcon className="uiArrow" /> : "↓"}</span></a>
                     </div>
                   </div>
                 ))}
@@ -915,7 +916,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
             {cvVersions.map((version) => (
               <a className="cvPreviewLink" href={version.pdf} target="_blank" rel="noreferrer" aria-label={`${t.cvPreview} — ${t.cvLanguageLabels[version.language]}`} key={version.language}>
                 <img src={version.preview} alt="" loading="lazy" decoding="async" />
-                <span>{t.cvLanguageLabels[version.language]} <span aria-hidden="true">↗</span></span>
+                <span>{t.cvLanguageLabels[version.language]} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></span>
               </a>
             ))}
           </div>
@@ -924,9 +925,9 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
         <section className="contactSection" id="contact" aria-labelledby="contact-title">
           <p className="eyebrow">{t.contactEyebrow}</p><h2 id="contact-title">{t.contactTitle}</h2>
           <div className="contactAvailability"><p className="contactLead">{t.contactLead}</p><span>{t.availabilityMeta}</span></div>
-          <a className="contactEmail" href="mailto:anghelrobert18@gmail.com"><span>anghelrobert18@gmail.com</span><span aria-hidden="true">↗</span></a>
-          <a className="contactPersonalEmail" href="mailto:hello@veliumin.com"><span>{t.workEmailLabel}</span><strong>hello@veliumin.com</strong><span aria-hidden="true">↗</span></a>
-          <div className="contactGrid"><div><span>{t.contactLabels[0]}</span><strong>Robert Anghel</strong></div><div><span>{t.contactLabels[1]}</span><strong>{t.based}</strong></div><div><span>{t.contactLabels[2]}</span><a href="tel:+40722905095">+40 722 905 095</a></div><div><span>{t.contactLabels[3]}</span><strong>{t.languages}</strong></div><div><span>{t.contactLabels[4]}</span><a href="https://www.linkedin.com/in/robert-anghel18/" target="_blank" rel="noreferrer">LinkedIn ↗</a></div></div>
+          <a className="contactEmail" href="mailto:anghelrobert18@gmail.com"><span>anghelrobert18@gmail.com</span><span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></a>
+          <a className="contactPersonalEmail" href="mailto:hello@veliumin.com"><span>{t.workEmailLabel}</span><strong>hello@veliumin.com</strong><span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></a>
+          <div className="contactGrid"><div><span>{t.contactLabels[0]}</span><strong>Robert Anghel</strong></div><div><span>{t.contactLabels[1]}</span><strong>{t.based}</strong></div><div><span>{t.contactLabels[2]}</span><a href="tel:+40722905095">+40 722 905 095</a></div><div><span>{t.contactLabels[3]}</span><strong>{t.languages}</strong></div><div><span>{t.contactLabels[4]}</span><a href="https://www.linkedin.com/in/robert-anghel18/" target="_blank" rel="noreferrer">LinkedIn {cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</a></div></div>
           <div className="contactMark" aria-hidden="true"><img src="/brand/vh_mark_paper.svg" alt="" /></div>
         </section>
       </main>
