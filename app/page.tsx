@@ -11,7 +11,7 @@ import { usePreviewMotion } from "./usePreviewMotion";
 import { imageDimensions } from "./imageDimensions";
 import { useModalFocus } from "./useModalFocus";
 import { useReducedMotion } from "./useReducedMotion";
-import { ArrowTopRightIcon, ArrowBottomRightIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, DownloadIcon, GridIcon, EnvelopeClosedIcon, PersonIcon, FileTextIcon, MagicWandIcon, CubeIcon, VideoIcon, ImageIcon } from "@radix-ui/react-icons";
+import { ArrowTopRightIcon, ArrowBottomRightIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, DownloadIcon, GridIcon, EnvelopeClosedIcon, PersonIcon, FileTextIcon, MagicWandIcon, CubeIcon, VideoIcon, ImageIcon, PlusIcon } from "@radix-ui/react-icons";
 import { digitalstageProjects } from "./digitalstageProjects";
 import { framebreedProjects } from "./framebreedProjects";
 
@@ -926,12 +926,24 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
             <div className="skillGroups">
               {t.skillGroups.map(([group, capabilities, tools], index) => (
                 <details className="skillGroup" key={group}>
+                  {cleanPreview ? <>
+                    <summary className="capabilitySummary">
+                      <div className="capabilityHead"><span className="symbolBadge"><CapabilitySymbol index={index} /></span><h4>{group}</h4><span className="capabilityExpand" aria-hidden="true"><PlusIcon /></span></div>
+                      <ul className="capabilityPreview">{capabilities.slice(0, 3).map(capability => <li key={capability}>{capability}</li>)}</ul>
+                      <span className="capabilityAction">{t.skillsExpand}</span>
+                    </summary>
+                    <div className="capabilityDetails">
+                      <ul className="capabilityPreview">{capabilities.slice(3).map(capability => <li key={capability}>{capability}</li>)}</ul>
+                      <div className="skillTools"><p>{t.skillsTools}</p><ul>{tools.map(tool => <li key={tool}>{tool}</li>)}</ul></div>
+                    </div>
+                  </> : <>
                   <summary>
                     <span className="skillIndex">0{index + 1}</span>
                     <div><h4>{cleanPreview && <span className="symbolBadge"><CapabilitySymbol index={index} /></span>}<span>{group}</span></h4><ul className="skillCapabilities">{capabilities.map((capability) => <li key={capability}>{capability}</li>)}</ul></div>
                     <small>{t.skillsExpand}</small><i aria-hidden="true">+</i>
                   </summary>
                   <div className="skillTools"><p>{t.skillsTools}</p><ul>{tools.map((tool) => <li key={tool}>{tool}</li>)}</ul></div>
+                  </>}
                 </details>
               ))}
             </div>
@@ -939,6 +951,23 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
         </section>
 
         <section className="cvSection" id="cv" aria-labelledby="cv-title">
+          {cleanPreview ? <>
+            <header className="cvHeader resumeHeader"><h2 id="cv-title">{t.cvTitle}</h2><p>{t.cvLead}</p></header>
+            <div className="resumeGrid">
+              {[...cvVersions].sort((a, b) => a.language === "en" ? -1 : b.language === "en" ? 1 : 0).map(version => (
+                <article className="resumeCard" key={version.language} aria-labelledby={`resume-language-${version.language}`}>
+                  <header className="resumeCardHeader"><span className="resumeFileIcon"><FileTextIcon aria-hidden="true" /></span><h3 id={`resume-language-${version.language}`}>{t.cvLanguageLabels[version.language]}</h3><span className="resumeFormat">PDF</span></header>
+                  <a className="resumePreview" href={version.pdf} target="_blank" rel="noreferrer" aria-label={`${t.cvPreview} — ${t.cvLanguageLabels[version.language]}`}>
+                    <img {...imageDimensions(version.preview)} src={version.preview} alt="" loading="lazy" decoding="async" />
+                  </a>
+                  <div className="resumeCardActions">
+                    <a className="resumeOpen" href={version.pdf} target="_blank" rel="noreferrer" aria-label={`${t.cvOpen} — ${t.cvLanguageLabels[version.language]}`}>{language === "en" ? "Open PDF" : "Vezi PDF"}<ArrowTopRightIcon className="uiArrow" aria-hidden="true" /></a>
+                    <a className="resumeDownload" href={version.pdf} download={version.fileName} aria-label={`${t.cvDownload} — ${t.cvLanguageLabels[version.language]}`}>{language === "en" ? "Download" : "Descarcă"}<DownloadIcon className="uiArrow" aria-hidden="true" /></a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </> : <>
           <header className="cvHeader">
             <div><p className="eyebrow">{t.cvEyebrow}</p><h2 id="cv-title">{t.cvTitle}</h2></div>
             <div className="cvIntro">
@@ -964,6 +993,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
               </a>
             ))}
           </div>
+          </>}
         </section>
 
         <section className="contactSection" id="contact" aria-labelledby="contact-title">

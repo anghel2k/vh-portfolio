@@ -789,3 +789,70 @@ body:has(.cleanPreview) { background:#f2f2f2; }
   .cleanPreview .companyWorkflow .workflowArrow { top:9px; right:-2px; }
 }
 @media (prefers-reduced-motion:reduce) { .cleanPreview .companyWorkflowDetail>span { animation:none; } }
+
+/* Capabilities and resume share one aligned header/grid rhythm. */
+.cleanPreview .sideSkillsBlock { display:block; padding-top:var(--section); }
+.cleanPreview .sideSkillsBlock>header { display:block; margin-bottom:32px; }
+.cleanPreview .sideSkillsBlock h3,.cleanPreview .resumeHeader h2 { margin:0; max-width:none; font-size:clamp(36px,4vw,56px); line-height:1.06; font-weight:700; letter-spacing:-.045em; text-transform:none; }
+.cleanPreview .skillGroups { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start; gap:20px; }
+.cleanPreview .skillGroup { min-width:0; margin:0; padding:0; border-radius:24px; background:#fff; }
+.cleanPreview .skillGroup .capabilitySummary { display:flex; flex-direction:column; align-items:stretch; gap:0; min-height:260px; padding:28px; }
+.cleanPreview .capabilityHead { display:grid; grid-template-columns:40px minmax(0,1fr) 32px; gap:14px; align-items:center; min-height:48px; }
+.cleanPreview .skillGroup .capabilityHead h4 { display:block; min-width:0; margin:0; font-size:24px; font-weight:700; line-height:1.12; letter-spacing:-.035em; }
+.cleanPreview .capabilityHead .symbolBadge { width:40px; height:40px; border-radius:13px; background:#eef1f7; }
+.cleanPreview .capabilityExpand { width:32px; height:32px; display:grid; place-items:center; border-radius:50%; color:var(--grey); background:#f2f2f2; transition:transform .2s,background-color .2s; }
+.cleanPreview .capabilityExpand svg { width:16px; height:16px; }
+.cleanPreview .skillGroup[open] .capabilityExpand { transform:rotate(45deg); background:#e9effb; color:var(--ultra); }
+.cleanPreview .capabilityPreview { display:grid; grid-template-columns:1fr; gap:9px; margin:22px 0 0; padding:0; list-style:none; }
+.cleanPreview .capabilityPreview li { min-width:0; color:var(--grey); font-size:15px; line-height:1.45; }
+.cleanPreview .capabilityPreview li::before { display:none; }
+.cleanPreview .capabilityAction { min-height:32px; display:flex; align-items:end; margin-top:auto; padding-top:16px; color:var(--grey); font-size:12px; line-height:1.4; }
+.cleanPreview .capabilitySummary:hover .capabilityAction { color:var(--ultra); }
+.cleanPreview .capabilityDetails { padding:0 28px 28px; }
+.cleanPreview .capabilityDetails>.capabilityPreview { margin:0; }
+.cleanPreview .capabilityDetails .skillTools { margin-top:26px; }
+.cleanPreview .capabilityDetails .skillTools>p { margin-bottom:14px; color:var(--grey); font-size:12px; line-height:1.4; }
+.cleanPreview .capabilityDetails .skillTools ul { display:flex; flex-wrap:wrap; gap:8px; }
+.cleanPreview .capabilityDetails .skillTools li { background:#f2f3f5; padding:8px 11px; border-radius:10px; font-size:12px; line-height:1.4; }
+.cleanPreview .cvSection { padding-top:0; }
+.cleanPreview .cvSection .resumeHeader { display:block; padding:0 0 32px; }
+.cleanPreview .resumeHeader>p { max-width:600px; margin-top:18px; color:var(--grey); font-size:18px; line-height:1.5; }
+.cleanPreview .resumeGrid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+.cleanPreview .resumeCard { min-width:0; padding:24px; border-radius:24px; background:#fff; }
+.cleanPreview .resumeCardHeader { min-height:44px; display:flex; align-items:center; gap:13px; margin-bottom:24px; }
+.cleanPreview .resumeFileIcon { width:40px; height:40px; flex:none; display:grid; place-items:center; border-radius:13px; background:#eef1f7; color:#404957; }
+.cleanPreview .resumeFileIcon svg { width:20px; height:20px; }
+.cleanPreview .resumeCardHeader h3 { min-width:0; flex:1; font-size:22px; font-weight:700; letter-spacing:-.035em; line-height:1.15; }
+.cleanPreview .resumeFormat { padding:6px 9px; border-radius:8px; color:var(--grey); background:#f2f3f5; font-size:11px; font-weight:600; }
+.cleanPreview .resumePreview { height:360px; padding:24px 24px 0; display:block; overflow:hidden; border-radius:16px; background:#eef0f3; text-decoration:none; }
+.cleanPreview .resumePreview img { width:100%; height:auto; min-height:100%; display:block; object-fit:cover; object-position:top; border-radius:4px 4px 0 0; transform-origin:center top; transition:transform .25s; box-shadow:0 6px 24px rgba(20,30,50,.1)!important; }
+.cleanPreview .resumePreview:hover img { transform:translateY(-3px); }
+.cleanPreview .resumeCardActions { margin-top:24px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.cleanPreview .resumeCardActions a { min-width:0; min-height:48px; padding:10px 14px; display:flex; align-items:center; justify-content:center; gap:9px; border-radius:16px; font-size:14px; font-weight:600; text-decoration:none; line-height:1.3; transition:background-color .2s,color .2s; }
+.cleanPreview .resumeOpen { color:white; background:var(--ink); }
+.cleanPreview .resumeOpen:hover { background:#333; }
+.cleanPreview .resumeDownload { color:var(--ink); background:#f2f3f5; }
+.cleanPreview .resumeDownload:hover { color:var(--ultra); background:#e9effb; }
+.cleanPreview .resumeCardActions .uiArrow { width:18px; height:18px; }
+.cleanPreview .cvSection+.contactSection { padding-top:0; }
+@media (max-width:1000px) {
+  .cleanPreview .skillGroup .capabilitySummary { padding:24px; }
+  .cleanPreview .capabilityDetails { padding:0 24px 24px; }
+  .cleanPreview .skillGroup .capabilityHead h4 { font-size:22px; }
+  .cleanPreview .resumePreview { padding:18px 18px 0; height:300px; }
+}
+@media (max-width:700px) {
+  .cleanPreview .sideSkillsBlock>header,.cleanPreview .cvSection .resumeHeader { margin-bottom:24px; }
+  .cleanPreview .cvSection .resumeHeader { padding-bottom:0; }
+  .cleanPreview .skillGroups,.cleanPreview .resumeGrid { grid-template-columns:1fr; gap:16px; }
+  .cleanPreview .skillGroup .capabilitySummary { min-height:0; padding:24px; }
+  .cleanPreview .capabilityHead { gap:12px; grid-template-columns:36px minmax(0,1fr) 30px; }
+  .cleanPreview .capabilityHead .symbolBadge { width:36px; height:36px; border-radius:12px; }
+  .cleanPreview .capabilityExpand { width:30px; height:30px; }
+  .cleanPreview .skillGroup .capabilityHead h4 { font-size:22px; }
+  .cleanPreview .resumeHeader>p { font-size:16px; }
+  .cleanPreview .resumeCard { padding:20px; }
+  .cleanPreview .resumePreview { height:280px; padding:18px 18px 0; }
+  .cleanPreview .resumeCardActions a { padding:10px 12px; font-size:13px; gap:8px; }
+}
+@media (prefers-reduced-motion:reduce) { .cleanPreview .resumePreview:hover img { transform:none; } }

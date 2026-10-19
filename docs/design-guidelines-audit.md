@@ -105,3 +105,9 @@ Validated 30 responsive tab states across EN/RO and 320/390/768/1024/1440px: no 
 - app/usePreviewMotion.ts - Company panels participate in one-time entry feedback. Reduced motion skips the observer enhancement; connectors and copy remain visible without it.
 - app/test/clean.css - Replaced nested role boxes with open timelines, purposeful brand-colored connectors and light identity surfaces. Mobile workflow uses three stable columns. Focus outlines remain visible; reduced-motion rules cover connectors, stage entry and changing scope text.
 - Validation: forty EN/RO responsive panel states pass at 320/390/768/1024/1440px. No accessibility violations in four desktop/mobile states or the expanded state. Keyboard role selection, twelve workflow toggles, four disclosures, all eight logo references, project viewer and homepage regression pass. Real stage counts and periods confirmed; no runtime errors. Production build and TypeScript pass.
+
+## Capabilities and resume revision
+
+- app/page.tsx - Preview capabilities use native disclosures with concise summaries and all original detail retained. Resume language, preview and document actions are grouped in two labelled articles. Native PDF links and downloads retain existing versioned URLs and filenames.
+- app/test/clean.css - Replaced offset title/list compositions with a consistent header/grid rhythm. Desktop uses two columns; mobile stacks cards. Explicit capability list columns override legacy responsive rules. Icons, titles, expand affordances and actions align consistently; section gaps avoid double spacing.
+- Validation: twenty responsive/expanded EN/RO states pass across 320–1440px; eight accessibility states report zero violations. Keyboard expansion, all 24 capabilities/21 tools, PDF responses, actual new-tab opening and actual downloads pass. Both filenames are correct and previews decode. Homepage presentation and browser runtime checks pass. Production build and TypeScript pass.
