@@ -92,3 +92,9 @@ Visual inspection: settled desktop/mobile hero, mobile project viewer, work time
 - app/test/clean.css - Single transform-only marquee with seamless equal-width copies; tab capsule animates transform; content transitions use opacity/transform; reduced-motion rules remain effective. Focus outlines and existing material fallbacks preserved.
 
 Validated 30 responsive tab states across EN/RO and 320/390/768/1024/1440px: no page/text overflow or indicator offset. Twelve automated accessibility states passed. Marquee moves, pauses, resumes and stops on hover; two loop groups both measure 2726px at desktop, with all 30 images decoded. Keyboard tab changes, native disclosure and project viewer pass. Reduced-motion mode has no logo animation, hides the duplicate group and makes the horizontal rail focusable. Homepage regression and browser runtime checks pass. Production build, TypeScript and diff checks pass.
+
+### Dock magnification follow-up
+
+- app/ClientLogoRail.tsx - Pointer-distance effect uses refs and a requestAnimationFrame loop, batched slot reads and image transform/opacity writes. Cleanup resets the images on leave, visibility changes, reduced motion and unmount. No continuous pointer values in React state.
+- app/test/clean.css - Removed hover pause; the track continues beneath the pointer. Added image-only scale/lift/opacity transitions and vertical headroom, preserving fixed slot widths and the seamless loop.
+- Validation: hover track remains running and changes position; closest logo reaches 1.64× with neighbour magnification and no clipping; leave resets transforms; explicit pause works. Narrow-page scale 1.36× without overflow. Touch and reduced motion behave correctly. Build, TypeScript, accessibility and runtime checks pass.

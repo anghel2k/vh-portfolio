@@ -608,18 +608,18 @@ body:has(.cleanPreview) { background:#f2f2f2; }
 
 /* Quiet client ribbon: one continuous track, with a real pause control. */
 .cleanPreview .clientLogoRail { position:relative; margin:0 var(--gutter); padding:8px 0 58px; }
-.cleanPreview .clientLogoViewport { overflow:hidden; mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent); -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent); }
+.cleanPreview .clientLogoViewport { padding-block:24px; margin-block:-24px; overflow:hidden; mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent); -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent); }
 .cleanPreview .clientLogoTrack { width:max-content; display:flex; animation:clientLogoFlow 72s linear infinite; }
 .cleanPreview .clientLogoGroup { display:flex; flex:none; align-items:center; gap:72px; padding-right:72px; }
 .cleanPreview .clientLogo { width:112px; height:68px; display:grid; place-items:center; flex:none; }
-.cleanPreview .clientLogo img { width:100%; height:48px; object-fit:contain; filter:brightness(0); opacity:.28; }
+.cleanPreview .clientLogo img { width:100%; height:48px; object-fit:contain; filter:brightness(0); opacity:var(--dock-opacity,.28); transform:translate3d(0,var(--dock-lift,0px),0) scale(var(--dock-scale,1)); transform-origin:center; transition:transform .16s cubic-bezier(.2,.7,.25,1),opacity .16s; }
 .cleanPreview .clientLogo[data-brand="new-balance"] { width:84px; }
 .cleanPreview .clientLogo[data-brand="ig-fat-cats"] { width:56px; }
 .cleanPreview .clientLogo[data-brand="macushield"] { width:138px; }
 .cleanPreview .clientLogo[data-brand="digitalstage-heineken"] { width:130px; }
 .cleanPreview .clientLogo[data-brand="digitalstage-hidrofugal"] { width:130px; }
 .cleanPreview .clientLogo[data-brand="digitalstage-kaufland"] { width:88px; }
-.cleanPreview .clientLogoViewport.isPaused .clientLogoTrack,.cleanPreview .clientLogoRail:hover .clientLogoTrack,.cleanPreview .clientLogoRail:focus-within .clientLogoTrack { animation-play-state:paused; }
+.cleanPreview .clientLogoViewport.isPaused .clientLogoTrack,.cleanPreview .clientLogoRail:focus-within .clientLogoTrack { animation-play-state:paused; }
 .cleanPreview .clientLogoPause { position:absolute; right:0; top:20px; width:44px; height:44px; display:grid; place-items:center; border-radius:50%; color:var(--grey); background:rgba(242,242,242,.9); cursor:pointer; opacity:0; transition:opacity .2s; }
 .cleanPreview .clientLogoPause svg { width:15px; height:15px; }
 .cleanPreview .clientLogoRail:hover .clientLogoPause,.cleanPreview .clientLogoPause:focus-visible { opacity:1; }
