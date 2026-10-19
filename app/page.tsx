@@ -664,7 +664,7 @@ export default function Home() {
               <article ref={projectDetailRef} className="projectDetail" data-project={activeProject.id} role="dialog" aria-modal="true" aria-labelledby="project-detail-title" onMouseDown={(event) => event.stopPropagation()}>
                 <header className="projectDetailHeader">
                   <span>{selectedProjectsLabel} / {activeProject.title}</span>
-                  <button className="projectCloseButton" type="button" autoFocus onClick={() => { setActiveProjectMediaIndex(null); setActiveProjectId(null); }} aria-label={t.closeProject}>{t.closeProject} <span aria-hidden="true">×</span></button>
+                  <button className="projectCloseButton" type="button" autoFocus onClick={() => { setActiveProjectMediaIndex(null); setActiveProjectId(null); }} aria-label={t.closeProject}><span className="projectCloseLabel">{t.closeProject}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button>
                 </header>
                 <div className="projectDetailIntro">
                   <div className="projectDetailIdentity">

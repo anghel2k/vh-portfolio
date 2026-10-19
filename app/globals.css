@@ -162,7 +162,8 @@ main:focus { outline:none; }
 .projectDirectoryGrid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:12px; }
 .projectGridCard { width:100%; aspect-ratio:4/3; grid-column:span 2; }
 .projectGridCard:nth-child(n+4) { grid-column:span 3; }
-.projectGridCard .projectLoopLogo { height:38%; }
+.projectGridCard .projectLoopLogo { inset:44% 22px auto; height:34%; transform:translateY(-50%); }
+.projectGridCard:hover .projectLoopLogo,.projectGridCard:focus-visible .projectLoopLogo { transform:translateY(calc(-50% - 5px)); }
 .projectGridCard .projectLoopMeta strong { min-height:54px; font-family:var(--display); font-size:clamp(10px,1.05vw,15px); font-weight:760; letter-spacing:-.015em; text-transform:none; }
 
 .projectDetailLayer { position:fixed; inset:0; z-index:200; padding:12px; overflow:hidden; background:rgba(20,20,20,.84); backdrop-filter:blur(14px); animation:projectLayerIn .22s ease-out both; }
@@ -177,8 +178,10 @@ main:focus { outline:none; }
 .projectDetailHeader>span::before { content:""; width:9px; height:9px; flex:none; background:var(--projectAccent); border-radius:50%; }
 .projectDetailHeader button { min-height:40px; padding:0 14px; display:flex; align-items:center; gap:12px; color:white; background:var(--ink); border:1.5px solid var(--ink); border-radius:999px; font-size:8px; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; }
 .projectDetailHeader button span { font-size:18px; line-height:1; }
-.projectDetailHeader .projectCloseButton { min-width:118px; min-height:44px; justify-content:space-between; border-width:2px; box-shadow:0 0 0 2px rgba(241,239,232,.92),0 0 0 3.5px var(--ink); font-weight:780; }
-.projectDetailHeader .projectCloseButton span { width:25px; height:25px; display:grid; place-items:center; color:var(--ink); background:white; border-radius:50%; font-size:21px; font-weight:500; }
+.projectDetailHeader .projectCloseButton { min-width:118px; min-height:44px; justify-content:center; flex:none; font-weight:780; }
+.projectDetailHeader .projectCloseLabel { font-size:8px; line-height:1; }
+.projectCloseButton svg { display:block; width:20px; height:20px; flex:none; }
+.projectCloseButton:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
 .projectDetailIntro { padding:44px 24px 52px; display:grid; grid-template-columns:minmax(420px,1.08fr) minmax(380px,.92fr); gap:clamp(54px,9vw,150px); align-items:end; }
 .projectDetailIdentity { min-width:0; }
 .projectDetailLogo { width:min(62%,300px); height:92px; margin-bottom:30px; display:flex; align-items:center; justify-content:flex-start; }
@@ -511,7 +514,7 @@ footer a { text-decoration:none; }
   .projectDirectory h3 { font-size:clamp(42px,13vw,64px); }
   .projectDirectoryGrid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
   .projectGridCard { width:100%; aspect-ratio:1; }
-  .projectGridCard .projectLoopLogo { inset:10px 10px auto; height:38%; }
+  .projectGridCard .projectLoopLogo { inset:44% 10px auto; height:28%; }
   .projectGridCard .projectLoopLogo img { width:72%; }
   .projectGridCard .projectLoopMeta { inset:auto 8px 8px; gap:6px; }
   .projectGridCard .projectLoopMeta small { font-size:6px; line-height:1.25; letter-spacing:.08em; }
@@ -522,8 +525,9 @@ footer a { text-decoration:none; }
   .projectDetailHeader { min-height:58px; padding:8px 10px; gap:10px; }
   .projectDetailHeader>span { max-width:calc(100% - 52px); }
   .projectDetailHeader button,.projectMediaLightbox>header button,.spetaLightboxHeader button { width:40px; min-width:40px; padding:0; justify-content:center; font-size:0; }
-  .projectDetailHeader .projectCloseButton { width:48px; min-width:48px; min-height:48px; flex:none; box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--ink); }
-  .projectDetailHeader .projectCloseButton span { width:29px; height:29px; font-size:25px; }
+  .projectDetailHeader .projectCloseButton { width:44px; min-width:44px; height:44px; min-height:44px; padding:0; gap:0; justify-content:center; }
+  .projectDetailHeader .projectCloseLabel { display:none; }
+  .projectCloseButton svg { width:22px; height:22px; }
   .projectDetailIntro { padding:32px 14px 38px; gap:40px; }
   .projectDetailLogo { width:min(68%,240px); height:72px; margin-bottom:24px; }
   .projectDetailIdentity h2 { font-size:clamp(42px,13vw,66px); }
