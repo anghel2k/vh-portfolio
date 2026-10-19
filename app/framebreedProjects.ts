@@ -642,7 +642,7 @@ export const framebreedProjects: readonly PortfolioProject[] = [
     "classification": "TRADITIONAL CGI / VFX",
     "studio": "Frame23 Studio / FrameBreed Studio",
     "image": "/projects/mentos-mammoth/preview.jpg",
-    "logo": "/projects/brand-logos/mentos.svg",
+    "logo": "/projects/brand-logos/mentos-white.svg",
     "media": [
       {
         "type": "video",
@@ -927,7 +927,7 @@ export const framebreedProjects: readonly PortfolioProject[] = [
     "classification": "TRADITIONAL CGI / VFX",
     "studio": "FrameBreed Studio",
     "image": "/projects/croco/preview.jpg",
-    "logo": "/projects/brand-logos/croco.png",
+    "logo": "/projects/brand-logos/croco-white.svg",
     "media": [
       {
         "type": "video",
@@ -1170,7 +1170,7 @@ export const framebreedProjects: readonly PortfolioProject[] = [
     "classification": "TRADITIONAL CGI / VFX",
     "studio": "FrameBreed Studio / Otherway / Eyeline",
     "image": "/projects/ig-fat-cats/preview.jpg",
-    "logo": "/projects/brand-logos/ig.webp",
+    "logo": "/projects/brand-logos/ig-white.svg",
     "media": [
       {
         "type": "video",
@@ -1311,7 +1311,7 @@ export const framebreedProjects: readonly PortfolioProject[] = [
     "classification": "TRADITIONAL CGI / VFX",
     "studio": "FrameBreed Studio / Headvertising",
     "image": "/projects/macushield/preview.jpg",
-    "logo": "/projects/brand-logos/macushield.png",
+    "logo": "/projects/brand-logos/macushield-white.svg",
     "media": [
       {
         "type": "video",
