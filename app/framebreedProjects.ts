@@ -642,7 +642,7 @@ export const framebreedProjects: readonly PortfolioProject[] = [
     "classification": "TRADITIONAL CGI / VFX",
     "studio": "Frame23 Studio / FrameBreed Studio",
     "image": "/projects/mentos-mammoth/preview.jpg",
-    "logo": "",
+    "logo": "/projects/brand-logos/mentos.svg",
     "media": [
       {
         "type": "video",
@@ -927,7 +927,7 @@ export const framebreedProjects: readonly PortfolioProject[] = [
     "classification": "TRADITIONAL CGI / VFX",
     "studio": "FrameBreed Studio",
     "image": "/projects/croco/preview.jpg",
-    "logo": "",
+    "logo": "/projects/brand-logos/croco.png",
     "media": [
       {
         "type": "video",
@@ -1170,7 +1170,7 @@ export const framebreedProjects: readonly PortfolioProject[] = [
     "classification": "TRADITIONAL CGI / VFX",
     "studio": "FrameBreed Studio / Otherway / Eyeline",
     "image": "/projects/ig-fat-cats/preview.jpg",
-    "logo": "",
+    "logo": "/projects/brand-logos/ig.webp",
     "media": [
       {
         "type": "video",
@@ -1311,7 +1311,7 @@ export const framebreedProjects: readonly PortfolioProject[] = [
     "classification": "TRADITIONAL CGI / VFX",
     "studio": "FrameBreed Studio / Headvertising",
     "image": "/projects/macushield/preview.jpg",
-    "logo": "",
+    "logo": "/projects/brand-logos/macushield.png",
     "media": [
       {
         "type": "video",
@@ -1472,7 +1472,7 @@ export const framebreedProjects: readonly PortfolioProject[] = [
     "classification": "TRADITIONAL CGI / VFX",
     "studio": "FrameBreed Studio / Saga Film",
     "image": "/projects/salt-bank/preview.jpg",
-    "logo": "",
+    "logo": "/projects/brand-logos/salt-bank.svg",
     "media": [
       {
         "type": "video",

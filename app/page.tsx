@@ -87,8 +87,8 @@ const veliuminArchive = [
 ] as const;
 
 const chapters = [
-  { company: { en: "FrameBreed Studio", ro: "FrameBreed Studio" }, years: { en: "Nov 2025 — Present", ro: "nov. 2025 — Prezent" }, role: { en: "Technical Director", ro: "Director tehnic" }, engagement: { en: "Independent contractor", ro: "Colaborator independent" }, href: "#framebreed-studio", logo: "/identity/framebreed-logo-timeline.png" },
-  { company: { en: "Digital Stage", ro: "Digital Stage" }, years: { en: "1 year 2 months / Present", ro: "1 an și 2 luni / Prezent" }, role: { en: "Producer", ro: "Producer" }, engagement: { en: "AI / Hybrid VFX production", ro: "Producție AI / VFX hibrid" }, href: "#digitalstage", logo: "/identity/digitalstage-logo.svg" },
+  { company: { en: "FrameBreed Studio", ro: "FrameBreed Studio" }, years: { en: "Mar 2024 — Present", ro: "mart. 2024 — Prezent" }, role: { en: "Technical Director", ro: "Director tehnic" }, engagement: { en: "Independent contractor", ro: "Colaborator independent" }, href: "#framebreed-studio", logo: "/identity/framebreed-logo-timeline.png" },
+  { company: { en: "Digital Stage", ro: "Digital Stage" }, years: { en: "Aug 2025 — Present", ro: "aug. 2025 — Prezent" }, role: { en: "Producer", ro: "Producer" }, engagement: { en: "AI / Hybrid VFX production", ro: "Producție AI / VFX hibrid" }, href: "#digitalstage", logo: "/identity/digitalstage-logo.svg" },
   { company: { en: "VELIUMIN", ro: "VELIUMIN" }, years: { en: "Mar 2023 — Present", ro: "mart. 2023 — Prezent" }, role: { en: "Founder / Creative Director", ro: "Fondator / Director de creație" }, engagement: { en: "Founder-led venture", ro: "Proiect propriu / Fondator" }, href: "#veliumin", logo: "/identity/veliumin-logo-blue.svg" },
   { company: { en: "Tranding Social Media", ro: "Tranding Social Media" }, years: { en: "Sep 2023 — Aug 2025", ro: "sept. 2023 — aug. 2025" }, role: { en: "Visual Effects Artist", ro: "Artist efecte vizuale" }, engagement: { en: "Project-based / Independent", ro: "Per proiect / Colaborator independent" }, href: "#tranding-social-media", logo: "/identity/tranding-logo-timeline.png" },
 ] as const;
@@ -587,12 +587,12 @@ export default function Home() {
           <header className="careerHeader">
             <div>
               <a className="careerLogo brandLogoHero" href="https://digitalstage.ro" target="_blank" rel="noreferrer" aria-label="Digital Stage website"><img src="/identity/digitalstage-logo.svg" alt="Digital Stage" /></a>
-              <p className="eyebrow">{language === "en" ? "1 year 2 months / Present" : "1 an și 2 luni / Prezent"}</p>
+              <p className="eyebrow">{language === "en" ? "Aug 2025 — Present" : "aug. 2025 — Prezent"}</p>
             </div>
             <div className="careerSummary">
               <p>{language === "en" ? "Producer at Digital Stage, creating AI commercials and hybrid VFX productions with a team working across retouching, video and visual effects." : "Producer la Digital Stage, unde producem reclame AI și producții VFX hibride cu o echipă de retuș, video și efecte vizuale."}</p>
               <ol className="framebreedRoleRoadmap" aria-label={language === "en" ? "Digital Stage role" : "Rolul la Digital Stage"}>
-                <li className="isCurrent"><span className="roleRoadmapNode" aria-hidden="true" /><span>{language === "en" ? "1 year 2 months" : "1 an și 2 luni"}</span><strong>Producer</strong><small>{language === "en" ? "AI commercials / Hybrid VFX / Team coordination" : "Reclame AI / VFX hibrid / Coordonarea echipei"}</small></li>
+                <li className="isCurrent"><span className="roleRoadmapNode" aria-hidden="true" /><time>{language === "en" ? "Aug 2025" : "aug. 2025"} — {t.present}</time><strong>Producer</strong><small>{language === "en" ? "AI commercials / Hybrid VFX / Team coordination" : "Reclame AI / VFX hibrid / Coordonarea echipei"}</small></li>
               </ol>
             </div>
           </header>

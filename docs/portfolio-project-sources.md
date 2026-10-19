@@ -21,3 +21,9 @@ Virgin Media, eMAG Wallet, S.Pellegrino, Nutline, Heineken, Hidrofugal and Kaufl
 ## Media handling
 
 Films are served from local public assets. Public Instagram clips were imported with audio and are identified as studio breakdowns where applicable. Temporary signed CDN addresses are not used as production URLs. Video frames supply the new project previews. Existing Digital Stage logo fixes and English-first language behavior are preserved.
+
+## Brand assets and career dates
+
+Official assets added 19 October 2026: Mentos wordmark extracted unchanged from the [Mentos homepage](https://www.mentos.com.mx/), [Croco logo](https://croco.ro/wp-content/uploads/2018/09/logo1.png), [IG website logo](https://www.ig.com/uk), [MacuShield logo](https://macushield.ro/wp-content/uploads/2021/07/logo-Macu.png), and [Salt Bank logo](https://salt.bank/themes/ideabank/assets/logos/salt.svg). The Salt source is an SVG symbol; a use element makes that symbol render as a standalone image. Brand colours are retained where monochrome filtering would obscure the mark.
+
+Career timeline uses Mar 2024 to present for the overall FrameBreed engagement and Aug 2025 to present for Digital Stage. FrameBreed's detailed progression remains 3D Generalist until Nov 2025, then Technical Director. Dates explicitly confirmed by Robert.
