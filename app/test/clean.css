@@ -132,7 +132,8 @@
 .cleanPreview .spetaFeature { padding:0 0 55px; color:var(--ink); background:none; grid-template-columns:1fr 1.2fr; gap:14%; }
 .cleanPreview .spetaIdentity { gap:22px; }
 .cleanPreview .projectClassification { display:none; }
-.cleanPreview .spetaWordmark span { width:42px; height:42px; color:white; background:var(--ink); font-weight:700; border-radius:8px; }
+.cleanPreview .spetaWordmark strong { color:var(--ultra); }
+.cleanPreview .spetaWordmark span { width:42px; height:42px; color:white; background:var(--ultra); font-weight:700; border-radius:8px; }
 .cleanPreview .spetaIdentity .eyebrow,.cleanPreview .spetaStatus { color:var(--grey); }
 .cleanPreview .spetaStatus { padding-top:16px; font-size:12px; letter-spacing:0; text-transform:none; }
 .cleanPreview .spetaCopy { display:block; }
