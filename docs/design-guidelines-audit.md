@@ -83,3 +83,12 @@ Automated checks are scoped to the states listed above and are not a formal WCAG
 - Internal anchors and image dimensions are valid. The four hero images, heading and both contact links remain visible without JavaScript. Original homepage hero and project open/close pass regression checks.
 
 Visual inspection: settled desktop/mobile hero, mobile project viewer, work timeline and contact section. Existing project allocation, role dates, latest CVs, personal/work addresses, logo-only timeline and blue SPETA identity are preserved. Automated results describe tested states, not a formal accessibility certification.
+
+## Recheck: visual overview and project-brand ribbon
+
+- app/ClientLogoRail.tsx - Continuous logo animation includes a named pause/resume control, hover/focus pause, visibility cleanup and a static keyboard-scrollable reduced-motion variant. Decorative duplicate group is aria-hidden. Brand names describe work represented in the portfolio, without claiming direct client relationships.
+- app/PracticeOverview.tsx - Named tablist, selected states, labelled panel, roving tabindex, arrow/Home/End support, image dimensions and real anchor destinations. Short active copy replaces the dense preview introduction. Native links preserve navigation semantics.
+- app/page.tsx - VELIUMIN's extra paragraph is available through a native details disclosure in the preview. Existing homepage presentation retained.
+- app/test/clean.css - Single transform-only marquee with seamless equal-width copies; tab capsule animates transform; content transitions use opacity/transform; reduced-motion rules remain effective. Focus outlines and existing material fallbacks preserved.
+
+Validated 30 responsive tab states across EN/RO and 320/390/768/1024/1440px: no page/text overflow or indicator offset. Twelve automated accessibility states passed. Marquee moves, pauses, resumes and stops on hover; two loop groups both measure 2726px at desktop, with all 30 images decoded. Keyboard tab changes, native disclosure and project viewer pass. Reduced-motion mode has no logo animation, hides the duplicate group and makes the horizontal rail focusable. Homepage regression and browser runtime checks pass. Production build, TypeScript and diff checks pass.

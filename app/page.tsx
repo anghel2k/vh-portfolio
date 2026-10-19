@@ -4,11 +4,13 @@ import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } f
 import BouncingMark from "./BouncingMark";
 import ProjectSlider from "./ProjectSlider";
 import HeroProjectBubbles from "./HeroProjectBubbles";
+import ClientLogoRail from "./ClientLogoRail";
+import PracticeOverview from "./PracticeOverview";
 import { usePreviewMotion } from "./usePreviewMotion";
 import { imageDimensions } from "./imageDimensions";
 import { useModalFocus } from "./useModalFocus";
 import { useReducedMotion } from "./useReducedMotion";
-import { ArrowTopRightIcon, ArrowBottomRightIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, DownloadIcon, GridIcon, EnvelopeClosedIcon, PersonIcon, FileTextIcon, MagicWandIcon, CubeIcon, VideoIcon, ImageIcon } from "@radix-ui/react-icons";
+import { ArrowTopRightIcon, ArrowBottomRightIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, DownloadIcon, GridIcon, EnvelopeClosedIcon, PersonIcon, FileTextIcon, MagicWandIcon, CubeIcon, VideoIcon, ImageIcon, PlusIcon } from "@radix-ui/react-icons";
 import { digitalstageProjects } from "./digitalstageProjects";
 import { framebreedProjects } from "./framebreedProjects";
 
@@ -530,9 +532,14 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
         </section>
         )}
 
-        <section className="heroBrief" id="intro" aria-label={t.heroBriefLabel}>
-          <p className="eyebrow">{t.heroBriefLabel}</p><p>{t.heroBrief}</p>
-        </section>
+        {cleanPreview ? <>
+          <ClientLogoRail language={language} />
+          <PracticeOverview language={language} />
+        </> : (
+          <section className="heroBrief" id="intro" aria-label={t.heroBriefLabel}>
+            <p className="eyebrow">{t.heroBriefLabel}</p><p>{t.heroBrief}</p>
+          </section>
+        )}
 
         <section className="experienceIndex" id="experience" aria-labelledby="experience-title">
           <header className="experienceHeader">
@@ -824,7 +831,13 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
           <header className="careerHeader inverse">
             <div><span className="careerLogo careerLogoWide veliuminLogoHero"><img {...imageDimensions("/identity/veliumin-logo.svg")} src="/identity/veliumin-logo.svg" alt="VELIUMIN" loading="lazy" decoding="async" /></span><p className="eyebrow">{t.veliuminEyebrow}</p></div>
             <div className="careerSummary">
-              {t.veliuminSummary.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              {cleanPreview ? <>
+                <p>{t.veliuminSummary[0]}</p>
+                <details className="careerRoleDetails">
+                  <summary>{language === "en" ? "More about my role" : "Mai multe despre rol"}<PlusIcon aria-hidden="true" /></summary>
+                  {t.veliuminSummary.slice(1).map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+                </details>
+              </> : t.veliuminSummary.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
               <dl className="roleProgression light"><div><dt>{t.role}</dt><dd>{t.veliuminRole}</dd></div></dl>
             </div>
           </header>
