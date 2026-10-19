@@ -491,3 +491,68 @@ body:has(.cleanPreview) { background:#f2f2f2; }
   .cleanPreview .contactEmailCard>strong { font-size:clamp(16px,4.65vw,23px); }
   .cleanPreview .contactEmailCard>.uiArrow { width:20px; height:20px; }
 }
+
+/* Web interpretation of Apple's material hierarchy, not the native Liquid Glass API.
+   Translucency belongs to navigation and controls; project content stays solid. */
+.cleanPreview {
+  --glass-surface:linear-gradient(135deg,rgba(255,255,255,.92),rgba(255,255,255,.72)),rgba(242,242,242,.48);
+  --glass-blur:blur(24px) saturate(135%);
+  --glass-depth:0 5px 22px rgba(20,24,32,.055);
+}
+.cleanPreview .uiSymbol { width:18px; height:18px; display:inline-block; flex:none; vertical-align:-.15em; }
+.cleanPreview .siteHeader { background:transparent; backdrop-filter:none; -webkit-backdrop-filter:none; }
+.cleanPreview :is(.brandLink,.headerActions,.mobileMenuToggle,.mobileMenu,.cleanSliderControls,.projectCloseButton) {
+  background:var(--glass-surface); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+  box-shadow:var(--glass-depth)!important;
+}
+.cleanPreview .brandLink { min-height:48px; padding:0 15px; border-radius:18px; gap:10px; }
+.cleanPreview .brandLink strong { letter-spacing:-.035em; }
+.cleanPreview .headerActions { min-height:54px; padding:5px; gap:10px; border-radius:22px; }
+.cleanPreview .siteHeader nav { gap:2px; }
+.cleanPreview .siteHeader nav a { gap:8px; padding:0 14px; border-radius:16px; font-size:14px; font-weight:600; transition:background-color .18s,color .18s; }
+.cleanPreview .siteHeader nav a:hover { color:var(--ink); background:rgba(255,255,255,.82); }
+.cleanPreview .languageSwitch { height:40px; padding:3px; gap:2px; border-radius:14px; background:rgba(22,22,22,.045); }
+.cleanPreview .languageSwitch button { min-width:36px; padding:0 9px; border-radius:11px; transition:background-color .18s,color .18s; }
+.cleanPreview .languageSwitch button.active { background:#fff; text-decoration:none; }
+.cleanPreview .languageSwitch button small { font-size:11px; font-weight:700; }
+.cleanPreview .cleanSliderControls { padding:5px; border-radius:20px; gap:4px; }
+.cleanPreview .cleanSliderCount { padding-left:10px; margin-right:8px; font-size:11px; }
+.cleanPreview .cleanSliderControls button { width:44px; height:44px; border-radius:15px; background:transparent; transition:background-color .18s,color .18s,transform .18s; }
+.cleanPreview .cleanSliderControls button:hover:not(:disabled) { color:var(--section-accent,var(--ink)); background:rgba(255,255,255,.94); }
+.cleanPreview .cleanSliderControls button:active:not(:disabled) { transform:scale(.94); }
+.cleanPreview .projectDetailHeader { background:rgba(242,242,242,.82); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); }
+.cleanPreview .projectDetailHeader .projectCloseButton { padding:0 14px; border-radius:16px; min-height:44px; background:var(--glass-surface); }
+.cleanPreview .projectCloseButton:hover { color:var(--ultra); }
+.cleanPreview .skillGroup h4 { display:flex; align-items:center; gap:12px; }
+.cleanPreview .skillGroup h4>span:last-child { min-width:0; }
+.cleanPreview .symbolBadge { width:36px; height:36px; display:inline-grid; place-items:center; flex:none; border-radius:11px; background:#eef1f7; color:#404957; }
+.cleanPreview .symbolBadge .uiSymbol { width:20px; height:20px; }
+.cleanPreview .contactEmailCard>span,.cleanPreview .cvVersion>strong { display:flex; align-items:center; gap:9px; }
+.cleanPreview .contactEmailCard>span .uiSymbol { width:17px; height:17px; }
+@media (max-width:700px) {
+  .cleanPreview .brandLink { min-height:44px; padding:0 12px; border-radius:16px; }
+  .cleanPreview .brandLink strong { font-size:15px; }
+  .cleanPreview .mobileMenuToggle { border-radius:16px; }
+  .cleanPreview .mobileMenu { top:68px; left:20px; right:20px; padding:12px; border-radius:22px; background:linear-gradient(135deg,rgba(255,255,255,.98),rgba(248,249,251,.93)); }
+  .cleanPreview .mobileMenu nav { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+  .cleanPreview .mobileMenu nav a { min-height:48px; padding:0 12px; font-size:14px; background:rgba(255,255,255,.5); }
+  .cleanPreview .mobileMenu .languageSwitch { width:100%; height:44px; margin-top:4px; }
+  .cleanPreview .mobileMenu .languageSwitch button { width:50%; }
+  .cleanPreview .cleanSliderHeader { gap:10px; }
+  .cleanPreview .cleanSliderControls { padding:4px; }
+  .cleanPreview .cleanSliderCount { padding-left:6px; margin-right:4px; font-size:10px; }
+  .cleanPreview .cleanSliderControls button { width:44px; height:44px; }
+  .cleanPreview .projectDetailHeader .projectCloseButton { padding:0; width:44px; }
+  .cleanPreview .skillGroup h4 { font-size:22px; gap:10px; }
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+  .cleanPreview { --glass-surface:#fff; }
+  .cleanPreview .projectDetailHeader,.cleanPreview .mobileMenu { background:#f7f7f8; }
+}
+@media (prefers-reduced-transparency:reduce), (prefers-contrast:more) {
+  .cleanPreview { --glass-surface:#fff; --glass-blur:none; --glass-depth:none; }
+  .cleanPreview .projectDetailHeader,.cleanPreview .mobileMenu { background:#f2f2f2; backdrop-filter:none; -webkit-backdrop-filter:none; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .cleanPreview .cleanSliderControls button:active:not(:disabled) { transform:none; }
+}

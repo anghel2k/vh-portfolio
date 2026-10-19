@@ -6,7 +6,7 @@ import ProjectSlider from "./ProjectSlider";
 import { imageDimensions } from "./imageDimensions";
 import { useModalFocus } from "./useModalFocus";
 import { useReducedMotion } from "./useReducedMotion";
-import { ArrowTopRightIcon, ArrowBottomRightIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, DownloadIcon } from "@radix-ui/react-icons";
+import { ArrowTopRightIcon, ArrowBottomRightIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, DownloadIcon, GridIcon, EnvelopeClosedIcon, PersonIcon, FileTextIcon, MagicWandIcon, CubeIcon, VideoIcon, ImageIcon } from "@radix-ui/react-icons";
 import { digitalstageProjects } from "./digitalstageProjects";
 import { framebreedProjects } from "./framebreedProjects";
 
@@ -360,6 +360,11 @@ function ProjectPreviewVideo({ src, poster, label }: { src: string; poster?: str
   );
 }
 
+function CapabilitySymbol({ index }: { index: number }) {
+  const Icon = [MagicWandIcon, CubeIcon, VideoIcon, ImageIcon][index] ?? CubeIcon;
+  return <Icon className="uiSymbol" aria-hidden="true" />;
+}
+
 export default function Home({ cleanPreview = false }: { cleanPreview?: boolean } = {}) {
   const [language, setLanguage] = useState<Language>("en");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -470,8 +475,8 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
         </a>
         <div className="headerActions">
           <nav aria-label={t.navLabel}>
-            <a className="workNav" href="#experience">{t.nav[0]}</a>
-            <a className="contactNav" href="#contact">{t.nav[1]}</a>
+            <a className="workNav" href="#experience">{cleanPreview && <GridIcon className="uiSymbol" aria-hidden="true" />}{t.nav[0]}</a>
+            <a className="contactNav" href="#contact">{cleanPreview && <EnvelopeClosedIcon className="uiSymbol" aria-hidden="true" />}{t.nav[1]}</a>
           </nav>
           <div className="languageSwitch" role="group" aria-label={t.languageLabel}>
             <button type="button" className={language === "en" ? "active" : ""} aria-pressed={language === "en"} aria-label={t.languageNames.en} title={t.languageNames.en} onClick={() => changeLanguage("en")}><span aria-hidden="true">🇬🇧</span><small>EN</small></button>
@@ -484,8 +489,8 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
         {mobileMenuOpen && (
           <div className="mobileMenu" id="mobile-menu">
             <nav aria-label={t.navLabel}>
-              <a className="workNav" href="#experience" onClick={() => setMobileMenuOpen(false)}>{t.nav[0]}</a>
-              <a className="contactNav" href="#contact" onClick={() => setMobileMenuOpen(false)}>{t.nav[1]}</a>
+              <a className="workNav" href="#experience" onClick={() => setMobileMenuOpen(false)}>{cleanPreview && <GridIcon className="uiSymbol" aria-hidden="true" />}{t.nav[0]}</a>
+              <a className="contactNav" href="#contact" onClick={() => setMobileMenuOpen(false)}>{cleanPreview && <EnvelopeClosedIcon className="uiSymbol" aria-hidden="true" />}{t.nav[1]}</a>
             </nav>
             <div className="languageSwitch" role="group" aria-label={t.languageLabel}>
               <button type="button" className={language === "en" ? "active" : ""} aria-pressed={language === "en"} aria-label={t.languageNames.en} onClick={() => { changeLanguage("en"); setMobileMenuOpen(false); }}><span aria-hidden="true">🇬🇧</span><small>EN</small></button>
@@ -904,7 +909,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                 <details className="skillGroup" key={group}>
                   <summary>
                     <span className="skillIndex">0{index + 1}</span>
-                    <div><h4>{group}</h4><ul className="skillCapabilities">{capabilities.map((capability) => <li key={capability}>{capability}</li>)}</ul></div>
+                    <div><h4>{cleanPreview && <span className="symbolBadge"><CapabilitySymbol index={index} /></span>}<span>{group}</span></h4><ul className="skillCapabilities">{capabilities.map((capability) => <li key={capability}>{capability}</li>)}</ul></div>
                     <small>{t.skillsExpand}</small><i aria-hidden="true">+</i>
                   </summary>
                   <div className="skillTools"><p>{t.skillsTools}</p><ul>{tools.map((tool) => <li key={tool}>{tool}</li>)}</ul></div>
@@ -922,7 +927,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
               <div className="cvActions">
                 {cvVersions.map((version) => (
                   <div className="cvVersion" key={version.language}>
-                    <strong>{t.cvLanguageLabels[version.language]}</strong>
+                    <strong>{cleanPreview && <FileTextIcon className="uiSymbol" aria-hidden="true" />}{t.cvLanguageLabels[version.language]}</strong>
                     <div className="cvVersionLinks">
                       <a href={version.pdf} target="_blank" rel="noreferrer">{t.cvOpen} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></a>
                       <a href={version.pdf} download={version.fileName}>{t.cvDownload} <span aria-hidden="true">{cleanPreview ? <DownloadIcon className="uiArrow" aria-hidden="true" /> : "↓"}</span></a>
@@ -948,12 +953,12 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
           {cleanPreview ? (
             <div className="contactEmailGrid">
               <a className="contactEmailCard" href="mailto:anghelrobert18@gmail.com">
-                <span>{t.personalEmailLabel}</span>
+                <span><PersonIcon className="uiSymbol" aria-hidden="true" />{t.personalEmailLabel}</span>
                 <strong>anghelrobert18@gmail.com</strong>
                 <ArrowTopRightIcon className="uiArrow" aria-hidden="true" />
               </a>
               <a className="contactEmailCard" href="mailto:hello@veliumin.com">
-                <span>{t.workEmailLabel}</span>
+                <span><EnvelopeClosedIcon className="uiSymbol" aria-hidden="true" />{t.workEmailLabel}</span>
                 <strong>hello@veliumin.com</strong>
                 <ArrowTopRightIcon className="uiArrow" aria-hidden="true" />
               </a>
