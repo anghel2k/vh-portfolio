@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import BouncingMark from "./BouncingMark";
+import { digitalstageProjects } from "./digitalstageProjects";
 
 type Language = "en" | "ro";
 
@@ -658,6 +659,7 @@ const veliuminArchive = [
 
 const chapters = [
   { company: { en: "FrameBreed Studio", ro: "FrameBreed Studio" }, years: { en: "Nov 2025 — Present", ro: "nov. 2025 — Prezent" }, role: { en: "Technical Director", ro: "Director tehnic" }, engagement: { en: "Independent contractor", ro: "Colaborator independent" }, href: "#framebreed-studio", logo: "/identity/framebreed-logo-timeline.png" },
+  { company: { en: "Digital Stage", ro: "Digital Stage" }, years: { en: "1 year 2 months / Present", ro: "1 an și 2 luni / Prezent" }, role: { en: "Producer", ro: "Producer" }, engagement: { en: "AI / Hybrid VFX production", ro: "Producție AI / VFX hibrid" }, href: "#digitalstage", logo: "/identity/digitalstage-logo.svg" },
   { company: { en: "VELIUMIN", ro: "VELIUMIN" }, years: { en: "Mar 2023 — Present", ro: "mart. 2023 — Prezent" }, role: { en: "Founder / Creative Director", ro: "Fondator / Director de creație" }, engagement: { en: "Founder-led venture", ro: "Proiect propriu / Fondator" }, href: "#veliumin", logo: "/identity/veliumin-logo-blue.svg" },
   { company: { en: "Tranding Social Media", ro: "Tranding Social Media" }, years: { en: "Sep 2023 — Aug 2025", ro: "sept. 2023 — aug. 2025" }, role: { en: "Visual Effects Artist", ro: "Artist efecte vizuale" }, engagement: { en: "Project-based / Independent", ro: "Per proiect / Colaborator independent" }, href: "#tranding-social-media", logo: "/identity/tranding-logo-timeline.png" },
 ] as const;
@@ -926,13 +928,16 @@ export default function Home() {
   const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
   const [activeProjectMediaIndex, setActiveProjectMediaIndex] = useState<number | null>(null);
   const [showAllProjects, setShowAllProjects] = useState(false);
+  const [showAllDigitalstageProjects, setShowAllDigitalstageProjects] = useState(false);
   const [activeSpetaImage, setActiveSpetaImage] = useState<number | null>(null);
   const [selectedSpetaPreview, setSelectedSpetaPreview] = useState(0);
   const carouselResumeTimers = useRef(new Map<HTMLElement, number>());
   const projectDetailRef = useRef<HTMLElement>(null);
   const t = copy[language];
-  const activeProject = framebreedProjects.find((project) => project.id === activeProjectId) ?? null;
-  const activeProjectIndex = framebreedProjects.findIndex((project) => project.id === activeProjectId);
+  const activeProjects = activeProjectId?.startsWith("digitalstage-") ? digitalstageProjects : framebreedProjects;
+  const selectedProjectsLabel = activeProjectId?.startsWith("digitalstage-") ? (language === "en" ? "Selected Digital Stage projects" : "Proiecte Digital Stage selectate") : t.selectedProjects;
+  const activeProject = activeProjects.find((project) => project.id === activeProjectId) ?? null;
+  const activeProjectIndex = activeProjects.findIndex((project) => project.id === activeProjectId);
   const spetaLabels = [t.spetaAlt, ...t.spetaGallery];
 
   useEffect(() => {
@@ -1155,15 +1160,87 @@ export default function Home() {
           )}
         </section>
 
+        <section className="careerChapter digitalstageChapter" id="digitalstage" aria-label="Digital Stage">
+          <header className="careerHeader">
+            <div>
+              <a className="careerLogo brandLogoHero" href="https://digitalstage.ro" target="_blank" rel="noreferrer" aria-label="Digital Stage website"><img src="/identity/digitalstage-logo.svg" alt="Digital Stage" /></a>
+              <p className="eyebrow">{language === "en" ? "1 year 2 months / Present" : "1 an și 2 luni / Prezent"}</p>
+            </div>
+            <div className="careerSummary">
+              <p>{language === "en" ? "Producer at Digital Stage, creating AI commercials and hybrid VFX productions with a team working across retouching, video and visual effects." : "Producer la Digital Stage, unde producem reclame AI și producții VFX hibride cu o echipă de retuș, video și efecte vizuale."}</p>
+              <ol className="framebreedRoleRoadmap" aria-label={language === "en" ? "Digital Stage role" : "Rolul la Digital Stage"}>
+                <li className="isCurrent"><span className="roleRoadmapNode" aria-hidden="true" /><span>{language === "en" ? "1 year 2 months" : "1 an și 2 luni"}</span><strong>Producer</strong><small>{language === "en" ? "AI commercials / Hybrid VFX / Team coordination" : "Reclame AI / VFX hibrid / Coordonarea echipei"}</small></li>
+              </ol>
+            </div>
+          </header>
+          <div className="projectLoop" id="digitalstage-work" aria-label={language === "en" ? "Selected Digital Stage projects" : "Proiecte Digital Stage selectate"} onPointerDown={pauseCarousel} onPointerUp={resumeCarousel} onPointerCancel={resumeCarousel} onPointerLeave={resumeCarousel}>
+            <div className="projectLoopTrack">
+              {[0, 1].map((copyIndex) => (
+                <div className="projectLoopGroup" aria-hidden={copyIndex === 1} key={copyIndex}>
+                  {digitalstageProjects.map((project) => {
+                    const projectCopy = project[language];
+                    const tileLogo = project.logo;
+                    return (
+                      <button
+                        className="projectLoopCard"
+                        data-project={project.id}
+                        id={copyIndex === 0 ? project.id : undefined}
+                        type="button"
+                        tabIndex={copyIndex === 1 ? -1 : undefined}
+                        onClick={() => setActiveProjectId(project.id)}
+                        key={`${copyIndex}-${project.id}`}
+                        aria-label={`${t.seeProject}: ${project.title}`}
+                      >
+                        <img className="projectLoopPreview" src={project.image} alt="" loading="lazy" decoding="async" />
+                        <span className="projectLoopTint" aria-hidden="true" />
+                        <span className="projectLoopLogo"><img src={tileLogo} alt={copyIndex === 0 ? project.title : ""} /></span>
+                        <span className="projectLoopMeta">
+                          <small>{project.classification} · {projectCopy.discipline}</small>
+                          <strong>{t.seeProject}<span aria-hidden="true">↗</span></strong>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="projectDirectoryToggleRow">
+            <span>{digitalstageProjects.length.toString().padStart(2, "0")} / {language === "en" ? "Selected Digital Stage projects" : "Proiecte Digital Stage selectate"}</span>
+            <button type="button" aria-expanded={showAllDigitalstageProjects} aria-controls="digitalstage-project-directory" onClick={() => setShowAllDigitalstageProjects((isOpen) => !isOpen)}>
+              {showAllDigitalstageProjects ? t.hideAllProjects : t.seeAllProjects}<span aria-hidden="true">{showAllDigitalstageProjects ? "−" : "+"}</span>
+            </button>
+          </div>
+          {showAllDigitalstageProjects && (
+            <section className="projectDirectory" id="digitalstage-project-directory" aria-labelledby="digitalstage-directory-title">
+              <header><p className="eyebrow">{language === "en" ? "Selected Digital Stage projects" : "Proiecte Digital Stage selectate"}</p><h3 id="digitalstage-directory-title">{language === "en" ? "All Digital Stage projects" : "Toate proiectele Digital Stage"}</h3></header>
+              <div className="projectDirectoryGrid">
+                {digitalstageProjects.map((project) => {
+                  const projectCopy = project[language];
+                  const tileLogo = project.logo;
+                  return (
+                    <button className="projectLoopCard projectGridCard" data-project={project.id} type="button" onClick={() => setActiveProjectId(project.id)} key={`grid-${project.id}`} aria-label={`${t.seeProject}: ${project.title}`}>
+                      <img className="projectLoopPreview" src={project.image} alt="" loading="lazy" decoding="async" />
+                      <span className="projectLoopTint" aria-hidden="true" />
+                      <span className="projectLoopLogo"><img src={tileLogo} alt={project.title} /></span>
+                      <span className="projectLoopMeta"><small>{project.classification} · {projectCopy.discipline}</small><strong>{project.title}<span aria-hidden="true">↗</span></strong></span>
+                    </button>
+                  );
+                })}
+              </div>
+            </section>
+          )}
+        </section>
+
         {activeProject && (() => {
           const projectCopy = activeProject[language];
-          const previousProject = framebreedProjects[(activeProjectIndex - 1 + framebreedProjects.length) % framebreedProjects.length];
-          const nextProject = framebreedProjects[(activeProjectIndex + 1) % framebreedProjects.length];
+          const previousProject = activeProjects[(activeProjectIndex - 1 + activeProjects.length) % activeProjects.length];
+          const nextProject = activeProjects[(activeProjectIndex + 1) % activeProjects.length];
           return (
             <div className="projectDetailLayer" onMouseDown={() => { setActiveProjectMediaIndex(null); setActiveProjectId(null); }}>
               <article ref={projectDetailRef} className="projectDetail" data-project={activeProject.id} role="dialog" aria-modal="true" aria-labelledby="project-detail-title" onMouseDown={(event) => event.stopPropagation()}>
                 <header className="projectDetailHeader">
-                  <span>{t.selectedProjects} / {activeProject.title}</span>
+                  <span>{selectedProjectsLabel} / {activeProject.title}</span>
                   <button className="projectCloseButton" type="button" autoFocus onClick={() => { setActiveProjectMediaIndex(null); setActiveProjectId(null); }} aria-label={t.closeProject}>{t.closeProject} <span aria-hidden="true">×</span></button>
                 </header>
                 <div className="projectDetailIntro">
@@ -1200,7 +1277,7 @@ export default function Home() {
                         ) : <img src={item.src} alt={`${activeProject.title} ${t.projectStill} ${index + 1}`} loading="lazy" decoding="async" />}
                         <span className="projectMediaHint" aria-hidden="true">{t.openMedia} ↗</span>
                       </button>
-                      <figcaption><span>{item.type === "video" ? t.motionPreview : t.imagePreview}</span><span>0{index + 1}</span></figcaption>
+                      <figcaption><span>{"label" in item ? item.label : item.type === "video" ? t.motionPreview : t.imagePreview}</span><span>0{index + 1}</span></figcaption>
                     </figure>
                   ))}
                 </section>
