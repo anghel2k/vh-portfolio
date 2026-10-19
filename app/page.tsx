@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import BouncingMark from "./BouncingMark";
 import ProjectSlider from "./ProjectSlider";
+import HeroProjectBubbles from "./HeroProjectBubbles";
 import { imageDimensions } from "./imageDimensions";
 import { useModalFocus } from "./useModalFocus";
 import { useReducedMotion } from "./useReducedMotion";
@@ -503,16 +504,12 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
       <main id="main" tabIndex={-1}>
         {cleanPreview ? (
           <section className="cleanHero" id="top" aria-labelledby="clean-hero-title">
-            <span className="cleanHeroImage cleanHeroImageOne"><img className="cleanHeroBlur" {...imageDimensions("/projects/raye/poster.jpg")} src="/projects/raye/poster.jpg" alt="" aria-hidden="true" /><img className="cleanHeroPicture" fetchPriority="high" {...imageDimensions("/projects/raye/poster.jpg")} src="/projects/raye/poster.jpg" alt="" /></span>
-            <span className="cleanHeroImage cleanHeroImageTwo"><img className="cleanHeroBlur" {...imageDimensions("/projects/new-balance/egg-hatch.jpg")} src="/projects/new-balance/egg-hatch.jpg" alt="" aria-hidden="true" /><img className="cleanHeroPicture" {...imageDimensions("/projects/new-balance/egg-hatch.jpg")} src="/projects/new-balance/egg-hatch.jpg" alt="" /></span>
-            <span className="cleanHeroImage cleanHeroImageThree"><img className="cleanHeroBlur" {...imageDimensions("/digitalstage/media/work-thumbnails/virgin-media-custom.jpg")} src="/digitalstage/media/work-thumbnails/virgin-media-custom.jpg" alt="" aria-hidden="true" /><img className="cleanHeroPicture" {...imageDimensions("/digitalstage/media/work-thumbnails/virgin-media-custom.jpg")} src="/digitalstage/media/work-thumbnails/virgin-media-custom.jpg" alt="" /></span>
-            <span className="cleanHeroImage cleanHeroImageFour"><img className="cleanHeroBlur" {...imageDimensions("/projects/heineken/heineken-blue.jpg")} src="/projects/heineken/heineken-blue.jpg" alt="" aria-hidden="true" /><img className="cleanHeroPicture" {...imageDimensions("/projects/heineken/heineken-blue.jpg")} src="/projects/heineken/heineken-blue.jpg" alt="" /></span>
-            <div className="cleanHeroCopy">
+            <HeroProjectBubbles language={language} onSelect={setActiveProjectId} obscured={Boolean(activeProjectId)}>
               <p>Robert Anghel</p>
               <h1 id="clean-hero-title">{language === "en" ? <>Technical direction.<br />Creative production.</> : <>Direcție tehnică.<br />Producție creativă.</>}</h1>
               <p>{t.heroCapabilities}</p>
               <a href="#experience">{language === "en" ? "Explore my work" : "Descoperă proiectele"} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></a>
-            </div>
+            </HeroProjectBubbles>
           </section>
         ) : (
         <section className="hero" id="top">
