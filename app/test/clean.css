@@ -1,8 +1,8 @@
 /* Scoped design study. The existing homepage keeps its own visual system. */
 .cleanPreview {
-  --ink:#161616; --paper:#f2f2f2; --paper-dark:#e9e9e9; --grey:#686868;
+  --ink:#161616; --paper:#f2f2f2; --paper-dark:#e9e9e9; --grey:#626262;
   --ultra:#205af9; --display:"Helvetica Neue",Helvetica,Arial,sans-serif;
-  --mono:var(--display); --gutter:clamp(20px,3vw,48px); --section:clamp(76px,9vw,136px);
+  --mono:var(--display); --gutter:clamp(20px,3vw,48px); --section:clamp(72px,7.5vw,112px);
   color:var(--ink); background:var(--paper); font-family:var(--display); font-size:16px;
 }
 .cleanPreview *, .cleanPreview *::before, .cleanPreview *::after { border:0!important; box-shadow:none!important; }
@@ -40,9 +40,9 @@
 .cleanPreview .cleanHeroImageTwo { grid-column:10 / 13; grid-row:1; justify-self:end; align-self:start; width:min(100%,240px); }
 .cleanPreview .cleanHeroImageThree { grid-column:3 / 5; grid-row:3; justify-self:start; align-self:end; width:min(100%,180px); }
 .cleanPreview .cleanHeroImageFour { grid-column:9 / 12; grid-row:3; justify-self:end; align-self:start; }
-.cleanPreview .heroBrief { min-height:0; padding:var(--section) var(--gutter); display:grid; grid-template-columns:1fr 2.1fr; gap:10%; background:var(--paper); }
+.cleanPreview .heroBrief { min-height:0; padding:70px var(--gutter) 90px; display:grid; grid-template-columns:1fr 2.1fr; gap:10%; background:var(--paper); }
 .cleanPreview .heroBrief .eyebrow { padding-top:8px; color:var(--grey); font-weight:500; }
-.cleanPreview .heroBrief>p:last-child { max-width:950px; font-size:clamp(28px,3.4vw,50px); font-weight:500; line-height:1.15; letter-spacing:-.035em; }
+.cleanPreview .heroBrief>p:last-child { max-width:950px; font-size:clamp(28px,2.8vw,40px); font-weight:500; line-height:1.15; letter-spacing:-.035em; }
 .cleanPreview .experienceIndex { padding:25px var(--gutter) var(--section); background:var(--paper); }
 .cleanPreview .experienceHeader { padding:0 0 54px; display:block; }
 .cleanPreview .experienceHeading { display:block; }
@@ -126,7 +126,7 @@
 .cleanPreview .trandingProjectMeta strong { font-size:28px; line-height:1.1; font-weight:700; letter-spacing:-.035em; }
 .cleanPreview .trandingProjectMeta small,.cleanPreview .trandingProjectMeta em { color:#fff; font-size:12px; letter-spacing:0; text-transform:none; }
 .cleanPreview .sideProjectsSection { padding:0 var(--gutter) var(--section); color:var(--ink); background:var(--paper); }
-.cleanPreview .sideProjectsHeader { padding:60px 0 70px; display:block; }
+.cleanPreview .sideProjectsHeader { padding:25px 0 45px; display:block; }
 .cleanPreview .sideProjectsHeader>.eyebrow { display:none; }
 .cleanPreview .sideProjectsHeader h2 { font-size:clamp(38px,5vw,72px); font-weight:700; line-height:1.08; letter-spacing:-.045em; text-transform:none; }
 .cleanPreview .sideProjectsHeader>p:last-child { margin-top:26px; max-width:600px; font-size:20px; font-weight:400; line-height:1.4; }
@@ -155,7 +155,7 @@
 .cleanPreview .spetaThumbnailRail { gap:16px; padding:20px 0 0; }
 .cleanPreview .spetaThumbnailRail button { padding:10px; border-radius:8px; color:var(--ink); background:#e9e9e9; }
 .cleanPreview .spetaThumbnailRail button.isActive { color:var(--ink); background:#ddd; }
-.cleanPreview .spetaThumbnailRail button>span { color:var(--grey); }
+.cleanPreview .spetaThumbnailRail button>span { color:#505050; font-size:11px; }
 .cleanPreview .spetaThumbnailRail button strong { font-size:13px; font-weight:500; letter-spacing:0; text-transform:none; }
 .cleanPreview .sideSkillsBlock { padding:var(--section) 0 0; grid-template-columns:1fr 1.2fr; gap:14%; color:var(--ink); background:none; }
 .cleanPreview .sideSkillsBlock header .eyebrow { display:none; }
@@ -251,7 +251,7 @@
 /* Section identity is expressed through a tinted panel, never a heavy stroke. */
 .cleanPreview .careerChapter { --section-accent:#205af9; --section-wash:#eaf0fb; }
 .cleanPreview .framebreedChapter { --section-accent:#b62c99; --section-wash:#f3eaf3; }
-.cleanPreview .digitalstageChapter { --section-accent:#da5128; --section-wash:#f9eee8; }
+.cleanPreview .digitalstageChapter { --section-accent:#af381b; --section-wash:#f9eee8; }
 .cleanPreview .veliuminChapter { --section-accent:#205af9; --section-wash:#e9effb; }
 .cleanPreview .trandingChapter { --section-accent:#59742b; --section-wash:#edf2e6; }
 .cleanPreview .careerHeader { padding:38px; margin:0 0 30px; background:var(--section-wash); border-radius:14px; grid-template-columns:.8fr 1.2fr; gap:10%; }
@@ -302,6 +302,35 @@
 .cleanPreview .cleanSlider .projectLoopTrack { width:max-content; display:flex; }
 .cleanPreview .cleanSlider .projectLoopGroup { width:max-content; display:flex; gap:24px; }
 .cleanPreview .cleanSlider .projectLoopCard { display:block; width:clamp(310px,31vw,460px); scroll-snap-align:start; flex:none; }
+/* Final audit: stable media, accessible rails and a consistent spacing rhythm. */
+body:has(.cleanPreview) { background:#f2f2f2; }
+.cleanPreview { color-scheme:light; }
+.cleanPreview :where(button,a,summary) { touch-action:manipulation; }
+.cleanPreview :where(button,a,summary,[tabindex]) { scroll-margin-block:90px 20px; }
+.cleanPreview :where(h1,h2,h3) { text-wrap:balance; }
+.cleanPreview .siteHeader { padding-left:max(var(--gutter),env(safe-area-inset-left)); padding-right:max(var(--gutter),env(safe-area-inset-right)); }
+.cleanPreview .cleanSliderViewport:focus-visible { outline:2px solid var(--ultra); outline-offset:4px; }
+.cleanPreview .cleanSliderHeader>span { min-width:0; }
+.cleanPreview .cleanSliderControls { flex:none; }
+.cleanPreview .cleanSliderCount { min-width:60px; text-align:right; }
+.cleanPreview .cleanSlider .veliuminShowcase,.cleanPreview .cleanSlider .trandingShowcase { width:max-content; overflow:visible; padding:0; }
+.cleanPreview .cleanSlider .veliuminShowcaseHeader { display:none; }
+.cleanPreview .cleanSlider .veliuminArchiveViewport { overflow:visible; }
+.cleanPreview .cleanSlider .veliuminArchiveTrack { padding:0; }
+.cleanPreview .cleanSlider .veliuminArchiveGroup { padding:0; }
+.cleanPreview .cleanSlider .veliuminArchiveCard { scroll-snap-align:start; display:grid; grid-template-rows:minmax(0,1fr) auto; }
+.cleanPreview .veliuminArchiveCard figcaption { padding:16px 18px; display:grid; gap:5px; color:var(--ink); background:#fff; }
+.cleanPreview .veliuminArchiveCard figcaption strong { font-size:16px; font-weight:700; line-height:1.2; }
+.cleanPreview .veliuminArchiveCard figcaption span { font-size:12px; color:var(--grey); line-height:1.4; }
+.cleanPreview .cleanSlider .trandingProjectCard { width:clamp(310px,31vw,460px); scroll-snap-align:start; }
+.cleanPreview .cvPreviewLink img { width:100%; height:clamp(200px,36vw,480px); object-fit:cover; object-position:top; background:#fff; }
+.cleanPreview .projectDetail,.cleanPreview .projectMediaLightbox,.cleanPreview .spetaLightbox { overscroll-behavior:contain; }
+.cleanPreview .projectDetail { scroll-padding-top:86px; }
+.cleanPreview .projectMediaLightbox>header button,.cleanPreview .spetaLightboxHeader button { min-width:44px; min-height:44px; display:flex; align-items:center; justify-content:center; }
+.cleanPreview .spetaLightboxControls button { min-height:44px; font-size:13px; letter-spacing:0; text-transform:none; }
+.cleanPreview .contactGrid a { display:inline-flex; align-items:center; min-height:44px; gap:6px; }
+.cleanPreview .contactGrid strong { display:inline-block; padding-block:12px; }
+.cleanPreview .languageSwitch button { min-width:36px; }
 @media (max-width:1000px) {
   .cleanPreview .careerHeader,.cleanPreview .spetaFeature,.cleanPreview .sideSkillsBlock,.cleanPreview .cvHeader { grid-template-columns:1fr 1.3fr; gap:8%; }
   .cleanPreview .chapterRow { grid-template-columns:minmax(0,1fr) 24px; gap:20px; padding:24px; }
@@ -354,7 +383,11 @@
   .cleanPreview .cleanSliderHeader { gap:12px; }
   .cleanPreview .cleanSliderHeader>span { max-width:44%; font-size:14px; line-height:1.3; }
   .cleanPreview .cleanSliderCount { margin-right:4px; font-size:10px; }
-  .cleanPreview .cleanSliderControls button { width:38px; height:38px; }
+  .cleanPreview .cleanSliderControls button { width:44px; height:44px; }
+  .cleanPreview .cleanSliderControls { gap:6px; }
+  .cleanPreview .cleanSliderCount { min-width:0; }
+  .cleanPreview .cleanSliderHeader>span { max-width:none; flex:1; }
+  .cleanPreview .cleanSlider .trandingProjectCard { width:82vw; }
   .cleanPreview .cleanSlider .projectLoopCard { width:82vw; max-width:380px; }
   .cleanPreview .spetaFeature { padding:24px; }
   .cleanPreview .skillGroup { padding:20px; }
@@ -438,3 +471,5 @@
 .cleanPreview .cleanSliderControls .uiArrow { width:20px; height:20px; }
 .cleanPreview .chapterArrow .uiArrow { width:22px; height:22px; }
 .cleanPreview .cleanHeroCopy>a .uiArrow { width:18px; height:18px; }
+
+@media (prefers-reduced-motion:reduce) { html:has(.cleanPreview) { scroll-behavior:auto; } }

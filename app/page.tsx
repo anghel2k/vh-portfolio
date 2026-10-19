@@ -3,7 +3,10 @@
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import BouncingMark from "./BouncingMark";
 import ProjectSlider from "./ProjectSlider";
-import { ArrowTopRightIcon, ArrowBottomRightIcon, ArrowLeftIcon, ArrowRightIcon, DownloadIcon } from "@radix-ui/react-icons";
+import { imageDimensions } from "./imageDimensions";
+import { useModalFocus } from "./useModalFocus";
+import { useReducedMotion } from "./useReducedMotion";
+import { ArrowTopRightIcon, ArrowBottomRightIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, DownloadIcon } from "@radix-ui/react-icons";
 import { digitalstageProjects } from "./digitalstageProjects";
 import { framebreedProjects } from "./framebreedProjects";
 
@@ -323,10 +326,12 @@ const copy = {
 function ProjectPreviewVideo({ src, poster, label }: { src: string; poster?: string; label: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [shouldLoad, setShouldLoad] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+    if (reducedMotion) { video.pause(); return; }
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setShouldLoad(true);
@@ -337,14 +342,14 @@ function ProjectPreviewVideo({ src, poster, label }: { src: string; poster?: str
     }, { rootMargin: "280px 0px", threshold: 0.05 });
     observer.observe(video);
     return () => observer.disconnect();
-  }, []);
+  }, [reducedMotion]);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !shouldLoad) return;
+    if (!video || !shouldLoad || reducedMotion) return;
     video.load();
     void video.play().catch(() => undefined);
-  }, [shouldLoad]);
+  }, [shouldLoad, reducedMotion]);
 
   return (
     <video ref={videoRef} loop muted playsInline preload="none" poster={poster} aria-label={label}>
@@ -363,7 +368,11 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
   const [activeSpetaImage, setActiveSpetaImage] = useState<number | null>(null);
   const [selectedSpetaPreview, setSelectedSpetaPreview] = useState(0);
   const carouselResumeTimers = useRef(new Map<HTMLElement, number>());
-  const projectDetailRef = useRef<HTMLElement>(null);
+  const projectDetailRef = useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion();
+  useModalFocus(Boolean(activeProjectId), ".projectDetail");
+  useModalFocus(activeProjectMediaIndex !== null, ".projectMediaLightbox");
+  useModalFocus(activeSpetaImage !== null, ".spetaLightbox");
   const t = copy[language];
   const activeProjects = activeProjectId?.startsWith("digitalstage-") ? digitalstageProjects : framebreedProjects;
   const selectedProjectsLabel = activeProjectId?.startsWith("digitalstage-") ? (language === "en" ? "Selected Digital Stage projects" : "Proiecte Digital Stage selectate") : t.selectedProjects;
@@ -382,6 +391,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
 
   useEffect(() => {
     projectDetailRef.current?.scrollTo({ top: 0, behavior: "auto" });
+    projectDetailRef.current?.querySelector<HTMLElement>("[data-modal-close]")?.focus({ preventScroll: true });
   }, [activeProjectId]);
 
   useEffect(() => {
@@ -453,8 +463,8 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
 
       <header className="siteHeader">
         <a className="brandLink" href="#top" aria-label={t.homeLabel} onClick={() => setMobileMenuOpen(false)}>
-          <img src="/brand/vh_mark_ink.svg" alt="" width={36} height={36} />
-          {cleanPreview && <strong>Robert Anghel</strong>}
+          <img {...imageDimensions("/brand/vh_mark_ink.svg")} src="/brand/vh_mark_ink.svg" alt="" width={36} height={36} />
+          {cleanPreview && <strong translate="no">Robert Anghel</strong>}
         </a>
         <div className="headerActions">
           <nav aria-label={t.navLabel}>
@@ -466,7 +476,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
             <button type="button" className={language === "ro" ? "active" : ""} aria-pressed={language === "ro"} aria-label={t.languageNames.ro} title={t.languageNames.ro} onClick={() => changeLanguage("ro")}><span aria-hidden="true">🇷🇴</span><small>RO</small></button>
           </div>
         </div>
-        <button className={`mobileMenuToggle${mobileMenuOpen ? " isOpen" : ""}`} type="button" aria-expanded={mobileMenuOpen} aria-controls="mobile-menu" aria-label={mobileMenuOpen ? t.menuClose : t.menuOpen} onClick={() => setMobileMenuOpen((isOpen) => !isOpen)}>
+        <button className={`mobileMenuToggle${mobileMenuOpen ? " isOpen" : ""}`} type="button" aria-expanded={mobileMenuOpen} aria-controls={mobileMenuOpen ? "mobile-menu" : undefined} aria-label={mobileMenuOpen ? t.menuClose : t.menuOpen} onClick={() => setMobileMenuOpen((isOpen) => !isOpen)}>
           <span aria-hidden="true" /><span aria-hidden="true" />
         </button>
         {mobileMenuOpen && (
@@ -486,15 +496,15 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
       <main id="main" tabIndex={-1}>
         {cleanPreview ? (
           <section className="cleanHero" id="top" aria-labelledby="clean-hero-title">
-            <span className="cleanHeroImage cleanHeroImageOne"><img className="cleanHeroBlur" src="/projects/raye/poster.jpg" alt="" aria-hidden="true" /><img className="cleanHeroPicture" src="/projects/raye/poster.jpg" alt="" /></span>
-            <span className="cleanHeroImage cleanHeroImageTwo"><img className="cleanHeroBlur" src="/projects/new-balance/egg-hatch.jpg" alt="" aria-hidden="true" /><img className="cleanHeroPicture" src="/projects/new-balance/egg-hatch.jpg" alt="" /></span>
-            <span className="cleanHeroImage cleanHeroImageThree"><img className="cleanHeroBlur" src="/digitalstage/media/work-thumbnails/virgin-media-custom.jpg" alt="" aria-hidden="true" /><img className="cleanHeroPicture" src="/digitalstage/media/work-thumbnails/virgin-media-custom.jpg" alt="" /></span>
-            <span className="cleanHeroImage cleanHeroImageFour"><img className="cleanHeroBlur" src="/projects/heineken/heineken-blue.jpg" alt="" aria-hidden="true" /><img className="cleanHeroPicture" src="/projects/heineken/heineken-blue.jpg" alt="" /></span>
+            <span className="cleanHeroImage cleanHeroImageOne"><img className="cleanHeroBlur" {...imageDimensions("/projects/raye/poster.jpg")} src="/projects/raye/poster.jpg" alt="" aria-hidden="true" /><img className="cleanHeroPicture" fetchPriority="high" {...imageDimensions("/projects/raye/poster.jpg")} src="/projects/raye/poster.jpg" alt="" /></span>
+            <span className="cleanHeroImage cleanHeroImageTwo"><img className="cleanHeroBlur" {...imageDimensions("/projects/new-balance/egg-hatch.jpg")} src="/projects/new-balance/egg-hatch.jpg" alt="" aria-hidden="true" /><img className="cleanHeroPicture" {...imageDimensions("/projects/new-balance/egg-hatch.jpg")} src="/projects/new-balance/egg-hatch.jpg" alt="" /></span>
+            <span className="cleanHeroImage cleanHeroImageThree"><img className="cleanHeroBlur" {...imageDimensions("/digitalstage/media/work-thumbnails/virgin-media-custom.jpg")} src="/digitalstage/media/work-thumbnails/virgin-media-custom.jpg" alt="" aria-hidden="true" /><img className="cleanHeroPicture" {...imageDimensions("/digitalstage/media/work-thumbnails/virgin-media-custom.jpg")} src="/digitalstage/media/work-thumbnails/virgin-media-custom.jpg" alt="" /></span>
+            <span className="cleanHeroImage cleanHeroImageFour"><img className="cleanHeroBlur" {...imageDimensions("/projects/heineken/heineken-blue.jpg")} src="/projects/heineken/heineken-blue.jpg" alt="" aria-hidden="true" /><img className="cleanHeroPicture" {...imageDimensions("/projects/heineken/heineken-blue.jpg")} src="/projects/heineken/heineken-blue.jpg" alt="" /></span>
             <div className="cleanHeroCopy">
               <p>Robert Anghel</p>
               <h1 id="clean-hero-title">{language === "en" ? <>Technical direction.<br />Creative production.</> : <>Direcție tehnică.<br />Producție creativă.</>}</h1>
               <p>{t.heroCapabilities}</p>
-              <a href="#experience">{language === "en" ? "Explore my work" : "Descoperă proiectele"} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></a>
+              <a href="#experience">{language === "en" ? "Explore my work" : "Descoperă proiectele"} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></a>
             </div>
           </section>
         ) : (
@@ -523,17 +533,18 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
             {chapters.map((chapter) => (
               <a href={chapter.href} className="chapterRow" key={chapter.href} aria-label={`${chapter.company[language]} — ${chapter.role[language]}`}>
                 <span className="roadmapNode" aria-hidden="true" />
-                <span className="chapterIdentity"><span className="chapterLogo"><img src={chapter.logo} alt={cleanPreview ? "" : chapter.company[language]} /></span>{cleanPreview && <span className="cleanCompany">{chapter.company[language]}</span>}</span>
+                <span className="chapterIdentity"><span className="chapterLogo"><img {...imageDimensions(chapter.logo)} src={chapter.logo} alt={cleanPreview ? "" : chapter.company[language]} loading="lazy" decoding="async" /></span>{cleanPreview && <span className="cleanCompany">{chapter.company[language]}</span>}</span>
                 <span className="chapterWork"><strong>{chapter.role[language]}</strong><small>{chapter.engagement[language]}</small></span>
-                <span className="chapterYears">{chapter.years[language]}</span><span className="chapterArrow" aria-hidden="true">{cleanPreview ? <ArrowBottomRightIcon className="uiArrow" /> : "↘"}</span>
+                <span className="chapterYears">{chapter.years[language]}</span><span className="chapterArrow" aria-hidden="true">{cleanPreview ? <ArrowBottomRightIcon className="uiArrow" aria-hidden="true" /> : "↘"}</span>
               </a>
             ))}
           </div>
         </section>
 
         <section className="careerChapter framebreedChapter" id="framebreed-studio" aria-label="FrameBreed Studio">
+          <h2 className="srOnly" translate="no">FrameBreed Studio</h2>
           <header className="careerHeader">
-            <div><span className="careerLogo brandLogoHero"><img src="/identity/framebreed-logo.png" alt="FrameBreed Studio" /></span><p className="eyebrow">{t.framebreedEyebrow}</p></div>
+            <div><span className="careerLogo brandLogoHero"><img {...imageDimensions("/identity/framebreed-logo.png")} src="/identity/framebreed-logo.png" alt="FrameBreed Studio" loading="lazy" decoding="async" /></span><p className="eyebrow">{t.framebreedEyebrow}</p></div>
             <div className="careerSummary">
               {t.framebreedSummary.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               <ol className="framebreedRoleRoadmap" aria-label={t.roleProgressionLabel}>
@@ -561,12 +572,12 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                         key={`${copyIndex}-${project.id}`}
                         aria-label={`${t.seeProject}: ${project.title}`}
                       >
-                        <img className="projectLoopPreview" src={project.image} alt="" />
+                        <img className="projectLoopPreview" {...imageDimensions(project.image)} src={project.image} alt="" loading="lazy" decoding="async" />
                         <span className="projectLoopTint" aria-hidden="true" />
-                        <span className="projectLoopLogo">{tileLogo ? <img src={tileLogo} alt={copyIndex === 0 ? project.title : ""} /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
+                        <span className="projectLoopLogo">{tileLogo ? <img {...imageDimensions(tileLogo)} src={tileLogo} alt={copyIndex === 0 ? project.title : ""} loading="lazy" decoding="async" /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
                         <span className="projectLoopMeta">
                           <small>{project.classification} · {projectCopy.discipline}</small>
-                          <strong>{cleanPreview ? project.title : t.seeProject}<span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></strong>
+                          <strong>{cleanPreview ? project.title : t.seeProject}<span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></strong>
                         </span>
                       </button>
                     );
@@ -578,7 +589,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
           </ProjectSlider>
           <div className="projectDirectoryToggleRow">
             <span>{framebreedProjects.length.toString().padStart(2, "0")} / {t.selectedProjects}</span>
-            <button type="button" aria-expanded={showAllProjects} aria-controls="framebreed-project-directory" onClick={() => setShowAllProjects((isOpen) => !isOpen)}>
+            <button type="button" aria-expanded={showAllProjects} aria-controls={showAllProjects ? "framebreed-project-directory" : undefined} onClick={() => setShowAllProjects((isOpen) => !isOpen)}>
               {showAllProjects ? t.hideAllProjects : t.seeAllProjects}<span aria-hidden="true">{showAllProjects ? "−" : "+"}</span>
             </button>
           </div>
@@ -591,10 +602,10 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                   const tileLogo = project.logo;
                   return (
                     <button className="projectLoopCard projectGridCard" data-project={project.id} type="button" onClick={() => setActiveProjectId(project.id)} key={`grid-${project.id}`} aria-label={`${t.seeProject}: ${project.title}`}>
-                      <img className="projectLoopPreview" src={project.image} alt="" />
+                      <img className="projectLoopPreview" {...imageDimensions(project.image)} src={project.image} alt="" loading="lazy" decoding="async" />
                       <span className="projectLoopTint" aria-hidden="true" />
-                      <span className="projectLoopLogo">{tileLogo ? <img src={tileLogo} alt={project.title} /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
-                      <span className="projectLoopMeta"><small>{project.classification} · {projectCopy.discipline}</small><strong>{project.title}<span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></strong></span>
+                      <span className="projectLoopLogo">{tileLogo ? <img {...imageDimensions(tileLogo)} src={tileLogo} alt={project.title} loading="lazy" decoding="async" /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
+                      <span className="projectLoopMeta"><small>{project.classification} · {projectCopy.discipline}</small><strong>{project.title}<span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></strong></span>
                     </button>
                   );
                 })}
@@ -604,9 +615,10 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
         </section>
 
         <section className="careerChapter digitalstageChapter" id="digitalstage" aria-label="Digital Stage">
+          <h2 className="srOnly" translate="no">Digital Stage</h2>
           <header className="careerHeader">
             <div>
-              <a className="careerLogo brandLogoHero" href="https://digitalstage.ro" target="_blank" rel="noreferrer" aria-label="Digital Stage website"><img src="/identity/digitalstage-logo.svg" alt="Digital Stage" /></a>
+              <a className="careerLogo brandLogoHero" href="https://digitalstage.ro" target="_blank" rel="noreferrer" aria-label="Digital Stage website"><img {...imageDimensions("/identity/digitalstage-logo.svg")} src="/identity/digitalstage-logo.svg" alt="Digital Stage" loading="lazy" decoding="async" /></a>
               <p className="eyebrow">{language === "en" ? "Aug 2025 — Present" : "aug. 2025 — Prezent"}</p>
             </div>
             <div className="careerSummary">
@@ -635,12 +647,12 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                         key={`${copyIndex}-${project.id}`}
                         aria-label={`${t.seeProject}: ${project.title}`}
                       >
-                        <img className="projectLoopPreview" src={project.image} alt="" loading="lazy" decoding="async" />
+                        <img className="projectLoopPreview" {...imageDimensions(project.image)} src={project.image} alt="" loading="lazy" decoding="async" />
                         <span className="projectLoopTint" aria-hidden="true" />
-                        <span className="projectLoopLogo">{tileLogo ? <img src={tileLogo} alt={copyIndex === 0 ? project.title : ""} /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
+                        <span className="projectLoopLogo">{tileLogo ? <img {...imageDimensions(tileLogo)} src={tileLogo} alt={copyIndex === 0 ? project.title : ""} loading="lazy" decoding="async" /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
                         <span className="projectLoopMeta">
                           <small>{project.classification} · {projectCopy.discipline}</small>
-                          <strong>{cleanPreview ? project.title : t.seeProject}<span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></strong>
+                          <strong>{cleanPreview ? project.title : t.seeProject}<span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></strong>
                         </span>
                       </button>
                     );
@@ -652,7 +664,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
           </ProjectSlider>
           <div className="projectDirectoryToggleRow">
             <span>{digitalstageProjects.length.toString().padStart(2, "0")} / {language === "en" ? "Selected Digital Stage projects" : "Proiecte Digital Stage selectate"}</span>
-            <button type="button" aria-expanded={showAllDigitalstageProjects} aria-controls="digitalstage-project-directory" onClick={() => setShowAllDigitalstageProjects((isOpen) => !isOpen)}>
+            <button type="button" aria-expanded={showAllDigitalstageProjects} aria-controls={showAllDigitalstageProjects ? "digitalstage-project-directory" : undefined} onClick={() => setShowAllDigitalstageProjects((isOpen) => !isOpen)}>
               {showAllDigitalstageProjects ? t.hideAllProjects : t.seeAllProjects}<span aria-hidden="true">{showAllDigitalstageProjects ? "−" : "+"}</span>
             </button>
           </div>
@@ -665,10 +677,10 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                   const tileLogo = project.logo;
                   return (
                     <button className="projectLoopCard projectGridCard" data-project={project.id} type="button" onClick={() => setActiveProjectId(project.id)} key={`grid-${project.id}`} aria-label={`${t.seeProject}: ${project.title}`}>
-                      <img className="projectLoopPreview" src={project.image} alt="" loading="lazy" decoding="async" />
+                      <img className="projectLoopPreview" {...imageDimensions(project.image)} src={project.image} alt="" loading="lazy" decoding="async" />
                       <span className="projectLoopTint" aria-hidden="true" />
-                      <span className="projectLoopLogo">{tileLogo ? <img src={tileLogo} alt={project.title} /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
-                      <span className="projectLoopMeta"><small>{project.classification} · {projectCopy.discipline}</small><strong>{project.title}<span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></strong></span>
+                      <span className="projectLoopLogo">{tileLogo ? <img {...imageDimensions(tileLogo)} src={tileLogo} alt={project.title} loading="lazy" decoding="async" /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
+                      <span className="projectLoopMeta"><small>{project.classification} · {projectCopy.discipline}</small><strong>{project.title}<span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></strong></span>
                     </button>
                   );
                 })}
@@ -683,14 +695,14 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
           const nextProject = activeProjects[(activeProjectIndex + 1) % activeProjects.length];
           return (
             <div className="projectDetailLayer" onMouseDown={() => { setActiveProjectMediaIndex(null); setActiveProjectId(null); }}>
-              <article ref={projectDetailRef} className="projectDetail" data-project={activeProject.id} role="dialog" aria-modal="true" aria-labelledby="project-detail-title" onMouseDown={(event) => event.stopPropagation()}>
+              <div ref={projectDetailRef} className="projectDetail" data-project={activeProject.id} role="dialog" aria-modal="true" tabIndex={-1} aria-labelledby="project-detail-title" onMouseDown={(event) => event.stopPropagation()}>
                 <header className="projectDetailHeader">
                   <span>{selectedProjectsLabel} / {activeProject.title}</span>
-                  <button className="projectCloseButton" type="button" autoFocus onClick={() => { setActiveProjectMediaIndex(null); setActiveProjectId(null); }} aria-label={t.closeProject}><span className="projectCloseLabel">{t.closeProject}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button>
+                  <button className="projectCloseButton" type="button" data-modal-close onClick={() => { setActiveProjectMediaIndex(null); setActiveProjectId(null); }} aria-label={t.closeProject}><span className="projectCloseLabel">{t.closeProject}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button>
                 </header>
                 <div className="projectDetailIntro">
                   <div className="projectDetailIdentity">
-                    {activeProject.logo && <span className="projectDetailLogo"><img src={activeProject.logo} alt={`${activeProject.title} logo`} /></span>}
+                    {activeProject.logo && <span className="projectDetailLogo"><img {...imageDimensions(activeProject.logo)} src={activeProject.logo} alt={`${activeProject.title} logo`} loading="lazy" decoding="async" /></span>}
                     <p className="eyebrow">{projectCopy.discipline}</p>
                     <h2 id="project-detail-title">{activeProject.title}</h2>
                   </div>
@@ -719,8 +731,8 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                       <button className="projectMediaPreview" type="button" onClick={() => setActiveProjectMediaIndex(index)} aria-label={`${t.openMedia}: ${activeProject.title} ${index + 1}`}>
                         {item.type === "video" ? (
                           <ProjectPreviewVideo src={item.src} poster={"poster" in item ? item.poster : undefined} label={`${activeProject.title} ${t.motionPreview} ${index + 1}`} />
-                        ) : <img src={item.src} alt={`${activeProject.title} ${t.projectStill} ${index + 1}`} loading="lazy" decoding="async" />}
-                        <span className="projectMediaHint" aria-hidden="true">{t.openMedia} {cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span>
+                        ) : <img {...imageDimensions(item.src)} src={item.src} alt={`${activeProject.title} ${t.projectStill} ${index + 1}`} loading="lazy" decoding="async" />}
+                        <span className="projectMediaHint" aria-hidden="true">{t.openMedia} {cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span>
                       </button>
                       <figcaption><span>{"label" in item ? item.label : item.type === "video" ? t.motionPreview : t.imagePreview}</span><span>0{index + 1}</span></figcaption>
                     </figure>
@@ -740,7 +752,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                             {value.map((person) => (
                               <li className={person.name === "Robert Anghel" ? "isSelfCredit" : undefined} key={`${label}-${person.name}`}>
                                 {"href" in person ? (
-                                  <a href={person.href} target="_blank" rel="noreferrer"><span>{person.name}</span>{"handle" in person && <small>{person.handle} {cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</small>}</a>
+                                  <a href={person.href} target="_blank" rel="noreferrer"><span>{person.name}</span>{"handle" in person && <small>{person.handle} {cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</small>}</a>
                                 ) : <span>{person.name}</span>}
                               </li>
                             ))}
@@ -751,10 +763,10 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                   })}</dl>
                 </section>
                 <nav className="projectCaseNavigation" aria-label={`${t.previousProject} / ${t.nextProject}`}>
-                  <button type="button" onClick={() => { setActiveProjectMediaIndex(null); setActiveProjectId(previousProject.id); }}><span>{cleanPreview ? <ArrowLeftIcon className="uiArrow" /> : "←"} {t.previousProject}</span><strong>{previousProject.title}</strong></button>
-                  <button type="button" onClick={() => { setActiveProjectMediaIndex(null); setActiveProjectId(nextProject.id); }}><span>{t.nextProject} {cleanPreview ? <ArrowRightIcon className="uiArrow" /> : "→"}</span><strong>{nextProject.title}</strong></button>
+                  <button type="button" onClick={() => { setActiveProjectMediaIndex(null); setActiveProjectId(previousProject.id); }}><span>{cleanPreview ? <ArrowLeftIcon className="uiArrow" aria-hidden="true" /> : "←"} {t.previousProject}</span><strong>{previousProject.title}</strong></button>
+                  <button type="button" onClick={() => { setActiveProjectMediaIndex(null); setActiveProjectId(nextProject.id); }}><span>{t.nextProject} {cleanPreview ? <ArrowRightIcon className="uiArrow" aria-hidden="true" /> : "→"}</span><strong>{nextProject.title}</strong></button>
                 </nav>
-              </article>
+              </div>
             </div>
           );
         })()}
@@ -763,16 +775,16 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
           const media = activeProject.media[activeProjectMediaIndex];
           return (
             <div className="projectMediaLightboxLayer" onMouseDown={() => setActiveProjectMediaIndex(null)}>
-              <article className="projectMediaLightbox" role="dialog" aria-modal="true" aria-labelledby="project-media-lightbox-title" onMouseDown={(event) => event.stopPropagation()}>
-                <header><span id="project-media-lightbox-title">{activeProject.title} / 0{activeProjectMediaIndex + 1}</span><button type="button" autoFocus onClick={() => setActiveProjectMediaIndex(null)} aria-label={t.closeMedia}>{t.closeMedia} <span aria-hidden="true">×</span></button></header>
+              <div className="projectMediaLightbox" role="dialog" aria-modal="true" tabIndex={-1} aria-labelledby="project-media-lightbox-title" onMouseDown={(event) => event.stopPropagation()}>
+                <header><span id="project-media-lightbox-title">{activeProject.title} / 0{activeProjectMediaIndex + 1}</span><button type="button" data-modal-close onClick={() => setActiveProjectMediaIndex(null)} aria-label={t.closeMedia}>{t.closeMedia} <span aria-hidden="true">×</span></button></header>
                 <div>
                   {media.type === "video" ? (
-                    <video key={media.src} controls autoPlay muted playsInline poster={"poster" in media ? media.poster : undefined}>
+                    <video key={media.src} controls autoPlay={!reducedMotion} muted playsInline poster={"poster" in media ? media.poster : undefined}>
                       <source src={media.src} type="video/mp4" />
                     </video>
-                  ) : <img src={media.src} alt={`${activeProject.title} ${t.projectStill} ${activeProjectMediaIndex + 1}`} />}
+                  ) : <img {...imageDimensions(media.src)} src={media.src} alt={`${activeProject.title} ${t.projectStill} ${activeProjectMediaIndex + 1}`} />}
                 </div>
-              </article>
+              </div>
             </div>
           );
         })()}
@@ -781,30 +793,32 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
           const imageLabel = activeSpetaImage === 0 ? t.spetaAlt : t.spetaGallery[activeSpetaImage - 1];
           return (
             <div className="spetaLightboxLayer" onMouseDown={() => setActiveSpetaImage(null)}>
-              <article className="spetaLightbox" role="dialog" aria-modal="true" aria-labelledby="speta-lightbox-title" onMouseDown={(event) => event.stopPropagation()}>
+              <div className="spetaLightbox" role="dialog" aria-modal="true" tabIndex={-1} aria-labelledby="speta-lightbox-title" onMouseDown={(event) => event.stopPropagation()}>
                 <header className="spetaLightboxHeader">
                   <span>SPETA / 0{activeSpetaImage + 1} — 0{spetaImages.length}</span>
-                  <button type="button" autoFocus onClick={() => setActiveSpetaImage(null)} aria-label={t.closeImage}>{t.closeImage} <span aria-hidden="true">×</span></button>
+                  <button type="button" data-modal-close onClick={() => setActiveSpetaImage(null)} aria-label={t.closeImage}>{t.closeImage} <span aria-hidden="true">×</span></button>
                 </header>
-                <div className="spetaLightboxMedia"><img src={spetaImages[activeSpetaImage]} alt={imageLabel} /></div>
+                <div className="spetaLightboxMedia"><img {...imageDimensions(spetaImages[activeSpetaImage])} src={spetaImages[activeSpetaImage]} alt={imageLabel} /></div>
                 <div className="spetaLightboxControls">
-                  <button type="button" onClick={() => setActiveSpetaImage((activeSpetaImage - 1 + spetaImages.length) % spetaImages.length)} aria-label={t.previousImage}><span aria-hidden="true">{cleanPreview ? <ArrowLeftIcon className="uiArrow" /> : "←"}</span> {t.previousImage}</button>
+                  <button type="button" onClick={() => setActiveSpetaImage((activeSpetaImage - 1 + spetaImages.length) % spetaImages.length)} aria-label={t.previousImage}><span aria-hidden="true">{cleanPreview ? <ArrowLeftIcon className="uiArrow" aria-hidden="true" /> : "←"}</span> {t.previousImage}</button>
                   <strong id="speta-lightbox-title">{imageLabel}</strong>
-                  <button type="button" onClick={() => setActiveSpetaImage((activeSpetaImage + 1) % spetaImages.length)} aria-label={t.nextImage}>{t.nextImage} <span aria-hidden="true">{cleanPreview ? <ArrowRightIcon className="uiArrow" /> : "→"}</span></button>
+                  <button type="button" onClick={() => setActiveSpetaImage((activeSpetaImage + 1) % spetaImages.length)} aria-label={t.nextImage}>{t.nextImage} <span aria-hidden="true">{cleanPreview ? <ArrowRightIcon className="uiArrow" aria-hidden="true" /> : "→"}</span></button>
                 </div>
-              </article>
+              </div>
             </div>
           );
         })()}
 
         <section className="careerChapter veliuminChapter" id="veliumin" aria-label="VELIUMIN">
+          <h2 className="srOnly" translate="no">VELIUMIN</h2>
           <header className="careerHeader inverse">
-            <div><span className="careerLogo careerLogoWide veliuminLogoHero"><img src="/identity/veliumin-logo.svg" alt="VELIUMIN" /></span><p className="eyebrow">{t.veliuminEyebrow}</p></div>
+            <div><span className="careerLogo careerLogoWide veliuminLogoHero"><img {...imageDimensions("/identity/veliumin-logo.svg")} src="/identity/veliumin-logo.svg" alt="VELIUMIN" loading="lazy" decoding="async" /></span><p className="eyebrow">{t.veliuminEyebrow}</p></div>
             <div className="careerSummary">
               {t.veliuminSummary.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               <dl className="roleProgression light"><div><dt>{t.role}</dt><dd>{t.veliuminRole}</dd></div></dl>
             </div>
           </header>
+          <ProjectSlider active={cleanPreview} label={t.veliuminShowcaseTitle} previousLabel={t.previousImage} nextLabel={t.nextImage} cardSelector=".veliuminArchiveCard">
           <div className="veliuminShowcase" aria-label={t.veliuminShowcaseLabel}>
             <header className="veliuminShowcaseHeader"><span>{t.veliuminShowcaseTitle}</span><span>2023 — 2025</span></header>
             <div className="veliuminArchiveViewport" onPointerDown={pauseCarousel} onPointerUp={resumeCarousel} onPointerCancel={resumeCarousel} onPointerLeave={resumeCarousel}>
@@ -813,39 +827,43 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                   <div className="veliuminArchiveGroup" aria-hidden={groupIndex === 1} key={groupIndex}>
                     {veliuminArchive.map((item) => (
                       <figure className="veliuminArchiveCard" data-format={item.format} key={`${groupIndex}-${item.id}`}>
-                        <img src={item.image} alt={groupIndex === 0 ? `${item.title[language]} — ${item.scope[language]}` : ""} loading={groupIndex === 0 ? "eager" : "lazy"} decoding="async" />
-                      </figure>
+                        <img {...imageDimensions(item.image)} src={item.image} alt={groupIndex === 0 ? `${item.title[language]} — ${item.scope[language]}` : ""} loading="lazy" decoding="async" />
+                      {cleanPreview && <figcaption><strong>{item.title[language]}</strong><span>{item.scope[language]}</span></figcaption>}</figure>
                     ))}
                   </div>
                 ))}
               </div>
             </div>
           </div>
+          </ProjectSlider>
         </section>
 
         <section className="careerChapter trandingChapter" id="tranding-social-media" aria-label="Tranding Social Media">
+          <h2 className="srOnly" translate="no">Tranding Social Media</h2>
           <header className="careerHeader compact">
-            <div><span className="careerLogo brandLogoHero"><img src="/identity/tranding-logo.png" alt="Tranding Social Media" /></span><p className="eyebrow">{t.trandingEyebrow}</p></div>
+            <div><span className="careerLogo brandLogoHero"><img {...imageDimensions("/identity/tranding-logo.png")} src="/identity/tranding-logo.png" alt="Tranding Social Media" loading="lazy" decoding="async" /></span><p className="eyebrow">{t.trandingEyebrow}</p></div>
             <div className="careerSummary"><p>{t.trandingSummary}</p><dl className="roleProgression"><div><dt>{t.role}</dt><dd>{t.trandingRole}</dd></div><div><dt>{t.contract}</dt><dd>{t.trandingContract}</dd></div><div><dt>{t.formats}</dt><dd>Product vis / CGI reels / 3D / VFX</dd></div></dl></div>
           </header>
+          <ProjectSlider active={cleanPreview} label={t.trandingMediaLabel} previousLabel={t.previousProject} nextLabel={t.nextProject} cardSelector=".trandingProjectCard">
           <div className="trandingShowcase" aria-label={t.trandingMediaLabel} onPointerDown={pauseCarousel} onPointerUp={resumeCarousel} onPointerCancel={resumeCarousel} onPointerLeave={resumeCarousel}>
             <div className="trandingProjectTrack">
               {(cleanPreview ? [0] : [0, 1]).map((groupIndex) => (
                 <div className="trandingProjectGroup" aria-hidden={groupIndex === 1} key={groupIndex}>
                   {trandingProjects.map((project) => (
                     <a className="trandingProjectCard" data-format={project.format} href={project.href} target="_blank" rel="noreferrer" key={`${groupIndex}-${project.id}`} tabIndex={groupIndex === 1 ? -1 : undefined}>
-                      <img src={project.image} alt={groupIndex === 0 ? `${project.title[language]} — ${project.scope[language]}` : ""} />
-                      <span className="trandingProjectMeta"><small>{project.scope[language]}</small><strong>{project.title[language]}</strong><em>{t.sourceProject} {cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</em></span>
+                      <img {...imageDimensions(project.image)} src={project.image} alt={groupIndex === 0 ? `${project.title[language]} — ${project.scope[language]}` : ""} loading="lazy" decoding="async" />
+                      <span className="trandingProjectMeta"><small>{project.scope[language]}</small><strong>{project.title[language]}</strong><em>{cleanPreview ? (language === "en" ? "View on Instagram" : "Vezi pe Instagram") : t.sourceProject} {cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</em></span>
                     </a>
                   ))}
                 </div>
               ))}
             </div>
           </div>
+          </ProjectSlider>
         </section>
 
         <section className="sideProjectsSection" id="side-projects" aria-labelledby="side-projects-title">
-          <header className="sideProjectsHeader"><p className="eyebrow">{t.sideEyebrow}</p><h2 id="side-projects-title">{t.sideTitle}</h2><p>{t.sideIntro}</p></header>
+          <header className="sideProjectsHeader"><p className="eyebrow">{t.sideEyebrow}</p><h2 id="side-projects-title">{cleanPreview ? (language === "en" ? "Side projects & experiments" : "Proiecte personale & experimente") : t.sideTitle}</h2><p>{t.sideIntro}</p></header>
           <article className="spetaFeature">
             <div className="spetaIdentity">
               <span className="projectClassification">PRODUCT</span>
@@ -856,7 +874,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
             <div className="spetaCopy">
               <h3>{t.spetaTitle}</h3><p>{t.spetaBody}</p>
               <dl>{t.spetaDetails.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-              <a className="externalProjectLink" href="https://www.speta.io/" target="_blank" rel="noreferrer">{t.visitSpeta} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></a>
+              <a className="externalProjectLink" href="https://www.speta.io/" target="_blank" rel="noreferrer">{t.visitSpeta} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></a>
             </div>
           </article>
           <section className="spetaShowcase" aria-label={t.spetaWalkthrough}>
@@ -864,15 +882,15 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
             <figure className="spetaShowcaseStage">
               <div className="spetaWindowBar" aria-hidden="true"><span><i></i><i></i><i></i></span><strong>speta.io</strong><small>PRODUCT / BETA</small></div>
               <button className="spetaImageButton" type="button" onClick={() => setActiveSpetaImage(selectedSpetaPreview)} aria-label={`${t.openImage}: ${spetaLabels[selectedSpetaPreview]}`}>
-                <img src={spetaImages[selectedSpetaPreview]} alt={spetaLabels[selectedSpetaPreview]} />
-                <span className="spetaExpandHint" aria-hidden="true">{t.openImage} {cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span>
+                <img {...imageDimensions(spetaImages[selectedSpetaPreview])} src={spetaImages[selectedSpetaPreview]} alt={spetaLabels[selectedSpetaPreview]} loading="lazy" decoding="async" />
+                <span className="spetaExpandHint" aria-hidden="true">{t.openImage} {cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span>
               </button>
               <figcaption><strong>{spetaLabels[selectedSpetaPreview]}</strong><span>SPETA / 0{selectedSpetaPreview + 1}</span></figcaption>
             </figure>
             <div className="spetaThumbnailRail" aria-label={t.spetaWalkthrough}>
               {spetaImages.map((image, index) => (
                 <button className={selectedSpetaPreview === index ? "isActive" : undefined} type="button" aria-pressed={selectedSpetaPreview === index} onClick={() => setSelectedSpetaPreview(index)} key={image}>
-                  <span>0{index + 1}</span><img src={image} alt="" /><strong>{spetaLabels[index]}</strong>
+                  <span>0{index + 1}</span><img {...imageDimensions(image)} src={image} alt="" loading="lazy" decoding="async" /><strong>{spetaLabels[index]}</strong>
                 </button>
               ))}
             </div>
@@ -904,8 +922,8 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                   <div className="cvVersion" key={version.language}>
                     <strong>{t.cvLanguageLabels[version.language]}</strong>
                     <div className="cvVersionLinks">
-                      <a href={version.pdf} target="_blank" rel="noreferrer">{t.cvOpen} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></a>
-                      <a href={version.pdf} download={version.fileName}>{t.cvDownload} <span aria-hidden="true">{cleanPreview ? <DownloadIcon className="uiArrow" /> : "↓"}</span></a>
+                      <a href={version.pdf} target="_blank" rel="noreferrer">{t.cvOpen} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></a>
+                      <a href={version.pdf} download={version.fileName}>{t.cvDownload} <span aria-hidden="true">{cleanPreview ? <DownloadIcon className="uiArrow" aria-hidden="true" /> : "↓"}</span></a>
                     </div>
                   </div>
                 ))}
@@ -915,8 +933,8 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
           <div className="cvPreviews">
             {cvVersions.map((version) => (
               <a className="cvPreviewLink" href={version.pdf} target="_blank" rel="noreferrer" aria-label={`${t.cvPreview} — ${t.cvLanguageLabels[version.language]}`} key={version.language}>
-                <img src={version.preview} alt="" loading="lazy" decoding="async" />
-                <span>{t.cvLanguageLabels[version.language]} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></span>
+                <img {...imageDimensions(version.preview)} src={version.preview} alt="" loading="lazy" decoding="async" />
+                <span>{t.cvLanguageLabels[version.language]} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></span>
               </a>
             ))}
           </div>
@@ -925,14 +943,14 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
         <section className="contactSection" id="contact" aria-labelledby="contact-title">
           <p className="eyebrow">{t.contactEyebrow}</p><h2 id="contact-title">{t.contactTitle}</h2>
           <div className="contactAvailability"><p className="contactLead">{t.contactLead}</p><span>{t.availabilityMeta}</span></div>
-          <a className="contactEmail" href="mailto:anghelrobert18@gmail.com"><span>anghelrobert18@gmail.com</span><span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></a>
-          <a className="contactPersonalEmail" href="mailto:hello@veliumin.com"><span>{t.workEmailLabel}</span><strong>hello@veliumin.com</strong><span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</span></a>
-          <div className="contactGrid"><div><span>{t.contactLabels[0]}</span><strong>Robert Anghel</strong></div><div><span>{t.contactLabels[1]}</span><strong>{t.based}</strong></div><div><span>{t.contactLabels[2]}</span><a href="tel:+40722905095">+40 722 905 095</a></div><div><span>{t.contactLabels[3]}</span><strong>{t.languages}</strong></div><div><span>{t.contactLabels[4]}</span><a href="https://www.linkedin.com/in/robert-anghel18/" target="_blank" rel="noreferrer">LinkedIn {cleanPreview ? <ArrowTopRightIcon className="uiArrow" /> : "↗"}</a></div></div>
-          <div className="contactMark" aria-hidden="true"><img src="/brand/vh_mark_paper.svg" alt="" /></div>
+          <a className="contactEmail" href="mailto:anghelrobert18@gmail.com"><span>anghelrobert18@gmail.com</span><span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></a>
+          <a className="contactPersonalEmail" href="mailto:hello@veliumin.com"><span>{t.workEmailLabel}</span><strong>hello@veliumin.com</strong><span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></a>
+          <div className="contactGrid"><div><span>{t.contactLabels[0]}</span><strong translate="no">Robert Anghel</strong></div><div><span>{t.contactLabels[1]}</span><strong>{t.based}</strong></div><div><span>{t.contactLabels[2]}</span><a href="tel:+40722905095">+40 722 905 095</a></div><div><span>{t.contactLabels[3]}</span><strong>{t.languages}</strong></div><div><span>{t.contactLabels[4]}</span><a href="https://www.linkedin.com/in/robert-anghel18/" target="_blank" rel="noreferrer">LinkedIn {cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</a></div></div>
+          <div className="contactMark" aria-hidden="true"><img {...imageDimensions("/brand/vh_mark_paper.svg")} src="/brand/vh_mark_paper.svg" alt="" loading="lazy" decoding="async" /></div>
         </section>
       </main>
 
-      <footer><span>Robert Anghel / Vellumhaus© 2026</span><a href="#top">{t.backTop}</a></footer>
+      <footer><span>Robert Anghel / Vellumhaus© 2026</span><a href="#top">{cleanPreview ? <>{t.backTop.replace(" ↑", "")} <ArrowUpIcon className="uiArrow" aria-hidden="true" /></> : t.backTop}</a></footer>
     </>
   );
 }

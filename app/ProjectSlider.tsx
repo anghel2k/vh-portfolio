@@ -6,7 +6,7 @@ import { useEffect, useRef, useState, type ReactNode, type PointerEvent } from "
 type Position = { first: number; last: number; total: number; previous: boolean; next: boolean };
 
 /** A native scroll rail: swipe on touch, drag with a mouse, or use the labelled controls. */
-export default function ProjectSlider({ active, label, previousLabel, nextLabel, children }: { active: boolean; label: string; previousLabel: string; nextLabel: string; children: ReactNode }) {
+export default function ProjectSlider({ active, label, previousLabel, nextLabel, cardSelector = ".projectLoopCard", children }: { active: boolean; label: string; previousLabel: string; nextLabel: string; cardSelector?: string; children: ReactNode }) {
   const viewport = useRef<HTMLDivElement>(null);
   const drag = useRef<{ x: number; scroll: number; moved: boolean } | null>(null);
   const suppressClick = useRef(false);
@@ -16,7 +16,7 @@ export default function ProjectSlider({ active, label, previousLabel, nextLabel,
     if (!active || !viewport.current) return;
     const rail = viewport.current;
     const update = () => {
-      const cards = [...rail.querySelectorAll<HTMLElement>(".projectLoopCard")];
+      const cards = [...rail.querySelectorAll<HTMLElement>(cardSelector)];
       if (!cards.length) return;
       const railBox = rail.getBoundingClientRect();
       const visible = cards.map((card, index) => ({ index, box: card.getBoundingClientRect() }))
@@ -30,14 +30,18 @@ export default function ProjectSlider({ active, label, previousLabel, nextLabel,
     const observer = new ResizeObserver(update);
     observer.observe(rail);
     return () => { rail.removeEventListener("scroll", update); observer.disconnect(); };
-  }, [active]);
+  }, [active, cardSelector]);
 
   const move = (direction: number) => {
     const rail = viewport.current;
-    const card = rail?.querySelector<HTMLElement>(".projectLoopCard");
-    if (!rail || !card) return;
+    if (!rail) return;
+    const cards = [...rail.querySelectorAll<HTMLElement>(cardSelector)];
+    const left = rail.getBoundingClientRect().left;
+    const candidates = cards.map(card => card.getBoundingClientRect().left - left);
+    const distance = direction > 0 ? candidates.find(x => x > 4) : candidates.reverse().find(x => x < -4);
+    if (distance === undefined) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    rail.scrollBy({ left: direction * (card.getBoundingClientRect().width + 24), behavior: reduced ? "instant" : "smooth" });
+    rail.scrollBy({ left: distance, behavior: reduced ? "instant" : "smooth" });
   };
   const release = (event: PointerEvent<HTMLDivElement>) => {
     if (drag.current?.moved) {
@@ -58,7 +62,12 @@ export default function ProjectSlider({ active, label, previousLabel, nextLabel,
           <button type="button" aria-label={`${nextLabel} / ${label}`} disabled={!position.next} onClick={() => move(1)}><ArrowRightIcon className="uiArrow" aria-hidden="true" /></button>
         </div>
       </div>
-      <div className="cleanSliderViewport" ref={viewport}
+      <div className="cleanSliderViewport" ref={viewport} tabIndex={0} role="region" aria-label={label}
+        onKeyDown={event => {
+          if (event.target !== event.currentTarget) return;
+          if (event.key === "ArrowLeft" || event.key === "ArrowRight") { event.preventDefault(); move(event.key === "ArrowLeft" ? -1 : 1); }
+          else if (event.key === "Home" || event.key === "End") { event.preventDefault(); event.currentTarget.scrollTo({ left: event.key === "Home" ? 0 : event.currentTarget.scrollWidth, behavior: "instant" }); }
+        }}
         onPointerDown={event => {
           suppressClick.current = false;
           if (event.pointerType === "mouse" && event.button === 0) drag.current = { x: event.clientX, scroll: event.currentTarget.scrollLeft, moved: false };
