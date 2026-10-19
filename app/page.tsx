@@ -941,11 +941,6 @@ export default function Home() {
   const spetaLabels = [t.spetaAlt, ...t.spetaGallery];
 
   useEffect(() => {
-    const savedLanguage = window.localStorage.getItem("robert-portfolio-language");
-    if (savedLanguage === "ro") setLanguage("ro");
-  }, []);
-
-  useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);
 
@@ -1000,7 +995,6 @@ export default function Home() {
 
   const changeLanguage = (nextLanguage: Language) => {
     setLanguage(nextLanguage);
-    window.localStorage.setItem("robert-portfolio-language", nextLanguage);
   };
 
   const pauseCarousel = (event: ReactPointerEvent<HTMLDivElement>) => {
