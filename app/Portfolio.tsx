@@ -11,7 +11,7 @@ import { usePreviewMotion } from "./usePreviewMotion";
 import { imageDimensions } from "./imageDimensions";
 import { useModalFocus } from "./useModalFocus";
 import { useReducedMotion } from "./useReducedMotion";
-import { ArrowTopRightIcon, ArrowBottomRightIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, DownloadIcon, GridIcon, EnvelopeClosedIcon, PersonIcon, FileTextIcon, MagicWandIcon, CubeIcon, VideoIcon, ImageIcon, PlusIcon } from "@radix-ui/react-icons";
+import { ArrowTopRightIcon, ArrowBottomRightIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, DownloadIcon, GridIcon, EnvelopeClosedIcon, PersonIcon, FileTextIcon, MagicWandIcon, CubeIcon, VideoIcon, ImageIcon, PlusIcon, CheckIcon } from "@radix-ui/react-icons";
 import { digitalstageProjects } from "./digitalstageProjects";
 import { framebreedProjects } from "./framebreedProjects";
 
@@ -725,12 +725,12 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                 <div className="projectDetailIntro">
                   <div className="projectDetailIdentity">
                     {activeProject.logo && <span className="projectDetailLogo"><img {...imageDimensions(activeProject.logo)} src={activeProject.logo} alt={`${activeProject.title} logo`} loading="lazy" decoding="async" /></span>}
-                    <p className="eyebrow">{projectCopy.discipline}</p>
-                    <h2 id="project-detail-title">{activeProject.title}</h2>
+                    <div className="projectHeadingCopy"><p className="eyebrow">{cleanPreview ? activeProject.classification : projectCopy.discipline}</p>
+                    <h2 id="project-detail-title">{activeProject.title}</h2></div>
                   </div>
                   <div className="projectDetailContext">
                     <dl className="projectQuickFacts">
-                      <div><dt>{t.projectType}</dt><dd>{activeProject.classification} / {projectCopy.projectType}</dd></div>
+                      <div><dt>{t.projectType}</dt><dd>{cleanPreview ? projectCopy.projectType : `${activeProject.classification} / ${projectCopy.projectType}`}</dd></div>
                       {"year" in activeProject && <div><dt>{t.projectYear}</dt><dd>{activeProject.year}</dd></div>}
                       <div><dt>{t.contribution}</dt><dd>{projectCopy.discipline}</dd></div>
                       <div><dt>{t.projectStudio}</dt><dd>{activeProject.studio}</dd></div>
@@ -743,7 +743,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                   <header><p className="eyebrow">{t.contribution}</p><h3 id="project-work-title">{t.responsibilityRecord}</h3></header>
                   <div className="projectWorkDetails">
                     <p>{projectCopy.role}</p>
-                    <ul>{projectCopy.work.map((item) => <li key={item}>{item}</li>)}</ul>
+                    <ul>{projectCopy.work.map((item) => <li key={item}>{cleanPreview && <span className="projectWorkIcon" aria-hidden="true"><CheckIcon /></span>}<span>{item}</span></li>)}</ul>
                   </div>
                   <aside className="projectOutcome"><span>{t.projectOutcome}</span><p>{projectCopy.outcome}</p></aside>
                 </section>
