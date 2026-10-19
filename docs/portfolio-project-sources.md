@@ -32,3 +32,7 @@ Career timeline uses Mar 2024 to present for the overall FrameBreed engagement a
 ### Refined monochrome logos
 - MacuShield: original vector wordmark extracted from public product leaflet https://media.bebetei.ro/gallery/7087/macushield-gold-90-capsule-macu-vision-2608.pdf, page 1, UK header. Original letter outlines retained, recoloured white.
 - Croco: higher-resolution original https://croco.ro/wp-content/uploads/2015/07/logo1.png. White lettering and oval selected with a soft SVG luminance mask, preserving antialiasing.
+
+### Croco thumbnail and compact lockup — 19 October 2026
+
+Replaced the tightly cropped character close-up with the baking conveyor shot at 3.8 seconds of the existing film. Both project-card variants and the film poster share the new local still. The white logo uses the existing official-source lettering and oval, cropped to the main wordmark without the small biscuit tagline. Increased its card size slightly, added restrained contrast behind it, and removed the inherited directory-image zoom for this project. Source film, credits and role copy are unchanged. Build/TypeScript, image decoding, 320–1440px framing, slider keyboard navigation and nested film open/close checked; desktop/mobile screenshots inspected.

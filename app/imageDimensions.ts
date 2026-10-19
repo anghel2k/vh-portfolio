@@ -168,6 +168,10 @@ const dimensions: Record<string, { width: number; height: number }> = {
     "width": 353,
     "height": 222
   },
+  "/projects/brand-logos/croco-wordmark-white.svg": {
+    "width": 353,
+    "height": 170
+  },
   "/projects/brand-logos/croco.png": {
     "width": 200,
     "height": 128
@@ -199,6 +203,10 @@ const dimensions: Record<string, { width: number; height: number }> = {
   "/projects/brand-logos/salt-bank.svg": {
     "width": 80,
     "height": 37
+  },
+  "/projects/croco/baking-preview.jpg": {
+    "width": 720,
+    "height": 900
   },
   "/projects/croco/preview.jpg": {
     "width": 720,

@@ -926,13 +926,13 @@ export const framebreedProjects: readonly PortfolioProject[] = [
     "title": "Croco / The Baking Crocodile",
     "classification": "TRADITIONAL CGI / VFX",
     "studio": "FrameBreed Studio",
-    "image": "/projects/croco/preview.jpg",
-    "logo": "/projects/brand-logos/croco-white.svg",
+    "image": "/projects/croco/baking-preview.jpg",
+    "logo": "/projects/brand-logos/croco-wordmark-white.svg",
     "media": [
       {
         "type": "video",
         "src": "/projects/croco/film.mp4",
-        "poster": "/projects/croco/preview.jpg"
+        "poster": "/projects/croco/baking-preview.jpg"
       }
     ],
     "en": {
