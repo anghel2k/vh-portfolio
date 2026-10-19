@@ -318,7 +318,7 @@ export const digitalstageProjects = [
     "classification": "HYBRID",
     "studio": "Digital Stage",
     "image": "/projects/heineken/heineken-blue.jpg",
-    "logo": "/digitalstage/logos/heineken.png",
+    "logo": "/digitalstage/logos/heineken-wordmark.svg",
     "media": [
       {
         "type": "image",
@@ -382,7 +382,7 @@ export const digitalstageProjects = [
     "classification": "HYBRID",
     "studio": "Digital Stage",
     "image": "/digitalstage/media/work-thumbnails/hidrofugal.jpg",
-    "logo": "/digitalstage/logos/hidrofugal.png",
+    "logo": "/digitalstage/logos/hidrofugal-wordmark.svg",
     "media": [
       {
         "type": "video",

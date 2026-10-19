@@ -139,6 +139,10 @@ main:focus { outline:none; }
 .projectLoopLogo { position:absolute; inset:22px 22px auto; height:42%; display:flex; align-items:center; justify-content:center; transition:transform .45s cubic-bezier(.2,.8,.2,1); }
 .projectLoopLogo img { width:78%; max-height:100%; object-fit:contain; filter:brightness(0) invert(1); }
 .projectLoopCard[data-project="kaufland"] .projectLoopLogo img { width:54%; }
+/* Balance visible artwork rather than the source image canvas. */
+.projectLoopCard[data-project="digitalstage-virgin-media"] .projectLoopLogo img { width:58%; }
+.projectLoopCard[data-project="digitalstage-heineken"] .projectLoopLogo img { width:74%; }
+.projectLoopCard[data-project="digitalstage-hidrofugal"] .projectLoopLogo img { width:62%; }
 .projectLoopMeta { position:absolute; inset:auto 20px 20px; display:grid; gap:12px; }
 .projectLoopMeta small { font-size:8px; font-weight:700; line-height:1.45; letter-spacing:.12em; text-transform:uppercase; opacity:.8; }
 .projectLoopMeta strong { min-height:48px; padding:0 14px; display:flex; align-items:center; justify-content:space-between; gap:20px; border-top:1px solid rgba(255,255,255,.75); border-bottom:1px solid rgba(255,255,255,.75); font-size:9px; letter-spacing:.14em; text-transform:uppercase; transition:color .3s ease,background .3s ease,padding .3s ease; }
