@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import BouncingMark from "./BouncingMark";
 import { digitalstageProjects } from "./digitalstageProjects";
+import { framebreedProjects } from "./framebreedProjects";
 
 type Language = "en" | "ro";
 
@@ -10,578 +11,6 @@ const cvVersions = [
   { language: "ro", pdf: "/cv/Robert_Anghel_CV_RO.pdf", preview: "/cv/Robert_Anghel_CV_RO-preview.png", fileName: "Robert_Anghel_CV_RO.pdf" },
   { language: "en", pdf: "/cv/Robert_Anghel_CV_EN.pdf", preview: "/cv/Robert_Anghel_CV_EN-preview.png", fileName: "Robert_Anghel_CV_EN.pdf" },
 ] as const;
-
-const framebreedProjects = [
-  {
-    id: "san-pellegrino",
-    title: "San Pellegrino — Ciao! Paris",
-    classification: "COMMERCIAL",
-    studio: "Frame23 Studio / Everything is Computer",
-    image: "/projects/san-pellegrino/pool-still.jpg",
-    logo: "/projects/san-pellegrino/san-pellegrino-logo.png",
-    media: [
-      { type: "video", src: "/projects/san-pellegrino/arc-de-triomphe.mp4", poster: "/projects/san-pellegrino/arc-de-triomphe-poster.jpg" },
-      { type: "video", src: "/projects/san-pellegrino/jardin.mp4", poster: "/projects/san-pellegrino/jardin-poster.jpg" },
-      { type: "video", src: "/projects/san-pellegrino/opera.mp4", poster: "/projects/san-pellegrino/opera-poster.jpg" },
-      { type: "image", src: "/projects/san-pellegrino/cherry-still.jpg" },
-      { type: "image", src: "/projects/san-pellegrino/lemon-still.jpg" },
-    ],
-    en: {
-      projectType: "Social campaign films",
-      outcome: "Three six-second social films delivered for the campaign.",
-      note: "Three six-second social films turning Paris landmarks into oversized Italian gifts, produced through Frame23 Studio and Everything is Computer.",
-      role: "Client and agency communication, keyframe creation, Photoshop retouching and AI video generation, working closely with Serj Zarnescu and Andrei Brovcenco.",
-      discipline: "Keyframes / Retouch / Video generation",
-      work: ["Team, client and agency communication", "Keyframe creation", "Photoshop retouching", "AI-assisted video generation"],
-      credits: [
-        ["Frame23 / FrameBreed Studio", "VFX and production"],
-        ["Everything is Computer", "Agency"],
-        ["John Nakamura Whitehouse", "Creative Director / Producer"],
-        ["Erfan Saadati", "Executive Producer"],
-        ["Andrei Brovcenco", "FrameBreed Founder / Producer / Creative support"],
-        ["Serj Zarnescu", "Main graphics / Keyframe collaboration"],
-        ["Robert Anghel", "Communication / Keyframes / Retouching / AI video generation"],
-      ],
-    },
-    ro: {
-      projectType: "Filme de campanie pentru social",
-      outcome: "Trei filme de câte șase secunde livrate pentru campanie.",
-      note: "Trei filme sociale de câte șase secunde, în care repere pariziene devin cadouri italiene supradimensionate, produse prin Frame23 Studio și Everything is Computer.",
-      role: "Comunicare cu clientul și agenția, creare de keyframe-uri, retuș în Photoshop și generare video cu AI, lucrând îndeaproape cu Serj Zarnescu și Andrei Brovcenco.",
-      discipline: "Keyframes / Retuș / Generare video",
-      work: ["Comunicare între echipă, client și agenție", "Creare de keyframe-uri", "Retuș în Photoshop", "Generare video asistată de AI"],
-      credits: [
-        ["Frame23 / FrameBreed Studio", "VFX și producție"],
-        ["Everything is Computer", "Agenție"],
-        ["John Nakamura Whitehouse", "Director de creație / Producător"],
-        ["Erfan Saadati", "Producător executiv"],
-        ["Andrei Brovcenco", "Fondator FrameBreed / Producător / Suport creativ"],
-        ["Serj Zarnescu", "Grafică principală / Colaborare la keyframe-uri"],
-        ["Robert Anghel", "Comunicare / Keyframe-uri / Retuș / Generare video AI"],
-      ],
-    },
-  },
-  {
-    id: "heineken",
-    title: "Heineken — Fans Have More Friends",
-    classification: "COMMERCIAL",
-    studio: "FrameBreed Studio",
-    image: "/projects/heineken/heineken-blue.jpg",
-    logo: "/projects/heineken/heineken-logo.png",
-    media: [
-      { type: "image", src: "/projects/heineken/heineken-blue.jpg" },
-      { type: "image", src: "/projects/heineken/heineken-day.jpg" },
-    ],
-    en: {
-      projectType: "Commercial campaign / On-set VFX",
-      outcome: "LED-ready campaign environments and final photographic assets.",
-      note: "For “Fans Have More Friends”, AI, 3D and VFX were combined into LED-ready campaign environments matched to the talent, lighting and photographic setup.",
-      role: "VFX supervision with Andrei Brovcenco, technical previs setups, AI tests and live Photoshop retouching for client and agency presentations on set.",
-      discipline: "VFX supervision / Previs / On-set retouch",
-      work: ["On-set VFX supervision with Andrei Brovcenco", "Technical previsualization setups", "AI workflow tests", "Live Photoshop retouching for client and agency presentations"],
-      credits: [
-        ["Client", [
-          { name: "Heineken", handle: "@heineken", href: "https://www.instagram.com/heineken/" },
-        ]],
-        ["Agency", [
-          { name: "LePub Worldwide", handle: "@lepub_worldwide", href: "https://www.instagram.com/lepub_worldwide/" },
-        ]],
-        ["Photographer", [
-          { name: "Justin Bettman", handle: "@justinbettman", href: "https://www.instagram.com/justinbettman/" },
-        ]],
-        ["Production", [
-          { name: "Bread.TheMakery", handle: "@bread.themakery", href: "https://www.instagram.com/bread.themakery/" },
-          { name: "Bread.Service", handle: "@bread.service", href: "https://www.instagram.com/bread.service/" },
-        ]],
-        ["FrameBreed Studio", "VFX / Technical production"],
-        ["Andrei Brovcenco", "VFX supervision / Technical collaboration"],
-        ["Robert Anghel", "VFX supervision / Technical previs / AI tests / Live on-set Photoshop"],
-      ],
-    },
-    ro: {
-      projectType: "Campanie comercială / VFX pe platou",
-      outcome: "Medii de campanie pregătite pentru LED și asset-uri fotografice finale.",
-      note: "Pentru „Fans Have More Friends”, AI, 3D și VFX au fost combinate în medii de campanie pregătite pentru LED, adaptate talentului, luminii și setup-ului fotografic.",
-      role: "Supervizare VFX alături de Andrei Brovcenco, setup-uri tehnice de previz, teste AI și retuș live în Photoshop pentru prezentările către client și agenție pe platou.",
-      discipline: "Supervizare VFX / Previz / Retuș pe platou",
-      work: ["Supervizare VFX pe platou alături de Andrei Brovcenco", "Setup-uri tehnice de pre-vizualizare", "Teste de fluxuri AI", "Retuș live în Photoshop pentru prezentările către client și agenție"],
-      credits: [
-        ["Client", [
-          { name: "Heineken", handle: "@heineken", href: "https://www.instagram.com/heineken/" },
-        ]],
-        ["Agenție", [
-          { name: "LePub Worldwide", handle: "@lepub_worldwide", href: "https://www.instagram.com/lepub_worldwide/" },
-        ]],
-        ["Fotograf", [
-          { name: "Justin Bettman", handle: "@justinbettman", href: "https://www.instagram.com/justinbettman/" },
-        ]],
-        ["Producție", [
-          { name: "Bread.TheMakery", handle: "@bread.themakery", href: "https://www.instagram.com/bread.themakery/" },
-          { name: "Bread.Service", handle: "@bread.service", href: "https://www.instagram.com/bread.service/" },
-        ]],
-        ["FrameBreed Studio", "VFX / Producție tehnică"],
-        ["Andrei Brovcenco", "Supervizare VFX / Colaborare tehnică"],
-        ["Robert Anghel", "Supervizare VFX / Previz tehnic / Teste AI / Photoshop live pe platou"],
-      ],
-    },
-  },
-  {
-    id: "house-of-errors",
-    title: "House of Errors — Selected Campaigns",
-    classification: "COMMERCIAL",
-    studio: "Frame23 / FrameBreed",
-    image: "/projects/house-of-errors/ss25-02.jpg",
-    logo: "/projects/house-of-errors/logo.svg",
-    media: [
-      { type: "video", src: "/projects/house-of-errors/moss.mp4", poster: "/projects/house-of-errors/moss-poster.jpg" },
-      { type: "video", src: "/projects/house-of-errors/ss25.mp4", poster: "/projects/house-of-errors/ss25-poster.jpg" },
-      { type: "image", src: "/projects/house-of-errors/ss25-01.jpg" },
-      { type: "image", src: "/projects/house-of-errors/ss25-03.jpg" },
-      { type: "image", src: "/projects/house-of-errors/ss25-04.jpg" },
-    ],
-    en: {
-      projectType: "Fashion campaign / VFX",
-      outcome: "Transition film work and final SS25 lighting and render assets.",
-      note: "Two House of Errors campaigns produced through Frame23 / FrameBreed: the Embroidered Moss Denim transition and the surreal SS25 paint-bucket assets.",
-      role: "For Embroidered Moss Denim: keyframe creation and video generation for the transition. For SS25: technical render setup, lighting and final bucket renders.",
-      discipline: "Keyframes / Generation / Lighting / Render",
-      work: ["Keyframe creation for the Embroidered Moss Denim transition", "AI-assisted video generation for the transition", "Technical render setup for the SS25 bucket assets", "Lighting and final bucket renders"],
-      creditScope: "Credits are grouped by production. Robert's exact contribution to each film is recorded above.",
-      credits: [
-        ["Project — House of Errors SS25", [
-          { name: "House of Errors", handle: "@houseoferrors", href: "https://www.instagram.com/houseoferrors/" },
-          { name: "fullyfullyfully", handle: "@fullyfullyfully", href: "https://www.instagram.com/fullyfullyfully/" },
-        ]],
-        ["Creative Director & Director", [
-          { name: "Tom Emmerson", handle: "@tom.emmerson", href: "https://www.instagram.com/tom.emmerson/" },
-        ]],
-        ["Agency", [
-          { name: "Red Buoy", handle: "@redbuoy.studio", href: "https://www.instagram.com/redbuoy.studio/" },
-        ]],
-        ["Producer", [
-          { name: "Maggie Curwin", handle: "@maggiecurwin", href: "https://www.instagram.com/maggiecurwin/" },
-        ]],
-        ["Production Manager", [
-          { name: "Peggy DiGioia Davies", handle: "@pdigioia_", href: "https://www.instagram.com/pdigioia_/" },
-        ]],
-        ["Light", [
-          { name: "Jjay Johnson", handle: "@jjay_johnson_", href: "https://www.instagram.com/jjay_johnson_/" },
-        ]],
-        ["Digi Op", [
-          { name: "Giorgio Lattanzi", handle: "@george_giorgio", href: "https://www.instagram.com/george_giorgio/" },
-        ]],
-        ["DOP", [
-          { name: "Sam Kinsella", handle: "@kinsellas", href: "https://www.instagram.com/kinsellas/" },
-        ]],
-        ["Production Designer", [
-          { name: "Naomi Feld", handle: "@naomifeldstudio", href: "https://www.instagram.com/naomifeldstudio/" },
-        ]],
-        ["Art Assistant", [{ name: "Eli Parkinson" }]],
-        ["Model", [
-          { name: "Randy", handle: "@raaandy.zip", href: "https://www.instagram.com/raaandy.zip/" },
-        ]],
-        ["VFX Supervisor", [{ name: "Lewis Ball" }]],
-        ["Post", [
-          { name: "Frame 23", handle: "@frame23.studio", href: "https://www.instagram.com/frame23.studio/" },
-        ]],
-        ["Frame 23 Executive Producers", [
-          { name: "Andrei Brovcenco", handle: "@tractoraptor", href: "https://www.instagram.com/tractoraptor/" },
-          { name: "Erfan Saadati", handle: "@erfanzugram", href: "https://www.instagram.com/erfanzugram/" },
-        ]],
-        ["3D Modelling", [
-          { name: "Mădălin Teletin", handle: "@teletinmadalin", href: "https://www.instagram.com/teletinmadalin/" },
-        ]],
-        ["Lighting & Render", [
-          { name: "Robert Anghel", handle: "@anghel.w", href: "https://www.instagram.com/anghel.w/" },
-        ]],
-        ["Compositing & Retouch", [
-          { name: "Marius Iftimie" },
-          { name: "Cosmin Moldovan", handle: "@cosm_o_gram", href: "https://www.instagram.com/cosm_o_gram/" },
-        ]],
-        ["Sound Designer", [
-          { name: "I Need Sound", handle: "@ineedsound.co", href: "https://www.instagram.com/ineedsound.co/" },
-        ]],
-        ["Colour", [
-          { name: "Mara Ciorba", handle: "@maraciorba", href: "https://www.instagram.com/maraciorba/" },
-          { name: "Harbor Picture Company", handle: "@harborpictureco", href: "https://www.instagram.com/harborpictureco/" },
-        ]],
-        ["Special Thanks", [
-          { name: "London Film Studios", handle: "@londonfilmstudios", href: "https://www.instagram.com/londonfilmstudios/" },
-          { name: "SHL London", handle: "@shl.london", href: "https://www.instagram.com/shl.london/" },
-          { name: "Luluz Catering", handle: "@luluzcatering", href: "https://www.instagram.com/luluzcatering/" },
-          { name: "The Unit Bag", handle: "@theunitbag", href: "https://www.instagram.com/theunitbag/" },
-        ]],
-        ["Project — Embroidered Moss Denim", [
-          { name: "House of Errors", handle: "@houseoferrors", href: "https://www.instagram.com/houseoferrors/" },
-        ]],
-        ["Creative Studio", [
-          { name: "Red Buoy", handle: "@redbuoy.studio", href: "https://www.instagram.com/redbuoy.studio/" },
-        ]],
-        ["Creative Director, Director & Photographer", [
-          { name: "Tom Emmerson", handle: "@tom.emmerson", href: "https://www.instagram.com/tom.emmerson/" },
-        ]],
-        ["Production", [
-          { name: "Business Club", handle: "@businessclub.tv", href: "https://www.instagram.com/businessclub.tv/" },
-        ]],
-        ["Executive Producer", [{ name: "Jason Lovelock" }]],
-        ["Producer", [
-          { name: "Brooklyn Adebowale", handle: "@Brooklynade", href: "https://www.instagram.com/Brooklynade/" },
-        ]],
-        ["DOP", [
-          { name: "Jack Maddison", handle: "@jackmaddisondop", href: "https://www.instagram.com/jackmaddisondop/" },
-        ]],
-        ["Model", [
-          { name: "Cheikh Diaw", handle: "@cheikh.ad", href: "https://www.instagram.com/cheikh.ad/" },
-        ]],
-        ["VFX", [
-          { name: "Frame 23", handle: "@frame23.studio", href: "https://www.instagram.com/frame23.studio/" },
-        ]],
-        ["Grade", [
-          { name: "Rascal Post", handle: "@RASCALSTUDIO_", href: "https://www.instagram.com/RASCALSTUDIO_/" },
-        ]],
-        ["Colourist", [
-          { name: "Dan Levy", handle: "@danmaxlevy", href: "https://www.instagram.com/danmaxlevy/" },
-        ]],
-        ["Sound", [
-          { name: "Cameron Byrom", handle: "@cbav_productions", href: "https://www.instagram.com/cbav_productions/" },
-        ]],
-        ["Local Crew — Production", [
-          { name: "Hawai", handle: "@hawaifilms", href: "https://www.instagram.com/hawaifilms/" },
-        ]],
-        ["Local Executive Producer", [{ name: "Ana Gil" }]],
-        ["Production Coordinator Madrid", [{ name: "Marta Gómez" }]],
-        ["Locations", [
-          { name: "Two Sisters", handle: "@twosisterslocations", href: "https://www.instagram.com/twosisterslocations/" },
-        ]],
-        ["Fixer", [{ name: "Rosa Cosmelli" }]],
-        ["Production Assistants", [
-          { name: "Laura Abadia" },
-          { name: "Giacomo Neri" },
-          { name: "Jeremy Blackwood", handle: "@jerryjblackwood", href: "https://www.instagram.com/jerryjblackwood/" },
-        ]],
-        ["Assistant Camera", [
-          { name: "Gabi Simo", handle: "@gabisimoig", href: "https://www.instagram.com/gabisimoig/" },
-        ]],
-        ["Prop Stylist", [{ name: "Laura Ques" }]],
-        ["Atrezzo", [{ name: "Killian Irz" }]],
-        ["Hair & Make-up Artist", [
-          { name: "Isabel Esteban", handle: "@isabelestebanmakeup", href: "https://www.instagram.com/isabelestebanmakeup/" },
-        ]],
-        ["Casting Director", [{ name: "Mar Clar" }]],
-        ["Cast", [
-          { name: "Begoña Paredes Gonzalez" },
-          { name: "Jose Ma Susacasa" },
-        ]],
-        ["Stunt", [{ name: "Marc Trilla" }]],
-        ["Hero Boat", [{ name: "Alcatraz" }]],
-        ["Boat Captain", [{ name: "Miguel" }]],
-        ["Safety Deckhand", [{ name: "Nerea" }]],
-        ["Marine Crew Coordination", [{ name: "Marine Tramuntana Diving and Film Services" }]],
-        ["Safety Boat", [{ name: "Smile II" }]],
-        ["Safety Boat Deckhand", [{ name: "Joad Sanchez" }]],
-        ["Office Coordination", [{ name: "Cata Vives" }]],
-      ],
-    },
-    ro: {
-      projectType: "Campanie fashion / VFX",
-      outcome: "Lucru pentru filmul de tranziție și asset-uri finale de lighting și render pentru SS25.",
-      note: "Două campanii House of Errors produse prin Frame23 / FrameBreed: tranziția Embroidered Moss Denim și elementele suprarealiste cu găleți de vopsea pentru SS25.",
-      role: "Pentru Embroidered Moss Denim: creare de keyframe-uri și generare video pentru tranziție. Pentru SS25: setup tehnic de render, lighting și randările finale ale găleților.",
-      discipline: "Keyframes / Generare / Lighting / Render",
-      work: ["Creare de keyframe-uri pentru tranziția Embroidered Moss Denim", "Generare video asistată de AI pentru tranziție", "Setup tehnic de render pentru asset-urile SS25", "Lighting și randările finale ale găleților"],
-      creditScope: "Creditele sunt grupate pe producții. Contribuția exactă a lui Robert pentru fiecare film este prezentată mai sus.",
-      credits: [
-        ["Proiect — House of Errors SS25", [
-          { name: "House of Errors", handle: "@houseoferrors", href: "https://www.instagram.com/houseoferrors/" },
-          { name: "fullyfullyfully", handle: "@fullyfullyfully", href: "https://www.instagram.com/fullyfullyfully/" },
-        ]],
-        ["Director de creație & Regizor", [
-          { name: "Tom Emmerson", handle: "@tom.emmerson", href: "https://www.instagram.com/tom.emmerson/" },
-        ]],
-        ["Agenție", [
-          { name: "Red Buoy", handle: "@redbuoy.studio", href: "https://www.instagram.com/redbuoy.studio/" },
-        ]],
-        ["Producător", [
-          { name: "Maggie Curwin", handle: "@maggiecurwin", href: "https://www.instagram.com/maggiecurwin/" },
-        ]],
-        ["Manager de producție", [
-          { name: "Peggy DiGioia Davies", handle: "@pdigioia_", href: "https://www.instagram.com/pdigioia_/" },
-        ]],
-        ["Light", [
-          { name: "Jjay Johnson", handle: "@jjay_johnson_", href: "https://www.instagram.com/jjay_johnson_/" },
-        ]],
-        ["Digi Op", [
-          { name: "Giorgio Lattanzi", handle: "@george_giorgio", href: "https://www.instagram.com/george_giorgio/" },
-        ]],
-        ["DOP", [
-          { name: "Sam Kinsella", handle: "@kinsellas", href: "https://www.instagram.com/kinsellas/" },
-        ]],
-        ["Production Designer", [
-          { name: "Naomi Feld", handle: "@naomifeldstudio", href: "https://www.instagram.com/naomifeldstudio/" },
-        ]],
-        ["Asistent artă", [{ name: "Eli Parkinson" }]],
-        ["Model", [
-          { name: "Randy", handle: "@raaandy.zip", href: "https://www.instagram.com/raaandy.zip/" },
-        ]],
-        ["Supervizor VFX", [{ name: "Lewis Ball" }]],
-        ["Post-producție", [
-          { name: "Frame 23", handle: "@frame23.studio", href: "https://www.instagram.com/frame23.studio/" },
-        ]],
-        ["Producători executivi Frame 23", [
-          { name: "Andrei Brovcenco", handle: "@tractoraptor", href: "https://www.instagram.com/tractoraptor/" },
-          { name: "Erfan Saadati", handle: "@erfanzugram", href: "https://www.instagram.com/erfanzugram/" },
-        ]],
-        ["Modelare 3D", [
-          { name: "Mădălin Teletin", handle: "@teletinmadalin", href: "https://www.instagram.com/teletinmadalin/" },
-        ]],
-        ["Lighting & Render", [
-          { name: "Robert Anghel", handle: "@anghel.w", href: "https://www.instagram.com/anghel.w/" },
-        ]],
-        ["Compositing & Retuș", [
-          { name: "Marius Iftimie" },
-          { name: "Cosmin Moldovan", handle: "@cosm_o_gram", href: "https://www.instagram.com/cosm_o_gram/" },
-        ]],
-        ["Sound Designer", [
-          { name: "I Need Sound", handle: "@ineedsound.co", href: "https://www.instagram.com/ineedsound.co/" },
-        ]],
-        ["Culoare", [
-          { name: "Mara Ciorba", handle: "@maraciorba", href: "https://www.instagram.com/maraciorba/" },
-          { name: "Harbor Picture Company", handle: "@harborpictureco", href: "https://www.instagram.com/harborpictureco/" },
-        ]],
-        ["Mulțumiri speciale", [
-          { name: "London Film Studios", handle: "@londonfilmstudios", href: "https://www.instagram.com/londonfilmstudios/" },
-          { name: "SHL London", handle: "@shl.london", href: "https://www.instagram.com/shl.london/" },
-          { name: "Luluz Catering", handle: "@luluzcatering", href: "https://www.instagram.com/luluzcatering/" },
-          { name: "The Unit Bag", handle: "@theunitbag", href: "https://www.instagram.com/theunitbag/" },
-        ]],
-        ["Proiect — Embroidered Moss Denim", [
-          { name: "House of Errors", handle: "@houseoferrors", href: "https://www.instagram.com/houseoferrors/" },
-        ]],
-        ["Studio de creație", [
-          { name: "Red Buoy", handle: "@redbuoy.studio", href: "https://www.instagram.com/redbuoy.studio/" },
-        ]],
-        ["Director de creație, Regizor & Fotograf", [
-          { name: "Tom Emmerson", handle: "@tom.emmerson", href: "https://www.instagram.com/tom.emmerson/" },
-        ]],
-        ["Producție", [
-          { name: "Business Club", handle: "@businessclub.tv", href: "https://www.instagram.com/businessclub.tv/" },
-        ]],
-        ["Producător executiv", [{ name: "Jason Lovelock" }]],
-        ["Producător", [
-          { name: "Brooklyn Adebowale", handle: "@Brooklynade", href: "https://www.instagram.com/Brooklynade/" },
-        ]],
-        ["DOP", [
-          { name: "Jack Maddison", handle: "@jackmaddisondop", href: "https://www.instagram.com/jackmaddisondop/" },
-        ]],
-        ["Model", [
-          { name: "Cheikh Diaw", handle: "@cheikh.ad", href: "https://www.instagram.com/cheikh.ad/" },
-        ]],
-        ["VFX", [
-          { name: "Frame 23", handle: "@frame23.studio", href: "https://www.instagram.com/frame23.studio/" },
-        ]],
-        ["Grade", [
-          { name: "Rascal Post", handle: "@RASCALSTUDIO_", href: "https://www.instagram.com/RASCALSTUDIO_/" },
-        ]],
-        ["Colorist", [
-          { name: "Dan Levy", handle: "@danmaxlevy", href: "https://www.instagram.com/danmaxlevy/" },
-        ]],
-        ["Sunet", [
-          { name: "Cameron Byrom", handle: "@cbav_productions", href: "https://www.instagram.com/cbav_productions/" },
-        ]],
-        ["Echipă locală — Producție", [
-          { name: "Hawai", handle: "@hawaifilms", href: "https://www.instagram.com/hawaifilms/" },
-        ]],
-        ["Producător executiv local", [{ name: "Ana Gil" }]],
-        ["Coordonator producție Madrid", [{ name: "Marta Gómez" }]],
-        ["Locații", [
-          { name: "Two Sisters", handle: "@twosisterslocations", href: "https://www.instagram.com/twosisterslocations/" },
-        ]],
-        ["Fixer", [{ name: "Rosa Cosmelli" }]],
-        ["Asistenți producție", [
-          { name: "Laura Abadia" },
-          { name: "Giacomo Neri" },
-          { name: "Jeremy Blackwood", handle: "@jerryjblackwood", href: "https://www.instagram.com/jerryjblackwood/" },
-        ]],
-        ["Asistent cameră", [
-          { name: "Gabi Simo", handle: "@gabisimoig", href: "https://www.instagram.com/gabisimoig/" },
-        ]],
-        ["Prop Stylist", [{ name: "Laura Ques" }]],
-        ["Atrezzo", [{ name: "Killian Irz" }]],
-        ["Hair & Make-up Artist", [
-          { name: "Isabel Esteban", handle: "@isabelestebanmakeup", href: "https://www.instagram.com/isabelestebanmakeup/" },
-        ]],
-        ["Director casting", [{ name: "Mar Clar" }]],
-        ["Distribuție", [
-          { name: "Begoña Paredes Gonzalez" },
-          { name: "Jose Ma Susacasa" },
-        ]],
-        ["Cascador", [{ name: "Marc Trilla" }]],
-        ["Ambarcațiune principală", [{ name: "Alcatraz" }]],
-        ["Căpitan ambarcațiune", [{ name: "Miguel" }]],
-        ["Marinar de siguranță", [{ name: "Nerea" }]],
-        ["Coordonare echipă marină", [{ name: "Marine Tramuntana Diving and Film Services" }]],
-        ["Ambarcațiune de siguranță", [{ name: "Smile II" }]],
-        ["Marinar ambarcațiune de siguranță", [{ name: "Joad Sanchez" }]],
-        ["Coordonare office", [{ name: "Cata Vives" }]],
-      ],
-    },
-  },
-  {
-    id: "new-balance",
-    title: "New Balance — Gator Run",
-    classification: "COMMERCIAL",
-    studio: "Frame23 Studio",
-    image: "/projects/new-balance/egg-hatch.jpg",
-    logo: "/projects/new-balance/new-balance-logo.png",
-    media: [
-      { type: "video", src: "/projects/new-balance/egg-hatch.mp4", poster: "/projects/new-balance/egg-hatch.jpg" },
-      { type: "video", src: "/projects/new-balance/croc-insert.mp4", poster: "/projects/new-balance/croc-insert.jpg" },
-      { type: "video", src: "/projects/new-balance/follow-leader.mp4", poster: "/projects/new-balance/follow-leader.jpg" },
-      { type: "video", src: "/projects/new-balance/mama-croc.mp4", poster: "/projects/new-balance/mama-croc.jpg" },
-    ],
-    en: {
-      projectType: "Full-CGI campaign",
-      outcome: "Four full-CGI campaign films and a suite of campaign stills.",
-      note: "“Gator Run” introduces a baby gator through four full-CGI campaign films and a suite of stills, produced through Frame23 Studio.",
-      role: "Previsualization with Andrei Brovcenco, team communication, agency delivery preparation and selected retouching support.",
-      discipline: "Previs / Coordination / Delivery / Retouch",
-      work: ["Previsualization with Andrei Brovcenco", "Production team communication", "Preparing versions and deliverables for the agency", "Selected Photoshop retouching"],
-      credits: [
-        ["Client", [{ name: "New Balance" }]],
-        ["Creative Agency", [{ name: "Red Buoy" }]],
-        ["Director / Photographer", [{ name: "Tom Emmerson" }]],
-        ["Production Company", [{ name: "Business Club" }]],
-        ["VFX / Full CGI", [{ name: "Frame23 Studio" }]],
-        ["3D Modelling & Texturing", [
-          { name: "Anastasia Bîdiliță", handle: "@anastasia.bidilita", href: "https://www.instagram.com/anastasia.bidilita/" },
-          { name: "Mădălin Teletin", handle: "@teletinmadalin", href: "https://www.instagram.com/teletinmadalin/" },
-          { name: "Salo Bohuslav" },
-        ]],
-        ["3D Animation", [
-          { name: "Călin Ivașcu" },
-          { name: "Filip Rădulescu", handle: "@filipu", href: "https://www.instagram.com/filipu/" },
-          { name: "Ramzan Mulani" },
-        ]],
-        ["Technical Direction", [
-          { name: "Cristian Afteni", handle: "@cristi_rdi", href: "https://www.instagram.com/cristi_rdi/" },
-          { name: "Ciprian Dumitru", handle: "@cipry16", href: "https://www.instagram.com/cipry16/" },
-          { name: "Robert Anghel", handle: "@anghel.w", href: "https://www.instagram.com/anghel.w/" },
-        ]],
-        ["Character Rigging", [
-          { name: "Alexandru Gonța", handle: "@aiex_gz", href: "https://www.instagram.com/aiex_gz/" },
-        ]],
-        ["Compositing", [
-          { name: "Laura Maria Mihăilă", handle: "@l.a.u.r.a.m.m", href: "https://www.instagram.com/l.a.u.r.a.m.m/" },
-          { name: "Marius Iftimie" },
-          { name: "Cosmin Moldovan", handle: "@cosm_o_gram", href: "https://www.instagram.com/cosm_o_gram/" },
-        ]],
-        ["VFX & 3D Animation Supervision", [
-          { name: "Andrei Brovcenco", handle: "@tractoraptor", href: "https://www.instagram.com/tractoraptor/" },
-        ]],
-        ["VFX Producers", [
-          { name: "Andrei Brovcenco", handle: "@tractoraptor", href: "https://www.instagram.com/tractoraptor/" },
-          { name: "Raluca Platon", handle: "@ralucaaaaip", href: "https://www.instagram.com/ralucaaaaip/" },
-          { name: "Cosmin Moldovan", handle: "@cosm_o_gram", href: "https://www.instagram.com/cosm_o_gram/" },
-        ]],
-        ["Executive Producer", [
-          { name: "Erfan Saadati" },
-        ]],
-      ],
-    },
-    ro: {
-      projectType: "Campanie full-CGI",
-      outcome: "Patru filme de campanie full-CGI și o serie de still-uri de campanie.",
-      note: "„Gator Run” prezintă un pui de aligator prin patru filme de campanie full-CGI și o serie de still-uri, produse prin Frame23 Studio.",
-      role: "Pre-vizualizare alături de Andrei Brovcenco, comunicarea cu echipa, pregătirea livrabilelor pentru agenție și suport punctual de retuș.",
-      discipline: "Previz / Coordonare / Livrare / Retuș",
-      work: ["Pre-vizualizare alături de Andrei Brovcenco", "Comunicare cu echipa de producție", "Pregătirea versiunilor și livrabilelor pentru agenție", "Retuș punctual în Photoshop"],
-      credits: [
-        ["Client", [{ name: "New Balance" }]],
-        ["Agenție de creație", [{ name: "Red Buoy" }]],
-        ["Regizor / Fotograf", [{ name: "Tom Emmerson" }]],
-        ["Companie de producție", [{ name: "Business Club" }]],
-        ["VFX / Full CGI", [{ name: "Frame23 Studio" }]],
-        ["Modelare 3D & texturare", [
-          { name: "Anastasia Bîdiliță", handle: "@anastasia.bidilita", href: "https://www.instagram.com/anastasia.bidilita/" },
-          { name: "Mădălin Teletin", handle: "@teletinmadalin", href: "https://www.instagram.com/teletinmadalin/" },
-          { name: "Salo Bohuslav" },
-        ]],
-        ["Animație 3D", [
-          { name: "Călin Ivașcu" },
-          { name: "Filip Rădulescu", handle: "@filipu", href: "https://www.instagram.com/filipu/" },
-          { name: "Ramzan Mulani" },
-        ]],
-        ["Direcție tehnică", [
-          { name: "Cristian Afteni", handle: "@cristi_rdi", href: "https://www.instagram.com/cristi_rdi/" },
-          { name: "Ciprian Dumitru", handle: "@cipry16", href: "https://www.instagram.com/cipry16/" },
-          { name: "Robert Anghel", handle: "@anghel.w", href: "https://www.instagram.com/anghel.w/" },
-        ]],
-        ["Rigging personaje", [
-          { name: "Alexandru Gonța", handle: "@aiex_gz", href: "https://www.instagram.com/aiex_gz/" },
-        ]],
-        ["Compositing", [
-          { name: "Laura Maria Mihăilă", handle: "@l.a.u.r.a.m.m", href: "https://www.instagram.com/l.a.u.r.a.m.m/" },
-          { name: "Marius Iftimie" },
-          { name: "Cosmin Moldovan", handle: "@cosm_o_gram", href: "https://www.instagram.com/cosm_o_gram/" },
-        ]],
-        ["Supervizare VFX & animație 3D", [
-          { name: "Andrei Brovcenco", handle: "@tractoraptor", href: "https://www.instagram.com/tractoraptor/" },
-        ]],
-        ["Producători VFX", [
-          { name: "Andrei Brovcenco", handle: "@tractoraptor", href: "https://www.instagram.com/tractoraptor/" },
-          { name: "Raluca Platon", handle: "@ralucaaaaip", href: "https://www.instagram.com/ralucaaaaip/" },
-          { name: "Cosmin Moldovan", handle: "@cosm_o_gram", href: "https://www.instagram.com/cosm_o_gram/" },
-        ]],
-        ["Producător executiv", [
-          { name: "Erfan Saadati" },
-        ]],
-      ],
-    },
-  },
-  {
-    id: "kaufland",
-    title: "Kaufland — AI Film",
-    classification: "COMMERCIAL",
-    year: "2026",
-    studio: "FrameBreed Studio",
-    image: "/projects/kaufland/kaufland-poster.jpg",
-    logo: "/projects/kaufland/kaufland-logo.png",
-    tileLogo: "/projects/kaufland/kaufland-logo-white.png",
-    media: [
-      { type: "video", src: "/projects/kaufland/kaufland-film.mp4", poster: "/projects/kaufland/kaufland-poster.jpg" },
-    ],
-    en: {
-      projectType: "AI-assisted campaign film",
-      outcome: "A 90-second master film generated, composited and graded for final delivery.",
-      note: "A 90-second AI film built scene by scene from designed keyframes, then generated, composited and graded into one continuous edit through FrameBreed Studio.",
-      role: "Keyframe creation and video generation together with Andrei Brovcenco, who developed the story, script and creative direction.",
-      discipline: "Keyframes / AI video generation",
-      work: ["Keyframe creation together with Andrei Brovcenco", "AI-assisted video generation", "Visual development support based on the approved story and script"],
-      credits: [
-        ["Client", [{ name: "Kaufland Romania" }]],
-        ["Agency", [{ name: "Saga Film" }]],
-        ["FrameBreed Studio", "VFX / AI production"],
-        ["Andrei Brovcenco", "Story / Script / Creative Direction / Keyframe and generation collaboration"],
-        ["Robert Anghel", "Keyframes / AI video generation"],
-      ],
-    },
-    ro: {
-      projectType: "Film de campanie asistat de AI",
-      outcome: "Un master de 90 de secunde generat, compozitat și gradat pentru livrarea finală.",
-      note: "Un film AI de 90 de secunde construit scenă cu scenă din keyframe-uri, apoi generat, compozitat și gradat într-un montaj continuu prin FrameBreed Studio.",
-      role: "Creare de keyframe-uri și generare video împreună cu Andrei Brovcenco, care a dezvoltat povestea, scenariul și direcția creativă.",
-      discipline: "Keyframes / Generare video AI",
-      work: ["Creare de keyframe-uri împreună cu Andrei Brovcenco", "Generare video asistată de AI", "Suport de dezvoltare vizuală pe baza poveștii și scenariului aprobate"],
-      credits: [
-        ["Client", [{ name: "Kaufland Romania" }]],
-        ["Agenție", [{ name: "Saga Film" }]],
-        ["FrameBreed Studio", "VFX / Producție AI"],
-        ["Andrei Brovcenco", "Poveste / Scenariu / Direcție creativă / Colaborare la keyframe-uri și generare"],
-        ["Robert Anghel", "Keyframe-uri / Generare video AI"],
-      ],
-    },
-  },
-];
 
 const trandingProjects = [
   {
@@ -679,14 +108,14 @@ const copy = {
     heroWork: "Creative Work",
     scrollPrompt: "Scroll to explore",
     heroBriefLabel: "Profile / Capabilities",
-    heroBrief: "Technical Director working across 3D, VFX and AI-assisted production, with hands-on experience in editing, graphics and retouching, and direct coordination between creative teams, clients and agencies.",
+    heroBrief: "Technical Director at FrameBreed Studio for traditional 3D and VFX, and Producer at Digital Stage for AI and hybrid production. Hands-on work across creative pipelines, with direct coordination between teams, clients and agencies.",
     experienceEyebrow: "Experience",
     experienceTitle: <>Work<br />timeline.</>,
     roadmapLabel: "Career roadmap / Latest first",
     roadmapHint: "Select a role to open the full section",
     framebreedEyebrow: "Mar 2024 — Present",
     framebreedSummary: [
-      "Technical Director with a background in 3D production, coordinating teams, clients and agencies while supporting estimates, deliverables, editing, graphics, AI workflows, 3D and on-set VFX supervision.",
+      "Technical Director working across traditional CGI and VFX production: previsualization, character animation pipelines, lighting, rendering, compositing and on-set supervision. I coordinate teams, clients and agencies through the production process.",
     ],
     present: "Present",
     currentPosition: "Current position",
@@ -790,14 +219,14 @@ const copy = {
     heroWork: "Creative Work",
     scrollPrompt: "Derulează pentru a explora",
     heroBriefLabel: "Profil / Competențe",
-    heroBrief: "Director tehnic activ în 3D, VFX și producție asistată de AI, cu experiență hands-on în editare, grafică și retuș, precum și coordonare directă între echipe creative, clienți și agenții.",
+    heroBrief: "Director tehnic la FrameBreed Studio pentru 3D și VFX tradițional și Producer la Digital Stage pentru producții AI și hibride. Lucrez direct în fluxurile creative și coordonez echipe, clienți și agenții.",
     experienceEyebrow: "Experiență",
     experienceTitle: <>Cronologie<br />profesională.</>,
     roadmapLabel: "Parcurs profesional / Cel mai recent primul",
     roadmapHint: "Selectează un rol pentru secțiunea completă",
     framebreedEyebrow: "mart. 2024 — Prezent",
     framebreedSummary: [
-      "Director tehnic cu experiență în producție 3D, coordonând echipe, clienți și agenții și contribuind la estimări, livrabile, editare, grafică, fluxuri AI, 3D și supervizare VFX pe platou.",
+      "Director tehnic în producție CGI și VFX tradițional: previz, fluxuri de animație de personaje, lighting, render, compositing și supervizare pe platou. Coordonez echipe, clienți și agenții pe parcursul producției.",
     ],
     present: "Prezent",
     currentPosition: "Poziție actuală",
@@ -1101,7 +530,7 @@ export default function Home() {
                 <div className="projectLoopGroup" aria-hidden={copyIndex === 1} key={copyIndex}>
                   {framebreedProjects.map((project) => {
                     const projectCopy = project[language];
-                    const tileLogo = "tileLogo" in project ? project.tileLogo : project.logo;
+                    const tileLogo = project.logo;
                     return (
                       <button
                         className="projectLoopCard"
@@ -1115,7 +544,7 @@ export default function Home() {
                       >
                         <img className="projectLoopPreview" src={project.image} alt="" />
                         <span className="projectLoopTint" aria-hidden="true" />
-                        <span className="projectLoopLogo"><img src={tileLogo} alt={copyIndex === 0 ? project.title : ""} /></span>
+                        <span className="projectLoopLogo">{tileLogo ? <img src={tileLogo} alt={copyIndex === 0 ? project.title : ""} /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
                         <span className="projectLoopMeta">
                           <small>{project.classification} · {projectCopy.discipline}</small>
                           <strong>{t.seeProject}<span aria-hidden="true">↗</span></strong>
@@ -1139,12 +568,12 @@ export default function Home() {
               <div className="projectDirectoryGrid">
                 {framebreedProjects.map((project) => {
                   const projectCopy = project[language];
-                  const tileLogo = "tileLogo" in project ? project.tileLogo : project.logo;
+                  const tileLogo = project.logo;
                   return (
                     <button className="projectLoopCard projectGridCard" data-project={project.id} type="button" onClick={() => setActiveProjectId(project.id)} key={`grid-${project.id}`} aria-label={`${t.seeProject}: ${project.title}`}>
                       <img className="projectLoopPreview" src={project.image} alt="" />
                       <span className="projectLoopTint" aria-hidden="true" />
-                      <span className="projectLoopLogo"><img src={tileLogo} alt={project.title} /></span>
+                      <span className="projectLoopLogo">{tileLogo ? <img src={tileLogo} alt={project.title} /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
                       <span className="projectLoopMeta"><small>{project.classification} · {projectCopy.discipline}</small><strong>{project.title}<span aria-hidden="true">↗</span></strong></span>
                     </button>
                   );
@@ -1187,7 +616,7 @@ export default function Home() {
                       >
                         <img className="projectLoopPreview" src={project.image} alt="" loading="lazy" decoding="async" />
                         <span className="projectLoopTint" aria-hidden="true" />
-                        <span className="projectLoopLogo"><img src={tileLogo} alt={copyIndex === 0 ? project.title : ""} /></span>
+                        <span className="projectLoopLogo">{tileLogo ? <img src={tileLogo} alt={copyIndex === 0 ? project.title : ""} /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
                         <span className="projectLoopMeta">
                           <small>{project.classification} · {projectCopy.discipline}</small>
                           <strong>{t.seeProject}<span aria-hidden="true">↗</span></strong>
@@ -1216,7 +645,7 @@ export default function Home() {
                     <button className="projectLoopCard projectGridCard" data-project={project.id} type="button" onClick={() => setActiveProjectId(project.id)} key={`grid-${project.id}`} aria-label={`${t.seeProject}: ${project.title}`}>
                       <img className="projectLoopPreview" src={project.image} alt="" loading="lazy" decoding="async" />
                       <span className="projectLoopTint" aria-hidden="true" />
-                      <span className="projectLoopLogo"><img src={tileLogo} alt={project.title} /></span>
+                      <span className="projectLoopLogo">{tileLogo ? <img src={tileLogo} alt={project.title} /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
                       <span className="projectLoopMeta"><small>{project.classification} · {projectCopy.discipline}</small><strong>{project.title}<span aria-hidden="true">↗</span></strong></span>
                     </button>
                   );
@@ -1239,7 +668,7 @@ export default function Home() {
                 </header>
                 <div className="projectDetailIntro">
                   <div className="projectDetailIdentity">
-                    <span className="projectDetailLogo"><img src={activeProject.logo} alt={`${activeProject.title} logo`} /></span>
+                    {activeProject.logo && <span className="projectDetailLogo"><img src={activeProject.logo} alt={`${activeProject.title} logo`} /></span>}
                     <p className="eyebrow">{projectCopy.discipline}</p>
                     <h2 id="project-detail-title">{activeProject.title}</h2>
                   </div>
