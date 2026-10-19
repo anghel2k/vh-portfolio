@@ -205,6 +205,7 @@ const copy = {
     contactLead: "Available for selected long-term remote collaborations.",
     availabilityMeta: "Contract · Retainer · Remote",
     contactLabels: ["Name", "Based", "Phone", "Languages", "LinkedIn"],
+    personalEmailLabel: "Personal email",
     workEmailLabel: "Work email",
     based: "Bucharest, Romania",
     languages: "Romanian / English",
@@ -316,6 +317,7 @@ const copy = {
     contactLead: "Disponibil pentru colaborări remote selectate, pe termen lung.",
     availabilityMeta: "Contract · Retainer · Remote",
     contactLabels: ["Nume", "Locație", "Telefon", "Limbi", "LinkedIn"],
+    personalEmailLabel: "Email personal",
     workEmailLabel: "Email de muncă",
     based: "București, România",
     languages: "Română / Engleză",
@@ -533,7 +535,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
             {chapters.map((chapter) => (
               <a href={chapter.href} className="chapterRow" key={chapter.href} aria-label={`${chapter.company[language]} — ${chapter.role[language]}`}>
                 <span className="roadmapNode" aria-hidden="true" />
-                <span className="chapterIdentity"><span className="chapterLogo"><img {...imageDimensions(chapter.logo)} src={chapter.logo} alt={cleanPreview ? "" : chapter.company[language]} loading="lazy" decoding="async" /></span>{cleanPreview && <span className="cleanCompany">{chapter.company[language]}</span>}</span>
+                <span className="chapterIdentity"><span className="chapterLogo"><img {...imageDimensions(chapter.logo)} src={chapter.logo} alt={cleanPreview ? "" : chapter.company[language]} loading="lazy" decoding="async" /></span></span>
                 <span className="chapterWork"><strong>{chapter.role[language]}</strong><small>{chapter.engagement[language]}</small></span>
                 <span className="chapterYears">{chapter.years[language]}</span><span className="chapterArrow" aria-hidden="true">{cleanPreview ? <ArrowBottomRightIcon className="uiArrow" aria-hidden="true" /> : "↘"}</span>
               </a>
@@ -943,8 +945,25 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
         <section className="contactSection" id="contact" aria-labelledby="contact-title">
           <p className="eyebrow">{t.contactEyebrow}</p><h2 id="contact-title">{t.contactTitle}</h2>
           <div className="contactAvailability"><p className="contactLead">{t.contactLead}</p><span>{t.availabilityMeta}</span></div>
+          {cleanPreview ? (
+            <div className="contactEmailGrid">
+              <a className="contactEmailCard" href="mailto:anghelrobert18@gmail.com">
+                <span>{t.personalEmailLabel}</span>
+                <strong>anghelrobert18@gmail.com</strong>
+                <ArrowTopRightIcon className="uiArrow" aria-hidden="true" />
+              </a>
+              <a className="contactEmailCard" href="mailto:hello@veliumin.com">
+                <span>{t.workEmailLabel}</span>
+                <strong>hello@veliumin.com</strong>
+                <ArrowTopRightIcon className="uiArrow" aria-hidden="true" />
+              </a>
+            </div>
+          ) : (
+            <>
           <a className="contactEmail" href="mailto:anghelrobert18@gmail.com"><span>anghelrobert18@gmail.com</span><span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></a>
           <a className="contactPersonalEmail" href="mailto:hello@veliumin.com"><span>{t.workEmailLabel}</span><strong>hello@veliumin.com</strong><span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></a>
+            </>
+          )}
           <div className="contactGrid"><div><span>{t.contactLabels[0]}</span><strong translate="no">Robert Anghel</strong></div><div><span>{t.contactLabels[1]}</span><strong>{t.based}</strong></div><div><span>{t.contactLabels[2]}</span><a href="tel:+40722905095">+40 722 905 095</a></div><div><span>{t.contactLabels[3]}</span><strong>{t.languages}</strong></div><div><span>{t.contactLabels[4]}</span><a href="https://www.linkedin.com/in/robert-anghel18/" target="_blank" rel="noreferrer">LinkedIn {cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</a></div></div>
           <div className="contactMark" aria-hidden="true"><img {...imageDimensions("/brand/vh_mark_paper.svg")} src="/brand/vh_mark_paper.svg" alt="" loading="lazy" decoding="async" /></div>
         </section>
