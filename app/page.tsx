@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } f
 import BouncingMark from "./BouncingMark";
 import ProjectSlider from "./ProjectSlider";
 import HeroProjectBubbles from "./HeroProjectBubbles";
+import { usePreviewMotion } from "./usePreviewMotion";
 import { imageDimensions } from "./imageDimensions";
 import { useModalFocus } from "./useModalFocus";
 import { useReducedMotion } from "./useReducedMotion";
@@ -367,6 +368,7 @@ function CapabilitySymbol({ index }: { index: number }) {
 }
 
 export default function Home({ cleanPreview = false }: { cleanPreview?: boolean } = {}) {
+  usePreviewMotion(cleanPreview);
   const [language, setLanguage] = useState<Language>("en");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
@@ -406,7 +408,11 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
     if (!mobileMenuOpen) return;
     const desktopQuery = window.matchMedia("(min-width: 701px)");
     const closeMenu = () => setMobileMenuOpen(false);
-    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") closeMenu(); };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      closeMenu();
+      document.querySelector<HTMLButtonElement>(".mobileMenuToggle")?.focus({ preventScroll: true });
+    };
     const closeOnOutsideClick = (event: PointerEvent) => {
       const target = event.target;
       if (target instanceof Element && !target.closest(".mobileMenu,.mobileMenuToggle")) closeMenu();

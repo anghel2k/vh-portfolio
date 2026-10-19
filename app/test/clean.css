@@ -83,7 +83,7 @@
 .cleanPreview .projectLoopTrack { width:100%; display:block; animation:none; transform:none; will-change:auto; }
 .cleanPreview .projectLoopGroup { width:100%; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; }
 .cleanPreview .projectLoopCard { width:100%; aspect-ratio:auto; display:block; overflow:hidden; color:var(--ink); background:#fff; border-radius:12px; isolation:isolate; }
-.cleanPreview .projectLoopPreview { position:relative; inset:auto; z-index:0; width:100%; height:auto; aspect-ratio:16/11; object-fit:cover; opacity:1; filter:none; transform:none; border-radius:12px 12px 0 0; transition:filter .3s; }
+.cleanPreview .projectLoopPreview { position:relative; inset:auto; z-index:0; width:100%; height:auto; aspect-ratio:16/11; object-fit:cover; opacity:1; filter:none; transform:none; border-radius:12px 12px 0 0; transition:opacity .25s; }
 .cleanPreview .projectLoopTint { inset:0 0 104px; z-index:1; background:#000; opacity:.18; border-radius:8px; }
 .cleanPreview .projectLoopLogo,.cleanPreview .projectGridCard .projectLoopLogo { inset:calc((100% - 104px)/2) 25% auto; height:24%; z-index:2; transform:translateY(-50%); }
 .cleanPreview .projectLoopLogo img { width:100%; max-height:100%; filter:brightness(0) invert(1); }
@@ -91,7 +91,7 @@
 .cleanPreview .projectLoopMeta small { color:var(--grey); font-size:11px; font-weight:400; letter-spacing:0; line-height:1.4; text-transform:none; opacity:1; }
 .cleanPreview .projectLoopMeta strong { min-height:0; padding:0; font-size:17px; font-weight:700; line-height:1.25; letter-spacing:-.025em; text-transform:none; }
 .cleanPreview .projectLoopMeta strong span { font-size:20px; animation:none; }
-.cleanPreview .projectLoopCard:hover .projectLoopPreview { opacity:1; filter:brightness(.88); transform:none; }
+.cleanPreview .projectLoopCard:hover .projectLoopPreview { opacity:.9; filter:none; transform:none; }
 .cleanPreview .projectLoopCard:hover .projectLoopTint { opacity:.18; }
 .cleanPreview .projectLoopCard:hover .projectLoopLogo,.cleanPreview .projectGridCard:hover .projectLoopLogo { transform:translateY(-50%); }
 .cleanPreview .projectLoopCard:hover .projectLoopMeta strong { padding:0; color:var(--ultra); background:none; }
@@ -558,31 +558,50 @@ body:has(.cleanPreview) { background:#f2f2f2; }
   .cleanPreview .cleanSliderControls button:active:not(:disabled) { transform:none; }
 }
 
-/* Project bubbles keep their grid footprint while pictures pop into place. */
-.cleanPreview .cleanHeroImage { padding:0; background:transparent; cursor:pointer; border-radius:24px 24px 24px 8px; transition:transform .25s; }
-.cleanPreview .cleanHeroImage:nth-child(even) { border-radius:24px 24px 8px 24px; }
-.cleanPreview .heroBubbleFrame { position:absolute; inset:0; display:block; border-radius:inherit; animation:heroBubblePop .65s cubic-bezier(.22,.8,.25,1) both; }
-.cleanPreview .cleanHeroImageTwo .heroBubbleFrame { animation-delay:.07s; }
-.cleanPreview .cleanHeroImageThree .heroBubbleFrame { animation-delay:.14s; }
-.cleanPreview .cleanHeroImageFour .heroBubbleFrame { animation-delay:.21s; }
-.cleanPreview .heroBubbleControls { display:flex; align-items:center; justify-content:center; gap:4px; margin-top:8px; }
-.cleanPreview .heroBubbleControls button { min-height:44px; min-width:44px; padding:0 10px; display:inline-flex; align-items:center; justify-content:center; gap:7px; border-radius:14px; background:transparent; color:var(--grey); font:inherit; font-size:12px; cursor:pointer; transition:background-color .2s,color .2s; }
-.cleanPreview .heroBubbleControls button:hover { color:var(--ink); background:#fff; }
-.cleanPreview .heroBubbleControls svg { width:16px; height:16px; }
+/* Clear glass frames for interactive project windows; artwork stays unobscured. */
+.cleanPreview .cleanHeroImage {
+  padding:0; cursor:pointer; border-radius:24px; isolation:isolate;
+  background:var(--glass-surface); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.95),inset 0 -1px 1px rgba(40,50,70,.08),0 10px 30px rgba(25,35,55,.1),0 2px 5px rgba(25,35,55,.06)!important;
+  transition:transform .28s cubic-bezier(.2,.7,.25,1); transform-origin:center;
+}
+.cleanPreview .cleanHeroImage::after { content:""; position:absolute; inset:0; z-index:2; border-radius:inherit; pointer-events:none; background:linear-gradient(135deg,rgba(255,255,255,.34),transparent 36%,transparent 70%,rgba(255,255,255,.18)); }
+.cleanPreview .heroBubbleFrame { position:absolute; inset:6px; display:block; border-radius:19px; animation:heroBubblePop .55s cubic-bezier(.22,.8,.25,1); }
+.cleanPreview .heroBubbleFrame .cleanHeroPicture { border-radius:inherit; }
+.cleanPreview .cleanHeroImage.isEntering { animation:heroWindowFloat 4.3s cubic-bezier(.2,.7,.25,1); }
+.cleanPreview .cleanHeroImageTwo.isEntering { animation-delay:.06s; }
+.cleanPreview .cleanHeroImageThree.isEntering { animation-delay:.12s; }
+.cleanPreview .cleanHeroImageFour.isEntering { animation-delay:.18s; }
+.cleanPreview .cleanSliderCount { font-variant-numeric:tabular-nums; }
+.cleanPreview :is(.chapterRow,.contactEmailCard,.cvPreviewLink) { transition:transform .22s cubic-bezier(.2,.7,.25,1),background-color .2s,color .2s; }
+.cleanPreview .uiArrow { transition:transform .2s; }
+.cleanPreview .contactEmailCard:hover>.uiArrow,.cleanPreview .cleanHeroCopy>a:hover>span>.uiArrow,.cleanPreview .externalProjectLink:hover>span>.uiArrow { transform:translate(2px,-2px); }
 @keyframes heroBubblePop {
-  0% { opacity:0; transform:translateY(10px) scale(.86); }
-  64% { opacity:1; transform:translateY(-2px) scale(1.025); }
+  0% { opacity:.25; transform:translateY(5px) scale(.94); }
+  70% { opacity:1; transform:translateY(-1px) scale(1.01); }
   100% { opacity:1; transform:translateY(0) scale(1); }
 }
-@media (hover:hover) and (prefers-reduced-motion:no-preference) {
-  .cleanPreview .cleanHeroImage:hover { transform:translateY(-4px) rotate(-1deg); }
-  .cleanPreview .cleanHeroImage:nth-child(even):hover { transform:translateY(-4px) rotate(1deg); }
+@keyframes heroWindowFloat {
+  0%,100% { transform:translateY(0) rotate(0); }
+  36% { transform:translateY(-6px) rotate(-.7deg); }
+  72% { transform:translateY(-2px) rotate(.35deg); }
 }
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  .cleanPreview .cleanHeroImage:hover { transform:translateY(-5px) rotate(-1deg) scale(1.025); }
+  .cleanPreview .cleanHeroImage:nth-child(even):hover { transform:translateY(-5px) rotate(1deg) scale(1.025); }
+  .cleanPreview :is(.chapterRow,.contactEmailCard,.cvPreviewLink):hover { transform:translateY(-3px); }
+}
+.cleanPreview .cleanHeroImage:active { transform:scale(.98); }
 @media (max-width:700px) {
-  .cleanPreview .cleanHeroImage { border-radius:16px 16px 16px 5px; }
-  .cleanPreview .cleanHeroImage:nth-child(even) { border-radius:16px 16px 5px 16px; }
+  .cleanPreview .cleanHeroImage { border-radius:18px; }
+  .cleanPreview .heroBubbleFrame { inset:4px; border-radius:14px; }
+}
+@media (prefers-reduced-transparency:reduce), (prefers-contrast:more) {
+  .cleanPreview .cleanHeroImage { background:#fff; backdrop-filter:none; -webkit-backdrop-filter:none; box-shadow:0 2px 6px rgba(25,35,55,.12)!important; }
+  .cleanPreview .cleanHeroImage::after,.cleanPreview .cleanHeroBlur { display:none; }
+  .cleanPreview :is(.projectDetailLayer,.projectMediaLightboxLayer) { backdrop-filter:none; -webkit-backdrop-filter:none; }
 }
 @media (prefers-reduced-motion:reduce) {
-  .cleanPreview .heroBubbleFrame { animation:none; }
-  .cleanPreview .cleanHeroImage { transition:none; }
+  .cleanPreview .heroBubbleFrame,.cleanPreview .cleanHeroImage.isEntering { animation:none; }
+  .cleanPreview .cleanHeroImage:active,.cleanPreview .contactEmailCard:hover>.uiArrow,.cleanPreview .cleanHeroCopy>a:hover>span>.uiArrow,.cleanPreview .externalProjectLink:hover>span>.uiArrow { transform:none; }
 }
