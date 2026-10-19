@@ -351,7 +351,7 @@ function ProjectPreviewVideo({ src, poster, label }: { src: string; poster?: str
   );
 }
 
-export default function Home() {
+export default function Home({ cleanPreview = false }: { cleanPreview?: boolean } = {}) {
   const [language, setLanguage] = useState<Language>("en");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
@@ -452,6 +452,7 @@ export default function Home() {
       <header className="siteHeader">
         <a className="brandLink" href="#top" aria-label={t.homeLabel} onClick={() => setMobileMenuOpen(false)}>
           <img src="/brand/vh_mark_ink.svg" alt="" width={36} height={36} />
+          {cleanPreview && <strong>Robert Anghel</strong>}
         </a>
         <div className="headerActions">
           <nav aria-label={t.navLabel}>
@@ -481,6 +482,20 @@ export default function Home() {
       </header>
 
       <main id="main" tabIndex={-1}>
+        {cleanPreview ? (
+          <section className="cleanHero" id="top" aria-labelledby="clean-hero-title">
+            <img className="cleanHeroImage cleanHeroImageOne" src="/projects/raye/poster.jpg" alt="" />
+            <img className="cleanHeroImage cleanHeroImageTwo" src="/projects/new-balance/egg-hatch.jpg" alt="" />
+            <img className="cleanHeroImage cleanHeroImageThree" src="/digitalstage/media/work-thumbnails/virgin-media-custom.jpg" alt="" />
+            <img className="cleanHeroImage cleanHeroImageFour" src="/projects/heineken/heineken-blue.jpg" alt="" />
+            <div className="cleanHeroCopy">
+              <p>Robert Anghel</p>
+              <h1 id="clean-hero-title">{language === "en" ? <>Technical direction.<br />Creative production.</> : <>Direcție tehnică.<br />Producție creativă.</>}</h1>
+              <p>{t.heroCapabilities}</p>
+              <a href="#experience">{language === "en" ? "Explore my work" : "Descoperă proiectele"} <span aria-hidden="true">↗</span></a>
+            </div>
+          </section>
+        ) : (
         <section className="hero" id="top">
           <BouncingMark />
           <h1 className="heroHeadline">
@@ -491,6 +506,7 @@ export default function Home() {
           </h1>
           <a className="heroScrollLink" href="#intro"><span>{t.scrollPrompt}</span><i aria-hidden="true" /></a>
         </section>
+        )}
 
         <section className="heroBrief" id="intro" aria-label={t.heroBriefLabel}>
           <p className="eyebrow">{t.heroBriefLabel}</p><p>{t.heroBrief}</p>
@@ -505,7 +521,7 @@ export default function Home() {
             {chapters.map((chapter) => (
               <a href={chapter.href} className="chapterRow" key={chapter.href} aria-label={`${chapter.company[language]} — ${chapter.role[language]}`}>
                 <span className="roadmapNode" aria-hidden="true" />
-                <span className="chapterIdentity"><span className="chapterLogo"><img src={chapter.logo} alt={chapter.company[language]} /></span></span>
+                <span className="chapterIdentity">{cleanPreview ? <span className="cleanCompany">{chapter.company[language]}</span> : <span className="chapterLogo"><img src={chapter.logo} alt={chapter.company[language]} /></span>}</span>
                 <span className="chapterWork"><strong>{chapter.role[language]}</strong><small>{chapter.engagement[language]}</small></span>
                 <span className="chapterYears">{chapter.years[language]}</span><span className="chapterArrow" aria-hidden="true">↘</span>
               </a>
@@ -526,9 +542,9 @@ export default function Home() {
           </header>
           <div className="projectLoop" id="selected-work" aria-label={t.selectedProjects} onPointerDown={pauseCarousel} onPointerUp={resumeCarousel} onPointerCancel={resumeCarousel} onPointerLeave={resumeCarousel}>
             <div className="projectLoopTrack">
-              {[0, 1].map((copyIndex) => (
+              {(cleanPreview ? [0] : [0, 1]).map((copyIndex) => (
                 <div className="projectLoopGroup" aria-hidden={copyIndex === 1} key={copyIndex}>
-                  {framebreedProjects.map((project) => {
+                  {(cleanPreview ? framebreedProjects.slice(0, 3) : framebreedProjects).map((project) => {
                     const projectCopy = project[language];
                     const tileLogo = project.logo;
                     return (
@@ -547,7 +563,7 @@ export default function Home() {
                         <span className="projectLoopLogo">{tileLogo ? <img src={tileLogo} alt={copyIndex === 0 ? project.title : ""} /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
                         <span className="projectLoopMeta">
                           <small>{project.classification} · {projectCopy.discipline}</small>
-                          <strong>{t.seeProject}<span aria-hidden="true">↗</span></strong>
+                          <strong>{cleanPreview ? project.title : t.seeProject}<span aria-hidden="true">↗</span></strong>
                         </span>
                       </button>
                     );
@@ -598,9 +614,9 @@ export default function Home() {
           </header>
           <div className="projectLoop" id="digitalstage-work" aria-label={language === "en" ? "Selected Digital Stage projects" : "Proiecte Digital Stage selectate"} onPointerDown={pauseCarousel} onPointerUp={resumeCarousel} onPointerCancel={resumeCarousel} onPointerLeave={resumeCarousel}>
             <div className="projectLoopTrack">
-              {[0, 1].map((copyIndex) => (
+              {(cleanPreview ? [0] : [0, 1]).map((copyIndex) => (
                 <div className="projectLoopGroup" aria-hidden={copyIndex === 1} key={copyIndex}>
-                  {digitalstageProjects.map((project) => {
+                  {(cleanPreview ? digitalstageProjects.slice(0, 3) : digitalstageProjects).map((project) => {
                     const projectCopy = project[language];
                     const tileLogo = project.logo;
                     return (
@@ -619,7 +635,7 @@ export default function Home() {
                         <span className="projectLoopLogo">{tileLogo ? <img src={tileLogo} alt={copyIndex === 0 ? project.title : ""} /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
                         <span className="projectLoopMeta">
                           <small>{project.classification} · {projectCopy.discipline}</small>
-                          <strong>{t.seeProject}<span aria-hidden="true">↗</span></strong>
+                          <strong>{cleanPreview ? project.title : t.seeProject}<span aria-hidden="true">↗</span></strong>
                         </span>
                       </button>
                     );
@@ -787,7 +803,7 @@ export default function Home() {
             <header className="veliuminShowcaseHeader"><span>{t.veliuminShowcaseTitle}</span><span>2023 — 2025</span></header>
             <div className="veliuminArchiveViewport" onPointerDown={pauseCarousel} onPointerUp={resumeCarousel} onPointerCancel={resumeCarousel} onPointerLeave={resumeCarousel}>
               <div className="veliuminArchiveTrack">
-                {[0, 1].map((groupIndex) => (
+                {(cleanPreview ? [0] : [0, 1]).map((groupIndex) => (
                   <div className="veliuminArchiveGroup" aria-hidden={groupIndex === 1} key={groupIndex}>
                     {veliuminArchive.map((item) => (
                       <figure className="veliuminArchiveCard" data-format={item.format} key={`${groupIndex}-${item.id}`}>
@@ -808,7 +824,7 @@ export default function Home() {
           </header>
           <div className="trandingShowcase" aria-label={t.trandingMediaLabel} onPointerDown={pauseCarousel} onPointerUp={resumeCarousel} onPointerCancel={resumeCarousel} onPointerLeave={resumeCarousel}>
             <div className="trandingProjectTrack">
-              {[0, 1].map((groupIndex) => (
+              {(cleanPreview ? [0] : [0, 1]).map((groupIndex) => (
                 <div className="trandingProjectGroup" aria-hidden={groupIndex === 1} key={groupIndex}>
                   {trandingProjects.map((project) => (
                     <a className="trandingProjectCard" data-format={project.format} href={project.href} target="_blank" rel="noreferrer" key={`${groupIndex}-${project.id}`} tabIndex={groupIndex === 1 ? -1 : undefined}>
