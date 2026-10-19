@@ -514,7 +514,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
         {cleanPreview ? (
           <section className="cleanHero" id="top" aria-labelledby="clean-hero-title">
             <HeroProjectBubbles language={language} onSelect={setActiveProjectId} obscured={Boolean(activeProjectId)}>
-              <p>Robert Anghel</p>
+              <p>Robert Anghel — {language === "en" ? "Portfolio" : "Portofoliu"}</p>
               <h1 id="clean-hero-title">{language === "en" ? <>Technical direction.<br />Creative production.</> : <>Direcție tehnică.<br />Producție creativă.</>}</h1>
               <p>{t.heroCapabilities}</p>
               <a href="#experience">{language === "en" ? "Explore my work" : "Descoperă proiectele"} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></a>
