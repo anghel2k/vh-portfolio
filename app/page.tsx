@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import BouncingMark from "./BouncingMark";
+import ProjectSlider from "./ProjectSlider";
 import { digitalstageProjects } from "./digitalstageProjects";
 import { framebreedProjects } from "./framebreedProjects";
 
@@ -484,10 +485,10 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
       <main id="main" tabIndex={-1}>
         {cleanPreview ? (
           <section className="cleanHero" id="top" aria-labelledby="clean-hero-title">
-            <img className="cleanHeroImage cleanHeroImageOne" src="/projects/raye/poster.jpg" alt="" />
-            <img className="cleanHeroImage cleanHeroImageTwo" src="/projects/new-balance/egg-hatch.jpg" alt="" />
-            <img className="cleanHeroImage cleanHeroImageThree" src="/digitalstage/media/work-thumbnails/virgin-media-custom.jpg" alt="" />
-            <img className="cleanHeroImage cleanHeroImageFour" src="/projects/heineken/heineken-blue.jpg" alt="" />
+            <span className="cleanHeroImage cleanHeroImageOne"><img className="cleanHeroBlur" src="/projects/raye/poster.jpg" alt="" aria-hidden="true" /><img className="cleanHeroPicture" src="/projects/raye/poster.jpg" alt="" /></span>
+            <span className="cleanHeroImage cleanHeroImageTwo"><img className="cleanHeroBlur" src="/projects/new-balance/egg-hatch.jpg" alt="" aria-hidden="true" /><img className="cleanHeroPicture" src="/projects/new-balance/egg-hatch.jpg" alt="" /></span>
+            <span className="cleanHeroImage cleanHeroImageThree"><img className="cleanHeroBlur" src="/digitalstage/media/work-thumbnails/virgin-media-custom.jpg" alt="" aria-hidden="true" /><img className="cleanHeroPicture" src="/digitalstage/media/work-thumbnails/virgin-media-custom.jpg" alt="" /></span>
+            <span className="cleanHeroImage cleanHeroImageFour"><img className="cleanHeroBlur" src="/projects/heineken/heineken-blue.jpg" alt="" aria-hidden="true" /><img className="cleanHeroPicture" src="/projects/heineken/heineken-blue.jpg" alt="" /></span>
             <div className="cleanHeroCopy">
               <p>Robert Anghel</p>
               <h1 id="clean-hero-title">{language === "en" ? <>Technical direction.<br />Creative production.</> : <>Direcție tehnică.<br />Producție creativă.</>}</h1>
@@ -521,7 +522,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
             {chapters.map((chapter) => (
               <a href={chapter.href} className="chapterRow" key={chapter.href} aria-label={`${chapter.company[language]} — ${chapter.role[language]}`}>
                 <span className="roadmapNode" aria-hidden="true" />
-                <span className="chapterIdentity">{cleanPreview ? <span className="cleanCompany">{chapter.company[language]}</span> : <span className="chapterLogo"><img src={chapter.logo} alt={chapter.company[language]} /></span>}</span>
+                <span className="chapterIdentity"><span className="chapterLogo"><img src={chapter.logo} alt={cleanPreview ? "" : chapter.company[language]} /></span>{cleanPreview && <span className="cleanCompany">{chapter.company[language]}</span>}</span>
                 <span className="chapterWork"><strong>{chapter.role[language]}</strong><small>{chapter.engagement[language]}</small></span>
                 <span className="chapterYears">{chapter.years[language]}</span><span className="chapterArrow" aria-hidden="true">↘</span>
               </a>
@@ -540,11 +541,12 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
               </ol>
             </div>
           </header>
+          <ProjectSlider active={cleanPreview} previousLabel={t.previousProject} nextLabel={t.nextProject} label={t.selectedProjects}>
           <div className="projectLoop" id="selected-work" aria-label={t.selectedProjects} onPointerDown={pauseCarousel} onPointerUp={resumeCarousel} onPointerCancel={resumeCarousel} onPointerLeave={resumeCarousel}>
             <div className="projectLoopTrack">
               {(cleanPreview ? [0] : [0, 1]).map((copyIndex) => (
                 <div className="projectLoopGroup" aria-hidden={copyIndex === 1} key={copyIndex}>
-                  {(cleanPreview ? framebreedProjects.slice(0, 3) : framebreedProjects).map((project) => {
+                  {framebreedProjects.map((project) => {
                     const projectCopy = project[language];
                     const tileLogo = project.logo;
                     return (
@@ -572,6 +574,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
               ))}
             </div>
           </div>
+          </ProjectSlider>
           <div className="projectDirectoryToggleRow">
             <span>{framebreedProjects.length.toString().padStart(2, "0")} / {t.selectedProjects}</span>
             <button type="button" aria-expanded={showAllProjects} aria-controls="framebreed-project-directory" onClick={() => setShowAllProjects((isOpen) => !isOpen)}>
@@ -612,11 +615,12 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
               </ol>
             </div>
           </header>
+          <ProjectSlider active={cleanPreview} previousLabel={t.previousProject} nextLabel={t.nextProject} label={language === "en" ? "Selected Digital Stage projects" : "Proiecte Digital Stage selectate"}>
           <div className="projectLoop" id="digitalstage-work" aria-label={language === "en" ? "Selected Digital Stage projects" : "Proiecte Digital Stage selectate"} onPointerDown={pauseCarousel} onPointerUp={resumeCarousel} onPointerCancel={resumeCarousel} onPointerLeave={resumeCarousel}>
             <div className="projectLoopTrack">
               {(cleanPreview ? [0] : [0, 1]).map((copyIndex) => (
                 <div className="projectLoopGroup" aria-hidden={copyIndex === 1} key={copyIndex}>
-                  {(cleanPreview ? digitalstageProjects.slice(0, 3) : digitalstageProjects).map((project) => {
+                  {digitalstageProjects.map((project) => {
                     const projectCopy = project[language];
                     const tileLogo = project.logo;
                     return (
@@ -644,6 +648,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
               ))}
             </div>
           </div>
+          </ProjectSlider>
           <div className="projectDirectoryToggleRow">
             <span>{digitalstageProjects.length.toString().padStart(2, "0")} / {language === "en" ? "Selected Digital Stage projects" : "Proiecte Digital Stage selectate"}</span>
             <button type="button" aria-expanded={showAllDigitalstageProjects} aria-controls="digitalstage-project-directory" onClick={() => setShowAllDigitalstageProjects((isOpen) => !isOpen)}>

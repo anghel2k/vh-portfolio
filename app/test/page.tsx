@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Portfolio from "../page";
-import "@fontsource-variable/inter-tight/wght.css";
 import "./clean.css";
 
 export const metadata: Metadata = {
