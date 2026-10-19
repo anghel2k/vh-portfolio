@@ -200,7 +200,7 @@ const copy = {
     contactLead: "Available for selected long-term remote collaborations.",
     availabilityMeta: "Contract · Retainer · Remote",
     contactLabels: ["Name", "Based", "Phone", "Languages", "LinkedIn"],
-    personalEmailLabel: "Personal email",
+    workEmailLabel: "Work email",
     based: "Bucharest, Romania",
     languages: "Romanian / English",
     backTop: "Back to top ↑",
@@ -311,7 +311,7 @@ const copy = {
     contactLead: "Disponibil pentru colaborări remote selectate, pe termen lung.",
     availabilityMeta: "Contract · Retainer · Remote",
     contactLabels: ["Nume", "Locație", "Telefon", "Limbi", "LinkedIn"],
-    personalEmailLabel: "Email personal",
+    workEmailLabel: "Email de muncă",
     based: "București, România",
     languages: "Română / Engleză",
     backTop: "Înapoi sus ↑",
@@ -903,8 +903,8 @@ export default function Home() {
         <section className="contactSection" id="contact" aria-labelledby="contact-title">
           <p className="eyebrow">{t.contactEyebrow}</p><h2 id="contact-title">{t.contactTitle}</h2>
           <div className="contactAvailability"><p className="contactLead">{t.contactLead}</p><span>{t.availabilityMeta}</span></div>
-          <a className="contactEmail" href="mailto:anghel@vellumhaus.studio"><span>anghel@vellumhaus.studio</span><span aria-hidden="true">↗</span></a>
-          <a className="contactPersonalEmail" href="mailto:anghelrobert18@gmail.com"><span>{t.personalEmailLabel}</span><strong>anghelrobert18@gmail.com</strong><span aria-hidden="true">↗</span></a>
+          <a className="contactEmail" href="mailto:anghelrobert18@gmail.com"><span>anghelrobert18@gmail.com</span><span aria-hidden="true">↗</span></a>
+          <a className="contactPersonalEmail" href="mailto:hello@veliumin.com"><span>{t.workEmailLabel}</span><strong>hello@veliumin.com</strong><span aria-hidden="true">↗</span></a>
           <div className="contactGrid"><div><span>{t.contactLabels[0]}</span><strong>Robert Anghel</strong></div><div><span>{t.contactLabels[1]}</span><strong>{t.based}</strong></div><div><span>{t.contactLabels[2]}</span><a href="tel:+40722905095">+40 722 905 095</a></div><div><span>{t.contactLabels[3]}</span><strong>{t.languages}</strong></div><div><span>{t.contactLabels[4]}</span><a href="https://www.linkedin.com/in/robert-anghel18/" target="_blank" rel="noreferrer">LinkedIn ↗</a></div></div>
           <div className="contactMark" aria-hidden="true"><img src="/brand/vh_mark_paper.svg" alt="" /></div>
         </section>

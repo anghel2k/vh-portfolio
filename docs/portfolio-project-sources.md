@@ -27,3 +27,8 @@ Films are served from local public assets. Public Instagram clips were imported 
 Official assets added 19 October 2026: Mentos wordmark extracted unchanged from the [Mentos homepage](https://www.mentos.com.mx/), [Croco logo](https://croco.ro/wp-content/uploads/2018/09/logo1.png), [IG website logo](https://www.ig.com/uk), [MacuShield logo](https://macushield.ro/wp-content/uploads/2021/07/logo-Macu.png), and [Salt Bank logo](https://salt.bank/themes/ideabank/assets/logos/salt.svg). The Salt source is an SVG symbol; a use element makes that symbol render as a standalone image. Brand colours are retained where monochrome filtering would obscure the mark.
 
 Career timeline uses Mar 2024 to present for the overall FrameBreed engagement and Aug 2025 to present for Digital Stage. FrameBreed's detailed progression remains 3D Generalist until Nov 2025, then Technical Director. Dates explicitly confirmed by Robert.
+
+
+### Refined monochrome logos
+- MacuShield: original vector wordmark extracted from public product leaflet https://media.bebetei.ro/gallery/7087/macushield-gold-90-capsule-macu-vision-2608.pdf, page 1, UK header. Original letter outlines retained, recoloured white.
+- Croco: higher-resolution original https://croco.ro/wp-content/uploads/2015/07/logo1.png. White lettering and oval selected with a soft SVG luminance mask, preserving antialiasing.
