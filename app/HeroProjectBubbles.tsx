@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { framebreedProjects } from "./framebreedProjects";
 import { digitalstageProjects } from "./digitalstageProjects";
-import { imageDimensions } from "./imageDimensions";
+import { imageDimensions, optimizedSource } from "./imageDimensions";
 import { useReducedMotion } from "./useReducedMotion";
 
 const projects = [...framebreedProjects, ...digitalstageProjects];
@@ -44,7 +44,10 @@ export default function HeroProjectBubbles({ children, language, onSelect, obscu
       const candidates = projects.map((_, index) => index).filter(index => !selected.current.includes(index));
       const candidate = candidates[Math.floor(Math.random() * candidates.length)];
       const picture = new Image();
-      picture.src = projects[candidate].image;
+      const attributes = imageDimensions(projects[candidate].image);
+      picture.sizes = "280px";
+      picture.srcset = attributes.srcSet ?? "";
+      picture.src = optimizedSource(projects[candidate].image);
       try {
         await picture.decode();
         // A slow network must not restart motion long after the opening sequence.
@@ -97,8 +100,8 @@ export default function HeroProjectBubbles({ children, language, onSelect, obscu
         data-hero-project={project.id} aria-label={`${language === "ro" ? "Vezi proiectul" : "View project"}: ${project.title}`}
         onClick={() => onSelect(project.id)}>
         <span className="heroBubbleFrame" key={project.id}>
-          <img className="cleanHeroBlur" {...imageDimensions(project.image)} src={project.image} alt="" aria-hidden="true" />
-          <img className="cleanHeroPicture" {...imageDimensions(project.image)} src={project.image} alt="" fetchPriority={slot === 0 ? "high" : "auto"} />
+          <img className="cleanHeroBlur" {...imageDimensions(project.image)} sizes="280px" src={project.image} alt="" aria-hidden="true" />
+          <img className="cleanHeroPicture" {...imageDimensions(project.image)} sizes="280px" src={project.image} alt="" fetchPriority={slot === 0 ? "high" : "auto"} />
         </span>
       </button>;
     })}

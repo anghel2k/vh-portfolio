@@ -7,8 +7,8 @@
   --grey:#65615a;
   --ultra:#205af9;
   --signal:#ff4e25;
-  --display:"Inter Variable","Inter",Arial,Helvetica,sans-serif;
-  --mono:"Space Mono",monospace;
+  --display:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:var(--display);
   --header-h:76px;
 }
 

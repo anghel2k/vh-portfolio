@@ -945,3 +945,6 @@ body:has(.cleanPreview) { background:#f2f2f2; }
 
 /* Reserve equal room for the three localized introductions on narrow screens. */
 @media (max-width:360px) { .cleanPreview .practiceCopy { min-height:430px; } }
+
+/* Comfortable language targets keep the compact header keyboard and touch friendly. */
+.cleanPreview .languageSwitch button { min-width:44px; min-height:44px; }

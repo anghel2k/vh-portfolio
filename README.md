@@ -37,3 +37,5 @@ All brand marks and San Pellegrino project media are included under `public/`. N
 ## Current published design
 
 The approved design is the homepage at `/`. Its shared client component is `app/Portfolio.tsx` and its styles are `app/portfolio.css`. The `/test` route uses the same component and remains excluded from indexing. Production canonical, indexing and viewport settings are exported from `app/page.tsx`.
+
+Responsive image assets can be regenerated with `node scripts/optimize-images.mjs`, followed by `python3 scripts/image-dimensions.py`. Generated WebP files are content hashed and checked in; originals are retained. See `docs/site-audit-2026-10-20.md` for the full-site design, accessibility and speed audit.

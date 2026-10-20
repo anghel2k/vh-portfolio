@@ -8,7 +8,7 @@ import ClientLogoRail from "./ClientLogoRail";
 import PracticeOverview from "./PracticeOverview";
 import CompanyJourney from "./CompanyJourney";
 import { usePreviewMotion } from "./usePreviewMotion";
-import { imageDimensions } from "./imageDimensions";
+import { imageDimensions, optimizedSource } from "./imageDimensions";
 import { useModalFocus } from "./useModalFocus";
 import { useReducedMotion } from "./useReducedMotion";
 import { ArrowTopRightIcon, ArrowBottomRightIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, DownloadIcon, GridIcon, EnvelopeClosedIcon, PersonIcon, FileTextIcon, MagicWandIcon, CubeIcon, VideoIcon, ImageIcon, PlusIcon, CheckIcon } from "@radix-ui/react-icons";
@@ -359,7 +359,7 @@ function ProjectPreviewVideo({ src, poster, label }: { src: string; poster?: str
   }, [shouldLoad, reducedMotion]);
 
   return (
-    <video ref={videoRef} loop muted playsInline preload="none" poster={poster} aria-label={label}>
+    <video ref={videoRef} loop muted playsInline preload="none" poster={poster ? optimizedSource(poster) : undefined} aria-label={label}>
       {shouldLoad && <source src={src} type="video/mp4" />}
     </video>
   );
@@ -489,8 +489,8 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
             <a className="contactNav" href="#contact">{cleanPreview && <EnvelopeClosedIcon className="uiSymbol" aria-hidden="true" />}{t.nav[1]}</a>
           </nav>
           <div className="languageSwitch" role="group" aria-label={t.languageLabel}>
-            <button type="button" className={language === "en" ? "active" : ""} aria-pressed={language === "en"} aria-label={t.languageNames.en} title={t.languageNames.en} onClick={() => changeLanguage("en")}><span aria-hidden="true">🇬🇧</span><small>EN</small></button>
-            <button type="button" className={language === "ro" ? "active" : ""} aria-pressed={language === "ro"} aria-label={t.languageNames.ro} title={t.languageNames.ro} onClick={() => changeLanguage("ro")}><span aria-hidden="true">🇷🇴</span><small>RO</small></button>
+            <button type="button" className={language === "en" ? "active" : ""} aria-pressed={language === "en"} aria-label={`EN — ${t.languageNames.en}`} title={t.languageNames.en} onClick={() => changeLanguage("en")}><span aria-hidden="true">🇬🇧</span><small>EN</small></button>
+            <button type="button" className={language === "ro" ? "active" : ""} aria-pressed={language === "ro"} aria-label={`RO — ${t.languageNames.ro}`} title={t.languageNames.ro} onClick={() => changeLanguage("ro")}><span aria-hidden="true">🇷🇴</span><small>RO</small></button>
           </div>
         </div>
         <button className={`mobileMenuToggle${mobileMenuOpen ? " isOpen" : ""}`} type="button" aria-expanded={mobileMenuOpen} aria-controls={mobileMenuOpen ? "mobile-menu" : undefined} aria-label={mobileMenuOpen ? t.menuClose : t.menuOpen} onClick={() => setMobileMenuOpen((isOpen) => !isOpen)}>
@@ -503,8 +503,8 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
               <a className="contactNav" href="#contact" onClick={() => setMobileMenuOpen(false)}>{cleanPreview && <EnvelopeClosedIcon className="uiSymbol" aria-hidden="true" />}{t.nav[1]}</a>
             </nav>
             <div className="languageSwitch" role="group" aria-label={t.languageLabel}>
-              <button type="button" className={language === "en" ? "active" : ""} aria-pressed={language === "en"} aria-label={t.languageNames.en} onClick={() => { changeLanguage("en"); setMobileMenuOpen(false); }}><span aria-hidden="true">🇬🇧</span><small>EN</small></button>
-              <button type="button" className={language === "ro" ? "active" : ""} aria-pressed={language === "ro"} aria-label={t.languageNames.ro} onClick={() => { changeLanguage("ro"); setMobileMenuOpen(false); }}><span aria-hidden="true">🇷🇴</span><small>RO</small></button>
+              <button type="button" className={language === "en" ? "active" : ""} aria-pressed={language === "en"} aria-label={`EN — ${t.languageNames.en}`} onClick={() => { changeLanguage("en"); setMobileMenuOpen(false); }}><span aria-hidden="true">🇬🇧</span><small>EN</small></button>
+              <button type="button" className={language === "ro" ? "active" : ""} aria-pressed={language === "ro"} aria-label={`RO — ${t.languageNames.ro}`} onClick={() => { changeLanguage("ro"); setMobileMenuOpen(false); }}><span aria-hidden="true">🇷🇴</span><small>RO</small></button>
             </div>
           </div>
         )}
@@ -549,9 +549,9 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
           </header>
           <div className="chapterList">
             {chapters.map((chapter) => (
-              <a href={chapter.href} className="chapterRow" key={chapter.href} aria-label={`${chapter.company[language]} — ${chapter.role[language]}`}>
+              <a href={chapter.href} className="chapterRow" key={chapter.href}>
                 <span className="roadmapNode" aria-hidden="true" />
-                <span className="chapterIdentity"><span className="chapterLogo"><img {...imageDimensions(chapter.logo)} src={chapter.logo} alt={cleanPreview ? "" : chapter.company[language]} loading="lazy" decoding="async" /></span></span>
+                <span className="chapterIdentity"><span className="chapterLogo"><img {...imageDimensions(chapter.logo)} src={chapter.logo} alt={chapter.company[language]} loading="lazy" decoding="async" /></span></span>
                 <span className="chapterWork"><strong>{chapter.role[language]}</strong><small>{chapter.engagement[language]}</small></span>
                 <span className="chapterYears">{chapter.years[language]}</span><span className="chapterArrow" aria-hidden="true">{cleanPreview ? <ArrowBottomRightIcon className="uiArrow" aria-hidden="true" /> : "↘"}</span>
               </a>
@@ -590,11 +590,11 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                         tabIndex={copyIndex === 1 ? -1 : undefined}
                         onClick={() => setActiveProjectId(project.id)}
                         key={`${copyIndex}-${project.id}`}
-                        aria-label={`${t.seeProject}: ${project.title}`}
+                        aria-label={cleanPreview ? undefined : `${t.seeProject}: ${project.title}`}
                       >
                         <img className="projectLoopPreview" {...imageDimensions(project.image)} src={project.image} alt="" loading="lazy" decoding="async" />
                         <span className="projectLoopTint" aria-hidden="true" />
-                        <span className="projectLoopLogo">{tileLogo ? <img {...imageDimensions(tileLogo)} src={tileLogo} alt={copyIndex === 0 ? project.title : ""} loading="lazy" decoding="async" /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
+                        <span className="projectLoopLogo">{tileLogo ? <img {...imageDimensions(tileLogo)} src={tileLogo} alt={!cleanPreview && copyIndex === 0 ? project.title : ""} loading="lazy" decoding="async" /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
                         <span className="projectLoopMeta">
                           <small>{project.classification} · {projectCopy.discipline}</small>
                           <strong>{cleanPreview ? project.title : t.seeProject}<span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></strong>
@@ -621,10 +621,10 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                   const projectCopy = project[language];
                   const tileLogo = project.logo;
                   return (
-                    <button className="projectLoopCard projectGridCard" data-project={project.id} type="button" onClick={() => setActiveProjectId(project.id)} key={`grid-${project.id}`} aria-label={`${t.seeProject}: ${project.title}`}>
+                    <button className="projectLoopCard projectGridCard" data-project={project.id} type="button" onClick={() => setActiveProjectId(project.id)} key={`grid-${project.id}`} aria-label={cleanPreview ? undefined : `${t.seeProject}: ${project.title}`}>
                       <img className="projectLoopPreview" {...imageDimensions(project.image)} src={project.image} alt="" loading="lazy" decoding="async" />
                       <span className="projectLoopTint" aria-hidden="true" />
-                      <span className="projectLoopLogo">{tileLogo ? <img {...imageDimensions(tileLogo)} src={tileLogo} alt={project.title} loading="lazy" decoding="async" /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
+                      <span className="projectLoopLogo">{tileLogo ? <img {...imageDimensions(tileLogo)} src={tileLogo} alt={cleanPreview ? "" : project.title} loading="lazy" decoding="async" /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
                       <span className="projectLoopMeta"><small>{project.classification} · {projectCopy.discipline}</small><strong>{project.title}<span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></strong></span>
                     </button>
                   );
@@ -667,11 +667,11 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                         tabIndex={copyIndex === 1 ? -1 : undefined}
                         onClick={() => setActiveProjectId(project.id)}
                         key={`${copyIndex}-${project.id}`}
-                        aria-label={`${t.seeProject}: ${project.title}`}
+                        aria-label={cleanPreview ? undefined : `${t.seeProject}: ${project.title}`}
                       >
                         <img className="projectLoopPreview" {...imageDimensions(project.image)} src={project.image} alt="" loading="lazy" decoding="async" />
                         <span className="projectLoopTint" aria-hidden="true" />
-                        <span className="projectLoopLogo">{tileLogo ? <img {...imageDimensions(tileLogo)} src={tileLogo} alt={copyIndex === 0 ? project.title : ""} loading="lazy" decoding="async" /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
+                        <span className="projectLoopLogo">{tileLogo ? <img {...imageDimensions(tileLogo)} src={tileLogo} alt={!cleanPreview && copyIndex === 0 ? project.title : ""} loading="lazy" decoding="async" /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
                         <span className="projectLoopMeta">
                           <small>{project.classification} · {projectCopy.discipline}</small>
                           <strong>{cleanPreview ? project.title : t.seeProject}<span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></strong>
@@ -698,10 +698,10 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                   const projectCopy = project[language];
                   const tileLogo = project.logo;
                   return (
-                    <button className="projectLoopCard projectGridCard" data-project={project.id} type="button" onClick={() => setActiveProjectId(project.id)} key={`grid-${project.id}`} aria-label={`${t.seeProject}: ${project.title}`}>
+                    <button className="projectLoopCard projectGridCard" data-project={project.id} type="button" onClick={() => setActiveProjectId(project.id)} key={`grid-${project.id}`} aria-label={cleanPreview ? undefined : `${t.seeProject}: ${project.title}`}>
                       <img className="projectLoopPreview" {...imageDimensions(project.image)} src={project.image} alt="" loading="lazy" decoding="async" />
                       <span className="projectLoopTint" aria-hidden="true" />
-                      <span className="projectLoopLogo">{tileLogo ? <img {...imageDimensions(tileLogo)} src={tileLogo} alt={project.title} loading="lazy" decoding="async" /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
+                      <span className="projectLoopLogo">{tileLogo ? <img {...imageDimensions(tileLogo)} src={tileLogo} alt={cleanPreview ? "" : project.title} loading="lazy" decoding="async" /> : <span className="projectBrandName">{project.title.split(" / ")[0]}</span>}</span>
                       <span className="projectLoopMeta"><small>{project.classification} · {projectCopy.discipline}</small><strong>{project.title}<span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></strong></span>
                     </button>
                   );
@@ -801,7 +801,7 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
                 <header><span id="project-media-lightbox-title">{activeProject.title} / 0{activeProjectMediaIndex + 1}</span><button type="button" data-modal-close onClick={() => setActiveProjectMediaIndex(null)} aria-label={t.closeMedia}>{t.closeMedia} <span aria-hidden="true">×</span></button></header>
                 <div>
                   {media.type === "video" ? (
-                    <video key={media.src} controls autoPlay={!reducedMotion} muted playsInline poster={"poster" in media ? media.poster : undefined}>
+                    <video key={media.src} controls autoPlay={!reducedMotion} muted playsInline poster={"poster" in media && media.poster ? optimizedSource(media.poster) : undefined}>
                       <source src={media.src} type="video/mp4" />
                     </video>
                   ) : <img {...imageDimensions(media.src)} src={media.src} alt={`${activeProject.title} ${t.projectStill} ${activeProjectMediaIndex + 1}`} />}
