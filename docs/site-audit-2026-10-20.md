@@ -2,11 +2,14 @@
 
 Scope: the published portfolio, shared /test route, EN/RO, desktop and emulated mobile/touch. Design reference: the approved Helvetica/light-surface design; fresh [Web Interface Guidelines](https://github.com/vercel-labs/web-interface-guidelines/blob/main/command.md).
 
+The ongoing design and release rules are captured in [Interface guidelines](interface-guidelines.md).
+
 ## Problems corrected
 
 - Oversized image downloads: the Heineken still alone transferred 6.27 MB even in small cards. Added content-hashed WebP variants at up to 480/960/1600px, responsive srcsets and image sizing hints. Intrinsic dimensions remain reserved. Hero predecodes use the same responsive candidates; video posters use optimized stills. Original images, video files and supplied PDFs remain available unchanged.
 - Font consistency: removed unused Inter/Space Mono stylesheet imports and aligned the document fallback stack with Helvetica Neue/Helvetica/Arial. No web font requests are needed.
 - Accessible names: language controls include their visible EN/RO abbreviations. Company links and project cards use their native visible content instead of overriding it with incomplete aria-labels. Logo alt text identifies logo-only company names without duplicating project-card titles.
+- Decorative hero blur is now a CSS background layer with resolution-aware sources rather than a second image element. The oval shape and transparent-material fallback are retained.
 - Hero settling: brought both automatic image replacements into the first two seconds; slow decodes cannot insert a late replacement. Finite floating feedback, interruption and reduced-motion handling are preserved.
 - Touch targets: language buttons now measure at least 44 × 44px.
 - Removed the obsolete inline filter that suppressed opaque browser script errors.
@@ -17,12 +20,13 @@ Scope: the published portfolio, shared /test route, EN/RO, desktop and emulated 
 | Area | Result |
 | --- | --- |
 | Whole-page EN/RO at 320, 390, 768, 1024 and 1440px | No horizontal overflow, overflowing text or hero/image overlap |
+| Additional sizes | 375×667, 844×390 landscape, 1366×768, 1920×1080 and 2560×1440 pass; close action remains visible on a short landscape screen |
 | Project dialogs | All 15; 150 responsive layout states and 60 automated accessibility states pass |
 | Project interactions | Focus containment, nested media, Escape, restored focus, previous/next and scroll reset pass |
 | Company panels | 40 responsive states; both FrameBreed roles, twelve workflow controls and four disclosures pass |
 | Capabilities/resume | 20 responsive/expanded states; 24 capabilities and 21 tools retained; disclosure keyboard operation passes |
 | CV documents | Both return HTTP 200/%PDF, open in new tabs and download under the expected filenames |
-| Images | All 143 rendered images with expanded directories decode; 105 use responsive optimized candidates; every image has intrinsic dimensions |
+| Images | All 139 rendered images with expanded directories decode; 101 use responsive optimized candidates; every image has intrinsic dimensions |
 | Media inventory | All 38 unique media files exist; all 26 unique videos have valid H.264 streams |
 | Navigation/structure | No missing internal anchors or duplicate IDs; one H1; default EN retained; mobile menu dismisses after navigation |
 | Keyboard/accessibility | WCAG A/AA and best-practice checks pass in tested states; explicit label-content-name matching rechecked separately |

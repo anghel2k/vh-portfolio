@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode, type CSSProperties } from "react";
 import { framebreedProjects } from "./framebreedProjects";
 import { digitalstageProjects } from "./digitalstageProjects";
 import { imageDimensions, optimizedSource } from "./imageDimensions";
@@ -99,8 +99,7 @@ export default function HeroProjectBubbles({ children, language, onSelect, obscu
       return <button className={`cleanHeroImage cleanHeroImage${positions[slot]}${entering && !reducedMotion && !obscured ? " isEntering" : ""}`} key={slot} type="button"
         data-hero-project={project.id} aria-label={`${language === "ro" ? "Vezi proiectul" : "View project"}: ${project.title}`}
         onClick={() => onSelect(project.id)}>
-        <span className="heroBubbleFrame" key={project.id}>
-          <img className="cleanHeroBlur" {...imageDimensions(project.image)} sizes="280px" src={project.image} alt="" aria-hidden="true" />
+        <span className="heroBubbleFrame" key={project.id} style={{ "--hero-blur-image": `image-set(url("${optimizedSource(project.image, 480)}") 1x, url("${optimizedSource(project.image, 960)}") 2x)` } as CSSProperties}>
           <img className="cleanHeroPicture" {...imageDimensions(project.image)} sizes="280px" src={project.image} alt="" fetchPriority={slot === 0 ? "high" : "auto"} />
         </span>
       </button>;

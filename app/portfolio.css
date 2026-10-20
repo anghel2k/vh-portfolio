@@ -34,7 +34,7 @@
 .cleanPreview .cleanHeroCopy>a:hover { color:var(--ultra); }
 .cleanPreview .cleanHeroImage { position:relative; z-index:0; display:block; border-radius:12px; width:min(100%,280px); aspect-ratio:1.65; }
 .cleanPreview .cleanHeroImage img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
-.cleanPreview .cleanHeroImage .cleanHeroBlur { z-index:-1; border-radius:50%; filter:blur(20px) saturate(1.15); opacity:.4; transform:scale(1.6,1.9); mask-image:radial-gradient(ellipse closest-side,#000 8%,rgba(0,0,0,.7) 38%,transparent 100%); -webkit-mask-image:radial-gradient(ellipse closest-side,#000 8%,rgba(0,0,0,.7) 38%,transparent 100%); pointer-events:none; }
+.cleanPreview .heroBubbleFrame::before { content:""; position:absolute; inset:0; background-image:var(--hero-blur-image); background-size:cover; background-position:center; z-index:-1; border-radius:50%; filter:blur(20px) saturate(1.15); opacity:.4; transform:scale(1.6,1.9); mask-image:radial-gradient(ellipse closest-side,#000 8%,rgba(0,0,0,.7) 38%,transparent 100%); -webkit-mask-image:radial-gradient(ellipse closest-side,#000 8%,rgba(0,0,0,.7) 38%,transparent 100%); pointer-events:none; }
 .cleanPreview .cleanHeroPicture { z-index:0; }
 .cleanPreview .cleanHeroImageOne { grid-column:1 / 4; grid-row:1; justify-self:start; align-self:end; }
 .cleanPreview .cleanHeroImageTwo { grid-column:10 / 13; grid-row:1; justify-self:end; align-self:start; width:min(100%,240px); }
@@ -598,7 +598,7 @@ body:has(.cleanPreview) { background:#f2f2f2; }
 }
 @media (prefers-reduced-transparency:reduce), (prefers-contrast:more) {
   .cleanPreview .cleanHeroImage { background:#fff; backdrop-filter:none; -webkit-backdrop-filter:none; box-shadow:0 2px 6px rgba(25,35,55,.12)!important; }
-  .cleanPreview .cleanHeroImage::after,.cleanPreview .cleanHeroBlur { display:none; }
+  .cleanPreview .cleanHeroImage::after,.cleanPreview .heroBubbleFrame::before { display:none; }
   .cleanPreview :is(.projectDetailLayer,.projectMediaLightboxLayer) { backdrop-filter:none; -webkit-backdrop-filter:none; }
 }
 @media (prefers-reduced-motion:reduce) {

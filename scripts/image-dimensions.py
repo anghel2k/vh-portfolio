@@ -32,8 +32,9 @@ source += '''export function imageDimensions(src: string) {
 }
 
 /** Efficient posters and decoded swaps; full-resolution originals remain available. */
-export function optimizedSource(src: string) {
-  return responsiveImages[src.split("?")[0]]?.at(-1)?.src ?? src;
+export function optimizedSource(src: string, width = 1600) {
+  const variants = responsiveImages[src.split("?")[0]];
+  return variants?.find(image => image.width >= width)?.src ?? variants?.at(-1)?.src ?? src;
 }
 '''
 (root / 'app' / 'imageDimensions.ts').write_text(source)
