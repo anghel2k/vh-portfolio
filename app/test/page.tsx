@@ -1,14 +1,15 @@
 import type { Metadata, Viewport } from "next";
 import Portfolio from "../Portfolio";
 import "../portfolio.css";
+import "./constellation.css";
 
 export const metadata: Metadata = {
-  title: "Robert Anghel | Clean design study",
+  title: "Robert Anghel | Floating projects study",
   robots: { index: false, follow: false },
 };
 
 export const viewport: Viewport = { themeColor: "#f2f2f2", colorScheme: "light", viewportFit: "cover" };
 
 export default function CleanDesignStudy() {
-  return <div className="cleanPreview"><Portfolio cleanPreview /></div>;
+  return <div className="cleanPreview orbitalPreview"><Portfolio cleanPreview heroStudy /></div>;
 }

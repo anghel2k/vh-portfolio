@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import dynamic from "next/dynamic";
 import BouncingMark from "./BouncingMark";
 import ProjectSlider from "./ProjectSlider";
 import HeroProjectBubbles from "./HeroProjectBubbles";
@@ -365,12 +366,15 @@ function ProjectPreviewVideo({ src, poster, label }: { src: string; poster?: str
   );
 }
 
+const HeroConstellation = dynamic(() => import("./HeroProjectConstellation"), { loading: () => <div className="constellationStage" aria-hidden="true" /> });
+
 function CapabilitySymbol({ index }: { index: number }) {
   const Icon = [MagicWandIcon, CubeIcon, VideoIcon, ImageIcon][index] ?? CubeIcon;
   return <Icon className="uiSymbol" aria-hidden="true" />;
 }
 
-export default function Home({ cleanPreview = false }: { cleanPreview?: boolean } = {}) {
+export default function Home({ cleanPreview = false, heroStudy = false }: { cleanPreview?: boolean; heroStudy?: boolean } = {}) {
+  const HeroProjects = heroStudy ? HeroConstellation : HeroProjectBubbles;
   usePreviewMotion(cleanPreview);
   const [language, setLanguage] = useState<Language>("en");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -474,6 +478,13 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
     carouselResumeTimers.current.set(carousel, timer);
   };
 
+  const heroCopy = <>
+    <p>Robert Anghel — {language === "en" ? "Portfolio" : "Portofoliu"}</p>
+    <h1 id="clean-hero-title">{language === "en" ? <>Technical direction.<br />Creative production.</> : <>Direcție tehnică.<br />Producție creativă.</>}</h1>
+    <p>{t.heroCapabilities}</p>
+    <a href="#experience">{language === "en" ? "Explore my work" : "Descoperă proiectele"} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></a>
+  </>;
+
   return (
     <>
       <a className="skipLink" href="#main">{t.skip}</a>
@@ -513,12 +524,10 @@ export default function Home({ cleanPreview = false }: { cleanPreview?: boolean 
       <main id="main" tabIndex={-1}>
         {cleanPreview ? (
           <section className="cleanHero" id="top" aria-labelledby="clean-hero-title">
-            <HeroProjectBubbles language={language} onSelect={setActiveProjectId} obscured={Boolean(activeProjectId)}>
-              <p>Robert Anghel — {language === "en" ? "Portfolio" : "Portofoliu"}</p>
-              <h1 id="clean-hero-title">{language === "en" ? <>Technical direction.<br />Creative production.</> : <>Direcție tehnică.<br />Producție creativă.</>}</h1>
-              <p>{t.heroCapabilities}</p>
-              <a href="#experience">{language === "en" ? "Explore my work" : "Descoperă proiectele"} <span aria-hidden="true">{cleanPreview ? <ArrowTopRightIcon className="uiArrow" aria-hidden="true" /> : "↗"}</span></a>
-            </HeroProjectBubbles>
+            <HeroProjects language={language} onSelect={setActiveProjectId} obscured={Boolean(activeProjectId)}>
+              {heroStudy ? null : heroCopy}
+            </HeroProjects>
+            {heroStudy && <div className="cleanHeroCopy constellationCopy">{heroCopy}</div>}
           </section>
         ) : (
         <section className="hero" id="top">
