@@ -927,7 +927,7 @@ export const framebreedProjects: readonly PortfolioProject[] = [
     "classification": "TRADITIONAL CGI / VFX",
     "studio": "FrameBreed Studio",
     "image": "/projects/croco/baking-preview.jpg",
-    "logo": "/projects/brand-logos/croco-wordmark-white.svg",
+    "logo": "/projects/brand-logos/croco-wordmark-vector.svg",
     "media": [
       {
         "type": "video",

@@ -169,6 +169,10 @@ const dimensions: Record<string, { width: number; height: number }> = {
     "width": 353,
     "height": 222
   },
+  "/projects/brand-logos/croco-wordmark-vector.svg": {
+    "width": 267,
+    "height": 100
+  },
   "/projects/brand-logos/croco-wordmark-white.svg": {
     "width": 353,
     "height": 170
