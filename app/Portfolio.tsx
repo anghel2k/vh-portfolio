@@ -479,6 +479,7 @@ export default function Home({ cleanPreview = false, heroStudy = false }: { clea
   };
 
   const heroCopy = <>
+    {heroStudy && <span className="heroPortrait"><img src="/robert-anghel-portrait.webp" alt="Robert Anghel" width={64} height={64} decoding="async" /></span>}
     <p>Robert Anghel — {language === "en" ? "Portfolio" : "Portofoliu"}</p>
     <h1 id="clean-hero-title">{language === "en" ? <>Technical direction.<br />Creative production.</> : <>Direcție tehnică.<br />Producție creativă.</>}</h1>
     <p>{t.heroCapabilities}</p>
