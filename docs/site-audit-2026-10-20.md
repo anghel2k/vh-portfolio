@@ -30,6 +30,7 @@ The ongoing design and release rules are captured in [Interface guidelines](inte
 | Media inventory | All 38 unique media files exist; all 26 unique videos have valid H.264 streams |
 | Navigation/structure | No missing internal anchors or duplicate IDs; one H1; default EN retained; mobile menu dismisses after navigation |
 | Keyboard/accessibility | WCAG A/AA and best-practice checks pass in tested states; explicit label-content-name matching rechecked separately |
+| Material preferences | Reduced-transparency and increased-contrast modes use solid white frames, no backdrop filter and no decorative blur |
 | Motion | Dock continues while magnifying on hover, resets on exit, pauses explicitly; reduced motion removes the loop and magnification; touch has no pointer-only effect |
 | Progressive rendering | Heading, four hero images and both email links remain present with JavaScript disabled |
 | Runtime/network | No page errors or failed responses in the complete asset/interaction pass |
@@ -41,4 +42,16 @@ Visual inspection covered the hero, timeline, company panels, capabilities, CV c
 
 Lighthouse lab runs use Chromium with the standard mobile throttling profile and desktop preset. The production baseline measured 71/100 mobile and 76/100 desktop, with about 8.5 MiB and 8.1 MiB transferred respectively. Both had zero measured layout shift. A provisional optimized local production run measured 95/100 mobile, 3.0 s LCP, 10 ms total blocking time and 932 KiB total transfer.
 
-Production measurements after publishing are recorded below when available. Lab scores vary with network conditions and the finite hero introduction; they are not real-user Core Web Vitals or an accessibility certification. Mobile checks use browser emulation, not physical iOS/Android devices.
+Final production runs, code revision f087580:
+
+| Metric | Mobile, three runs | Desktop |
+| --- | --- | --- |
+| Performance score | 91, 89, 91; median 91/100 (baseline 71) | 100/100 (baseline 76) |
+| Accessibility / best practices / SEO | 100/100 in every category and run | 100/100 in every category |
+| First contentful paint | 1.1–1.4 s | 0.3 s |
+| Largest contentful paint | 3.0–3.8 s | 0.7 s |
+| Total blocking time | 3–19 ms | 0 ms |
+| Layout shift | 0 in every run | 0 |
+| Initial transfer | 861–928 KiB, about 90% below baseline | 894 KiB |
+
+[Per-run measurements](performance-2026-10-20.json) preserve the instrument version, scores and numeric metrics. The mobile LCP is still above the 2.5 s good threshold in these throttled runs; the image introduction and random replacement still influence the last large paint. This is recorded as a remaining performance tradeoff of the requested dynamic landing, rather than presented as a perfect result. Lab scores vary with network conditions and the finite hero introduction; they are not real-user Core Web Vitals or an accessibility certification. Mobile checks use browser emulation, not physical iOS/Android devices.

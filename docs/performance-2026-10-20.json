@@ -1,0 +1,222 @@
+{
+  "date": "2026-10-20",
+  "url": "https://portfolio.vellumhaus.studio/",
+  "codeRevision": "f087580",
+  "method": "Chromium Lighthouse default mobile throttling and desktop preset; cold browser profiles, no real-user measurements.",
+  "baseline": {
+    "mobile": {
+      "lighthouseVersion": "13.5.0",
+      "scores": {
+        "performance": 71,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 1237.9875,
+          "display": "1.2 s"
+        },
+        "largest-contentful-paint": {
+          "value": 38887.9875,
+          "display": "38.9 s"
+        },
+        "speed-index": {
+          "value": 3713.8530440062304,
+          "display": "3.7 s"
+        },
+        "total-blocking-time": {
+          "value": 167,
+          "display": "170 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 0,
+          "display": "0"
+        },
+        "total-byte-weight": {
+          "value": 8911827,
+          "display": "Total size was 8,703 KiB"
+        }
+      }
+    },
+    "desktop": {
+      "lighthouseVersion": "13.5.0",
+      "scores": {
+        "performance": 76,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 376.742,
+          "display": "0.4 s"
+        },
+        "largest-contentful-paint": {
+          "value": 6316.742,
+          "display": "6.3 s"
+        },
+        "speed-index": {
+          "value": 562.8086315863643,
+          "display": "0.6 s"
+        },
+        "total-blocking-time": {
+          "value": 0,
+          "display": "0 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 0,
+          "display": "0"
+        },
+        "total-byte-weight": {
+          "value": 8471590,
+          "display": "Total size was 8,273 KiB"
+        }
+      }
+    }
+  },
+  "final": {
+    "mobile": [
+      {
+        "lighthouseVersion": "13.5.0",
+        "scores": {
+          "performance": 91,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "first-contentful-paint": {
+            "value": 1367.277,
+            "display": "1.4 s"
+          },
+          "largest-contentful-paint": {
+            "value": 2959.277,
+            "display": "3.0 s"
+          },
+          "speed-index": {
+            "value": 5135.27625706678,
+            "display": "5.1 s"
+          },
+          "total-blocking-time": {
+            "value": 3,
+            "display": "0 ms"
+          },
+          "cumulative-layout-shift": {
+            "value": 0,
+            "display": "0"
+          },
+          "total-byte-weight": {
+            "value": 933176,
+            "display": "Total size was 911 KiB"
+          }
+        }
+      },
+      {
+        "lighthouseVersion": "13.5.0",
+        "scores": {
+          "performance": 89,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "first-contentful-paint": {
+            "value": 1088.045,
+            "display": "1.1 s"
+          },
+          "largest-contentful-paint": {
+            "value": 3788.045,
+            "display": "3.8 s"
+          },
+          "speed-index": {
+            "value": 1088.045,
+            "display": "1.1 s"
+          },
+          "total-blocking-time": {
+            "value": 19,
+            "display": "20 ms"
+          },
+          "cumulative-layout-shift": {
+            "value": 0,
+            "display": "0"
+          },
+          "total-byte-weight": {
+            "value": 950674,
+            "display": "Total size was 928 KiB"
+          }
+        }
+      },
+      {
+        "lighthouseVersion": "13.5.0",
+        "scores": {
+          "performance": 91,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "first-contentful-paint": {
+            "value": 1261.091,
+            "display": "1.3 s"
+          },
+          "largest-contentful-paint": {
+            "value": 3511.091,
+            "display": "3.5 s"
+          },
+          "speed-index": {
+            "value": 1261.091,
+            "display": "1.3 s"
+          },
+          "total-blocking-time": {
+            "value": 9,
+            "display": "10 ms"
+          },
+          "cumulative-layout-shift": {
+            "value": 0,
+            "display": "0"
+          },
+          "total-byte-weight": {
+            "value": 881391,
+            "display": "Total size was 861 KiB"
+          }
+        }
+      }
+    ],
+    "desktop": {
+      "lighthouseVersion": "13.5.0",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 325.975,
+          "display": "0.3 s"
+        },
+        "largest-contentful-paint": {
+          "value": 691.975,
+          "display": "0.7 s"
+        },
+        "speed-index": {
+          "value": 403.24234016661603,
+          "display": "0.4 s"
+        },
+        "total-blocking-time": {
+          "value": 0,
+          "display": "0 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 0,
+          "display": "0"
+        },
+        "total-byte-weight": {
+          "value": 915574,
+          "display": "Total size was 894 KiB"
+        }
+      }
+    }
+  }
+}
