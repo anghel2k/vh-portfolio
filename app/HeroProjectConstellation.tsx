@@ -64,7 +64,7 @@ export default function HeroProjectConstellation({ language, onSelect, obscured 
   return <>
     <div ref={stage} className={`constellationStage${arriving && !reduced && !obscured ? " isArriving" : ""}`} onPointerMove={move} onPointerLeave={reset} onPointerEnter={() => setArriving(false)} onFocusCapture={() => setArriving(false)} onPointerDown={() => setArriving(false)}>
       <span className="constellationHaze constellationHazeLeft" aria-hidden="true" style={{ backgroundImage: `url("${optimizedSource("/digitalstage/media/work-thumbnails/emag-wallet-custom.jpg", 480)}")` }} />
-      <span className="constellationHaze constellationHazeRight" aria-hidden="true" style={{ backgroundImage: `url("${optimizedSource("/projects/house-of-errors/ss25-02.jpg", 480)}")` }} />
+      <span className="constellationHaze constellationHazeRight" aria-hidden="true" style={{ backgroundImage: `url("${optimizedSource("/projects/heineken/heineken-blue.jpg", 480)}")` }} />
       {slots.map((slot, index) => {
         const project = projects.find(item => item.id === slot.id)!;
         const style = { "--tile-angle": `${slot.angle}deg`, "--tile-drift": `${slot.drift}px`, "--arrival-delay": `${index * 35}ms`, "--tile-glow": `url("${optimizedSource(project.image, 480)}")` } as CSSProperties;
