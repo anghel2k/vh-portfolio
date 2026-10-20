@@ -91,3 +91,9 @@ The composition adapts at narrow/mobile and tablet sizes without placing artwork
 Validation: production build/TypeScript pass. Twenty EN/RO layout states across 320–1920px pass without page/text overflow, clipped action targets or image/text overlap. Four desktop/mobile accessibility states pass. All six project open/close and restored-focus flows pass. Hover, parallax/reset, touch opening, finite motion, reduced motion and solid reduced-transparency fallback pass. The action remains visible on a 1366×768 laptop. No runtime errors; homepage regression confirms four original hero windows and index/follow metadata. Desktop/mobile screenshots reviewed.
 
 Performance sanity check for this study: one local mobile Lighthouse run reports 89/100 performance, 100/100 accessibility and best practices, 0 CLS and 970 KiB transfer. This is a single lab sample; it is not a production score or a guarantee.
+
+## Floating projects promoted to the homepage — 20 October 2026
+
+Following the user's approval, the six-project floating composition with the corrected Croco vector mark is now the official homepage. Its styles are shared from app/constellation.css; both / and /test render the same approved hero. Root canonical/index/follow metadata is retained and /test remains noindex/nofollow. The browser theme matches the new hero background.
+
+Build/TypeScript and diff checks pass. Root layout checked at 320/390/768/1440px, all with six project actions and no horizontal overflow. Automated accessibility passes. Croco case study and nested film open/close; EN/RO switching and default EN reload pass. Production canonical and both routes' indexing metadata are verified.

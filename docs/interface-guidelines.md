@@ -25,7 +25,7 @@ These rules describe the approved portfolio design and keep future edits consist
 - Maintain visible keyboard focus, 44px primary touch targets, working slider controls and keyboard alternatives to drag gestures.
 - Project viewers trap focus, isolate their background, preserve a visible close action, close with Escape and restore the opener. Nested viewers must restore focus to the underlying viewer.
 - Default to English on a fresh load; EN/RO switching remains available within the session.
-- Automatic hero image replacements settle within two seconds. The finite opening animation ends before five seconds, is interruptible and is disabled by reduced-motion preferences.
+- The floating project introduction settles within 1.2 seconds, is interruptible and is disabled by reduced-motion preferences. Keep pointer depth subtle and disable it on touch-only devices and while a project viewer is open.
 - The continuous brand ribbon retains a pause control. Pointer magnification must not clip logos, shift layout or run on touch-only/reduced-motion devices.
 - Provide solid material fallbacks when transparency or contrast preferences require them. Animate transform/opacity rather than layout.
 
