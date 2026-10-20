@@ -69,10 +69,10 @@ export default function HeroProjectBubbles({ children, language, onSelect, obscu
       }
       if (!entry.isIntersecting || document.hidden || hero.contains(document.activeElement)) return;
       started.current = true;
-      deadline = performance.now() + 3500;
+      deadline = performance.now() + 2000;
       setEntering(true);
-      timers.push(window.setTimeout(() => { void replace(0); }, 1100));
-      timers.push(window.setTimeout(() => { void replace(3); }, 2600));
+      timers.push(window.setTimeout(() => { void replace(0); }, 500));
+      timers.push(window.setTimeout(() => { void replace(3); }, 1100));
       timers.push(window.setTimeout(stop, 4600));
     }, { threshold: .25 });
     const visibility = () => { if (document.hidden) stop(); };

@@ -7,6 +7,7 @@ Scope: the published portfolio, shared /test route, EN/RO, desktop and emulated 
 - Oversized image downloads: the Heineken still alone transferred 6.27 MB even in small cards. Added content-hashed WebP variants at up to 480/960/1600px, responsive srcsets and image sizing hints. Intrinsic dimensions remain reserved. Hero predecodes use the same responsive candidates; video posters use optimized stills. Original images, video files and supplied PDFs remain available unchanged.
 - Font consistency: removed unused Inter/Space Mono stylesheet imports and aligned the document fallback stack with Helvetica Neue/Helvetica/Arial. No web font requests are needed.
 - Accessible names: language controls include their visible EN/RO abbreviations. Company links and project cards use their native visible content instead of overriding it with incomplete aria-labels. Logo alt text identifies logo-only company names without duplicating project-card titles.
+- Hero settling: brought both automatic image replacements into the first two seconds; slow decodes cannot insert a late replacement. Finite floating feedback, interruption and reduced-motion handling are preserved.
 - Touch targets: language buttons now measure at least 44 × 44px.
 - Removed the obsolete inline filter that suppressed opaque browser script errors.
 - Optimized image filenames include a content/version hash and receive immutable cache headers. The checked-in image generator and manifest make later regeneration reproducible.
