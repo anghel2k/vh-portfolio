@@ -26,7 +26,7 @@ These rules describe the approved portfolio design and keep future edits consist
 - Project viewers trap focus, isolate their background, preserve a visible close action, close with Escape and restore the opener. Nested viewers must restore focus to the underlying viewer.
 - Default to English on a fresh load; EN/RO switching remains available within the session.
 - The floating project introduction settles within 1.2 seconds, is interruptible and is disabled by reduced-motion preferences. Keep pointer depth subtle and disable it on touch-only devices and while a project viewer is open.
-- The continuous brand ribbon retains a pause control. Pointer magnification must not clip logos, shift layout or run on touch-only/reduced-motion devices.
+- The continuous brand ribbon has no separate pause button, per the explicit design request of 20 October 2026. Keep reduced-motion support and pause when out of view. This leaves a known WCAG 2.2.2 limitation; do not claim full conformance. Pointer magnification must not clip logos, shift layout or run on touch-only/reduced-motion devices.
 - Provide solid material fallbacks when transparency or contrast preferences require them. Animate transform/opacity rather than layout.
 
 ## Performance and release checks
@@ -37,3 +37,10 @@ These rules describe the approved portfolio design and keep future edits consist
 - Before publishing, run the production build, responsive EN/RO checks, keyboard/touch interactions, document/media checks and automated accessibility checks. Review representative screenshots, including long titles and credits.
 - Measure mobile and desktop Lighthouse results on the public site. Record repeat runs, payload size, LCP, blocking time and layout shift; distinguish lab measurements from real-user data.
 - Keep the provided CV contents, confirmed project roles, company dates and studio/project allocations intact during visual edits.
+
+## Material and legal-page refinements — 21 October 2026
+
+- Use a single glass layer in compound controls; children use a simple translucent fill rather than a second backdrop filter.
+- Keep the six hero projects in the initial rendered HTML; hydration should add interaction rather than reveal essential imagery.
+- Legal pages use the same Helvetica scale and quiet neutral surfaces, a readable line length, numbered sections and native anchor navigation. EN/RO versions must remain equivalent.
+- State the operator as Veliumin SRL, distinguish Robert’s contribution from third-party ownership, and preserve statutory exceptions. Do not invent registration details or claim permission to show work merely because terms exist.

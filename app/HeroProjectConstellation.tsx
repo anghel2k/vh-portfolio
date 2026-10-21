@@ -16,7 +16,7 @@ const slots = [
   { id: "digitalstage-san-pellegrino", position: "small", angle: 7, drift: 4 },
 ];
 
-/** Preview study: spatial project composition with finite entry and pointer-only depth. */
+/** Spatial project composition, rendered with the initial page HTML. */
 export default function HeroProjectConstellation({ language, onSelect, obscured }: {
   children: ReactNode; language: "en" | "ro"; onSelect: (id: string) => void; obscured: boolean;
 }) {

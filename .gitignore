@@ -1,6 +1,8 @@
 node_modules/
 .next/
 .DS_Store
+*.tsbuildinfo
+.playwright-cli/
 tmp/
 pnpm-lock.yaml
 pnpm-workspace.yaml

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
-import dynamic from "next/dynamic";
+import HeroConstellation from "./HeroProjectConstellation";
 import BouncingMark from "./BouncingMark";
 import ProjectSlider from "./ProjectSlider";
 import HeroProjectBubbles from "./HeroProjectBubbles";
@@ -365,8 +365,6 @@ function ProjectPreviewVideo({ src, poster, label }: { src: string; poster?: str
     </video>
   );
 }
-
-const HeroConstellation = dynamic(() => import("./HeroProjectConstellation"), { loading: () => <div className="constellationStage" aria-hidden="true" /> });
 
 function CapabilitySymbol({ index }: { index: number }) {
   const Icon = [MagicWandIcon, CubeIcon, VideoIcon, ImageIcon][index] ?? CubeIcon;
@@ -1032,7 +1030,7 @@ export default function Home({ cleanPreview = false, heroStudy = false }: { clea
         </section>
       </main>
 
-      <footer><span>Robert Anghel / Vellumhaus© 2026</span><a href="#top">{cleanPreview ? <>{t.backTop.replace(" ↑", "")} <ArrowUpIcon className="uiArrow" aria-hidden="true" /></> : t.backTop}</a></footer>
+      <footer><span>© 2026 Robert Anghel · Veliumin SRL</span><nav aria-label={language === "en" ? "Footer" : "Subsol"}><a href={language === "en" ? "/terms" : "/termeni"}>{language === "en" ? "Terms & copyright" : "Termeni și drepturi de autor"}</a><a href="#top">{cleanPreview ? <>{t.backTop.replace(" ↑", "")} <ArrowUpIcon className="uiArrow" aria-hidden="true" /></> : t.backTop}</a></nav></footer>
     </>
   );
 }

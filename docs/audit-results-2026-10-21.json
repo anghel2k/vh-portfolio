@@ -1,0 +1,708 @@
+{
+  "date": "2026-10-21",
+  "baselineRevision": "6ab948a",
+  "tools": {
+    "next": "16.4.2",
+    "react": "19.2.6",
+    "sharp": "0.35.5",
+    "node": "24.20.0",
+    "lighthouse": "13.5.0"
+  },
+  "npmAuditBefore": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 4,
+    "critical": 1,
+    "total": 5
+  },
+  "npmAuditAfter": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "baselineMobile": {
+    "scores": {
+      "performance": 0.96,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 1,
+      "agentic-browsing": 1
+    },
+    "metrics": {
+      "first-contentful-paint": 1424.4185,
+      "largest-contentful-paint": 2774.4184999999998,
+      "total-blocking-time": 15,
+      "cumulative-layout-shift": 0,
+      "total-byte-weight": 940241
+    },
+    "runs": 1
+  },
+  "checks": {
+    "projects": {
+      "layoutStates": 150,
+      "layoutFailures": [],
+      "accessibilityStates": 60,
+      "accessibilityFailures": [],
+      "interactions": [
+        {
+          "id": "new-balance",
+          "trap": true,
+          "nested": true,
+          "mediaReturn": true,
+          "next": "RAYE / Click Clack Symphony",
+          "reset": true,
+          "restored": true
+        },
+        {
+          "id": "raye",
+          "trap": true,
+          "nested": true,
+          "mediaReturn": true,
+          "next": "Mentos / Mammoth",
+          "reset": true,
+          "restored": true
+        },
+        {
+          "id": "mentos-mammoth",
+          "trap": true,
+          "nested": true,
+          "mediaReturn": true,
+          "next": "Croco / The Baking Crocodile",
+          "reset": true,
+          "restored": true
+        },
+        {
+          "id": "croco",
+          "trap": true,
+          "nested": true,
+          "mediaReturn": true,
+          "next": "IG / Fat Cats",
+          "reset": true,
+          "restored": true
+        },
+        {
+          "id": "ig-fat-cats",
+          "trap": true,
+          "nested": true,
+          "mediaReturn": true,
+          "next": "MacuShield / Planeta Solaria",
+          "reset": true,
+          "restored": true
+        },
+        {
+          "id": "macushield",
+          "trap": true,
+          "nested": true,
+          "mediaReturn": true,
+          "next": "Salt Bank / Christmas",
+          "reset": true,
+          "restored": true
+        },
+        {
+          "id": "salt-bank",
+          "trap": true,
+          "nested": true,
+          "mediaReturn": true,
+          "next": "New Balance — Gator Run",
+          "reset": true,
+          "restored": true
+        },
+        {
+          "id": "digitalstage-virgin-media",
+          "trap": true,
+          "nested": true,
+          "mediaReturn": true,
+          "next": "eMAG / Wallet",
+          "reset": true,
+          "restored": true
+        },
+        {
+          "id": "digitalstage-emag-wallet",
+          "trap": true,
+          "nested": true,
+          "mediaReturn": true,
+          "next": "S.Pellegrino / Ciao! Paris",
+          "reset": true,
+          "restored": true
+        },
+        {
+          "id": "digitalstage-san-pellegrino",
+          "trap": true,
+          "nested": true,
+          "mediaReturn": true,
+          "next": "Nutline / Three short spots",
+          "reset": true,
+          "restored": true
+        },
+        {
+          "id": "digitalstage-nutline",
+          "trap": true,
+          "nested": true,
+          "mediaReturn": true,
+          "next": "Heineken / Fans Have More Friends",
+          "reset": true,
+          "restored": true
+        },
+        {
+          "id": "digitalstage-heineken",
+          "trap": true,
+          "nested": true,
+          "mediaReturn": true,
+          "next": "Hidrofugal / 100 Jahre",
+          "reset": true,
+          "restored": true
+        },
+        {
+          "id": "digitalstage-hidrofugal",
+          "trap": true,
+          "nested": true,
+          "mediaReturn": true,
+          "next": "Kaufland / AI Film",
+          "reset": true,
+          "restored": true
+        },
+        {
+          "id": "digitalstage-kaufland",
+          "trap": true,
+          "nested": true,
+          "mediaReturn": true,
+          "next": "House of Errors — Selected Campaigns",
+          "reset": true,
+          "restored": true
+        },
+        {
+          "id": "digitalstage-house-of-errors",
+          "trap": true,
+          "nested": true,
+          "mediaReturn": true,
+          "next": "Virgin Media / 30s TVC",
+          "reset": true,
+          "restored": true
+        }
+      ],
+      "errors": [],
+      "inert": 0
+    },
+    "companies": {
+      "layoutStates": 40,
+      "layoutFailures": [],
+      "accessibilityStates": 4,
+      "accessibilityFailures": [],
+      "previous": {
+        "pressed": "true",
+        "scope": "Previsualizare, fluxuri de animație, iluminare, randare și compositing. Colaborator independent."
+      },
+      "current": "true",
+      "flows": [
+        {
+          "company": "framebreed",
+          "i": 0,
+          "expanded": "true",
+          "text": "Previsualizare și pregătirea fluxului creativ înainte de producție."
+        },
+        {
+          "company": "framebreed",
+          "i": 1,
+          "expanded": "true",
+          "text": "Fluxuri de animație de personaje, iluminare, randare și compositing."
+        },
+        {
+          "company": "framebreed",
+          "i": 2,
+          "expanded": "true",
+          "text": "Coordonarea echipei, clienților și agențiilor până la livrarea finală."
+        },
+        {
+          "company": "framebreed",
+          "disclosure": true
+        },
+        {
+          "company": "digitalstage",
+          "i": 0,
+          "expanded": "true",
+          "text": "Planificarea producției și coordonarea echipei."
+        },
+        {
+          "company": "digitalstage",
+          "i": 1,
+          "expanded": "true",
+          "text": "Coordonarea producției de retuș, video și AI / VFX hibrid."
+        },
+        {
+          "company": "digitalstage",
+          "i": 2,
+          "expanded": "true",
+          "text": "Urmărirea procesului de producție până la livrarea campaniei."
+        },
+        {
+          "company": "digitalstage",
+          "disclosure": true
+        },
+        {
+          "company": "veliumin",
+          "i": 0,
+          "expanded": "true",
+          "text": "Sisteme de brand, identitate și direcție grafică."
+        },
+        {
+          "company": "veliumin",
+          "i": 1,
+          "expanded": "true",
+          "text": "Dezvoltare de produs, tech packs și lansări de produse."
+        },
+        {
+          "company": "veliumin",
+          "i": 2,
+          "expanded": "true",
+          "text": "Producție de campanie, comerț online și pop-up fizic."
+        },
+        {
+          "company": "veliumin",
+          "disclosure": true
+        },
+        {
+          "company": "tranding",
+          "i": 0,
+          "expanded": "true",
+          "text": "Vizualizare independentă de produs și lucrări 3D."
+        },
+        {
+          "company": "tranding",
+          "i": 1,
+          "expanded": "true",
+          "text": "Reels CGI, editare și integrări 3D / VFX."
+        },
+        {
+          "company": "tranding",
+          "i": 2,
+          "expanded": "true",
+          "text": "Livrare per proiect pentru campanii de social media."
+        },
+        {
+          "company": "tranding",
+          "disclosure": true
+        }
+      ],
+      "stages": [
+        {
+          "company": "framebreed",
+          "count": 2,
+          "period": "mar. 2024 — Prezent"
+        },
+        {
+          "company": "digitalstage",
+          "count": 1,
+          "period": "aug. 2025 — Prezent"
+        },
+        {
+          "company": "veliumin",
+          "count": 1,
+          "period": "mar. 2023 — Prezent"
+        },
+        {
+          "company": "tranding",
+          "count": 1,
+          "period": "sept. 2023 — aug. 2025"
+        }
+      ],
+      "expandedAxe": [],
+      "reveal": true,
+      "project": true,
+      "homepage": {
+        "newPanels": 4,
+        "originalHeaders": 0
+      },
+      "errors": []
+    },
+    "capabilities": {
+      "layoutStates": 20,
+      "layoutFailures": [],
+      "accessibilityStates": 8,
+      "accessibilityFailures": [],
+      "counts": [
+        {
+          "capabilities": 6,
+          "tools": 8
+        },
+        {
+          "capabilities": 6,
+          "tools": 5
+        },
+        {
+          "capabilities": 6,
+          "tools": 5
+        },
+        {
+          "capabilities": 6,
+          "tools": 3
+        }
+      ],
+      "keyboard": true,
+      "pdfs": [
+        {
+          "href": "/cv/Robert_Anghel_CV_EN.pdf?v=c3aaba5056ea",
+          "status": 200,
+          "signature": "%PDF",
+          "opens": true
+        },
+        {
+          "href": "/cv/Robert_Anghel_CV_RO.pdf?v=84251e4d1443",
+          "status": 200,
+          "signature": "%PDF",
+          "opens": true
+        }
+      ],
+      "downloads": [
+        {
+          "name": "Robert_Anghel_CV_EN.pdf",
+          "failure": null
+        },
+        {
+          "name": "Robert_Anghel_CV_RO.pdf",
+          "failure": null
+        }
+      ],
+      "order": [
+        "English",
+        "Romanian"
+      ],
+      "homepage": {
+        "newCards": 2,
+        "oldActions": 0,
+        "oldPreviews": 0,
+        "skills": 4
+      },
+      "errors": []
+    },
+    "assets": {
+      "images": {
+        "count": 147,
+        "broken": [],
+        "optimized": 107
+      },
+      "structure": {
+        "missingAnchors": [],
+        "duplicateIds": [],
+        "font": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+        "h1": 1,
+        "undimensioned": []
+      },
+      "labelRules": [],
+      "pdfs": [
+        {
+          "href": "/cv/Robert_Anghel_CV_EN.pdf?v=c3aaba5056ea",
+          "status": 200,
+          "signature": "%PDF"
+        },
+        {
+          "href": "/cv/Robert_Anghel_CV_RO.pdf?v=84251e4d1443",
+          "status": 200,
+          "signature": "%PDF"
+        }
+      ],
+      "touchNavigation": {
+        "hash": "#experience",
+        "menu": false,
+        "overflow": false
+      },
+      "progressive": {
+        "h1": "Technical direction.Creative production.",
+        "images": 6,
+        "emails": 2
+      },
+      "errors": [],
+      "failed": []
+    },
+    "layoutAndLegal": {
+      "layoutStates": 40,
+      "layoutFailures": [],
+      "legalStates": 20,
+      "legalFailures": [],
+      "axeStates": 12,
+      "axeFailures": [],
+      "notFound": {
+        "status": 404,
+        "homeLink": 1
+      },
+      "progressive": {
+        "h1": true,
+        "projects": 6,
+        "emails": 2,
+        "legalSections": 6
+      },
+      "ribbon": {
+        "noPauseButton": true,
+        "moving": true,
+        "reduced": true
+      },
+      "mobileMenu": {
+        "closed": true,
+        "hash": "#experience"
+      },
+      "errors": [],
+      "badResponses": []
+    }
+  },
+  "localHeaders": [
+    {
+      "path": "/",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cache": "s-maxage=31536000",
+      "headers": {
+        "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' blob:; connect-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "canonical": " href=\"https://portfolio.vellumhaus.studio\"/><meta property=\"og:title\" content=\"Robert Anghel — Creative Work\"/><meta pr"
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cache": "s-maxage=31536000",
+      "headers": {
+        "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' blob:; connect-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "canonical": " href=\"https://portfolio.vellumhaus.studio/terms\"/><link rel=\"alternate\" hrefLang=\"en\" href=\"https://portfolio.vellumhau"
+    },
+    {
+      "path": "/termeni",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cache": "s-maxage=31536000",
+      "headers": {
+        "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' blob:; connect-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "canonical": " href=\"https://portfolio.vellumhaus.studio/termeni\"/><link rel=\"alternate\" hrefLang=\"en\" href=\"https://portfolio.vellumh"
+    },
+    {
+      "path": "/test",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cache": "s-maxage=31536000",
+      "headers": {
+        "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' blob:; connect-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "canonical": null
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "contentType": "text/plain",
+      "cache": "public, max-age=0, must-revalidate",
+      "headers": {
+        "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' blob:; connect-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "canonical": null
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "contentType": "application/xml",
+      "cache": "public, max-age=0, must-revalidate",
+      "headers": {
+        "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' blob:; connect-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "canonical": null
+    },
+    {
+      "path": "/optimized/7ad3cd44311d-480.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "cache": "public, max-age=31536000, immutable",
+      "headers": {
+        "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' blob:; connect-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=()"
+      },
+      "canonical": null
+    }
+  ],
+  "videos": [
+    {
+      "path": "public/digitalstage/media/virgin-media/film.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "30.016000"
+    },
+    {
+      "path": "public/digitalstage/media/emag-wallet/wallet-1b-before.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "13.212154"
+    },
+    {
+      "path": "public/digitalstage/media/emag-wallet/wallet-1b-master.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "20.000000"
+    },
+    {
+      "path": "public/digitalstage/media/emag-wallet/wallet-1a-master.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "20.000000"
+    },
+    {
+      "path": "public/digitalstage/media/emag-wallet/wallet-1a-before.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "14.883991"
+    },
+    {
+      "path": "public/digitalstage/media/hidrofugal/film.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "20.030000"
+    },
+    {
+      "path": "public/digitalstage/media/nutline/football.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "6.122667"
+    },
+    {
+      "path": "public/digitalstage/media/nutline/back-to-school.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "6.080000"
+    },
+    {
+      "path": "public/digitalstage/media/nutline/summer.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "6.122667"
+    },
+    {
+      "path": "public/projects/ig-fat-cats/film.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "30.037000"
+    },
+    {
+      "path": "public/projects/kaufland/kaufland-film.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "90.068000"
+    },
+    {
+      "path": "public/projects/new-balance/croc-insert.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "13.640000"
+    },
+    {
+      "path": "public/projects/new-balance/mama-croc.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "21.000000"
+    },
+    {
+      "path": "public/projects/new-balance/follow-leader.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "11.000000"
+    },
+    {
+      "path": "public/projects/new-balance/egg-hatch.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "19.680000"
+    },
+    {
+      "path": "public/projects/salt-bank/film.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "45.013000"
+    },
+    {
+      "path": "public/projects/house-of-errors/moss.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "23.960000"
+    },
+    {
+      "path": "public/projects/house-of-errors/ss25.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "52.520000"
+    },
+    {
+      "path": "public/projects/raye/click-clack-symphony-3d-sequence.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "30.000000"
+    },
+    {
+      "path": "public/projects/raye/makingof.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "31.000000"
+    },
+    {
+      "path": "public/projects/mentos-mammoth/film.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "46.640000"
+    },
+    {
+      "path": "public/projects/croco/film.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "30.000000"
+    },
+    {
+      "path": "public/projects/macushield/film.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "20.010000"
+    },
+    {
+      "path": "public/projects/san-pellegrino/jardin.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "6.000000"
+    },
+    {
+      "path": "public/projects/san-pellegrino/opera.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "6.041667"
+    },
+    {
+      "path": "public/projects/san-pellegrino/arc-de-triomphe.mp4",
+      "ok": true,
+      "codec": "h264",
+      "duration": "6.041667"
+    }
+  ]
+}
