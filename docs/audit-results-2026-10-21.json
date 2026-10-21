@@ -719,7 +719,7 @@
     "findings": [],
     "scope": "Current tracked text files, common private-key and token patterns; not historical/provider-account certification."
   },
-  "deployedRevision": "6d23585",
+  "deployedRevision": "5c11856",
   "firstHardenedBuildRuns": [
     {
       "revision": "6d23585",
@@ -801,5 +801,101 @@
         "total-byte-weight": 1064205
       }
     }
-  ]
+  ],
+  "finalProductionRuns": [
+    {
+      "revision": "5c11856",
+      "profile": "mobile",
+      "run": 1,
+      "lighthouseVersion": "13.5.0",
+      "scores": {
+        "performance": 0.9,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1,
+        "agentic-browsing": 1
+      },
+      "metrics": {
+        "first-contentful-paint": 1475.458,
+        "largest-contentful-paint": 3000.458,
+        "total-blocking-time": 4,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 950856
+      }
+    },
+    {
+      "revision": "5c11856",
+      "profile": "mobile",
+      "run": 2,
+      "lighthouseVersion": "13.5.0",
+      "scores": {
+        "performance": 0.88,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1,
+        "agentic-browsing": 1
+      },
+      "metrics": {
+        "first-contentful-paint": 1248.705,
+        "largest-contentful-paint": 3948.705,
+        "total-blocking-time": 8.5,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 950752
+      }
+    },
+    {
+      "revision": "5c11856",
+      "profile": "mobile",
+      "run": 3,
+      "lighthouseVersion": "13.5.0",
+      "scores": {
+        "performance": 0.89,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1,
+        "agentic-browsing": 1
+      },
+      "metrics": {
+        "first-contentful-paint": 1250.44,
+        "largest-contentful-paint": 3800.4400000000005,
+        "total-blocking-time": 7,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 950789
+      }
+    },
+    {
+      "revision": "5c11856",
+      "profile": "desktop",
+      "run": 1,
+      "lighthouseVersion": "13.5.0",
+      "scores": {
+        "performance": 1,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1,
+        "agentic-browsing": 1
+      },
+      "metrics": {
+        "first-contentful-paint": 333.784,
+        "largest-contentful-paint": 673.784,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 1064017
+      }
+    }
+  ],
+  "publicSmoke": {
+    "status": 200,
+    "mobile": {
+      "animation": "none",
+      "backdrop": "none"
+    },
+    "terms": "Terms & copyright.",
+    "ro": {
+      "title": "Termeni și drepturi de autor.",
+      "CUI": true
+    },
+    "axe": [],
+    "errors": []
+  }
 }
