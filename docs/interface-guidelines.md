@@ -25,7 +25,7 @@ These rules describe the approved portfolio design and keep future edits consist
 - Maintain visible keyboard focus, 44px primary touch targets, working slider controls and keyboard alternatives to drag gestures.
 - Project viewers trap focus, isolate their background, preserve a visible close action, close with Escape and restore the opener. Nested viewers must restore focus to the underlying viewer.
 - Default to English on a fresh load; EN/RO switching remains available within the session.
-- The floating project introduction settles within 1.2 seconds, is interruptible and is disabled by reduced-motion preferences. Keep pointer depth subtle and disable it on touch-only devices and while a project viewer is open.
+- The floating project introduction settles within 1.2 seconds on desktop, is interruptible and is disabled on mobile layouts and by reduced-motion preferences. Keep pointer depth subtle and disable it on touch-only devices and while a project viewer is open.
 - The continuous brand ribbon has no separate pause button, per the explicit design request of 20 October 2026. Keep reduced-motion support and pause when out of view. This leaves a known WCAG 2.2.2 limitation; do not claim full conformance. Pointer magnification must not clip logos, shift layout or run on touch-only/reduced-motion devices.
 - Provide solid material fallbacks when transparency or contrast preferences require them. Animate transform/opacity rather than layout.
 
@@ -44,3 +44,4 @@ These rules describe the approved portfolio design and keep future edits consist
 - Keep the six hero projects in the initial rendered HTML; hydration should add interaction rather than reveal essential imagery.
 - Legal pages use the same Helvetica scale and quiet neutral surfaces, a readable line length, numbered sections and native anchor navigation. EN/RO versions must remain equivalent.
 - State the operator as Veliumin SRL, distinguish Robert’s contribution from third-party ownership, and preserve statutory exceptions. Do not invent registration details or claim permission to show work merely because terms exist.
+- Project rims use gradients and highlights over a uniform background; no live backdrop filter is needed on each of the six hero buttons.

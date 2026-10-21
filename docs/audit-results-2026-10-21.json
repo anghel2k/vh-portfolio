@@ -704,5 +704,102 @@
       "codec": "h264",
       "duration": "6.041667"
     }
+  ],
+  "publicTransport": {
+    "observedAt": "2026-10-21",
+    "dnsCname": "601ca25f05f180fd.vercel-dns-017.com.",
+    "tls": "TLSv1.3",
+    "certificateAuthorized": true,
+    "certificateValidFromUTC": "2026-10-17T15:14:30Z",
+    "certificateValidToUTC": "2027-01-15T15:14:29Z",
+    "host": "portfolio.vellumhaus.studio"
+  },
+  "credentialPatternScan": {
+    "trackedEnvironmentFiles": [],
+    "findings": [],
+    "scope": "Current tracked text files, common private-key and token patterns; not historical/provider-account certification."
+  },
+  "deployedRevision": "6d23585",
+  "firstHardenedBuildRuns": [
+    {
+      "revision": "6d23585",
+      "profile": "mobile",
+      "run": 1,
+      "lighthouseVersion": "13.5.0",
+      "scores": {
+        "performance": 0.94,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1,
+        "agentic-browsing": 1
+      },
+      "metrics": {
+        "first-contentful-paint": 1468.527,
+        "largest-contentful-paint": 2968.527,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 950796
+      }
+    },
+    {
+      "revision": "6d23585",
+      "profile": "mobile",
+      "run": 2,
+      "lighthouseVersion": "13.5.0",
+      "scores": {
+        "performance": 0.9,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1,
+        "agentic-browsing": 1
+      },
+      "metrics": {
+        "first-contentful-paint": 1243.563,
+        "largest-contentful-paint": 3584.063,
+        "total-blocking-time": 3.5,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 950821
+      }
+    },
+    {
+      "revision": "6d23585",
+      "profile": "mobile",
+      "run": 3,
+      "lighthouseVersion": "13.5.0",
+      "scores": {
+        "performance": 0.89,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1,
+        "agentic-browsing": 1
+      },
+      "metrics": {
+        "first-contentful-paint": 1254.103,
+        "largest-contentful-paint": 3729.103,
+        "total-blocking-time": 8.5,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 950752
+      }
+    },
+    {
+      "revision": "6d23585",
+      "profile": "desktop",
+      "run": 1,
+      "lighthouseVersion": "13.5.0",
+      "scores": {
+        "performance": 0.99,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1,
+        "agentic-browsing": 1
+      },
+      "metrics": {
+        "first-contentful-paint": 333.73699999999997,
+        "largest-contentful-paint": 833.737,
+        "total-blocking-time": 0,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 1064205
+      }
+    }
   ]
 }
